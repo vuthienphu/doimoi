@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_customer_source_list" model="ir.ui.view">
+        <field name="name">dcg.customer.source.list</field>
+        <field name="model">dcg.customer.source</field>
+        <field name="arch" type="xml">
+            <list string="Customer Sources">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_customer_source_form" model="ir.ui.view">
+        <field name="name">dcg.customer.source.form</field>
+        <field name="model">dcg.customer.source</field>
+        <field name="arch" type="xml">
+            <form string="Customer Source">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_customer_source_search" model="ir.ui.view">
+        <field name="name">dcg.customer.source.search</field>
+        <field name="model">dcg.customer.source</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_customer_source" model="ir.actions.act_window">
+        <field name="name">Customer Sources</field>
+        <field name="res_model">dcg.customer.source</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_dcg_customer_source"
+        name="Customer Sources"
+        parent="menu_dcg_config_crm"
+        action="action_dcg_customer_source"
+        sequence="20"/>
+
+</odoo>

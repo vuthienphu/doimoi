@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_ticket_severity_list" model="ir.ui.view">
+        <field name="name">dcg.ticket.severity.list</field>
+        <field name="model">dcg.ticket.severity</field>
+        <field name="arch" type="xml">
+            <list string="Ticket Severities">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="response_hours_default"/>
+                <field name="resolution_hours_default"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_ticket_severity_form" model="ir.ui.view">
+        <field name="name">dcg.ticket.severity.form</field>
+        <field name="model">dcg.ticket.severity</field>
+        <field name="arch" type="xml">
+            <form string="Ticket Severity">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="response_hours_default"/>
+                            <field name="resolution_hours_default"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_ticket_severity_search" model="ir.ui.view">
+        <field name="name">dcg.ticket.severity.search</field>
+        <field name="model">dcg.ticket.severity</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_ticket_severity" model="ir.actions.act_window">
+        <field name="name">Ticket Severities</field>
+        <field name="res_model">dcg.ticket.severity</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_dcg_ticket_severity"
+        name="Ticket Severities"
+        parent="menu_dcg_config_support"
+        action="action_dcg_ticket_severity"
+        sequence="20"/>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_resource_role_list" model="ir.ui.view">
+        <field name="name">dcg.resource.role.list</field>
+        <field name="model">dcg.resource.role</field>
+        <field name="arch" type="xml">
+            <list string="Resource Roles" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="department_id" optional="show"/>
+                <field name="default_cost_rate" optional="show"/>
+                <field name="default_bill_rate" optional="show"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_dcg_resource_role" model="ir.actions.act_window">
+        <field name="name">Resource Roles</field>
+        <field name="res_model">dcg.resource.role</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Loading - Odoo Module</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #4a5568;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b6b;
+        }
+        .feature h3 {
+            color: #2d3748;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .tech-specs h3 {
+            margin-top: 0;
+            color: #ff6b6b;
+        }
+        .installation h3 {
+            color: #2c7a7b;
+            margin-top: 0;
+        }
+        .installation ol {
+            margin: 20px 0;
+        }
+        .installation li {
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        .highlight {
+            background: linear-gradient(120deg, #ff9a56 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        .demo-section {
+            text-align: center;
+            background: #fff5f5;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cat Loading</h1>
+            <p>Upgrade your loading display to make the user experience more enjoyable with a cat-themed loading screen</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Overview</h2>
+                <p><strong>Cat Loading</strong> is a delightful Odoo module that transforms the mundane loading experience into something enjoyable. By replacing Odoo's standard loading indicator with a <span class="highlight">playful cat-themed animation</span>, this module adds a touch of fun to the interface while users wait for processes to complete.</p>
+
+                <p>Whether your users are loading reports, processing data, or navigating between modules, they'll be greeted with charming cat animations that make waiting times feel shorter and more pleasant.</p>
+
+                <div style="display: flex; gap: 30px; margin: 30px 0; justify-content: center; flex-wrap: wrap; flex-direction: column">
+                    <div style="text-align: center;">
+                        <img src="nyan_cat.png" alt="Nyan Cat Sample" style="max-width: 1000px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                        <div style="margin-top: 10px; font-size: 0.95em; color: #666;">Nyan Cat</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="rotate_cat.png" alt="Rotate Cat Sample" style="max-width: 1000px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                        <div style="margin-top: 10px; font-size: 0.95em; color: #666;">Rotate Cat</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3>Transform Your Loading Experience</h3>
+                <p>Hello to adorable cat animations!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

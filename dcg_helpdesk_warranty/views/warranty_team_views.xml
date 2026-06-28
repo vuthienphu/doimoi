@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_warranty_team_list" model="ir.ui.view">
+        <field name="name">dcg.warranty.team.list</field>
+        <field name="model">dcg.warranty.team</field>
+        <field name="arch" type="xml">
+            <list string="Support Teams" editable="bottom">
+                <field name="name"/>
+                <field name="leader_id"/>
+                <field name="member_ids" widget="many2many_tags"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_warranty_team_form" model="ir.ui.view">
+        <field name="name">dcg.warranty.team.form</field>
+        <field name="model">dcg.warranty.team</field>
+        <field name="arch" type="xml">
+            <form string="Support Team">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="leader_id"/>
+                        <field name="active" widget="boolean_toggle"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group string="Members">
+                        <field name="member_ids" widget="many2many_tags" nolabel="1"/>
+                    </group>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dcg_warranty_team" model="ir.actions.act_window">
+        <field name="name">Support Teams</field>
+        <field name="res_model">dcg.warranty.team</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

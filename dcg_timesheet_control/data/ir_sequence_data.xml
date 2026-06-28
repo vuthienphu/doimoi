@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_dcg_timesheet_sheet" model="ir.sequence">
+            <field name="name">DCG Timesheet Sheet</field>
+            <field name="code">dcg.timesheet.sheet</field>
+            <field name="prefix">TS/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_dcg_timesheet_ot_request" model="ir.sequence">
+            <field name="name">DCG OT Request</field>
+            <field name="code">dcg.timesheet.ot.request</field>
+            <field name="prefix">OT/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_dcg_dashboard_home" model="ir.actions.client">
+        <field name="name">Dashboard Home</field>
+        <field name="tag">dcg_dashboard_home</field>
+    </record>
+    <record id="action_dcg_dashboard_executive" model="ir.actions.client">
+        <field name="name">Executive Dashboard</field>
+        <field name="tag">dcg_dashboard_executive</field>
+    </record>
+    <record id="action_dcg_dashboard_sales" model="ir.actions.client">
+        <field name="name">Sales Dashboard</field>
+        <field name="tag">dcg_dashboard_sales</field>
+    </record>
+    <record id="action_dcg_dashboard_project" model="ir.actions.client">
+        <field name="name">Project Dashboard</field>
+        <field name="tag">dcg_dashboard_project</field>
+    </record>
+    <record id="action_dcg_dashboard_resource" model="ir.actions.client">
+        <field name="name">Resource Dashboard</field>
+        <field name="tag">dcg_dashboard_resource</field>
+    </record>
+    <record id="action_dcg_dashboard_finance" model="ir.actions.client">
+        <field name="name">Finance Dashboard</field>
+        <field name="tag">dcg_dashboard_finance</field>
+    </record>
+    <record id="action_dcg_dashboard_support" model="ir.actions.client">
+        <field name="name">Support Dashboard</field>
+        <field name="tag">dcg_dashboard_support</field>
+    </record>
+    <record id="action_dcg_dashboard_asset" model="ir.actions.client">
+        <field name="name">Asset Dashboard</field>
+        <field name="tag">dcg_dashboard_asset</field>
+    </record>
+    <record id="action_dashboard_project_task" model="ir.actions.client">
+        <field name="name">Project Tasks</field>
+        <field name="tag">dcg_dashboard_project_task</field>
+    </record>
+</odoo>

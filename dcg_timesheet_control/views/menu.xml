@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_dcg_timesheet_root"
+        name="Timesheets"
+        sequence="94"
+        web_icon="dcg_timesheet_control,static/description/icon.png"
+        groups="dcg_timesheet_control.group_dcg_timesheet_user"/>
+
+    <menuitem
+        id="menu_dcg_timesheet_my_sheets"
+        name="My Timesheet Sheets"
+        parent="menu_dcg_timesheet_root"
+        action="action_dcg_timesheet_sheet"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_dcg_timesheet_to_approve"
+        name="Sheets to Approve"
+        parent="menu_dcg_timesheet_root"
+        action="action_dcg_timesheet_sheet_to_approve"
+        sequence="15"
+        groups="dcg_timesheet_control.group_dcg_timesheet_approver"/>
+
+    <menuitem
+        id="menu_dcg_timesheet_lines"
+        name="Timesheet Lines"
+        parent="menu_dcg_timesheet_root"
+        action="action_dcg_timesheet_lines"
+        sequence="20"/>
+
+    <menuitem
+        id="menu_dcg_timesheet_ot_requests"
+        name="OT Requests"
+        parent="menu_dcg_timesheet_root"
+        action="action_dcg_timesheet_ot_request"
+        sequence="30"/>
+
+    <menuitem
+        id="menu_dcg_timesheet_generate"
+        name="Generate Sheet"
+        parent="menu_dcg_timesheet_root"
+        action="action_dcg_generate_sheet_wizard"
+        sequence="90"/>
+</odoo>

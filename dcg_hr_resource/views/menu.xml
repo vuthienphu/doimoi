@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Nest under Resource Planning root menu -->
+    <menuitem id="menu_dcg_hr_resource" name="HR Resource"
+        parent="dcg_resource_planning.menu_dcg_resource_root"
+        sequence="60"
+        groups="dcg_hr_resource.group_dcg_hr_resource_user"/>
+    <menuitem id="menu_dcg_hr_resource_certificates" name="Certificates"
+        parent="menu_dcg_hr_resource" action="action_dcg_certificate" sequence="10"/>
+    <menuitem id="menu_dcg_hr_resource_training" name="Training"
+        parent="menu_dcg_hr_resource" action="action_dcg_training" sequence="20"/>
+    <menuitem id="menu_dcg_hr_resource_competency" name="Competency"
+        parent="menu_dcg_hr_resource" action="action_dcg_competency" sequence="30"/>
+    <menuitem id="menu_dcg_hr_resource_kpi" name="Delivery KPIs"
+        parent="menu_dcg_hr_resource" action="action_dcg_kpi" sequence="40"/>
+    <menuitem id="menu_dcg_hr_resource_availability" name="Availability"
+        parent="menu_dcg_hr_resource" action="action_dcg_availability" sequence="50"/>
+
+    <!-- Config under Resource Planning config -->
+    <menuitem id="menu_dcg_hr_resource_config_career" name="Career Levels"
+        parent="dcg_resource_planning.menu_dcg_resource_config"
+        action="action_dcg_career_level" sequence="30"/>
+</odoo>

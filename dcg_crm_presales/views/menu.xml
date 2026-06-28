@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Sub-menu "Presales" dưới CRM root, dùng menu sale_crm_root có sẵn -->
+    <menuitem
+        id="menu_dcg_presales_root"
+        name="Presales"
+        parent="crm.crm_menu_root"
+        sequence="15"/>
+
+    <menuitem
+        id="menu_dcg_presales_solution_scope"
+        name="Solution Scopes"
+        parent="menu_dcg_presales_root"
+        action="action_dcg_crm_solution_scope"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_dcg_presales_requirement"
+        name="Requirement Surveys"
+        parent="menu_dcg_presales_root"
+        action="action_dcg_crm_requirement"
+        sequence="20"/>
+
+    <menuitem
+        id="menu_dcg_presales_estimate"
+        name="Estimates"
+        parent="menu_dcg_presales_root"
+        action="action_dcg_crm_estimate"
+        sequence="30"/>
+
+    <menuitem
+        id="menu_dcg_presales_cost"
+        name="Presales Costs"
+        parent="menu_dcg_presales_root"
+        action="action_dcg_crm_presales_cost"
+        sequence="40"/>
+
+</odoo>

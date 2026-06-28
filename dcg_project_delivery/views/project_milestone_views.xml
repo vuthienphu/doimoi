@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_project_milestone_list" model="ir.ui.view">
+        <field name="name">dcg.project.milestone.list</field>
+        <field name="model">dcg.project.milestone</field>
+        <field name="arch" type="xml">
+            <list string="Milestones" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="milestone_type"/>
+                <field name="scope_id" optional="show"/>
+                <field name="planned_date"/>
+                <field name="actual_date" optional="show"/>
+                <field name="contract_payment_id" optional="show"/>
+                <field name="acceptance_id" optional="hide"/>
+                <field name="progress_percent" widget="progressbar" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-info="state == 'in_progress'"
+                       decoration-danger="state == 'delayed'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_project_milestone_form" model="ir.ui.view">
+        <field name="name">dcg.project.milestone.form</field>
+        <field name="model">dcg.project.milestone</field>
+        <field name="arch" type="xml">
+            <form string="Milestone">
+                <header>
+                    <button name="action_start" type="object" string="Start"
+                            invisible="state not in ('draft', 'waiting')"/>
+                    <button name="action_done" type="object" string="Done" class="btn-primary"
+                            invisible="state != 'in_progress'"/>
+                    <button name="action_delay" type="object" string="Mark Delayed"
+                            invisible="state not in ('in_progress', 'waiting')"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id" readonly="1"/>
+                            <field name="name"/>
+                            <field name="milestone_type"/>
+                            <field name="scope_id"/>
+                        </group>
+                        <group>
+                            <field name="planned_date"/>
+                            <field name="actual_date"/>
+                            <field name="due_date"/>
+                            <field name="progress_percent" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <group string="Links">
+                        <field name="contract_payment_id"/>
+                        <field name="acceptance_id"/>
+                    </group>
+                    <field name="note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_dcg_project_milestone_search" model="ir.ui.view">
+        <field name="name">dcg.project.milestone.search</field>
+        <field name="model">dcg.project.milestone</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="milestone_type"/>
+                <filter string="In Progress" name="filter_in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Delayed" name="filter_delayed" domain="[('state', '=', 'delayed')]"/>
+                <filter string="Done" name="filter_done" domain="[('state', '=', 'done')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Type" name="group_type" context="{'group_by': 'milestone_type'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_dcg_project_milestone" model="ir.actions.act_window">
+        <field name="name">Milestones</field>
+        <field name="res_model">dcg.project.milestone</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

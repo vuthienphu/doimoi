@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_kpi_target_list" model="ir.ui.view">
+        <field name="name">dcg.kpi.target.list</field>
+        <field name="model">dcg.kpi.target</field>
+        <field name="arch" type="xml">
+            <list string="KPI Targets">
+                <field name="name"/>
+                <field name="target_type"/>
+                <field name="department_id"/>
+                <field name="owner_id"/>
+                <field name="period_type"/>
+                <field name="target_value"/>
+                <field name="unit"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_kpi_target_form" model="ir.ui.view">
+        <field name="name">dcg.kpi.target.form</field>
+        <field name="model">dcg.kpi.target</field>
+        <field name="arch" type="xml">
+            <form string="KPI Target">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <group string="Identification">
+                            <field name="name"/>
+                            <field name="target_type"/>
+                            <field name="period_type"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Scope &amp; Target">
+                            <field name="department_id"/>
+                            <field name="owner_id"/>
+                            <field name="target_value"/>
+                            <field name="unit"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_kpi_target_search" model="ir.ui.view">
+        <field name="name">dcg.kpi.target.search</field>
+        <field name="model">dcg.kpi.target</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="target_type"/>
+                <field name="department_id"/>
+                <field name="owner_id"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Target Type" name="group_target_type" context="{'group_by': 'target_type'}"/>
+                    <filter string="Period" name="group_period_type" context="{'group_by': 'period_type'}"/>
+                    <filter string="Department" name="group_department" context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_kpi_target" model="ir.actions.act_window">
+        <field name="name">KPI Targets</field>
+        <field name="res_model">dcg.kpi.target</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_dcg_kpi_target"
+        name="KPI Targets"
+        parent="menu_dcg_config_kpi_alerts"
+        action="action_dcg_kpi_target"
+        sequence="10"/>
+
+</odoo>

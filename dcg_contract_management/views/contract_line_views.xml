@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_contract_line_list" model="ir.ui.view">
+        <field name="name">dcg.contract.line.list</field>
+        <field name="model">dcg.contract.line</field>
+        <field name="arch" type="xml">
+            <list string="Contract Lines" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="service_catalog_id" optional="show"/>
+                <field name="line_type" optional="show"/>
+                <field name="quantity"/>
+                <field name="uom_name" optional="hide"/>
+                <field name="unit_price"/>
+                <field name="amount" sum="Total"/>
+                <field name="planned_start_date" optional="hide"/>
+                <field name="planned_end_date" optional="hide"/>
+                <field name="total_hours" optional="hide" sum="Total"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_contract_line_form" model="ir.ui.view">
+        <field name="name">dcg.contract.line.form</field>
+        <field name="model">dcg.contract.line</field>
+        <field name="arch" type="xml">
+            <form string="Contract Line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="contract_id" readonly="1"/>
+                            <field name="name"/>
+                            <field name="service_catalog_id"/>
+                            <field name="scope_id"/>
+                            <field name="estimate_line_id"/>
+                            <field name="line_type"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                            <field name="uom_name"/>
+                            <field name="unit_price"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="planned_start_date"/>
+                            <field name="planned_end_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Effort" name="effort">
+                            <group>
+                                <group>
+                                    <field name="ba_hours"/>
+                                    <field name="dev_hours"/>
+                                    <field name="test_hours"/>
+                                </group>
+                                <group>
+                                    <field name="pm_hours"/>
+                                    <field name="support_hours"/>
+                                    <field name="total_hours" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description"/>
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

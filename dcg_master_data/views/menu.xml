@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root menu: DCG Configuration -->
+    <menuitem
+        id="menu_dcg_config_root"
+        name="DCG Configuration"
+        sequence="90"
+        web_icon="dcg_master_data,static/description/icon.png"
+        groups="dcg_master_data.group_dcg_master_data_user"/>
+
+    <!-- Sub-menu: CRM -->
+    <menuitem
+        id="menu_dcg_config_crm"
+        name="CRM"
+        parent="menu_dcg_config_root"
+        sequence="10"/>
+
+    <!-- Sub-menu: Contract &amp; Delivery -->
+    <menuitem
+        id="menu_dcg_config_contract"
+        name="Contract &amp; Delivery"
+        parent="menu_dcg_config_root"
+        sequence="20"/>
+
+    <!-- Sub-menu: Support -->
+    <menuitem
+        id="menu_dcg_config_support"
+        name="Support"
+        parent="menu_dcg_config_root"
+        sequence="30"/>
+
+    <!-- Sub-menu: Finance -->
+    <menuitem
+        id="menu_dcg_config_finance"
+        name="Finance"
+        parent="menu_dcg_config_root"
+        sequence="40"/>
+
+    <!-- Sub-menu: KPI &amp; Alerts -->
+    <menuitem
+        id="menu_dcg_config_kpi_alerts"
+        name="KPI &amp; Alerts"
+        parent="menu_dcg_config_root"
+        sequence="50"/>
+
+</odoo>

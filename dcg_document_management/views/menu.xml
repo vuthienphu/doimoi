@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dcg_document_root" name="Documents"
+        sequence="92" web_icon="dcg_document_management,static/description/icon.png"
+        groups="dcg_document_management.group_dcg_document_user"/>
+    <menuitem id="menu_dcg_document_all" name="All Documents"
+        parent="menu_dcg_document_root" action="action_dcg_document" sequence="10"/>
+    <menuitem id="menu_dcg_document_folders" name="Folders"
+        parent="menu_dcg_document_root" action="action_dcg_document_folder" sequence="20"/>
+
+    <menuitem id="menu_dcg_document_config" name="Configuration"
+        parent="menu_dcg_document_root" sequence="90"
+        groups="dcg_document_management.group_dcg_document_manager"/>
+    <menuitem id="menu_dcg_document_config_types" name="Types"
+        parent="menu_dcg_document_config" action="action_dcg_document_type" sequence="10"/>
+    <menuitem id="menu_dcg_document_config_categories" name="Categories"
+        parent="menu_dcg_document_config" action="action_dcg_document_category" sequence="20"/>
+    <menuitem id="menu_dcg_document_config_tags" name="Tags"
+        parent="menu_dcg_document_config" action="action_dcg_document_tag" sequence="30"/>
+    <menuitem id="menu_dcg_document_config_templates" name="Templates"
+        parent="menu_dcg_document_config" action="action_dcg_document_template" sequence="40"/>
+</odoo>

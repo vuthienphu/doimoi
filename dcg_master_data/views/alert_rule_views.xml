@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_alert_rule_list" model="ir.ui.view">
+        <field name="name">dcg.alert.rule.list</field>
+        <field name="model">dcg.alert.rule</field>
+        <field name="arch" type="xml">
+            <list string="Alert Rules">
+                <field name="name"/>
+                <field name="rule_type"/>
+                <field name="model_name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_alert_rule_form" model="ir.ui.view">
+        <field name="name">dcg.alert.rule.form</field>
+        <field name="model">dcg.alert.rule</field>
+        <field name="arch" type="xml">
+            <form string="Alert Rule">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <group>
+                        <group string="Identification">
+                            <field name="name"/>
+                            <field name="rule_type"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Target">
+                            <field name="model_name" placeholder="account.move, project.task, ..."/>
+                        </group>
+                    </group>
+                    <group string="Recipients">
+                        <field name="recipient_group_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Condition (JSON)" name="condition">
+                            <field name="condition_json" placeholder='{"days_overdue": 7, "amount_gt": 10000000}'/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_alert_rule_search" model="ir.ui.view">
+        <field name="name">dcg.alert.rule.search</field>
+        <field name="model">dcg.alert.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="rule_type"/>
+                <field name="model_name"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Rule Type" name="group_rule_type" context="{'group_by': 'rule_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_alert_rule" model="ir.actions.act_window">
+        <field name="name">Alert Rules</field>
+        <field name="res_model">dcg.alert.rule</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_dcg_alert_rule"
+        name="Alert Rules"
+        parent="menu_dcg_config_kpi_alerts"
+        action="action_dcg_alert_rule"
+        sequence="20"/>
+
+</odoo>

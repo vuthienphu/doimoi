@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dcg_timesheet_sheet_user,dcg.timesheet.sheet user,model_dcg_timesheet_sheet,dcg_timesheet_control.group_dcg_timesheet_user,1,1,1,0
+access_dcg_timesheet_sheet_approver,dcg.timesheet.sheet approver,model_dcg_timesheet_sheet,dcg_timesheet_control.group_dcg_timesheet_approver,1,1,1,0
+access_dcg_timesheet_sheet_manager,dcg.timesheet.sheet manager,model_dcg_timesheet_sheet,dcg_timesheet_control.group_dcg_timesheet_manager,1,1,1,1
+access_dcg_timesheet_ot_request_user,dcg.timesheet.ot.request user,model_dcg_timesheet_ot_request,dcg_timesheet_control.group_dcg_timesheet_user,1,1,1,0
+access_dcg_timesheet_ot_request_approver,dcg.timesheet.ot.request approver,model_dcg_timesheet_ot_request,dcg_timesheet_control.group_dcg_timesheet_approver,1,1,1,0
+access_dcg_timesheet_ot_request_manager,dcg.timesheet.ot.request manager,model_dcg_timesheet_ot_request,dcg_timesheet_control.group_dcg_timesheet_manager,1,1,1,1
+access_dcg_generate_sheet_wizard_user,dcg.generate.sheet.wizard user,model_dcg_generate_sheet_wizard,dcg_timesheet_control.group_dcg_timesheet_user,1,1,1,1

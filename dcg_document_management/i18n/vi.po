@@ -1,0 +1,532 @@
+# Vietnamese translation for DCG Document Management
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_document_management 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: dcg_document_management
+#: model:res.groups,name:dcg_document_management.group_dcg_document_user
+msgid "DCG Document / User"
+msgstr "DCG Tài liệu / Người dùng"
+
+#. module: dcg_document_management
+#: model:res.groups,name:dcg_document_management.group_dcg_document_reviewer
+msgid "DCG Document / Reviewer"
+msgstr "DCG Tài liệu / Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model:res.groups,name:dcg_document_management.group_dcg_document_manager
+msgid "DCG Document / Manager"
+msgstr "DCG Tài liệu / Quản lý"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_root
+msgid "Documents"
+msgstr "Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_all
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document
+msgid "All Documents"
+msgstr "Tất cả Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_folders
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document_folder
+msgid "Folders"
+msgstr "Thư mục"
+
+#. module: dcg_document_management
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document_type
+msgid "Document Types"
+msgstr "Loại Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_config_types
+msgid "Types"
+msgstr "Loại Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_config_categories
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document_category
+msgid "Categories"
+msgstr "Danh mục"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_config_tags
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document_tag
+msgid "Tags"
+msgstr "Nhãn"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_config_templates
+#: model:ir.actions.act_window,name:dcg_document_management.action_dcg_document_template
+msgid "Templates"
+msgstr "Mẫu"
+
+#. module: dcg_document_management
+#: model:ir.ui.menu,name:dcg_document_management.menu_dcg_document_config
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document
+msgid "Document"
+msgstr "Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_version
+msgid "Document Version"
+msgstr "Phiên bản Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_folder
+msgid "Document Folder"
+msgstr "Thư mục Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_category
+msgid "Document Category"
+msgstr "Danh mục Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_type
+msgid "Document Type"
+msgstr "Loại Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_tag
+msgid "Document Tag"
+msgstr "Nhãn Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_template
+msgid "Document Template"
+msgstr "Mẫu Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_review
+msgid "Document Review"
+msgstr "Kiểm duyệt Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_link
+msgid "Document Business Link"
+msgstr "Liên kết Nghiệp vụ Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model,name:dcg_document_management.model_dcg_document_checklist
+msgid "Document Checklist"
+msgstr "Danh mục Kiểm tra Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.sequence,name:dcg_document_management.seq_dcg_document
+msgid "DCG Document"
+msgstr "DCG Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__name
+msgid "Document Name"
+msgstr "Tên Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__code
+msgid "Document Code"
+msgstr "Mã Tài liệu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__owner_id
+msgid "Owner"
+msgstr "Người sở hữu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__folder_id
+msgid "Folder"
+msgstr "Thư mục"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__type_id
+msgid "Type"
+msgstr "Loại"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__category_id
+msgid "Category"
+msgstr "Danh mục"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__tag_ids
+msgid "Tags"
+msgstr "Nhãn"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__template_id
+msgid "From Template"
+msgstr "Từ Mẫu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__partner_id
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__project_id
+msgid "Project"
+msgstr "Dự án"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__contract_id
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__current_attachment_id
+msgid "Current File"
+msgstr "File Hiện tại"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__current_version
+msgid "Current Version"
+msgstr "Phiên bản Hiện tại"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__description
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_template__description
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document__content
+msgid "Content"
+msgstr "Nội dung"
+
+# Document state selection
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__review
+msgid "In Review"
+msgstr "Đang Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__published
+msgid "Published"
+msgstr "Đã Xuất bản"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__archived
+msgid "Archived"
+msgstr "Lưu trữ"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+# Folder
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_folder__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_folder__complete_name
+msgid "Full Path"
+msgstr "Đường dẫn Đầy đủ"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_folder__parent_id
+msgid "Parent Folder"
+msgstr "Thư mục Cha"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_folder__manager_id
+msgid "Manager"
+msgstr "Quản lý"
+
+# Type
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_type__requires_approval
+msgid "Requires Approval"
+msgstr "Yêu cầu Duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_type__requires_version
+msgid "Requires Version"
+msgstr "Yêu cầu Version"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_type__portal_visible
+msgid "Portal Visible"
+msgstr "Hiển thị trên Portal"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_type__retention_days
+msgid "Retention (days)"
+msgstr "Lưu giữ (ngày)"
+
+# Version
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_version__version_number
+msgid "Version"
+msgstr "Phiên bản"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_version__attachment_id
+msgid "File"
+msgstr "Tệp"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_version__change_log
+msgid "Change Log"
+msgstr "Nhật ký Thay đổi"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_version__created_by_id
+msgid "Created By"
+msgstr "Tạo bởi"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_version__is_current
+msgid "Current Version"
+msgstr "Phiên bản Hiện tại"
+
+# Review
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_review__reviewer_id
+msgid "Reviewer"
+msgstr "Người Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_review__review_date
+msgid "Review Date"
+msgstr "Ngày Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_review__status
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_review__comment
+msgid "Comment"
+msgstr "Bình luận"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_review__status__pending
+msgid "Pending"
+msgstr "Chờ xử lý"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_review__status__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_review__status__rejected
+msgid "Rejected"
+msgstr "Từ chối"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_review__status__comment
+msgid "Comment Only"
+msgstr "Chỉ Bình luận"
+
+# Link
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_link__link_model
+msgid "Object Type"
+msgstr "Loại Đối tượng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_link__link_res_id
+msgid "Object ID"
+msgstr "ID Đối tượng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_link__link_name
+msgid "Object Name"
+msgstr "Tên Đối tượng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__res.partner
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__crm.lead
+msgid "Opportunity"
+msgstr "Cơ hội"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.contract
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.contract.appendix
+msgid "Appendix"
+msgstr "Phụ lục"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.project.delivery
+msgid "Project"
+msgstr "Dự án"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.warranty.ticket
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.business.trip
+msgid "Business Trip"
+msgstr "Công tác"
+
+#. module: dcg_document_management
+#: model:ir.model.fields.selection,name:dcg_document_management.selection__dcg_document_link__link_model__dcg.project.finance
+msgid "Finance"
+msgstr "Tài chính"
+
+# Checklist
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_checklist__name
+msgid "Required Document"
+msgstr "Tài liệu Yêu cầu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_checklist__is_mandatory
+msgid "Mandatory"
+msgstr "Bắt buộc"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_checklist__document_id
+msgid "Linked Document"
+msgstr "Tài liệu Liên kết"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_checklist__is_fulfilled
+msgid "Fulfilled"
+msgstr "Đã đáp ứng"
+
+# Template
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_template__name
+msgid "Template"
+msgstr "Mẫu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_template__attachment_id
+msgid "Template File"
+msgstr "Tệp Mẫu"
+
+#. module: dcg_document_management
+#: model:ir.model.fields,field_description:dcg_document_management.field_dcg_document_template__default_content
+msgid "Default Content"
+msgstr "Nội dung Mặc định"
+
+# View strings
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Submit Review"
+msgstr "Gửi Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Approve"
+msgstr "Duyệt"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Publish"
+msgstr "Xuất bản"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Archive"
+msgstr "Lưu trữ"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Reset to Draft"
+msgstr "Đặt lại về Nháp"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Classification"
+msgstr "Phân loại"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Ownership"
+msgstr "Sở hữu"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Current File"
+msgstr "File Hiện tại"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Versions"
+msgstr "Phiên bản"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Reviews"
+msgstr "Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_form
+msgid "Business Links"
+msgstr "Liên kết Nghiệp vụ"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_search
+msgid "My Documents"
+msgstr "Tài liệu Của tôi"
+
+#. module: dcg_document_management
+#: model_terms:ir.ui.view,arch_db:dcg_document_management.view_dcg_document_search
+msgid "In Review"
+msgstr "Đang Kiểm duyệt"
+
+#. module: dcg_document_management
+#: model_terms:ir.actions.act_window,help:dcg_document_management.action_dcg_document
+msgid "Create a document"
+msgstr "Tạo tài liệu"
+
+# Python messages
+#. module: dcg_document_management
+#: code:addons/dcg_document_management/models/document.py:0
+#, python-format
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_document_management
+#: code:addons/dcg_document_management/models/document.py:0
+#, python-format
+msgid "Please upload at least one version before submitting for review."
+msgstr "Vui lòng tải lên ít nhất một phiên bản trước khi gửi kiểm duyệt."

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dcg_resource_root" name="Resource Planning"
+        sequence="93" web_icon="dcg_resource_planning,static/description/icon.png"
+        groups="dcg_resource_planning.group_dcg_resource_planner"/>
+
+    <menuitem id="menu_dcg_resource_plans" name="Resource Plans"
+        parent="menu_dcg_resource_root" action="action_dcg_resource_plan" sequence="10"/>
+    <menuitem id="menu_dcg_resource_allocations" name="Allocations"
+        parent="menu_dcg_resource_root" action="action_dcg_resource_allocation" sequence="20"/>
+    <menuitem id="menu_dcg_resource_requests" name="Resource Requests"
+        parent="menu_dcg_resource_root" action="action_dcg_resource_request" sequence="30"/>
+    <menuitem id="menu_dcg_resource_capacity" name="Capacity"
+        parent="menu_dcg_resource_root" action="action_dcg_resource_capacity" sequence="40"/>
+    <menuitem id="menu_dcg_resource_forecast" name="Forecast"
+        parent="menu_dcg_resource_root" action="action_dcg_resource_forecast" sequence="50"/>
+
+    <!-- Config -->
+    <menuitem id="menu_dcg_resource_config" name="Configuration"
+        parent="menu_dcg_resource_root" sequence="90"
+        groups="dcg_resource_planning.group_dcg_resource_manager"/>
+    <menuitem id="menu_dcg_resource_config_roles" name="Roles"
+        parent="menu_dcg_resource_config" action="action_dcg_resource_role" sequence="10"/>
+    <menuitem id="menu_dcg_resource_config_skills" name="Skills"
+        parent="menu_dcg_resource_config" action="action_dcg_resource_skill" sequence="20"/>
+</odoo>

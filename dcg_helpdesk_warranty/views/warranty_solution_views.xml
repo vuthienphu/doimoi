@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_warranty_solution_list" model="ir.ui.view">
+        <field name="name">dcg.warranty.solution.list</field>
+        <field name="model">dcg.warranty.solution</field>
+        <field name="arch" type="xml">
+            <list string="Solutions">
+                <field name="title"/>
+                <field name="module_name" optional="show"/>
+                <field name="keyword" optional="show"/>
+                <field name="ticket_count"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_warranty_solution_form" model="ir.ui.view">
+        <field name="name">dcg.warranty.solution.form</field>
+        <field name="model">dcg.warranty.solution</field>
+        <field name="arch" type="xml">
+            <form string="Solution / KB">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="module_name"/>
+                        <field name="keyword"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    </group>
+                    <notebook>
+                        <page string="Problem" name="problem">
+                            <field name="problem"/>
+                        </page>
+                        <page string="Solution" name="solution">
+                            <field name="solution"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dcg_warranty_solution" model="ir.actions.act_window">
+        <field name="name">Solutions / KB</field>
+        <field name="res_model">dcg.warranty.solution</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

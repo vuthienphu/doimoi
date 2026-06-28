@@ -1,0 +1,1390 @@
+# Vietnamese translation for DCG CRM Presales
+# This file is distributed under the same license as the dcg_crm_presales package.
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_crm_presales 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ============================================================
+# Module metadata
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.module.module,shortdesc:dcg_crm_presales.module_meta_information
+msgid "DCG CRM Presales"
+msgstr "DCG - Tiền bán hàng (Presales)"
+
+#. module: dcg_crm_presales
+#: model:ir.module.module,summary:dcg_crm_presales.module_meta_information
+msgid "Presales workflow: requirement survey, solution scope, estimate, presales cost, deal approval"
+msgstr "Quy trình tiền bán hàng: khảo sát yêu cầu, phạm vi giải pháp, estimate, chi phí presales, duyệt deal"
+
+# ============================================================
+# Security groups
+# ============================================================
+#. module: dcg_crm_presales
+#: model:res.groups,name:dcg_crm_presales.group_dcg_presales_user
+msgid "DCG Presales / User"
+msgstr "DCG Presales / Người dùng"
+
+#. module: dcg_crm_presales
+#: model:res.groups,name:dcg_crm_presales.group_dcg_presales_manager
+msgid "DCG Presales / Manager"
+msgstr "DCG Presales / Quản lý"
+
+#. module: dcg_crm_presales
+#: model:res.groups,comment:dcg_crm_presales.group_dcg_presales_user
+msgid "Sale/presales user: CRUD lead/requirement/scope/estimate/cost trong phạm vi mình phụ trách."
+msgstr "Người dùng sale/presales: tạo/sửa/xoá lead, requirement, scope, estimate, chi phí trong phạm vi mình phụ trách."
+
+#. module: dcg_crm_presales
+#: model:res.groups,comment:dcg_crm_presales.group_dcg_presales_manager
+msgid "Toàn quyền: thấy toàn bộ deal/estimate/cost, có thể force chỉnh approved/current version."
+msgstr "Toàn quyền: xem toàn bộ deal/estimate/chi phí, có thể ép chỉnh phiên bản đã duyệt/hiện hành."
+
+# ============================================================
+# Menus
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.ui.menu,name:dcg_crm_presales.menu_dcg_presales_root
+msgid "Presales"
+msgstr "Tiền bán hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.ui.menu,name:dcg_crm_presales.menu_dcg_presales_solution_scope
+#: model:ir.actions.act_window,name:dcg_crm_presales.action_dcg_crm_solution_scope
+msgid "Solution Scope"
+msgstr "Phạm vi Giải pháp"
+
+#. module: dcg_crm_presales
+#: model:ir.ui.menu,name:dcg_crm_presales.menu_dcg_presales_requirement
+msgid "Requirement Surveys"
+msgstr "Khảo sát Yêu cầu"
+
+#. module: dcg_crm_presales
+#: model:ir.actions.act_window,name:dcg_crm_presales.action_dcg_crm_requirement
+msgid "Requirement Surveys"
+msgstr "Khảo sát Yêu cầu"
+
+#. module: dcg_crm_presales
+#: model:ir.ui.menu,name:dcg_crm_presales.menu_dcg_presales_estimate
+#: model:ir.actions.act_window,name:dcg_crm_presales.action_dcg_crm_estimate
+msgid "Estimates"
+msgstr "Bản ước tính"
+
+#. module: dcg_crm_presales
+#: model:ir.ui.menu,name:dcg_crm_presales.menu_dcg_presales_cost
+#: model:ir.actions.act_window,name:dcg_crm_presales.action_dcg_crm_presales_cost
+msgid "Presales Costs"
+msgstr "Chi phí Presales"
+
+# ============================================================
+# Sequences
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.sequence,name:dcg_crm_presales.seq_dcg_crm_requirement
+msgid "DCG CRM Requirement"
+msgstr "DCG Khảo sát Yêu cầu"
+
+#. module: dcg_crm_presales
+#: model:ir.sequence,name:dcg_crm_presales.seq_dcg_crm_estimate
+msgid "DCG CRM Estimate"
+msgstr "DCG Estimate"
+
+# ============================================================
+# Model names
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model,name:dcg_crm_presales.model_dcg_crm_requirement
+msgid "CRM Requirement Survey"
+msgstr "Khảo sát Yêu cầu CRM"
+
+#. module: dcg_crm_presales
+#: model:ir.model,name:dcg_crm_presales.model_dcg_crm_solution_scope
+msgid "CRM Solution Scope"
+msgstr "Phạm vi Giải pháp CRM"
+
+#. module: dcg_crm_presales
+#: model:ir.model,name:dcg_crm_presales.model_dcg_crm_estimate
+msgid "CRM Presales Estimate"
+msgstr "Estimate Presales CRM"
+
+#. module: dcg_crm_presales
+#: model:ir.model,name:dcg_crm_presales.model_dcg_crm_estimate_line
+msgid "CRM Estimate Line"
+msgstr "Dòng Estimate CRM"
+
+#. module: dcg_crm_presales
+#: model:ir.model,name:dcg_crm_presales.model_dcg_crm_presales_cost
+msgid "CRM Presales Cost"
+msgstr "Chi phí Presales CRM"
+
+# ============================================================
+# res.partner — DCG fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__is_company_customer
+msgid "Target Company Customer"
+msgstr "Khách hàng doanh nghiệp mục tiêu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_res_partner__is_company_customer
+msgid "Marks this partner as a B2B customer account targeted by sales/presales."
+msgstr "Đánh dấu đối tác này là khách hàng B2B mục tiêu của sales/presales."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__customer_code
+msgid "Customer Code"
+msgstr "Mã khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__account_manager_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__account_manager_id
+msgid "Account Manager"
+msgstr "Quản lý Khách hàng (AM)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__partner_status
+msgid "Customer Status"
+msgstr "Trạng thái Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__dcg_industry_id
+msgid "DCG Industry"
+msgstr "Ngành (DCG)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_res_partner__dcg_industry_id
+msgid "DCG-specific industry classification (separate from the standard Odoo Industry field)."
+msgstr "Phân loại ngành riêng của DCG (khác với field Ngành chuẩn của Odoo)."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__source_id
+msgid "Source"
+msgstr "Nguồn"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__customer_rank_level
+msgid "Customer Rank"
+msgstr "Hạng Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__cooperation_status
+msgid "Cooperation Status"
+msgstr "Trạng thái Hợp tác"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__debt_risk_level
+msgid "Debt Risk Level"
+msgstr "Mức Rủi ro Công nợ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__support_level
+msgid "Support Level"
+msgstr "Mức Hỗ trợ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__note_internal
+msgid "Internal Note"
+msgstr "Ghi chú Nội bộ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__last_presales_date
+msgid "Last Presales Date"
+msgstr "Ngày Presales Gần nhất"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__last_contract_date
+msgid "Last Contract Date"
+msgstr "Ngày Hợp đồng Gần nhất"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__total_opportunity_count
+msgid "Opportunities"
+msgstr "Cơ hội"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_res_partner__total_quotation_count
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__quotation_count
+msgid "Quotations"
+msgstr "Báo giá"
+
+# Partner Status selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__partner_status__prospect
+msgid "Prospect"
+msgstr "Khách hàng tiềm năng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__partner_status__active
+msgid "Active Customer"
+msgstr "Khách hàng đang hoạt động"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__partner_status__inactive
+msgid "Inactive"
+msgstr "Không hoạt động"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__partner_status__blacklisted
+msgid "Blacklisted"
+msgstr "Trong danh sách hạn chế"
+
+# Customer Rank Level selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__customer_rank_level__strategic
+msgid "Strategic"
+msgstr "Chiến lược"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__customer_rank_level__vip
+msgid "VIP"
+msgstr "VIP"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__customer_rank_level__normal
+msgid "Normal"
+msgstr "Thông thường"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__customer_rank_level__low
+msgid "Low"
+msgstr "Thấp"
+
+# Cooperation Status selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__cooperation_status__new
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__cooperation_status__negotiating
+msgid "Negotiating"
+msgstr "Đang đàm phán"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__cooperation_status__active
+msgid "Active"
+msgstr "Đang hợp tác"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__cooperation_status__on_hold
+msgid "On Hold"
+msgstr "Tạm hoãn"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__cooperation_status__closed
+msgid "Closed"
+msgstr "Đã đóng"
+
+# Debt Risk Level selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__debt_risk_level__low
+msgid "Risk: Low"
+msgstr "Rủi ro: Thấp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__debt_risk_level__medium
+msgid "Risk: Medium"
+msgstr "Rủi ro: Trung bình"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__debt_risk_level__high
+msgid "Risk: High"
+msgstr "Rủi ro: Cao"
+
+# Support Level selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__support_level__standard
+msgid "Standard"
+msgstr "Tiêu chuẩn"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__support_level__premium
+msgid "Premium"
+msgstr "Cao cấp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__res_partner__support_level__vip
+msgid "Support: VIP"
+msgstr "Hỗ trợ: VIP"
+
+# ============================================================
+# res.partner views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_partner_form_dcg_presales
+msgid "Customer Classification"
+msgstr "Phân loại Khách hàng"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_partner_form_dcg_presales
+msgid "Classification"
+msgstr "Phân loại"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_partner_form_dcg_presales
+msgid "History"
+msgstr "Lịch sử"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_partner_form_dcg_presales
+msgid "Internal Note"
+msgstr "Ghi chú Nội bộ"
+
+# ============================================================
+# crm.lead — DCG fields (identification & ownership)
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__opportunity_code
+msgid "Opportunity Code"
+msgstr "Mã Cơ hội"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__presales_owner_id
+msgid "Presales Owner"
+msgstr "Người phụ trách Presales"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__presales_team_member_ids
+msgid "Presales Team"
+msgstr "Team Presales"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__lead_source_id
+msgid "Lead Source"
+msgstr "Nguồn Lead"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__industry_id
+msgid "DCG Industry"
+msgstr "Ngành (DCG)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_crm_lead__industry_id
+msgid "DCG-specific industry classification snapshot for this opportunity."
+msgstr "Bản chụp phân loại ngành riêng của DCG cho cơ hội này."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__currency_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__currency_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__currency_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__currency_id
+msgid "Currency"
+msgstr "Tiền tệ"
+
+# ============================================================
+# crm.lead — Business discovery
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__customer_need_summary
+msgid "Customer Need Summary"
+msgstr "Tóm tắt Nhu cầu Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__pain_point
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__pain_point
+msgid "Pain Point"
+msgstr "Vấn đề Khách hàng (Pain Point)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__business_goal
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__business_goal
+msgid "Business Goal"
+msgstr "Mục tiêu Business"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__current_system
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__current_system
+msgid "Current System"
+msgstr "Hệ thống Hiện tại"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__competitor_info
+msgid "Competitor Info"
+msgstr "Thông tin Đối thủ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__risk_note
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__risk_note
+msgid "Risk Note"
+msgstr "Ghi chú Rủi ro"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__decision_deadline
+msgid "Decision Deadline"
+msgstr "Hạn Ra Quyết định"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__expected_go_live_date
+msgid "Expected Go-Live Date"
+msgstr "Ngày Go-live Dự kiến"
+
+# ============================================================
+# crm.lead — Presales / scope summary
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__solution_scope_summary
+msgid "Solution Scope Summary"
+msgstr "Tóm tắt Phạm vi Giải pháp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_ba_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_ba_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__ba_hours
+msgid "BA Hours"
+msgstr "Giờ BA"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_dev_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_dev_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__dev_hours
+msgid "Dev Hours"
+msgstr "Giờ Dev"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_test_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_test_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__test_hours
+msgid "Test Hours"
+msgstr "Giờ Test"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_pm_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_pm_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__pm_hours
+msgid "PM Hours"
+msgstr "Giờ PM"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_support_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_support_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__support_hours
+msgid "Support Hours"
+msgstr "Giờ Hỗ trợ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_other_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__other_hours
+msgid "Other Hours"
+msgstr "Giờ Khác"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_timeline_days
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_timeline_days
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__timeline_days
+msgid "Timeline (days)"
+msgstr "Thời gian (ngày)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_cost
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_cost
+msgid "Estimated Cost"
+msgstr "Chi phí Dự kiến"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_revenue
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_revenue
+msgid "Estimated Revenue"
+msgstr "Doanh thu Dự kiến"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_margin
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_margin
+msgid "Estimated Margin"
+msgstr "Biên lợi nhuận Dự kiến"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimated_margin_rate
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_margin_rate
+msgid "Margin Rate (%)"
+msgstr "Tỷ lệ Biên lợi nhuận (%)"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__presales_cost_amount
+msgid "Presales Cost Total"
+msgstr "Tổng Chi phí Presales"
+
+# ============================================================
+# crm.lead — Approval / commercial decision
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__deal_approval_required
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__approval_required
+msgid "Approval Required"
+msgstr "Cần Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__deal_submit_note
+msgid "Approval Submission Note"
+msgstr "Ghi chú Gửi Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__commercial_status
+msgid "Commercial Status"
+msgstr "Trạng thái Thương mại"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_crm_lead__commercial_status
+msgid "Presales-specific status, tracked in parallel with the CRM pipeline stage."
+msgstr "Trạng thái riêng cho presales, theo dõi song song với giai đoạn pipeline CRM."
+
+# Commercial Status selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__draft
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_requirement__state__draft
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__state__draft
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_presales_cost__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__qualification
+msgid "Qualification"
+msgstr "Thẩm định"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__surveying
+msgid "Surveying"
+msgstr "Đang khảo sát"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__estimating
+msgid "Estimating"
+msgstr "Đang estimate"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__waiting_approval
+msgid "Waiting Approval"
+msgstr "Chờ Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__quoted
+msgid "Quoted"
+msgstr "Đã Báo giá"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__won
+msgid "Won"
+msgstr "Thắng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__crm_lead__commercial_status__lost
+msgid "Lost"
+msgstr "Thua"
+
+# ============================================================
+# crm.lead — Statistics / links
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__requirement_ids
+msgid "Requirement Surveys"
+msgstr "Khảo sát Yêu cầu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__solution_scope_ids
+msgid "Solution Scope"
+msgstr "Phạm vi Giải pháp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimate_ids
+msgid "Estimates"
+msgstr "Estimate"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__presales_cost_ids
+msgid "Presales Costs"
+msgstr "Chi phí Presales"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__requirement_count
+msgid "Requirement Count"
+msgstr "Số Khảo sát"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__solution_scope_count
+msgid "Scope Item Count"
+msgstr "Số Hạng mục Scope"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__estimate_count
+msgid "Estimate Count"
+msgstr "Số Estimate"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__presales_cost_count
+msgid "Presales Cost Count"
+msgstr "Số Chi phí Presales"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__latest_estimate_id
+msgid "Latest Estimate"
+msgstr "Estimate Mới nhất"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__approved_estimate_id
+msgid "Approved Estimate"
+msgstr "Estimate Đã Chốt"
+
+# ============================================================
+# crm.lead — Quotation / handover
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__quotation_id
+msgid "Primary Quotation"
+msgstr "Báo giá Chính"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__quotation_ready
+msgid "Ready for Quotation"
+msgstr "Sẵn sàng Báo giá"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_crm_lead__handover_note
+msgid "Handover Note"
+msgstr "Ghi chú Bàn giao"
+
+# ============================================================
+# crm.lead views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Submit Deal Approval"
+msgstr "Gửi Duyệt Deal"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "View Approval"
+msgstr "Xem Duyệt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Create Quotation"
+msgstr "Tạo Báo giá"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Requirements"
+msgstr "Khảo sát"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Scope Items"
+msgstr "Hạng mục Scope"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Business Discovery"
+msgstr "Khám phá Nhu cầu"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Approval &amp; Quotation"
+msgstr "Duyệt &amp; Báo giá"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Approval"
+msgstr "Duyệt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Quotation"
+msgstr "Báo giá"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+msgid "Current Reference"
+msgstr "Tham chiếu Hiện hành"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_form_dcg_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Summary"
+msgstr "Tóm tắt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Need Approval"
+msgstr "Cần Duyệt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Waiting Approval"
+msgstr "Chờ Duyệt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Low Margin (&lt;20%)"
+msgstr "Biên lợi nhuận thấp (&lt;20%)"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Quoted"
+msgstr "Đã Báo giá"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Account Manager"
+msgstr "Quản lý Khách hàng (AM)"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Presales Owner"
+msgstr "Người phụ trách Presales"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Commercial Status"
+msgstr "Trạng thái Thương mại"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.crm_lead_view_search_dcg_presales
+msgid "Industry"
+msgstr "Ngành"
+
+# ============================================================
+# dcg.crm.requirement fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__name
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__name
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__name
+msgid "Reference"
+msgstr "Số tham chiếu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__lead_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__lead_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__lead_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__lead_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__lead_id
+msgid "Opportunity"
+msgstr "Cơ hội"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__partner_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__partner_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__partner_id
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__survey_date
+msgid "Survey Date"
+msgstr "Ngày Khảo sát"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__owner_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__owner_id
+msgid "Owner"
+msgstr "Người phụ trách"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__version
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__version
+msgid "Version"
+msgstr "Phiên bản"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__state
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__state
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__state
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__scope_summary
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__scope_summary
+msgid "Scope Summary"
+msgstr "Tóm tắt Phạm vi"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__department_involved
+msgid "Departments Involved"
+msgstr "Phòng ban Liên quan"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__input_data_desc
+msgid "Input Data Description"
+msgstr "Mô tả Dữ liệu Đầu vào"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__output_data_desc
+msgid "Output Data Description"
+msgstr "Mô tả Dữ liệu Đầu ra"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__integration_requirement
+msgid "Integration Requirement"
+msgstr "Yêu cầu Tích hợp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__reporting_requirement
+msgid "Reporting Requirement"
+msgstr "Yêu cầu Báo cáo"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__deployment_requirement
+msgid "Deployment Requirement"
+msgstr "Yêu cầu Triển khai"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__attachment_ids
+msgid "Attachments"
+msgstr "Tệp đính kèm"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__meeting_note
+msgid "Meeting Note"
+msgstr "Ghi chú Cuộc họp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_requirement__contact_person_ids
+msgid "Customer Contacts"
+msgstr "Liên hệ Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_dcg_crm_requirement__contact_person_ids
+msgid "Contact persons from the customer side who participated in the survey."
+msgstr "Người liên hệ từ phía khách hàng đã tham gia buổi khảo sát."
+
+# Requirement state selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_requirement__state__confirmed
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_presales_cost__state__confirmed
+msgid "Confirmed"
+msgstr "Đã xác nhận"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_requirement__state__cancelled
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_presales_cost__state__cancelled
+msgid "Cancelled"
+msgstr "Đã huỷ"
+
+# ============================================================
+# dcg.crm.requirement views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Requirement Survey"
+msgstr "Khảo sát Yêu cầu"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Confirm"
+msgstr "Xác nhận"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Update Lead Summary"
+msgstr "Cập nhật Tóm tắt vào Lead"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Set to Draft"
+msgstr "Đặt về Nháp"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Discovery"
+msgstr "Khám phá"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Technical Details"
+msgstr "Chi tiết Kỹ thuật"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_requirement_form
+msgid "Meeting &amp; Attachments"
+msgstr "Cuộc họp &amp; Tệp đính kèm"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.actions.act_window,help:dcg_crm_presales.action_dcg_crm_requirement
+msgid "Create your first requirement survey"
+msgstr "Tạo khảo sát yêu cầu đầu tiên"
+
+# ============================================================
+# dcg.crm.solution.scope fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__requirement_id
+msgid "Source Requirement"
+msgstr "Khảo sát Nguồn"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__name
+msgid "Scope Item"
+msgstr "Hạng mục Scope"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__service_catalog_id
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__service_catalog_id
+msgid "Service"
+msgstr "Dịch vụ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__scope_type
+msgid "Scope Type"
+msgstr "Loại Scope"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__description
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__in_scope
+msgid "In Scope"
+msgstr "Trong Phạm vi"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_dcg_crm_solution_scope__in_scope
+msgid "Unchecking marks this item as proposed but excluded from the final proposal."
+msgstr "Bỏ chọn để đánh dấu hạng mục này được đề xuất nhưng bị loại khỏi proposal cuối cùng."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__estimated_complexity
+msgid "Complexity"
+msgstr "Độ phức tạp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_solution_scope__estimated_note
+msgid "Estimate Note"
+msgstr "Ghi chú Estimate"
+
+# Scope Type selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__implementation
+msgid "Implementation"
+msgstr "Triển khai"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__customization
+msgid "Customization"
+msgstr "Tuỳ biến"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__integration
+msgid "Integration"
+msgstr "Tích hợp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__migration
+msgid "Migration"
+msgstr "Chuyển đổi dữ liệu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__support
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__consulting
+msgid "Consulting"
+msgstr "Tư vấn"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__license
+msgid "License"
+msgstr "Bản quyền"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__scope_type__other
+msgid "Other"
+msgstr "Khác"
+
+# Complexity selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__estimated_complexity__low
+msgid "Complexity: Low"
+msgstr "Độ phức tạp: Thấp"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__estimated_complexity__medium
+msgid "Complexity: Medium"
+msgstr "Độ phức tạp: Trung bình"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_solution_scope__estimated_complexity__high
+msgid "Complexity: High"
+msgstr "Độ phức tạp: Cao"
+
+# ============================================================
+# dcg.crm.solution.scope views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_solution_scope_form
+msgid "Solution Scope Item"
+msgstr "Hạng mục Phạm vi Giải pháp"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.actions.act_window,help:dcg_crm_presales.action_dcg_crm_solution_scope
+msgid "Add a solution scope item"
+msgstr "Thêm một hạng mục phạm vi giải pháp"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_solution_scope_search
+msgid "In Scope"
+msgstr "Trong Phạm vi"
+
+# ============================================================
+# dcg.crm.estimate fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimate_date
+msgid "Estimate Date"
+msgstr "Ngày Estimate"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__is_current_version
+msgid "Current Version"
+msgstr "Phiên bản Hiện hành"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_dcg_crm_estimate__is_current_version
+msgid "The version currently being worked on / referenced as the latest."
+msgstr "Phiên bản đang được sử dụng / tham chiếu như bản mới nhất."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__is_approved_version
+msgid "Approved Version"
+msgstr "Phiên bản Đã Chốt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_dcg_crm_estimate__is_approved_version
+msgid "The version chosen by the business as the basis for quotation."
+msgstr "Phiên bản được business chọn làm cơ sở để báo giá."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__line_ids
+msgid "Estimate Lines"
+msgstr "Dòng Estimate"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__line_count
+msgid "Line Count"
+msgstr "Số dòng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__total_estimated_hours
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__total_hours
+msgid "Total Hours"
+msgstr "Tổng giờ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__estimated_timeline_note
+msgid "Timeline Note"
+msgstr "Ghi chú Tiến độ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__assumption_note
+msgid "Assumptions"
+msgstr "Giả định"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__exclusion_note
+msgid "Exclusions"
+msgstr "Loại trừ"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__pricing_note
+msgid "Pricing Note"
+msgstr "Ghi chú Giá"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__approval_request_id
+msgid "Approval Request"
+msgstr "Yêu cầu Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__approval_state
+msgid "Approval Status"
+msgstr "Trạng thái Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__quotation_id
+msgid "Quotation"
+msgstr "Báo giá"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate__converted_to_quotation
+msgid "Converted to Quotation"
+msgstr "Đã Chuyển thành Báo giá"
+
+# Estimate state selection
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__state__review
+msgid "In Review"
+msgstr "Đang Xem xét"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__state__rejected
+msgid "Rejected"
+msgstr "Bị Từ chối"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__state__archived
+msgid "Archived"
+msgstr "Đã Lưu trữ"
+
+# Approval State selection (forward-compatible field on estimate)
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__approval_state__not_required
+msgid "Not Required"
+msgstr "Không yêu cầu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields.selection,name:dcg_crm_presales.selection__dcg_crm_estimate__approval_state__waiting
+msgid "Waiting Approval (Estimate)"
+msgstr "Chờ Duyệt (Bản ước tính)"
+
+# ============================================================
+# dcg.crm.estimate SQL constraint
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.constraint,message:dcg_crm_presales.constraint_dcg_crm_estimate_name_lead_uniq
+msgid "Estimate version must be unique per opportunity."
+msgstr "Phiên bản estimate phải là duy nhất trong mỗi cơ hội."
+
+# ============================================================
+# dcg.crm.estimate views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Presales Estimate"
+msgstr "Bản ước tính Presales"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Send to Review"
+msgstr "Gửi Xem xét"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Set Current Version"
+msgstr "Đặt làm Phiên bản Hiện hành"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Mark Approved Version"
+msgstr "Đặt làm Phiên bản Đã Chốt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Reset to Draft"
+msgstr "Đặt lại về Nháp"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Archive"
+msgstr "Lưu trữ"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Đặt estimate này làm phiên bản chốt để báo giá?"
+msgstr "Đặt estimate này làm phiên bản chốt để báo giá?"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "General"
+msgstr "Thông tin chung"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Commercial Summary"
+msgstr "Tóm tắt Thương mại"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Effort Summary"
+msgstr "Tóm tắt Effort"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Scope / Assumptions"
+msgstr "Phạm vi / Giả định"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_form
+msgid "Approval (reserved)"
+msgstr "Duyệt (dự phòng)"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.actions.act_window,help:dcg_crm_presales.action_dcg_crm_estimate
+msgid "Create your first estimate"
+msgstr "Tạo estimate đầu tiên"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_search
+msgid "Approved Version"
+msgstr "Phiên bản Đã Chốt"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_estimate_search
+msgid "In Review"
+msgstr "Đang Xem xét"
+
+# ============================================================
+# dcg.crm.estimate.line fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__estimate_id
+msgid "Estimate"
+msgstr "Bản ước tính"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__scope_id
+msgid "Scope Item"
+msgstr "Hạng mục Scope"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__name
+msgid "Line"
+msgstr "Dòng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__cost_amount
+msgid "Cost"
+msgstr "Chi phí"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__revenue_amount
+msgid "Revenue"
+msgstr "Doanh thu"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_estimate_line__note
+msgid "Note"
+msgstr "Ghi chú"
+
+# ============================================================
+# dcg.crm.presales.cost fields
+# ============================================================
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__expense_type_id
+msgid "Expense Type"
+msgstr "Loại Chi phí"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__expense_date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__description
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__amount
+msgid "Amount"
+msgstr "Số tiền"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__billable_to_customer
+msgid "Billable to Customer"
+msgstr "Có thể Thu lại từ Khách hàng"
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,help:dcg_crm_presales.field_dcg_crm_presales_cost__billable_to_customer
+msgid "Whether this presales cost can be charged to the customer as part of the deal."
+msgstr "Chi phí presales này có thể được tính lại cho khách hàng như một phần của deal hay không."
+
+#. module: dcg_crm_presales
+#: model:ir.model.fields,field_description:dcg_crm_presales.field_dcg_crm_presales_cost__attachment_ids
+msgid "Attachments / Receipts"
+msgstr "Tệp đính kèm / Hoá đơn"
+
+# ============================================================
+# dcg.crm.presales.cost views
+# ============================================================
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_presales_cost_form
+msgid "Presales Cost"
+msgstr "Chi phí Presales"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.actions.act_window,help:dcg_crm_presales.action_dcg_crm_presales_cost
+msgid "Record a presales cost"
+msgstr "Ghi nhận một chi phí presales"
+
+#. module: dcg_crm_presales
+#: model_terms:ir.ui.view,arch_db:dcg_crm_presales.view_dcg_crm_presales_cost_search
+msgid "Billable"
+msgstr "Có thể Thu lại"
+
+# ============================================================
+# Python error / validation messages
+# ============================================================
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "Please set a customer before submitting this deal for approval."
+msgstr "Vui lòng chọn khách hàng trước khi gửi duyệt deal này."
+
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "Please create at least one estimate before submitting this deal for approval."
+msgstr "Vui lòng tạo ít nhất một estimate trước khi gửi duyệt deal này."
+
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "Estimated revenue must be greater than 0 before submitting for approval."
+msgstr "Doanh thu dự kiến phải lớn hơn 0 trước khi gửi duyệt."
+
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "Please set a customer before creating a quotation."
+msgstr "Vui lòng chọn khách hàng trước khi tạo báo giá."
+
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "New Requirement Survey"
+msgstr "Khảo sát Yêu cầu Mới"
+
+#. module: dcg_crm_presales
+#. odoo-python
+#: code:addons/dcg_crm_presales/models/crm_lead.py:0
+#, python-format
+msgid "New Estimate"
+msgstr "Bản ước tính Mới"

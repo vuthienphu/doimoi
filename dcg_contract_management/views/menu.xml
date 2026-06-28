@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_dcg_contract_root"
+        name="Contracts"
+        sequence="92"
+        web_icon="dcg_contract_management,static/description/icon.png"
+        groups="dcg_contract_management.group_dcg_contract_user"/>
+
+    <menuitem
+        id="menu_dcg_contract_contracts"
+        name="Contracts"
+        parent="menu_dcg_contract_root"
+        action="action_dcg_contract"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_dcg_contract_payments"
+        name="Payment Schedules"
+        parent="menu_dcg_contract_root"
+        action="action_dcg_contract_payment"
+        sequence="20"/>
+
+    <menuitem
+        id="menu_dcg_contract_appendices"
+        name="Appendices"
+        parent="menu_dcg_contract_root"
+        action="action_dcg_contract_appendix"
+        sequence="30"/>
+
+    <menuitem
+        id="menu_dcg_contract_acceptances"
+        name="Acceptances"
+        parent="menu_dcg_contract_root"
+        action="action_dcg_contract_acceptance"
+        sequence="40"/>
+
+</odoo>

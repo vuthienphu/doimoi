@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_asset_warranty_list" model="ir.ui.view">
+        <field name="name">dcg.asset.warranty.list</field>
+        <field name="model">dcg.asset.warranty</field>
+        <field name="arch" type="xml">
+            <list string="Warranties" editable="bottom">
+                <field name="asset_id"/><field name="vendor_id" optional="show"/><field name="warranty_type"/>
+                <field name="start_date"/><field name="end_date"/>
+                <field name="is_expired" widget="boolean" decoration-danger="is_expired"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_dcg_asset_warranty" model="ir.actions.act_window">
+        <field name="name">Asset Warranties</field><field name="res_model">dcg.asset.warranty</field><field name="view_mode">list,form</field>
+    </record>
+</odoo>

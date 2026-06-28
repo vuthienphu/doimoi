@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_approval_reject_wizard_form" model="ir.ui.view">
+        <field name="name">dcg.approval.reject.wizard.form</field>
+        <field name="model">dcg.approval.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reject Approval Request">
+                <group>
+                    <field name="request_id" readonly="1"/>
+                </group>
+                <group string="Reject Reason">
+                    <field name="reason" nolabel="1" placeholder="Please enter the reject reason..."/>
+                </group>
+                <footer>
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirm Reject"
+                            class="btn-danger"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

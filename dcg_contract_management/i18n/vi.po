@@ -1,0 +1,1103 @@
+# Vietnamese translation for DCG Contract Management
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_contract_management 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: dcg_contract_management
+#: model:res.groups,name:dcg_contract_management.group_dcg_contract_user
+msgid "DCG Contract / User"
+msgstr "DCG Hợp đồng / Người dùng"
+
+#. module: dcg_contract_management
+#: model:res.groups,name:dcg_contract_management.group_dcg_contract_manager
+msgid "DCG Contract / Manager"
+msgstr "DCG Hợp đồng / Quản lý"
+
+#. module: dcg_contract_management
+#: model:ir.ui.menu,name:dcg_contract_management.menu_dcg_contract_root
+msgid "Contracts"
+msgstr "Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.ui.menu,name:dcg_contract_management.menu_dcg_contract_contracts
+#: model:ir.actions.act_window,name:dcg_contract_management.action_dcg_contract
+msgid "Contracts"
+msgstr "Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.ui.menu,name:dcg_contract_management.menu_dcg_contract_payments
+#: model:ir.actions.act_window,name:dcg_contract_management.action_dcg_contract_payment
+msgid "Payment Schedules"
+msgstr "Lịch Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.ui.menu,name:dcg_contract_management.menu_dcg_contract_appendices
+#: model:ir.actions.act_window,name:dcg_contract_management.action_dcg_contract_appendix
+msgid "Appendices"
+msgstr "Phụ lục"
+
+#. module: dcg_contract_management
+#: model:ir.ui.menu,name:dcg_contract_management.menu_dcg_contract_acceptances
+#: model:ir.actions.act_window,name:dcg_contract_management.action_dcg_contract_acceptance
+msgid "Acceptances"
+msgstr "Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract
+msgid "Customer Contract"
+msgstr "Hợp đồng Khách hàng"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_line
+msgid "Contract Line"
+msgstr "Hạng mục Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_payment
+msgid "Contract Payment Schedule"
+msgstr "Lịch Thanh toán Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_appendix
+msgid "Contract Appendix"
+msgstr "Phụ lục Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_appendix_line
+msgid "Contract Appendix Line"
+msgstr "Dòng Phụ lục Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_acceptance
+msgid "Contract Acceptance"
+msgstr "Biên bản Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model:ir.model,name:dcg_contract_management.model_dcg_contract_close_wizard
+msgid "Close Contract Wizard"
+msgstr "Wizard Đóng Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.sequence,name:dcg_contract_management.seq_dcg_contract
+msgid "DCG Contract"
+msgstr "DCG Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.sequence,name:dcg_contract_management.seq_dcg_contract_appendix
+msgid "DCG Contract Appendix"
+msgstr "DCG Phụ lục Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.sequence,name:dcg_contract_management.seq_dcg_contract_acceptance
+msgid "DCG Contract Acceptance"
+msgstr "DCG Biên bản Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__name
+msgid "Contract Number"
+msgstr "Số Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__contract_code
+msgid "Internal Code"
+msgstr "Mã Nội bộ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__partner_id
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__partner_id
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__partner_id
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__lead_id
+msgid "Opportunity"
+msgstr "Cơ hội"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__quotation_id
+msgid "Quotation"
+msgstr "Báo giá"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__estimate_id
+msgid "Source Estimate"
+msgstr "Estimate Nguồn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__account_manager_id
+msgid "Account Manager"
+msgstr "Quản lý Khách hàng (AM)"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__presales_owner_id
+msgid "Presales Owner"
+msgstr "Người phụ trách Presales"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__project_manager_id
+msgid "Project Manager"
+msgstr "Quản lý Dự án (PM)"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__delivery_owner_id
+msgid "Delivery Owner"
+msgstr "Người phụ trách Triển khai"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__contract_type
+msgid "Contract Type"
+msgstr "Loại Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__sign_date
+msgid "Signed Date"
+msgstr "Ngày Ký"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__effective_date
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__effective_date
+msgid "Effective Date"
+msgstr "Ngày Hiệu lực"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__start_date
+msgid "Start Date"
+msgstr "Ngày Bắt đầu"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__end_date
+msgid "End Date"
+msgstr "Ngày Kết thúc"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__warranty_end_date
+msgid "Warranty End Date"
+msgstr "Ngày Hết Bảo hành"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__amount_untaxed
+msgid "Amount Untaxed"
+msgstr "Số tiền Trước thuế"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__tax_amount
+msgid "Tax Amount"
+msgstr "Tiền Thuế"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__amount_total
+msgid "Total Amount"
+msgstr "Tổng Giá trị"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__expected_cost
+msgid "Expected Cost"
+msgstr "Chi phí Dự kiến"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__expected_margin
+msgid "Expected Margin"
+msgstr "Biên lợi nhuận Dự kiến"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__expected_margin_rate
+msgid "Margin Rate (%)"
+msgstr "Tỷ lệ Biên lợi nhuận (%)"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__line_amount_total
+msgid "Lines Total"
+msgstr "Tổng các Dòng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__payment_term_note
+msgid "Payment Terms"
+msgstr "Điều khoản Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__billing_note
+msgid "Billing Note"
+msgstr "Ghi chú Xuất hóa đơn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__contract_summary
+msgid "Contract Summary"
+msgstr "Tóm tắt Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__scope_summary
+msgid "Scope Summary"
+msgstr "Tóm tắt Phạm vi"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__assumption_note
+msgid "Assumptions"
+msgstr "Giả định"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__exclusion_note
+msgid "Exclusions"
+msgstr "Loại trừ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__legal_note
+msgid "Legal Note"
+msgstr "Ghi chú Pháp lý"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__handover_note
+msgid "Handover Note"
+msgstr "Ghi chú Bàn giao"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__internal_note
+msgid "Internal Note"
+msgstr "Ghi chú Nội bộ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__handover_completed
+msgid "Handover Completed"
+msgstr "Đã Bàn giao"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__handover_date
+msgid "Handover Date"
+msgstr "Ngày Bàn giao"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__signed_attachment_ids
+msgid "Signed Documents"
+msgstr "Tài liệu Đã ký"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__draft_attachment_ids
+msgid "Draft Documents"
+msgstr "Tài liệu Bản nháp"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__line_ids
+msgid "Contract Lines"
+msgstr "Hạng mục Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract__payment_ids
+msgid "Payment Schedule"
+msgstr "Lịch Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__implementation
+msgid "Implementation Contract"
+msgstr "Hợp đồng Triển khai"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__support
+msgid "Support/Maintenance Contract"
+msgstr "Hợp đồng Hỗ trợ/Bảo trì"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__training
+msgid "Training Contract"
+msgstr "Hợp đồng Đào tạo"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__consulting
+msgid "Consulting Contract"
+msgstr "Hợp đồng Tư vấn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__license
+msgid "License Contract"
+msgstr "Hợp đồng Bản quyền"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__contract_type__other
+msgid "Other"
+msgstr "Khác"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__waiting_approval
+msgid "Waiting Approval"
+msgstr "Chờ Duyệt"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__active
+msgid "Active"
+msgstr "Hiệu lực"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__in_progress
+msgid "In Progress"
+msgstr "Đang Triển khai"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__done
+msgid "Completed"
+msgstr "Hoàn thành"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract__state__closed
+msgid "Closed"
+msgstr "Đã Đóng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__name
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__name
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__service_catalog_id
+msgid "Service"
+msgstr "Dịch vụ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__scope_id
+msgid "Source Scope"
+msgstr "Scope Nguồn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__estimate_line_id
+msgid "Source Estimate Line"
+msgstr "Dòng Estimate Nguồn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__line_type
+msgid "Type"
+msgstr "Loại"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__description
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__description
+msgid "Detail"
+msgstr "Chi tiết"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__quantity
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__quantity
+msgid "Quantity"
+msgstr "Số lượng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__uom_name
+msgid "Unit"
+msgstr "Đơn vị"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__unit_price
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__unit_price
+msgid "Unit Price"
+msgstr "Đơn giá"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__amount
+msgid "Amount"
+msgstr "Thành tiền"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__planned_start_date
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__planned_start_date
+msgid "Planned Start"
+msgstr "Bắt đầu Dự kiến"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__planned_end_date
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__planned_end_date
+msgid "Planned End"
+msgstr "Kết thúc Dự kiến"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__note
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__ba_hours
+msgid "BA Hours"
+msgstr "Giờ BA"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__dev_hours
+msgid "Dev Hours"
+msgstr "Giờ Dev"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__test_hours
+msgid "Test Hours"
+msgstr "Giờ Test"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__pm_hours
+msgid "PM Hours"
+msgstr "Giờ PM"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__support_hours
+msgid "Support Hours"
+msgstr "Giờ Hỗ trợ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_line__total_hours
+msgid "Total Hours"
+msgstr "Tổng Giờ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_line__line_type__implementation
+msgid "Implementation"
+msgstr "Triển khai"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_line__line_type__support
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_line__line_type__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_line__line_type__consulting
+msgid "Consulting"
+msgstr "Tư vấn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_line__line_type__license
+msgid "License"
+msgstr "Bản quyền"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__sequence
+msgid "Installment"
+msgstr "Đợt thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__name
+msgid "Milestone"
+msgstr "Mốc"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__milestone_name
+msgid "Milestone Detail"
+msgstr "Chi tiết Mốc"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__payment_type
+msgid "Payment Type"
+msgstr "Loại Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__percent
+msgid "Percentage (%)"
+msgstr "Phần trăm (%)"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__amount_received
+msgid "Amount Received"
+msgstr "Số tiền Đã nhận"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__balance_amount
+msgid "Balance"
+msgstr "Còn lại"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__due_date
+msgid "Due Date"
+msgstr "Ngày Đến hạn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__planned_invoice_date
+msgid "Planned Invoice Date"
+msgstr "Ngày Xuất hóa đơn Dự kiến"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__actual_received_date
+msgid "Actual Received Date"
+msgstr "Ngày Nhận thực tế"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__condition_note
+msgid "Payment Condition"
+msgstr "Điều kiện Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_payment__invoice_note
+msgid "Invoice Note"
+msgstr "Ghi chú Hóa đơn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_payment__payment_type__percent
+msgid "By Percentage"
+msgstr "Theo Phần trăm"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_payment__payment_type__fixed
+msgid "Fixed Amount"
+msgstr "Số tiền Cố định"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_payment__state__waiting
+msgid "Waiting"
+msgstr "Chờ"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_payment__state__partial
+msgid "Partially Received"
+msgstr "Đã nhận Một phần"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_payment__state__paid
+msgid "Paid"
+msgstr "Đã Thanh toán"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__name
+msgid "Appendix Number"
+msgstr "Số Phụ lục"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__contract_id
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__contract_id
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__appendix_type
+msgid "Appendix Type"
+msgstr "Loại Phụ lục"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__appendix_date
+msgid "Appendix Date"
+msgstr "Ngày Phụ lục"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__value_delta
+msgid "Value Change"
+msgstr "Thay đổi Giá trị"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__old_amount_total
+msgid "Amount Before"
+msgstr "Số tiền Trước"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__new_amount_total
+msgid "Amount After"
+msgstr "Số tiền Sau"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__old_end_date
+msgid "End Date Before"
+msgstr "Ngày KT Trước"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__new_end_date
+msgid "New End Date"
+msgstr "Ngày KT Mới"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__reason
+msgid "Reason"
+msgstr "Lý do"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__summary
+msgid "Summary"
+msgstr "Tóm tắt"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix__line_ids
+msgid "Change Lines"
+msgstr "Các Dòng Thay đổi"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix__appendix_type__scope_change
+msgid "Scope Change"
+msgstr "Thay đổi Phạm vi"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix__appendix_type__value_change
+msgid "Value Change"
+msgstr "Thay đổi Giá trị"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix__appendix_type__timeline_extension
+msgid "Timeline Extension"
+msgstr "Gia hạn Thời gian"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix__appendix_type__general_update
+msgid "General Update"
+msgstr "Cập nhật Chung"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix__state__effective
+msgid "Effective"
+msgstr "Có Hiệu lực"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__appendix_id
+msgid "Appendix"
+msgstr "Phụ lục"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__contract_line_id
+msgid "Affected Contract Line"
+msgstr "Hạng mục HĐ Bị ảnh hưởng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__change_type
+msgid "Change Type"
+msgstr "Loại Thay đổi"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_appendix_line__amount_delta
+msgid "Amount Delta"
+msgstr "Chênh lệch Giá trị"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix_line__change_type__add
+msgid "Add New Scope"
+msgstr "Thêm Phạm vi Mới"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix_line__change_type__update
+msgid "Update Existing Scope"
+msgstr "Cập nhật Phạm vi Hiện tại"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_appendix_line__change_type__remove
+msgid "Remove Scope"
+msgstr "Loại bỏ Phạm vi"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__name
+msgid "Acceptance No."
+msgstr "Số Biên bản NT"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__acceptance_type
+msgid "Acceptance Type"
+msgstr "Loại Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__acceptance_date
+msgid "Acceptance Date"
+msgstr "Ngày Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__title
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__result_note
+msgid "Result Note"
+msgstr "Ghi chú Kết quả"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__signed_by_customer
+msgid "Signed By Customer"
+msgstr "Ký bởi Khách hàng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__signed_by_company
+msgid "Signed By Company"
+msgstr "Ký bởi Công ty"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__attachment_ids
+msgid "Attachments"
+msgstr "Tệp đính kèm"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__payment_id
+msgid "Related Payment"
+msgstr "Đợt Thanh toán Liên quan"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_acceptance__appendix_id
+msgid "Related Appendix"
+msgstr "Phụ lục Liên quan"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_acceptance__acceptance_type__phase
+msgid "Phase Acceptance"
+msgstr "Nghiệm thu Giai đoạn"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_acceptance__acceptance_type__milestone
+msgid "Milestone Acceptance"
+msgstr "Nghiệm thu Mốc"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_acceptance__acceptance_type__final
+msgid "Final Acceptance"
+msgstr "Nghiệm thu Cuối cùng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_acceptance__acceptance_type__warranty_handover
+msgid "Warranty / Handover"
+msgstr "Bảo hành / Bàn giao"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields.selection,name:dcg_contract_management.selection__dcg_contract_acceptance__state__confirmed
+msgid "Confirmed"
+msgstr "Đã Xác nhận"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_sale_order__contract_count
+msgid "Contracts"
+msgstr "Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_sale_order__contract_created
+msgid "Contract Created"
+msgstr "Đã Tạo Hợp đồng"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_crm_lead__primary_contract_id
+msgid "Primary Contract"
+msgstr "Hợp đồng Chính"
+
+#. module: dcg_contract_management
+#: model:ir.model.fields,field_description:dcg_contract_management.field_dcg_contract_close_wizard__close_note
+msgid "Close Note"
+msgstr "Ghi chú Đóng"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Submit Approval"
+msgstr "Gửi Duyệt"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "View Approval"
+msgstr "Xem Duyệt"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Activate Contract"
+msgstr "Kích hoạt Hợp đồng"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Mark In Progress"
+msgstr "Đánh dấu Đang Triển khai"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Mark Done"
+msgstr "Đánh dấu Hoàn thành"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Close Contract"
+msgstr "Đóng Hợp đồng"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Create Appendix"
+msgstr "Tạo Phụ lục"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Create Acceptance"
+msgstr "Tạo Biên bản Nghiệm thu"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Customer &amp; Source"
+msgstr "Khách hàng &amp; Nguồn"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Ownership"
+msgstr "Phụ trách"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Timeline"
+msgstr "Thời gian"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Commercial"
+msgstr "Thương mại"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Scope &amp; Lines"
+msgstr "Phạm vi &amp; Hạng mục"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Legal &amp; Notes"
+msgstr "Pháp lý &amp; Ghi chú"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Documents"
+msgstr "Tài liệu"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Handover"
+msgstr "Bàn giao"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Lines Subtotal"
+msgstr "Tổng phụ Hạng mục"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_appendix_form
+msgid "General"
+msgstr "Thông tin chung"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_appendix_form
+msgid "Impact"
+msgstr "Ảnh hưởng"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_appendix_form
+msgid "Mark Effective"
+msgstr "Đánh dấu Hiệu lực"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_appendix_form
+msgid "This will update the contract amounts and scope. Continue?"
+msgstr "Thao tác này sẽ cập nhật giá trị và phạm vi hợp đồng. Tiếp tục?"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_form
+msgid "Activate this contract?"
+msgstr "Kích hoạt hợp đồng này?"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_payment_form
+msgid "Mark Waiting"
+msgstr "Đánh dấu Chờ"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_payment_form
+msgid "Mark Partial"
+msgstr "Đánh dấu Đã nhận Một phần"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_payment_form
+msgid "Mark Paid"
+msgstr "Đánh dấu Đã Thanh toán"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_payment_form
+msgid "Reset to Draft"
+msgstr "Đặt lại về Nháp"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_acceptance_form
+msgid "Confirm"
+msgstr "Xác nhận"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_acceptance_form
+msgid "Set to Draft"
+msgstr "Đặt về Nháp"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_acceptance_form
+msgid "Result"
+msgstr "Kết quả"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_payment_form
+msgid "Condition"
+msgstr "Điều kiện"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_line_form
+msgid "Effort"
+msgstr "Effort"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_close_wizard_form
+msgid "Confirm Close"
+msgstr "Xác nhận Đóng"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_close_wizard_form
+msgid "Final remarks before closing..."
+msgstr "Ghi chú cuối trước khi đóng..."
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_search
+msgid "My Contracts (AM)"
+msgstr "HĐ của Tôi (AM)"
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_dcg_contract_search
+msgid "My Contracts (PM)"
+msgstr "HĐ của Tôi (PM)"
+
+#. module: dcg_contract_management
+#: model_terms:ir.actions.act_window,help:dcg_contract_management.action_dcg_contract
+msgid "Create your first contract"
+msgstr "Tạo hợp đồng đầu tiên"
+
+#. module: dcg_contract_management
+#: model_terms:ir.actions.act_window,help:dcg_contract_management.action_dcg_contract
+msgid "Contracts are typically created from a quotation (sale order) or directly from a CRM opportunity."
+msgstr "Hợp đồng thường được tạo từ báo giá hoặc trực tiếp từ cơ hội CRM."
+
+#. module: dcg_contract_management
+#: model_terms:ir.ui.view,arch_db:dcg_contract_management.view_order_form_dcg_contract
+msgid "Create Contract"
+msgstr "Tạo Hợp đồng"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Cannot delete contract '%s' in state '%s'. Cancel it first."
+msgstr "Không thể xoá hợp đồng '%s' ở trạng thái '%s'. Vui lòng Huỷ trước."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must have a customer before submitting for approval."
+msgstr "Hợp đồng phải có khách hàng trước khi gửi duyệt."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must have at least one line item before submitting for approval."
+msgstr "Hợp đồng phải có ít nhất một hạng mục trước khi gửi duyệt."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract total amount must be greater than 0."
+msgstr "Tổng giá trị hợp đồng phải lớn hơn 0."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must be approved before activation."
+msgstr "Hợp đồng phải được duyệt trước khi kích hoạt."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must be active before marking in progress."
+msgstr "Hợp đồng phải đang hiệu lực trước khi đánh dấu đang triển khai."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must be in progress before marking as done."
+msgstr "Hợp đồng phải đang triển khai trước khi đánh dấu hoàn thành."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Contract must be completed (done) before closing."
+msgstr "Hợp đồng phải hoàn thành trước khi đóng."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Closed contract cannot be cancelled."
+msgstr "Hợp đồng đã đóng không thể huỷ."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "Close Contract"
+msgstr "Đóng Hợp đồng"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "New Appendix"
+msgstr "Phụ lục Mới"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract.py:0
+#, python-format
+msgid "New Acceptance"
+msgstr "Biên bản NT Mới"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract_appendix.py:0
+#, python-format
+msgid "Appendix must be linked to a contract."
+msgstr "Phụ lục phải được gắn với một hợp đồng."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract_appendix.py:0
+#, python-format
+msgid "Appendix must be approved before marking as effective."
+msgstr "Phụ lục phải được duyệt trước khi đánh dấu hiệu lực."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract_appendix.py:0
+#, python-format
+msgid "Cannot cancel an effective appendix. Create a reversal appendix instead."
+msgstr "Không thể huỷ phụ lục đã có hiệu lực. Hãy tạo phụ lục đảo thay thế."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract_appendix.py:0
+#, python-format
+msgid "Added by appendix %s"
+msgstr "Thêm bởi phụ lục %s"
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/models/contract_payment.py:0
+#, python-format
+msgid "Please enter the received amount before marking as partial."
+msgstr "Vui lòng nhập số tiền đã nhận trước khi đánh dấu đã nhận một phần."
+
+#. module: dcg_contract_management
+#: code:addons/dcg_contract_management/wizard/contract_close_wizard.py:0
+#, python-format
+msgid "Contract must be in 'Completed' state to close."
+msgstr "Hợp đồng phải ở trạng thái 'Hoàn thành' để đóng."

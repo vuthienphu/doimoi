@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dcg_dashboard_root" name="Dashboard" sequence="5"
+        web_icon="dcg_dashboard_kpi,static/description/icon.png"
+        groups="dcg_dashboard_kpi.group_dcg_dashboard_user"/>
+    <menuitem id="menu_dcg_dashboard_home" name="Home" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_home" sequence="1"/>
+    <menuitem id="menu_dcg_dashboard_executive" name="Executive" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_executive" sequence="10"/>
+    <menuitem id="menu_dcg_dashboard_sales" name="Sales" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_sales" sequence="20"/>
+    <menuitem id="menu_dcg_dashboard_project" name="Project" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_project" sequence="30"/>
+    <menuitem id="menu_dashboard_project_task" name="Project Tasks" parent="menu_dcg_dashboard_root"
+        action="action_dashboard_project_task" sequence="40"/>
+    <menuitem id="menu_dcg_dashboard_resource" name="Resource" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_resource" sequence="50"/>
+    <menuitem id="menu_dcg_dashboard_finance" name="Finance" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_finance" sequence="60"/>
+    <menuitem id="menu_dcg_dashboard_support" name="Support" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_support" sequence="70"/>
+    <menuitem id="menu_dcg_dashboard_asset" name="Asset" parent="menu_dcg_dashboard_root"
+        action="action_dcg_dashboard_asset" sequence="80"/>
+</odoo>

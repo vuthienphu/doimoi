@@ -1,0 +1,1021 @@
+# Vietnamese translation for DCG Project Delivery
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_project_delivery 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: dcg_project_delivery
+#: model:res.groups,name:dcg_project_delivery.group_dcg_project_user
+msgid "DCG Project Delivery / User"
+msgstr "DCG Triển khai DA / Người dùng"
+
+#. module: dcg_project_delivery
+#: model:res.groups,name:dcg_project_delivery.group_dcg_project_manager
+msgid "DCG Project Delivery / Manager"
+msgstr "DCG Triển khai DA / Quản lý"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_root
+msgid "Delivery"
+msgstr "Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_projects
+#: model:ir.actions.act_window,name:dcg_project_delivery.action_dcg_project_delivery
+msgid "Projects"
+msgstr "Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_milestones
+#: model:ir.actions.act_window,name:dcg_project_delivery.action_dcg_project_milestone
+msgid "Milestones"
+msgstr "Mốc Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_issues
+#: model:ir.actions.act_window,name:dcg_project_delivery.action_dcg_project_issue
+msgid "Issues / Risks"
+msgstr "Vấn đề / Rủi ro"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_change_requests
+#: model:ir.actions.act_window,name:dcg_project_delivery.action_dcg_project_change_request
+msgid "Change Requests"
+msgstr "Yêu cầu Thay đổi"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_delivery
+msgid "Project Delivery"
+msgstr "Dự án Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_scope
+msgid "Project Scope"
+msgstr "Phạm vi Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_milestone
+msgid "Project Milestone"
+msgstr "Mốc Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_member
+msgid "Project Member"
+msgstr "Thành viên Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_issue
+msgid "Project Issue"
+msgstr "Vấn đề Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_change_request
+msgid "Project Change Request"
+msgstr "Yêu cầu Thay đổi Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.sequence,name:dcg_project_delivery.seq_dcg_project_delivery
+msgid "DCG Project Delivery"
+msgstr "DCG Dự án Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.sequence,name:dcg_project_delivery.seq_dcg_project_change_request
+msgid "DCG Change Request"
+msgstr "DCG Yêu cầu Thay đổi"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__name
+msgid "Project Name"
+msgstr "Tên Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__project_code
+msgid "Project Code"
+msgstr "Mã Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__contract_id
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__lead_id
+msgid "Opportunity"
+msgstr "Cơ hội"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__partner_id
+msgid "Customer"
+msgstr "Khách hàng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__estimate_id
+msgid "Source Estimate"
+msgstr "Estimate Nguồn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__project_manager_id
+msgid "Project Manager"
+msgstr "Quản lý Dự án (PM)"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__delivery_owner_id
+msgid "Delivery Owner"
+msgstr "Người phụ trách Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__presales_owner_id
+msgid "Presales Owner"
+msgstr "Người phụ trách Presales"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__project_type
+msgid "Project Type"
+msgstr "Loại Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__odoo_project_id
+msgid "Odoo Project"
+msgstr "Dự án Odoo"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__kick_off_date
+msgid "Kick-off Date"
+msgstr "Ngày Kick-off"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__start_date
+msgid "Start Date"
+msgstr "Ngày Bắt đầu"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__end_date
+msgid "End Date"
+msgstr "Ngày Kết thúc"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__actual_end_date
+msgid "Actual End Date"
+msgstr "Ngày KT Thực tế"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__warranty_start_date
+msgid "Warranty Start"
+msgstr "Bắt đầu Bảo hành"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__warranty_end_date
+msgid "Warranty End"
+msgstr "Kết thúc Bảo hành"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__contract_amount_total
+msgid "Contract Amount"
+msgstr "Giá trị Hợp đồng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__expected_cost
+msgid "Expected Cost"
+msgstr "Chi phí Dự kiến"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__expected_margin
+msgid "Expected Margin"
+msgstr "Biên lợi nhuận Dự kiến"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__planned_effort_hours
+msgid "Planned Effort (h)"
+msgstr "Effort Kế hoạch (h)"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__actual_effort_hours
+msgid "Actual Effort (h)"
+msgstr "Effort Thực tế (h)"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__progress_percent
+msgid "Progress (%)"
+msgstr "Tiến độ (%)"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__health_status
+msgid "Health"
+msgstr "Sức khoẻ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__overall_note
+msgid "Overall Note"
+msgstr "Ghi chú Tổng quan"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__project_summary
+msgid "Project Summary"
+msgstr "Tóm tắt Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__scope_summary
+msgid "Scope Summary"
+msgstr "Tóm tắt Phạm vi"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__implementation_method
+msgid "Implementation Method"
+msgstr "Phương pháp Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__assumption_note
+msgid "Assumptions"
+msgstr "Giả định"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__exclusion_note
+msgid "Exclusions"
+msgstr "Loại trừ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__risk_summary
+msgid "Risk Summary"
+msgstr "Tóm tắt Rủi ro"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__handover_note
+msgid "Handover Note"
+msgstr "Ghi chú Bàn giao"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__scope_ids
+msgid "Scope / Work Packages"
+msgstr "Phạm vi / Gói Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__milestone_ids
+msgid "Milestones"
+msgstr "Mốc Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__member_ids
+msgid "Team Members"
+msgstr "Thành viên Nhóm"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__issue_ids
+msgid "Issues / Risks"
+msgstr "Vấn đề / Rủi ro"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_delivery__change_request_ids
+msgid "Change Requests"
+msgstr "Yêu cầu Thay đổi"
+
+# Project Type selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__implementation
+msgid "Implementation"
+msgstr "Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__customization
+msgid "Customization"
+msgstr "Tuỳ chỉnh"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__support
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__consulting
+msgid "Consulting"
+msgstr "Tư vấn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__project_type__internal
+msgid "Internal"
+msgstr "Nội bộ"
+
+# Project State selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__ready
+msgid "Ready for Delivery"
+msgstr "Sẵn sàng Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__in_progress
+msgid "In Progress"
+msgstr "Đang Triển khai"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__on_hold
+msgid "On Hold"
+msgstr "Tạm dừng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__uat
+msgid "UAT"
+msgstr "UAT"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__done
+msgid "Completed"
+msgstr "Hoàn thành"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__closed
+msgid "Closed"
+msgstr "Đã Đóng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+# Health selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__health_status__green
+msgid "Green"
+msgstr "Xanh"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__health_status__yellow
+msgid "Yellow"
+msgstr "Vàng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_delivery__health_status__red
+msgid "Red"
+msgstr "Đỏ"
+
+# ---- Scope ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__name
+msgid "Work Package"
+msgstr "Gói Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__contract_line_id
+msgid "Source Contract Line"
+msgstr "Hạng mục HĐ Nguồn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__estimate_line_id
+msgid "Source Estimate Line"
+msgstr "Dòng Estimate Nguồn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__lead_scope_id
+msgid "Source Presales Scope"
+msgstr "Scope Presales Nguồn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__service_catalog_id
+msgid "Service"
+msgstr "Dịch vụ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__owner_id
+msgid "Owner"
+msgstr "Người phụ trách"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__planned_start_date
+msgid "Planned Start"
+msgstr "Bắt đầu Dự kiến"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__planned_end_date
+msgid "Planned End"
+msgstr "Kết thúc Dự kiến"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__planned_hours
+msgid "Planned Hours"
+msgstr "Giờ Kế hoạch"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__actual_hours
+msgid "Actual Hours"
+msgstr "Giờ Thực tế"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__ba_hours
+msgid "BA Hours"
+msgstr "Giờ BA"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__dev_hours
+msgid "Dev Hours"
+msgstr "Giờ Dev"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__test_hours
+msgid "Test Hours"
+msgstr "Giờ Test"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__pm_hours
+msgid "PM Hours"
+msgstr "Giờ PM"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_scope__support_hours
+msgid "Support Hours"
+msgstr "Giờ Hỗ trợ"
+
+# Scope Type selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_scope__scope_type__integration
+msgid "Integration"
+msgstr "Tích hợp"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_scope__scope_type__migration
+msgid "Migration"
+msgstr "Chuyển đổi"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_scope__scope_type__other
+msgid "Other"
+msgstr "Khác"
+
+# Scope State selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_scope__state__ready
+msgid "Ready"
+msgstr "Sẵn sàng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_scope__state__done
+msgid "Done"
+msgstr "Hoàn thành"
+
+# ---- Milestone ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__name
+msgid "Milestone"
+msgstr "Mốc"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__payment_id
+msgid "Payment Milestone"
+msgstr "Mốc Thanh toán"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__acceptance_id
+msgid "Acceptance"
+msgstr "Nghiệm thu"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__planned_date
+msgid "Planned Date"
+msgstr "Ngày Dự kiến"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__actual_date
+msgid "Actual Date"
+msgstr "Ngày Thực tế"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_milestone__due_date
+msgid "Due Date"
+msgstr "Ngày Đến hạn"
+
+# Milestone Type selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__kickoff
+msgid "Kickoff"
+msgstr "Kickoff"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__survey
+msgid "Survey"
+msgstr "Khảo sát"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__analysis
+msgid "Analysis / Blueprint"
+msgstr "Phân tích / Blueprint"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__development
+msgid "Development"
+msgstr "Phát triển"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__go_live
+msgid "Go Live"
+msgstr "Go Live"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__milestone_type__acceptance
+msgid "Acceptance"
+msgstr "Nghiệm thu"
+
+# Milestone State selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__state__waiting
+msgid "Waiting"
+msgstr "Chờ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_milestone__state__delayed
+msgid "Delayed"
+msgstr "Trễ"
+
+# ---- Member ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_member__role
+msgid "Role"
+msgstr "Vai trò"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_member__allocation_percent
+msgid "Allocation (%)"
+msgstr "Phân bổ (%)"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_member__is_billable
+msgid "Billable"
+msgstr "Tính phí được"
+
+# Member Role selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__pm
+msgid "Project Manager"
+msgstr "Quản lý Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__ba
+msgid "Business Analyst"
+msgstr "Phân tích Nghiệp vụ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__dev
+msgid "Developer"
+msgstr "Lập trình viên"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__qa
+msgid "QA / Tester"
+msgstr "QA / Kiểm thử"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__consultant
+msgid "Consultant"
+msgstr "Tư vấn viên"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_member__role__trainer
+msgid "Trainer"
+msgstr "Đào tạo viên"
+
+# ---- Issue ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__name
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__assigned_to_id
+msgid "Assigned To"
+msgstr "Phân công cho"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__raised_by_id
+msgid "Raised By"
+msgstr "Người báo cáo"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__description
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__impact
+msgid "Impact"
+msgstr "Ảnh hưởng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__action_plan
+msgid "Action Plan"
+msgstr "Kế hoạch Hành động"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__target_date
+msgid "Target Date"
+msgstr "Ngày Mục tiêu"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_issue__resolved_date
+msgid "Resolved Date"
+msgstr "Ngày Xử lý"
+
+# Issue Type selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__issue_type__issue
+msgid "Issue"
+msgstr "Vấn đề"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__issue_type__risk
+msgid "Risk"
+msgstr "Rủi ro"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__issue_type__blocker
+msgid "Blocker"
+msgstr "Vấn đề Chặn"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__issue_type__dependency
+msgid "Dependency"
+msgstr "Phụ thuộc"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__issue_type__customer_pending
+msgid "Customer Pending"
+msgstr "Chờ Khách hàng"
+
+# Issue Priority selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__priority__low
+msgid "Low"
+msgstr "Thấp"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__priority__medium
+msgid "Medium"
+msgstr "Trung bình"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__priority__high
+msgid "High"
+msgstr "Cao"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__priority__critical
+msgid "Critical"
+msgstr "Nghiêm trọng"
+
+# Issue State selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__state__open
+msgid "Open"
+msgstr "Mở"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_issue__state__resolved
+msgid "Resolved"
+msgstr "Đã Xử lý"
+
+# ---- Change Request ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__name
+msgid "CR Number"
+msgstr "Số CR"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__request_date
+msgid "Request Date"
+msgstr "Ngày Yêu cầu"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__requested_by
+msgid "Requested By"
+msgstr "Yêu cầu bởi"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__owner_id
+msgid "Owner"
+msgstr "Người phụ trách"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__appendix_id
+msgid "Generated Appendix"
+msgstr "Phụ lục Đã tạo"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__impact_scope
+msgid "Scope Impact"
+msgstr "Ảnh hưởng Phạm vi"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__impact_timeline
+msgid "Timeline Impact"
+msgstr "Ảnh hưởng Tiến độ"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__impact_cost
+msgid "Cost Impact"
+msgstr "Ảnh hưởng Chi phí"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__decision_note
+msgid "Decision Note"
+msgstr "Ghi chú Quyết định"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__estimated_extra_hours
+msgid "Extra Hours"
+msgstr "Giờ Thêm"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__estimated_extra_cost
+msgid "Extra Cost"
+msgstr "Chi phí Thêm"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__estimated_value_delta
+msgid "Value Delta"
+msgstr "Chênh lệch Giá trị"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_project_change_request__new_target_end_date
+msgid "New Target End Date"
+msgstr "Ngày KT Mục tiêu Mới"
+
+# CR Requested By selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_change_request__requested_by__customer
+msgid "Customer"
+msgstr "Khách hàng"
+
+# CR State selection
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_change_request__state__analysis
+msgid "Impact Analysis"
+msgstr "Phân tích Ảnh hưởng"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_change_request__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_change_request__state__rejected
+msgid "Rejected"
+msgstr "Từ chối"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields.selection,name:dcg_project_delivery.selection__dcg_project_change_request__state__implemented
+msgid "Implemented"
+msgstr "Đã Triển khai"
+
+# ---- Contract extension ----
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_contract__primary_project_id
+msgid "Primary Project"
+msgstr "Dự án Chính"
+
+#. module: dcg_project_delivery
+#: model:ir.model.fields,field_description:dcg_project_delivery.field_dcg_contract__project_created
+msgid "Project Created"
+msgstr "Đã Tạo Dự án"
+
+# ---- View strings ----
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Mark Ready"
+msgstr "Đánh dấu Sẵn sàng"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Start Project"
+msgstr "Bắt đầu Dự án"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Set On Hold"
+msgstr "Tạm dừng"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Move to UAT"
+msgstr "Chuyển sang UAT"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Mark Done"
+msgstr "Đánh dấu Hoàn thành"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Close Project"
+msgstr "Đóng Dự án"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Customer &amp; Source"
+msgstr "Khách hàng &amp; Nguồn"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Ownership"
+msgstr "Phụ trách"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Timeline"
+msgstr "Thời gian"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Financial"
+msgstr "Tài chính"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Scope &amp; Milestones"
+msgstr "Phạm vi &amp; Mốc"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Team"
+msgstr "Nhóm"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_form
+msgid "Notes"
+msgstr "Ghi chú"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_search
+msgid "My Projects (PM)"
+msgstr "DA của Tôi (PM)"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_delivery_search
+msgid "Red Health"
+msgstr "Sức khoẻ Đỏ"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_contract_form_delivery
+msgid "Create Project"
+msgstr "Tạo Dự án"
+
+#. module: dcg_project_delivery
+#: model_terms:ir.ui.view,arch_db:dcg_project_delivery.view_dcg_project_change_request_form
+msgid "Create Appendix"
+msgstr "Tạo Phụ lục"
+
+# ---- Python messages ----
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Please assign a Project Manager before marking as ready."
+msgstr "Vui lòng phân công Quản lý Dự án trước khi đánh dấu sẵn sàng."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Project must be ready or on hold to start."
+msgstr "Dự án phải ở trạng thái sẵn sàng hoặc tạm dừng để bắt đầu."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Only in-progress projects can be set on hold."
+msgstr "Chỉ dự án đang triển khai mới có thể tạm dừng."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Project must be in progress to move to UAT."
+msgstr "Dự án phải đang triển khai để chuyển sang UAT."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Project must be in progress or UAT to mark as done."
+msgstr "Dự án phải đang triển khai hoặc UAT để đánh dấu hoàn thành."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Project must be completed before closing."
+msgstr "Dự án phải hoàn thành trước khi đóng."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "Closed project cannot be cancelled."
+msgstr "Dự án đã đóng không thể huỷ."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "New Issue"
+msgstr "Vấn đề Mới"
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_delivery.py:0
+#, python-format
+msgid "New Change Request"
+msgstr "Yêu cầu Thay đổi Mới"
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/contract.py:0
+#, python-format
+msgid "Contract must be approved, active, or in progress to create a project."
+msgstr "Hợp đồng phải được duyệt, hiệu lực, hoặc đang triển khai để tạo dự án."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/contract.py:0
+#, python-format
+msgid "Delivery Projects"
+msgstr "Dự án Triển khai"
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_change_request.py:0
+#, python-format
+msgid "Change request must be approved before marking as implemented."
+msgstr "Yêu cầu thay đổi phải được duyệt trước khi đánh dấu đã triển khai."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_change_request.py:0
+#, python-format
+msgid "Change request must be approved before creating an appendix."
+msgstr "Yêu cầu thay đổi phải được duyệt trước khi tạo phụ lục."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_change_request.py:0
+#, python-format
+msgid "An appendix has already been created for this change request."
+msgstr "Phụ lục đã được tạo cho yêu cầu thay đổi này."
+
+#. module: dcg_project_delivery
+#: code:addons/dcg_project_delivery/models/project_change_request.py:0
+#, python-format
+msgid "Generated from Change Request %s"
+msgstr "Tạo từ Yêu cầu Thay đổi %s"
+
+# ---- Task translation ----
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_task
+msgid "Project Task"
+msgstr "Công việc Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_task_stage
+msgid "Project Task Stage"
+msgstr "Trạng thái Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.model,name:dcg_project_delivery.model_dcg_project_task_tag
+msgid "Project Task Tag"
+msgstr "Nhãn Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_my_tasks
+msgid "My Tasks"
+msgstr "Công việc của tôi"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_all_tasks
+msgid "All Tasks"
+msgstr "Tất cả Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_tasks_by_project
+msgid "Tasks by Project"
+msgstr "Công việc theo Dự án"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_task_stage
+msgid "Task Stages"
+msgstr "Trạng thái Công việc"
+
+#. module: dcg_project_delivery
+#: model:ir.ui.menu,name:dcg_project_delivery.menu_dcg_delivery_task_tag
+msgid "Task Tags"
+msgstr "Nhãn Công việc"

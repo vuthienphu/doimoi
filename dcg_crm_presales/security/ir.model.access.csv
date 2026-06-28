@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dcg_crm_requirement_user,dcg.crm.requirement user,model_dcg_crm_requirement,dcg_crm_presales.group_dcg_presales_user,1,1,1,1
+access_dcg_crm_requirement_manager,dcg.crm.requirement manager,model_dcg_crm_requirement,dcg_crm_presales.group_dcg_presales_manager,1,1,1,1
+access_dcg_crm_solution_scope_user,dcg.crm.solution.scope user,model_dcg_crm_solution_scope,dcg_crm_presales.group_dcg_presales_user,1,1,1,1
+access_dcg_crm_solution_scope_manager,dcg.crm.solution.scope manager,model_dcg_crm_solution_scope,dcg_crm_presales.group_dcg_presales_manager,1,1,1,1
+access_dcg_crm_estimate_user,dcg.crm.estimate user,model_dcg_crm_estimate,dcg_crm_presales.group_dcg_presales_user,1,1,1,1
+access_dcg_crm_estimate_manager,dcg.crm.estimate manager,model_dcg_crm_estimate,dcg_crm_presales.group_dcg_presales_manager,1,1,1,1
+access_dcg_crm_estimate_line_user,dcg.crm.estimate.line user,model_dcg_crm_estimate_line,dcg_crm_presales.group_dcg_presales_user,1,1,1,1
+access_dcg_crm_estimate_line_manager,dcg.crm.estimate.line manager,model_dcg_crm_estimate_line,dcg_crm_presales.group_dcg_presales_manager,1,1,1,1
+access_dcg_crm_presales_cost_user,dcg.crm.presales.cost user,model_dcg_crm_presales_cost,dcg_crm_presales.group_dcg_presales_user,1,1,1,1
+access_dcg_crm_presales_cost_manager,dcg.crm.presales.cost manager,model_dcg_crm_presales_cost,dcg_crm_presales.group_dcg_presales_manager,1,1,1,1

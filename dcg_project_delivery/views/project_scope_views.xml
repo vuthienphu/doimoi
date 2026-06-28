@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_project_scope_list" model="ir.ui.view">
+        <field name="name">dcg.project.scope.list</field>
+        <field name="model">dcg.project.scope</field>
+        <field name="arch" type="xml">
+            <list string="Scope / Work Packages" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="service_catalog_id" optional="show"/>
+                <field name="scope_type" optional="show"/>
+                <field name="owner_id" optional="show"/>
+                <field name="planned_hours" sum="Total"/>
+                <field name="actual_hours" sum="Total"/>
+                <field name="progress_percent" widget="progressbar"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-info="state == 'in_progress'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_project_scope_form" model="ir.ui.view">
+        <field name="name">dcg.project.scope.form</field>
+        <field name="model">dcg.project.scope</field>
+        <field name="arch" type="xml">
+            <form string="Work Package">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_tasks" type="object"
+                                class="oe_stat_button" icon="fa-tasks">
+                            <field name="task_count" widget="statinfo" string="Tasks"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="project_id" readonly="1"/>
+                            <field name="name"/>
+                            <field name="service_catalog_id"/>
+                            <field name="scope_type"/>
+                            <field name="owner_id"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="contract_line_id"/>
+                            <field name="estimate_line_id"/>
+                            <field name="lead_scope_id"/>
+                            <field name="planned_start_date"/>
+                            <field name="planned_end_date"/>
+                            <field name="actual_end_date"/>
+                            <field name="progress_percent" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Effort" name="effort">
+                            <group>
+                                <group>
+                                    <field name="ba_hours"/>
+                                    <field name="dev_hours"/>
+                                    <field name="test_hours"/>
+                                </group>
+                                <group>
+                                    <field name="pm_hours"/>
+                                    <field name="support_hours"/>
+                                    <field name="planned_hours" readonly="1"/>
+                                    <field name="actual_hours"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description"/>
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

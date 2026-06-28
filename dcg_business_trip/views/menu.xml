@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_dcg_business_trip_root"
+        name="Business Trips"
+        sequence="96"
+        web_icon="dcg_business_trip,static/description/icon.png"
+        groups="dcg_business_trip.group_dcg_business_trip_user"/>
+    <menuitem
+        id="menu_dcg_business_trip_main"
+        name="Business Trips"
+        parent="menu_dcg_business_trip_root"
+        action="action_dcg_business_trip"
+        sequence="10"/>
+    <menuitem
+        id="menu_dcg_business_trip_expenses"
+        name="Trip Expenses"
+        parent="menu_dcg_business_trip_root"
+        action="action_dcg_business_trip_expense"
+        sequence="20"/>
+</odoo>

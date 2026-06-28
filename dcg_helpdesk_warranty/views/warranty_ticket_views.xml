@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Kanban -->
+    <record id="view_dcg_warranty_ticket_kanban" model="ir.ui.view">
+        <field name="name">dcg.warranty.ticket.kanban</field>
+        <field name="model">dcg.warranty.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column">
+                <field name="stage_id"/>
+                <field name="severity"/>
+                <field name="partner_id"/>
+                <field name="support_engineer_id"/>
+                <templates>
+                    <t t-name="card">
+                        <field name="title" class="fw-bold"/>
+                        <field name="name" class="text-muted"/>
+                        <div>
+                            <field name="partner_id"/>
+                        </div>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <footer>
+                            <field name="severity" widget="badge"
+                                   decoration-danger="severity == 'critical'"
+                                   decoration-warning="severity == 'high'"/>
+                            <field name="support_engineer_id" widget="many2one_avatar_user"
+                                   domain="[('share', '=', False)]" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- List -->
+    <record id="view_dcg_warranty_ticket_list" model="ir.ui.view">
+        <field name="name">dcg.warranty.ticket.list</field>
+        <field name="model">dcg.warranty.ticket</field>
+        <field name="arch" type="xml">
+            <list string="Warranty Tickets" sample="1" multi_edit="1">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="partner_id"/>
+                <field name="ticket_type"/>
+                <field name="severity" decoration-danger="severity == 'critical'"
+                       decoration-warning="severity == 'high'"/>
+                <field name="priority" optional="show"/>
+                <field name="support_engineer_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="team_id" optional="hide"/>
+                <field name="project_id" optional="show"/>
+                <field name="is_in_warranty" widget="boolean" optional="show"/>
+                <field name="sla_breached" widget="boolean" optional="show"/>
+                <field name="stage_id"/>
+                <field name="create_date" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form -->
+    <record id="view_dcg_warranty_ticket_form" model="ir.ui.view">
+        <field name="name">dcg.warranty.ticket.form</field>
+        <field name="model">dcg.warranty.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Warranty Ticket">
+                <header>
+                    <button name="action_assign_to_me" type="object" string="Assign to Me"
+                            invisible="support_engineer_id"/>
+                    <button name="action_mark_response" type="object" string="Mark Response"
+                            invisible="response_date"/>
+                    <button name="action_close" type="object" string="Close Ticket"
+                            class="btn-primary"/>
+                    <field name="stage_id" widget="statusbar"
+                           options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="SLA Breached" bg_color="bg-danger"
+                            invisible="not sla_breached"/>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1><field name="title"/></h1>
+                        <field name="name" readonly="1"/>
+                    </div>
+
+                    <group>
+                        <group string="Customer">
+                            <field name="partner_id"/>
+                            <field name="contact_id"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <group string="Classification">
+                            <field name="ticket_type"/>
+                            <field name="ticket_category"/>
+                            <field name="severity"/>
+                            <field name="priority"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Assignment">
+                            <field name="team_id"/>
+                            <field name="owner_id"/>
+                            <field name="support_engineer_id"/>
+                            <field name="reviewer_id"/>
+                        </group>
+                        <group string="Project / Contract">
+                            <field name="project_id"/>
+                            <field name="contract_id"/>
+                            <field name="scope_id"/>
+                            <field name="is_in_warranty" readonly="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="SLA">
+                            <field name="sla_id"/>
+                            <field name="response_deadline"/>
+                            <field name="resolve_deadline"/>
+                            <field name="sla_breached" readonly="1"/>
+                        </group>
+                        <group string="Dates">
+                            <field name="assign_date" readonly="1"/>
+                            <field name="response_date" readonly="1"/>
+                            <field name="resolve_date" readonly="1"/>
+                            <field name="close_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="summary"/>
+                            <field name="description"/>
+                        </page>
+                        <page string="Resolution" name="resolution">
+                            <group>
+                                <field name="warranty_result"/>
+                                <field name="solution_id"/>
+                            </group>
+                            <field name="root_cause"/>
+                            <field name="solution_text"/>
+                            <field name="customer_feedback"/>
+                        </page>
+                        <page string="Version / Dev" name="version">
+                            <group>
+                                <field name="affected_version"/>
+                                <field name="fixed_version"/>
+                                <field name="commit_url" widget="url"/>
+                            </group>
+                        </page>
+                        <page string="Effort" name="effort">
+                            <group>
+                                <field name="estimated_hours"/>
+                                <field name="spent_hours"/>
+                            </group>
+                        </page>
+                        <page string="Activity Timeline" name="activities">
+                            <field name="activity_line_ids"/>
+                        </page>
+                        <page string="Attachments" name="attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_dcg_warranty_ticket_search" model="ir.ui.view">
+        <field name="name">dcg.warranty.ticket.search</field>
+        <field name="model">dcg.warranty.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="title"/>
+                <field name="partner_id"/>
+                <field name="support_engineer_id"/>
+                <field name="project_id"/>
+                <field name="ticket_type"/>
+                <field name="tag_ids"/>
+                <separator/>
+                <filter string="My Tickets" name="filter_my"
+                        domain="[('support_engineer_id', '=', uid)]"/>
+                <filter string="Unassigned" name="filter_unassigned"
+                        domain="[('support_engineer_id', '=', False)]"/>
+                <filter string="Critical" name="filter_critical"
+                        domain="[('severity', '=', 'critical')]"/>
+                <filter string="SLA Breached" name="filter_sla_breached"
+                        domain="[('sla_breached', '=', True)]"/>
+                <filter string="In Warranty" name="filter_in_warranty"
+                        domain="[('is_in_warranty', '=', True)]"/>
+                <filter string="Out of Warranty" name="filter_out_warranty"
+                        domain="[('is_in_warranty', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Stage" name="group_stage" context="{'group_by': 'stage_id'}"/>
+                    <filter string="Engineer" name="group_engineer" context="{'group_by': 'support_engineer_id'}"/>
+                    <filter string="Customer" name="group_customer" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Type" name="group_type" context="{'group_by': 'ticket_type'}"/>
+                    <filter string="Severity" name="group_severity" context="{'group_by': 'severity'}"/>
+                    <filter string="Team" name="group_team" context="{'group_by': 'team_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_dcg_warranty_ticket" model="ir.actions.act_window">
+        <field name="name">Warranty Tickets</field>
+        <field name="res_model">dcg.warranty.ticket</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a warranty ticket</p>
+        </field>
+    </record>
+
+    <record id="action_dcg_warranty_ticket_my" model="ir.actions.act_window">
+        <field name="name">My Tickets</field>
+        <field name="res_model">dcg.warranty.ticket</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'search_default_filter_my': 1}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_resource_forecast_list" model="ir.ui.view">
+        <field name="name">dcg.resource.forecast.list</field>
+        <field name="model">dcg.resource.forecast</field>
+        <field name="arch" type="xml">
+            <list string="Resource Forecast" editable="bottom">
+                <field name="period_label"/>
+                <field name="role_id"/>
+                <field name="project_id" optional="show"/>
+                <field name="demand_count"/>
+                <field name="demand_hours" optional="show"/>
+                <field name="supply_count"/>
+                <field name="supply_hours" optional="show"/>
+                <field name="gap_count" decoration-danger="gap_count &gt; 0"/>
+                <field name="gap_hours" optional="show"/>
+                <field name="department_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_resource_forecast_search" model="ir.ui.view">
+        <field name="name">dcg.resource.forecast.search</field>
+        <field name="model">dcg.resource.forecast</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="role_id"/>
+                <field name="period_label"/>
+                <filter string="Has Gap" name="filter_gap" domain="[('gap_count', '&gt;', 0)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Role" name="group_role" context="{'group_by': 'role_id'}"/>
+                    <filter string="Period" name="group_period" context="{'group_by': 'period_label'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_dcg_resource_forecast" model="ir.actions.act_window">
+        <field name="name">Forecast</field>
+        <field name="res_model">dcg.resource.forecast</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

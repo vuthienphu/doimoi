@@ -1,0 +1,632 @@
+# Vietnamese translation for DCG Business Trip
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_business_trip 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: dcg_business_trip
+#: model:res.groups,name:dcg_business_trip.group_dcg_business_trip_user
+msgid "DCG Business Trip / User"
+msgstr "DCG Công tác / Người dùng"
+
+#. module: dcg_business_trip
+#: model:res.groups,name:dcg_business_trip.group_dcg_business_trip_manager
+msgid "DCG Business Trip / Manager"
+msgstr "DCG Công tác / Quản lý"
+
+#. module: dcg_business_trip
+#: model:ir.ui.menu,name:dcg_business_trip.menu_dcg_business_trip_root
+#: model:ir.actions.act_window,name:dcg_business_trip.action_dcg_business_trip
+msgid "Business Trips"
+msgstr "Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.ui.menu,name:dcg_business_trip.menu_dcg_business_trip_main
+msgid "Business Trips"
+msgstr "Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.ui.menu,name:dcg_business_trip.menu_dcg_business_trip_expenses
+#: model:ir.actions.act_window,name:dcg_business_trip.action_dcg_business_trip_expense
+msgid "Trip Expenses"
+msgstr "Chi phí Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model,name:dcg_business_trip.model_dcg_business_trip
+msgid "Business Trip"
+msgstr "Phiếu Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model,name:dcg_business_trip.model_dcg_business_trip_member
+msgid "Business Trip Member"
+msgstr "Thành viên Chuyến công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model,name:dcg_business_trip.model_dcg_business_trip_expense
+msgid "Business Trip Expense"
+msgstr "Chi phí Chuyến công tác"
+
+#. module: dcg_business_trip
+#: model:ir.sequence,name:dcg_business_trip.seq_dcg_business_trip
+msgid "DCG Business Trip"
+msgstr "DCG Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__name
+msgid "Trip Code"
+msgstr "Mã Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__title
+msgid "Title"
+msgstr "Tiêu đề"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__requester_id
+msgid "Requester"
+msgstr "Người đề nghị"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__employee_id
+msgid "Employee"
+msgstr "Nhân viên"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__department_id
+msgid "Department"
+msgstr "Phòng ban"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__manager_id
+msgid "Manager"
+msgstr "Quản lý"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__partner_id
+msgid "Customer / Partner"
+msgstr "Khách hàng / Đối tác"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__project_id
+msgid "Project"
+msgstr "Dự án"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__contract_id
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__finance_id
+msgid "Finance Record"
+msgstr "Hồ sơ Tài chính"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__trip_type
+msgid "Trip Type"
+msgstr "Loại Chuyến đi"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__trip_purpose
+msgid "Purpose"
+msgstr "Mục đích"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__work_type
+msgid "Work Type"
+msgstr "Loại Công việc"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__is_billable
+msgid "Billable"
+msgstr "Tính phí được"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__is_onsite
+msgid "Onsite"
+msgstr "Tại khách hàng"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__request_date
+msgid "Request Date"
+msgstr "Ngày Đề nghị"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__start_datetime
+msgid "Departure"
+msgstr "Xuất phát"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__end_datetime
+msgid "Return"
+msgstr "Kết thúc"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__total_days
+msgid "Total Days"
+msgstr "Tổng Ngày"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__departure_place
+msgid "From"
+msgstr "Nơi đi"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__destination_place
+msgid "Destination"
+msgstr "Nơi đến"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__destination_address
+msgid "Destination Address"
+msgstr "Địa chỉ Nơi đến"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__objective
+msgid "Objective"
+msgstr "Mục tiêu"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__agenda
+msgid "Agenda"
+msgstr "Chương trình"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__expected_result
+msgid "Expected Result"
+msgstr "Kết quả Mong đợi"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__internal_note
+msgid "Internal Note"
+msgstr "Ghi chú Nội bộ"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__estimated_cost
+msgid "Estimated Cost"
+msgstr "Chi phí Dự kiến"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__actual_cost
+msgid "Actual Cost"
+msgstr "Chi phí Thực tế"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__cost_variance
+msgid "Cost Variance"
+msgstr "Chênh lệch Chi phí"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip__cancel_reason
+msgid "Cancel Reason"
+msgstr "Lý do Huỷ"
+
+# Trip Type selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__project_onsite
+msgid "Project Onsite"
+msgstr "Onsite Dự án"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__customer_meeting
+msgid "Customer Meeting"
+msgstr "Họp Khách hàng"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__survey
+msgid "Survey"
+msgstr "Khảo sát"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__support
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__internal
+msgid "Internal"
+msgstr "Nội bộ"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_type__other
+msgid "Other"
+msgstr "Khác"
+
+# Trip Purpose selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__kickoff
+msgid "Kickoff"
+msgstr "Kickoff"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__requirement
+msgid "Requirement Survey"
+msgstr "Khảo sát Yêu cầu"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__implementation
+msgid "Implementation"
+msgstr "Triển khai"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__uat
+msgid "UAT"
+msgstr "UAT"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__golive
+msgid "Go-live"
+msgstr "Go-live"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__warranty
+msgid "Warranty"
+msgstr "Bảo hành"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__trip_purpose__meeting
+msgid "Meeting"
+msgstr "Họp"
+
+# Trip Work Type selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__work_type__project_delivery
+msgid "Project Delivery"
+msgstr "Triển khai Dự án"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__work_type__presales
+msgid "Presales"
+msgstr "Tiền bán hàng"
+
+# Trip State selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__waiting_approval
+msgid "Waiting Approval"
+msgstr "Chờ Duyệt"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__in_progress
+msgid "In Progress"
+msgstr "Đang Thực hiện"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__done
+msgid "Done"
+msgstr "Hoàn thành"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+# Member fields
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_member__role
+msgid "Role"
+msgstr "Vai trò"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_member__is_team_lead
+msgid "Team Lead"
+msgstr "Trưởng đoàn"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_member__join_datetime
+msgid "Join Date"
+msgstr "Ngày Tham gia"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_member__leave_datetime
+msgid "Leave Date"
+msgstr "Ngày Rời đi"
+
+# Member Role selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__pm
+msgid "Project Manager"
+msgstr "Quản lý Dự án"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__ba
+msgid "BA"
+msgstr "BA"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__dev
+msgid "Developer"
+msgstr "Lập trình viên"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__qa
+msgid "QA"
+msgstr "QA"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__trainer
+msgid "Trainer"
+msgstr "Đào tạo viên"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_member__role__sales
+msgid "Sales"
+msgstr "Sales"
+
+# Expense fields
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__name
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__expense_type_id
+msgid "Expense Type"
+msgstr "Loại Chi phí"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__expense_category
+msgid "Category"
+msgstr "Nhóm"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__source_type
+msgid "Source"
+msgstr "Nguồn"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__expense_date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__amount
+msgid "Amount"
+msgstr "Số tiền"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__vendor_name
+msgid "Vendor"
+msgstr "Nhà cung cấp"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__bill_reference
+msgid "Bill Reference"
+msgstr "Số Hoá đơn"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__attachment_ids
+msgid "Receipts"
+msgstr "Chứng từ"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__finance_cost_line_id
+msgid "Finance Cost Line"
+msgstr "Dòng CP Tài chính"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_business_trip_expense__finance_synced
+msgid "Synced to Finance"
+msgstr "Đã Đồng bộ Tài chính"
+
+# Expense Category selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__transport
+msgid "Transport"
+msgstr "Đi lại"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__hotel
+msgid "Hotel"
+msgstr "Khách sạn"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__allowance
+msgid "Allowance"
+msgstr "Phụ cấp"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__meal
+msgid "Meal"
+msgstr "Ăn uống"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__entertainment
+msgid "Entertainment"
+msgstr "Tiếp khách"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__expense_category__visa
+msgid "Visa / Documents"
+msgstr "Visa / Giấy tờ"
+
+# Expense Source selection
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__source_type__estimated
+msgid "Estimated"
+msgstr "Dự kiến"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__source_type__actual
+msgid "Actual"
+msgstr "Thực tế"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields.selection,name:dcg_business_trip.selection__dcg_business_trip_expense__source_type__adjustment
+msgid "Adjustment"
+msgstr "Điều chỉnh"
+
+# Project extension
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_project_delivery__trip_count
+msgid "Trips"
+msgstr "Công tác"
+
+#. module: dcg_business_trip
+#: model:ir.model.fields,field_description:dcg_business_trip.field_dcg_project_delivery__total_trip_cost
+msgid "Trip Cost"
+msgstr "Chi phí Công tác"
+
+# View strings
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Submit Approval"
+msgstr "Gửi Duyệt"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "View Approval"
+msgstr "Xem Duyệt"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Start Trip"
+msgstr "Bắt đầu Chuyến đi"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Mark Done"
+msgstr "Hoàn thành"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Sync to Finance"
+msgstr "Đồng bộ Tài chính"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Members"
+msgstr "Thành viên"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Expenses"
+msgstr "Chi phí"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Objectives"
+msgstr "Mục tiêu"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Notes"
+msgstr "Ghi chú"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Requester"
+msgstr "Người đề nghị"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Business Link"
+msgstr "Liên kết Nghiệp vụ"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Classification"
+msgstr "Phân loại"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Schedule"
+msgstr "Lịch trình"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Cost Summary"
+msgstr "Tóm tắt Chi phí"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_form
+msgid "Finance Trace"
+msgstr "Truy vết Tài chính"
+
+# Search filters
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_search
+msgid "My Trips"
+msgstr "Công tác Của tôi"
+
+#. module: dcg_business_trip
+#: model_terms:ir.ui.view,arch_db:dcg_business_trip.view_dcg_business_trip_search
+msgid "Project Trips"
+msgstr "Công tác Dự án"
+
+# Help
+#. module: dcg_business_trip
+#: model_terms:ir.actions.act_window,help:dcg_business_trip.action_dcg_business_trip
+msgid "Create a business trip request"
+msgstr "Tạo đề nghị công tác"
+
+# Python errors
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "Please add at least one member before submitting."
+msgstr "Vui lòng thêm ít nhất một thành viên trước khi gửi duyệt."
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "Please set departure and return dates."
+msgstr "Vui lòng chọn ngày đi và ngày về."
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "Trip must be approved before starting."
+msgstr "Chuyến đi phải được duyệt trước khi bắt đầu."
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "Trip must be in progress to mark as done."
+msgstr "Chuyến đi phải đang thực hiện để đánh dấu hoàn thành."
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "Cannot cancel a completed trip."
+msgstr "Không thể huỷ chuyến đi đã hoàn thành."
+
+#. module: dcg_business_trip
+#: code:addons/dcg_business_trip/models/business_trip.py:0
+#, python-format
+msgid "This trip is not linked to a project finance record. Please set a project with an active finance record."
+msgstr "Chuyến đi chưa liên kết hồ sơ tài chính dự án. Vui lòng chọn dự án có hồ sơ tài chính."

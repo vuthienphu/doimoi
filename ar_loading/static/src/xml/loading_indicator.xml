@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ar_loading.CatLoadingIndicator1">
+        <Transition visible="state.show" name="'o-fade'" t-slot-scope="transition" leaveDuration="400">
+            <div class="o_cat_loading" t-att-class="transition.className">
+                <div class="o_cat_wrapper">
+                    <div class="o_cat_mask">
+                        <div class="o_cat">
+                            <!-- Cat body base -->
+                            <div class="body-up"></div>
+                            <div class="body-down"></div>
+                            <div class="body-inside"></div>
+                            <div class="body-mask"></div>
+
+                            <!-- Body inside wrappers with animation -->
+                            <div class="body-inside-wrapper">
+                                <div class="body-inside-fix"></div>
+                            </div>
+                            <div class="body-inside-wrapper-end">
+                                <div class="body-inside-fix end"></div>
+                            </div>
+
+                            <!-- Inner mask -->
+                            <div class="inner-mask"></div>
+
+                            <!-- Shape masks for rotation effect -->
+                            <div class="shape-mask"></div>
+                            <div class="shape-mask second"></div>
+
+                            <!-- Cat rear parts (rotating) -->
+                            <div class="cat-ass-wrapper">
+                                <div class="cat-tail"></div>
+                                <div class="cat-ass"></div>
+                                <div class="cat-leg"></div>
+                                <div class="cat-leg right"></div>
+                            </div>
+
+                            <!-- Cat head parts (rotating) -->
+                            <div class="cat-head-wrapper">
+                                <div class="cat-head">
+                                    <div class="cat-eye"></div>
+                                    <div class="cat-eye right"></div>
+                                    <div class="cat-mouth-wrapper">
+                                        <div class="cat-mouth"></div>
+                                        <div class="cat-mouth-up"></div>
+                                        <div class="cat-mouth-up right"></div>
+                                        <!-- Whiskers/beard -->
+                                        <div class="cat-beard up"></div>
+                                        <div class="cat-beard"></div>
+                                        <div class="cat-beard down"></div>
+                                        <div class="cat-beard right up"></div>
+                                        <div class="cat-beard right"></div>
+                                        <div class="cat-beard right down"></div>
+                                    </div>
+                                </div>
+                                <!-- Cat ears -->
+                                <div class="cat-ear"></div>
+                                <div class="cat-ear right"></div>
+                                <!-- Cat hands/paws -->
+                                <div class="cat-hand"></div>
+                                <div class="cat-hand right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Transition>
+    </t>
+
+    <t t-name="ar_loading.CatLoadingIndicator2">
+        <Transition visible="state.show" name="'o-fade'" t-slot-scope="transition" leaveDuration="400">
+            <div class="o_cat_loading2" t-att-class="transition.className">
+                <div class="o_cat_wrapper2">
+                    <div class="rainbow2"><div class="sprite2"></div></div>
+                    <ul class="stars2">
+                        <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
+                        <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
+                        <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
+                    </ul>
+                    <div class="cat2">
+                        <div class="tail2"><div class="sprite2"></div></div>
+                        <div class="feet2"><div class="sprite2"></div></div>
+                        <div class="poptart2"></div>
+                        <div class="head2"></div>
+                    </div>
+                </div>
+            </div>
+        </Transition>
+    </t>
+</templates>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dcg_warranty_root" name="Warranty"
+        sequence="97" web_icon="dcg_helpdesk_warranty,static/description/icon.png"
+        groups="dcg_helpdesk_warranty.group_dcg_warranty_user"/>
+    <menuitem id="menu_dcg_warranty_tickets" name="All Tickets"
+        parent="menu_dcg_warranty_root" action="action_dcg_warranty_ticket" sequence="10"/>
+    <menuitem id="menu_dcg_warranty_my_tickets" name="My Tickets"
+        parent="menu_dcg_warranty_root" action="action_dcg_warranty_ticket_my" sequence="15"/>
+    <menuitem id="menu_dcg_warranty_solutions" name="Solutions / KB"
+        parent="menu_dcg_warranty_root" action="action_dcg_warranty_solution" sequence="20"/>
+
+    <!-- Config submenu -->
+    <menuitem id="menu_dcg_warranty_config" name="Configuration"
+        parent="menu_dcg_warranty_root" sequence="90"
+        groups="dcg_helpdesk_warranty.group_dcg_warranty_manager"/>
+    <menuitem id="menu_dcg_warranty_config_teams" name="Teams"
+        parent="menu_dcg_warranty_config" action="action_dcg_warranty_team" sequence="10"/>
+    <menuitem id="menu_dcg_warranty_config_sla" name="SLA Policies"
+        parent="menu_dcg_warranty_config" action="action_dcg_warranty_sla" sequence="20"/>
+    <menuitem id="menu_dcg_warranty_config_stages" name="Stages"
+        parent="menu_dcg_warranty_config" action="action_dcg_warranty_ticket_stage" sequence="30"/>
+    <menuitem id="menu_dcg_warranty_config_tags" name="Tags"
+        parent="menu_dcg_warranty_config" action="action_dcg_warranty_ticket_tag" sequence="40"/>
+</odoo>

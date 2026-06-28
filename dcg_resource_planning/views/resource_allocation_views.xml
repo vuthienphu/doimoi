@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_resource_allocation_list" model="ir.ui.view">
+        <field name="name">dcg.resource.allocation.list</field>
+        <field name="model">dcg.resource.allocation</field>
+        <field name="arch" type="xml">
+            <list string="Allocations" editable="bottom">
+                <field name="employee_id"/>
+                <field name="role_id"/>
+                <field name="project_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="allocation_percent"/>
+                <field name="allocation_hours" sum="Total"/>
+                <field name="actual_hours" sum="Total" optional="show"/>
+                <field name="total_allocation_percent" optional="show"/>
+                <field name="is_over_allocated" widget="boolean" optional="show"
+                       decoration-danger="is_over_allocated"/>
+                <field name="state" widget="badge"/>
+                <field name="plan_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_resource_allocation_form" model="ir.ui.view">
+        <field name="name">dcg.resource.allocation.form</field>
+        <field name="model">dcg.resource.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Resource Allocation">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_done" type="object" string="Done"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Over-allocated" bg_color="bg-danger"
+                            invisible="not is_over_allocated"/>
+                    <group>
+                        <group string="Resource">
+                            <field name="employee_id"/>
+                            <field name="role_id"/>
+                            <field name="resource_type"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="is_billable"/>
+                        </group>
+                        <group string="Project">
+                            <field name="plan_id"/>
+                            <field name="project_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Allocation">
+                            <field name="allocation_percent"/>
+                            <field name="allocation_hours"/>
+                            <field name="actual_hours" readonly="1"/>
+                            <field name="variance_hours" readonly="1"/>
+                        </group>
+                        <group string="Rates">
+                            <field name="cost_rate"/>
+                            <field name="bill_rate"/>
+                            <field name="total_allocation_percent" readonly="1"/>
+                            <field name="is_over_allocated" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_dcg_resource_allocation_search" model="ir.ui.view">
+        <field name="name">dcg.resource.allocation.search</field>
+        <field name="model">dcg.resource.allocation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="project_id"/>
+                <field name="role_id"/>
+<!--                <filter string="Over-allocated" name="filter_over" domain="[('is_over_allocated', '=', True)]"/>-->
+                <filter string="Active" name="filter_active" domain="[('state', 'in', ['draft', 'confirmed'])]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="group_emp" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Role" name="group_role" context="{'group_by': 'role_id'}"/>
+                    <filter string="Department" name="group_dept" context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_dcg_resource_allocation" model="ir.actions.act_window">
+        <field name="name">Allocations</field>
+        <field name="res_model">dcg.resource.allocation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

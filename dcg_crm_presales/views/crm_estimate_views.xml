@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Estimate Line (used embedded inside estimate form)              -->
+    <!-- ============================================================ -->
+    <record id="view_dcg_crm_estimate_line_list" model="ir.ui.view">
+        <field name="name">dcg.crm.estimate.line.list</field>
+        <field name="model">dcg.crm.estimate.line</field>
+        <field name="arch" type="xml">
+            <list string="Estimate Lines" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="scope_id"/>
+                <field name="service_catalog_id" optional="show"/>
+                <field name="ba_hours" sum="Total"/>
+                <field name="dev_hours" sum="Total"/>
+                <field name="test_hours" sum="Total"/>
+                <field name="pm_hours" sum="Total"/>
+                <field name="support_hours" sum="Total"/>
+                <field name="total_hours" sum="Total"/>
+                <field name="cost_amount" sum="Total" optional="show"/>
+                <field name="revenue_amount" sum="Total"/>
+                <field name="timeline_days" optional="show"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Estimate header                                                 -->
+    <!-- ============================================================ -->
+    <record id="view_dcg_crm_estimate_list" model="ir.ui.view">
+        <field name="name">dcg.crm.estimate.list</field>
+        <field name="model">dcg.crm.estimate</field>
+        <field name="arch" type="xml">
+            <list string="Estimates">
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="version"/>
+                <field name="estimate_date"/>
+                <field name="estimated_revenue" sum="Total"/>
+                <field name="estimated_cost" sum="Total"/>
+                <field name="estimated_margin" sum="Total"/>
+                <field name="estimated_margin_rate" avg="Avg Margin %" widget="percentage"/>
+                <field name="estimated_timeline_days"/>
+                <field name="is_current_version" widget="boolean_toggle"/>
+                <field name="is_approved_version" widget="boolean_toggle"/>
+                <field name="state"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"
+                       decoration-muted="state == 'archived'"
+                       widget="badge"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_crm_estimate_form" model="ir.ui.view">
+        <field name="name">dcg.crm.estimate.form</field>
+        <field name="model">dcg.crm.estimate</field>
+        <field name="arch" type="xml">
+            <form string="Presales Estimate">
+                <header>
+                    <button name="action_set_review" type="object" string="Send to Review"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_set_current_version" type="object"
+                            string="Set Current Version"
+                            invisible="is_current_version"/>
+                    <button name="action_mark_approved_version" type="object"
+                            string="Mark Approved Version"
+                            class="btn-primary"
+                            invisible="is_approved_version"
+                            confirm="Đặt estimate này làm phiên bản chốt để báo giá?"/>
+                    <button name="action_set_draft" type="object" string="Reset to Draft"
+                            invisible="state not in ('review', 'rejected')"/>
+                    <button name="action_archive_estimate" type="object" string="Archive"
+                            invisible="state == 'archived'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,review,approved"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Current Version" bg_color="bg-info"
+                            invisible="not is_current_version"/>
+                    <widget name="web_ribbon" title="Approved Version" bg_color="bg-success"
+                            invisible="not is_approved_version"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                            <field name="version" class="ms-2" style="width: 80px; display: inline-block;"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="lead_id"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="owner_id"/>
+                            <field name="estimate_date"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                        </group>
+                        <group string="Commercial Summary">
+                            <field name="estimated_cost"/>
+                            <field name="estimated_revenue"/>
+                            <field name="estimated_margin"/>
+                            <field name="estimated_margin_rate" widget="percentage"/>
+                            <field name="estimated_timeline_days"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Estimate Lines" name="lines">
+                            <field name="line_ids" context="{'default_lead_id': lead_id}"/>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_estimated_hours" widget="float_time"/>
+                            </group>
+                        </page>
+                        <page string="Effort Summary" name="effort_summary">
+                            <group>
+                                <group>
+                                    <field name="estimated_ba_hours" readonly="1"/>
+                                    <field name="estimated_dev_hours" readonly="1"/>
+                                    <field name="estimated_test_hours" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="estimated_pm_hours" readonly="1"/>
+                                    <field name="estimated_support_hours" readonly="1"/>
+                                    <field name="estimated_other_hours" readonly="1"/>
+                                </group>
+                            </group>
+                            <field name="estimated_timeline_note"/>
+                        </page>
+                        <page string="Scope / Assumptions" name="scope">
+                            <field name="scope_summary"/>
+                            <field name="assumption_note"/>
+                            <field name="exclusion_note"/>
+                            <field name="risk_note"/>
+                            <field name="pricing_note"/>
+                        </page>
+                        <page string="Approval / Quotation" name="approval_quotation">
+                            <group>
+                                <group string="Approval (reserved)">
+                                    <field name="approval_required"/>
+                                    <field name="approval_state" readonly="1"/>
+                                    <field name="approval_request_id" readonly="1"/>
+                                </group>
+                                <group string="Quotation">
+                                    <field name="quotation_id" readonly="1"/>
+                                    <field name="converted_to_quotation" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_crm_estimate_search" model="ir.ui.view">
+        <field name="name">dcg.crm.estimate.search</field>
+        <field name="model">dcg.crm.estimate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="owner_id"/>
+                <filter string="Current Version" name="filter_current" domain="[('is_current_version', '=', True)]"/>
+                <filter string="Approved Version" name="filter_approved_version" domain="[('is_approved_version', '=', True)]"/>
+                <separator/>
+                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="In Review" name="filter_review" domain="[('state', '=', 'review')]"/>
+                <filter string="Approved" name="filter_state_approved" domain="[('state', '=', 'approved')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Opportunity" name="group_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Owner" name="group_owner" context="{'group_by': 'owner_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_crm_estimate" model="ir.actions.act_window">
+        <field name="name">Estimates</field>
+        <field name="res_model">dcg.crm.estimate</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first estimate
+            </p>
+        </field>
+    </record>
+
+</odoo>

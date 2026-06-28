@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dcg_knowledge_root" name="Knowledge" sequence="91"
+        web_icon="dcg_knowledge_sop,static/description/icon.png"
+        groups="dcg_knowledge_sop.group_dcg_knowledge_user"/>
+    <menuitem id="menu_dcg_knowledge_browse" name="Browse"
+        parent="menu_dcg_knowledge_root" action="action_dcg_knowledge_article" sequence="10"/>
+    <menuitem id="menu_dcg_knowledge_all" name="All Articles"
+        parent="menu_dcg_knowledge_root" action="action_dcg_knowledge_article_all" sequence="15"/>
+    <menuitem id="menu_dcg_knowledge_sop" name="SOP"
+        parent="menu_dcg_knowledge_root" action="action_dcg_knowledge_sop" sequence="20"/>
+    <menuitem id="menu_dcg_knowledge_faq" name="FAQ"
+        parent="menu_dcg_knowledge_root" action="action_dcg_knowledge_faq" sequence="30"/>
+    <menuitem id="menu_dcg_knowledge_config" name="Configuration"
+        parent="menu_dcg_knowledge_root" sequence="90"
+        groups="dcg_knowledge_sop.group_dcg_knowledge_manager"/>
+    <menuitem id="menu_dcg_knowledge_config_categories" name="Categories"
+        parent="menu_dcg_knowledge_config" action="action_dcg_knowledge_category" sequence="10"/>
+    <menuitem id="menu_dcg_knowledge_config_tags" name="Tags"
+        parent="menu_dcg_knowledge_config" action="action_dcg_knowledge_tag" sequence="20"/>
+</odoo>

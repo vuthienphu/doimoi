@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_dcg_resource_plan" model="ir.sequence">
+            <field name="name">DCG Resource Plan</field>
+            <field name="code">dcg.resource.plan</field>
+            <field name="prefix">RPL/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_dcg_resource_request" model="ir.sequence">
+            <field name="name">DCG Resource Request</field>
+            <field name="code">dcg.resource.request</field>
+            <field name="prefix">RRQ/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

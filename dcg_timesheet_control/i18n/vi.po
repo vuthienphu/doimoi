@@ -1,0 +1,650 @@
+# Vietnamese translation for DCG Timesheet Control
+# Công ty TNHH Đổi Mới G.R.O.U.P, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dcg_timesheet_control 18.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: DCG <support@doimoigroup.vn>\n"
+"Language-Team: Vietnamese <vi@doimoigroup.vn>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: dcg_timesheet_control
+#: model:res.groups,name:dcg_timesheet_control.group_dcg_timesheet_user
+msgid "DCG Timesheet / User"
+msgstr "DCG Chấm công / Người dùng"
+
+#. module: dcg_timesheet_control
+#: model:res.groups,name:dcg_timesheet_control.group_dcg_timesheet_approver
+msgid "DCG Timesheet / Approver"
+msgstr "DCG Chấm công / Người duyệt"
+
+#. module: dcg_timesheet_control
+#: model:res.groups,name:dcg_timesheet_control.group_dcg_timesheet_manager
+msgid "DCG Timesheet / Manager"
+msgstr "DCG Chấm công / Quản lý"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_root
+msgid "Timesheets"
+msgstr "Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_my_sheets
+#: model:ir.actions.act_window,name:dcg_timesheet_control.action_dcg_timesheet_sheet
+msgid "My Sheets"
+msgstr "Phiếu Của tôi"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_to_approve
+#: model:ir.actions.act_window,name:dcg_timesheet_control.action_dcg_timesheet_sheet_to_approve
+msgid "To Approve"
+msgstr "Chờ Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_lines
+#: model:ir.actions.act_window,name:dcg_timesheet_control.action_dcg_timesheet_lines
+msgid "Timesheet Lines"
+msgstr "Dòng Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_ot_requests
+#: model:ir.actions.act_window,name:dcg_timesheet_control.action_dcg_timesheet_ot_request
+msgid "OT Requests"
+msgstr "Yêu cầu Tăng ca"
+
+#. module: dcg_timesheet_control
+#: model:ir.ui.menu,name:dcg_timesheet_control.menu_dcg_timesheet_generate
+msgid "Generate Sheet"
+msgstr "Tạo Phiếu"
+
+#. module: dcg_timesheet_control
+#: model:ir.model,name:dcg_timesheet_control.model_dcg_timesheet_sheet
+msgid "Timesheet Sheet"
+msgstr "Phiếu Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.model,name:dcg_timesheet_control.model_dcg_timesheet_ot_request
+msgid "OT Request"
+msgstr "Yêu cầu Tăng ca"
+
+#. module: dcg_timesheet_control
+#: model:ir.sequence,name:dcg_timesheet_control.seq_dcg_timesheet_sheet
+msgid "DCG Timesheet Sheet"
+msgstr "DCG Phiếu Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.sequence,name:dcg_timesheet_control.seq_dcg_timesheet_ot_request
+msgid "DCG OT Request"
+msgstr "DCG Yêu cầu Tăng ca"
+
+# ============================================================
+# dcg.timesheet.sheet — fields
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__name
+msgid "Sheet Number"
+msgstr "Số Phiếu"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__employee_id
+msgid "Employee"
+msgstr "Nhân viên"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__date_start
+msgid "Period Start"
+msgstr "Đầu Kỳ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__date_end
+msgid "Period End"
+msgstr "Cuối Kỳ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__period_type
+msgid "Period Type"
+msgstr "Loại Kỳ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__week_no
+msgid "Week No."
+msgstr "Tuần"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__month_key
+msgid "Month"
+msgstr "Tháng"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__approver_id
+msgid "Approver"
+msgstr "Người Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__submitted_date
+msgid "Submitted Date"
+msgstr "Ngày Gửi"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__approved_date
+msgid "Approved Date"
+msgstr "Ngày Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__rejected_date
+msgid "Rejected Date"
+msgstr "Ngày Từ chối"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__reject_reason
+msgid "Reject Reason"
+msgstr "Lý do Từ chối"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__line_ids
+msgid "Timesheet Lines"
+msgstr "Dòng Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__total_hours
+msgid "Total Hours"
+msgstr "Tổng Giờ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__total_billable_hours
+msgid "Billable Hours"
+msgstr "Giờ Billable"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__total_non_billable_hours
+msgid "Non-billable Hours"
+msgstr "Giờ Non-billable"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__total_ot_hours
+msgid "OT Hours"
+msgstr "Giờ Tăng ca"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_sheet__line_count
+msgid "Lines"
+msgstr "Số dòng"
+
+# Sheet period_type selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__period_type__weekly
+msgid "Weekly"
+msgstr "Tuần"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__period_type__monthly
+msgid "Monthly"
+msgstr "Tháng"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__period_type__manual
+msgid "Manual"
+msgstr "Thủ công"
+
+# Sheet state selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__state__submitted
+msgid "Submitted"
+msgstr "Đã Gửi"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__state__rejected
+msgid "Rejected"
+msgstr "Từ chối"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_sheet__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+# ============================================================
+# dcg.timesheet.ot.request — fields
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__name
+msgid "OT Number"
+msgstr "Số YC Tăng ca"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__request_date
+msgid "Request Date"
+msgstr "Ngày Yêu cầu"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__date_from
+msgid "OT Start"
+msgstr "Bắt đầu OT"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__date_to
+msgid "OT End"
+msgstr "Kết thúc OT"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__total_hours
+msgid "OT Hours"
+msgstr "Giờ OT"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__project_id
+msgid "Project"
+msgstr "Dự án"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_timesheet_ot_request__reason
+msgid "Reason"
+msgstr "Lý do"
+
+# OT state selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_ot_request__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_ot_request__state__submitted
+msgid "Submitted"
+msgstr "Đã Gửi"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_ot_request__state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_ot_request__state__rejected
+msgid "Rejected"
+msgstr "Từ chối"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__dcg_timesheet_ot_request__state__cancelled
+msgid "Cancelled"
+msgstr "Đã Huỷ"
+
+# ============================================================
+# account.analytic.line extension — fields
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__dcg_sheet_id
+msgid "Timesheet Sheet"
+msgstr "Phiếu Chấm công"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__line_state
+msgid "Line Status"
+msgstr "Trạng thái Dòng"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__dcg_project_id
+msgid "Delivery Project"
+msgstr "Dự án Triển khai"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__dcg_scope_id
+msgid "Work Package"
+msgstr "Gói Công việc"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__dcg_milestone_id
+msgid "Milestone"
+msgstr "Mốc"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__contract_id
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__work_type
+msgid "Work Type"
+msgstr "Loại Công việc"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__charge_type
+msgid "Charge Type"
+msgstr "Loại Tính phí"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__is_billable
+msgid "Billable"
+msgstr "Tính phí được"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__is_overtime
+msgid "Overtime"
+msgstr "Tăng ca"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__overtime_hours
+msgid "OT Hours"
+msgstr "Giờ OT"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__ot_request_id
+msgid "OT Request"
+msgstr "Yêu cầu OT"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__work_summary
+msgid "Work Summary"
+msgstr "Tóm tắt Công việc"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__result_note
+msgid "Result"
+msgstr "Kết quả"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__billing_rate
+msgid "Billing Rate"
+msgstr "Đơn giá Tính phí"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__cost_rate
+msgid "Cost Rate"
+msgstr "Đơn giá Nội bộ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__line_cost_amount
+msgid "Cost Amount"
+msgstr "Giá trị Chi phí"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_account_analytic_line__line_billing_amount
+msgid "Billing Amount"
+msgstr "Giá trị Tính phí"
+
+# Work type selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__project_delivery
+msgid "Project Delivery"
+msgstr "Triển khai Dự án"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__support
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__internal
+msgid "Internal"
+msgstr "Nội bộ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__presales
+msgid "Presales"
+msgstr "Tiền bán hàng"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__training
+msgid "Training"
+msgstr "Đào tạo"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__leave_related
+msgid "Leave Related"
+msgstr "Liên quan Nghỉ phép"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__work_type__other
+msgid "Other"
+msgstr "Khác"
+
+# Charge type selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__charge_type__billable
+msgid "Billable"
+msgstr "Tính phí được"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__charge_type__non_billable
+msgid "Non-billable"
+msgstr "Không tính phí"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__charge_type__investment
+msgid "Investment"
+msgstr "Đầu tư"
+
+# Line state selection
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__line_state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__line_state__submitted
+msgid "Submitted"
+msgstr "Đã Gửi"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__line_state__approved
+msgid "Approved"
+msgstr "Đã Duyệt"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields.selection,name:dcg_timesheet_control.selection__account_analytic_line__line_state__rejected
+msgid "Rejected"
+msgstr "Từ chối"
+
+# ============================================================
+# dcg.project.delivery extension
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_delivery__ts_actual_hours
+msgid "Actual Hours (approved)"
+msgstr "Giờ Thực tế (đã duyệt)"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_delivery__ts_billable_hours
+msgid "Billable Hours"
+msgstr "Giờ Billable"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_delivery__ts_non_billable_hours
+msgid "Non-billable Hours"
+msgstr "Giờ Non-billable"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_delivery__ts_ot_hours
+msgid "OT Hours"
+msgstr "Giờ Tăng ca"
+
+# ============================================================
+# dcg.project.scope extension
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_scope__ts_actual_hours
+msgid "Actual Hours (TS)"
+msgstr "Giờ TT (TS)"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_scope__ts_billable_hours
+msgid "Billable Hours (TS)"
+msgstr "Giờ Billable (TS)"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_scope__ts_non_billable_hours
+msgid "Non-billable (TS)"
+msgstr "Non-billable (TS)"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_project_scope__ts_ot_hours
+msgid "OT Hours (TS)"
+msgstr "Giờ OT (TS)"
+
+# ============================================================
+# Wizard
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_generate_sheet_wizard__employee_id
+msgid "Employee"
+msgstr "Nhân viên"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_generate_sheet_wizard__period_type
+msgid "Period"
+msgstr "Kỳ"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_generate_sheet_wizard__date_start
+msgid "Start Date"
+msgstr "Ngày Bắt đầu"
+
+#. module: dcg_timesheet_control
+#: model:ir.model.fields,field_description:dcg_timesheet_control.field_dcg_generate_sheet_wizard__date_end
+msgid "End Date"
+msgstr "Ngày Kết thúc"
+
+# ============================================================
+# View strings
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Submit"
+msgstr "Gửi"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Approve"
+msgstr "Duyệt"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Reject"
+msgstr "Từ chối"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Reset to Draft"
+msgstr "Đặt lại Nháp"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Cancel"
+msgstr "Huỷ"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Load Lines"
+msgstr "Tải Dòng"
+
+#. module: dcg_timesheet_control
+#: model_terms:ir.ui.view,arch_db:dcg_timesheet_control.view_dcg_timesheet_sheet_form
+msgid "Summary"
+msgstr "Tóm tắt"
+
+# ============================================================
+# Python error messages
+# ============================================================
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "New"
+msgstr "Mới"
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Period start must be before period end."
+msgstr "Ngày bắt đầu kỳ phải trước ngày kết thúc kỳ."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Can only load lines into a draft sheet."
+msgstr "Chỉ có thể tải dòng vào phiếu ở trạng thái nháp."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Only draft sheets can be submitted."
+msgstr "Chỉ phiếu nháp mới có thể gửi."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Cannot submit an empty timesheet sheet."
+msgstr "Không thể gửi phiếu chấm công rỗng."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Only submitted sheets can be approved."
+msgstr "Chỉ phiếu đã gửi mới có thể duyệt."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Only submitted sheets can be rejected."
+msgstr "Chỉ phiếu đã gửi mới có thể từ chối."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Cannot reset this sheet to draft."
+msgstr "Không thể đặt lại phiếu này về nháp."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_sheet.py:0
+#, python-format
+msgid "Cannot cancel an approved sheet. Reset to draft first."
+msgstr "Không thể huỷ phiếu đã duyệt. Hãy đặt lại về nháp trước."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_ot_request.py:0
+#, python-format
+msgid "Only draft OT requests can be submitted."
+msgstr "Chỉ yêu cầu OT nháp mới có thể gửi."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_ot_request.py:0
+#, python-format
+msgid "Only submitted OT requests can be approved."
+msgstr "Chỉ yêu cầu OT đã gửi mới có thể duyệt."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_ot_request.py:0
+#, python-format
+msgid "Only submitted OT requests can be rejected."
+msgstr "Chỉ yêu cầu OT đã gửi mới có thể từ chối."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/models/timesheet_ot_request.py:0
+#, python-format
+msgid "Cannot cancel an approved OT request."
+msgstr "Không thể huỷ yêu cầu OT đã duyệt."
+
+#. module: dcg_timesheet_control
+#: code:addons/dcg_timesheet_control/wizard/generate_sheet_wizard.py:0
+#, python-format
+msgid "A sheet already exists for this employee and period: %s"
+msgstr "Phiếu chấm công đã tồn tại cho nhân viên và kỳ này: %s"

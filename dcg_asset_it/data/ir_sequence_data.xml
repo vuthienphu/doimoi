@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_dcg_asset" model="ir.sequence">
+            <field name="name">DCG Asset</field>
+            <field name="code">dcg.asset</field>
+            <field name="prefix">AST/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_dcg_asset_checkout" model="ir.sequence">
+            <field name="name">DCG Asset Checkout</field>
+            <field name="code">dcg.asset.checkout</field>
+            <field name="prefix">CHK/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_certificate_list" model="ir.ui.view">
+        <field name="name">dcg.employee.certificate.list</field>
+        <field name="model">dcg.employee.certificate</field>
+        <field name="arch" type="xml">
+            <list string="Certificates">
+                <field name="employee_id"/>
+                <field name="name"/>
+                <field name="issuer" optional="show"/>
+                <field name="certificate_no" optional="show"/>
+                <field name="issue_date"/>
+                <field name="expiry_date"/>
+                <field name="is_expired" widget="boolean"
+                       decoration-danger="is_expired"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_certificate_form" model="ir.ui.view">
+        <field name="name">dcg.employee.certificate.form</field>
+        <field name="model">dcg.employee.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Certificate">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="name"/>
+                            <field name="issuer"/>
+                            <field name="certificate_no"/>
+                        </group>
+                        <group>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="is_expired" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="note"/>
+                    <field name="attachment_ids" widget="many2many_binary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_dcg_certificate_search" model="ir.ui.view">
+        <field name="name">dcg.employee.certificate.search</field>
+        <field name="model">dcg.employee.certificate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/><field name="employee_id"/>
+                <filter string="Expired" name="filter_expired" domain="[('is_expired', '=', True)]"/>
+                <filter string="Expiring Soon" name="filter_expiring"
+                        domain="[('expiry_date', '&lt;=', (context_today() + datetime.timedelta(days=90)).strftime('%Y-%m-%d')), ('is_expired', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="group_emp" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Issuer" name="group_issuer" context="{'group_by': 'issuer'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_dcg_certificate" model="ir.actions.act_window">
+        <field name="name">Certificates</field>
+        <field name="res_model">dcg.employee.certificate</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

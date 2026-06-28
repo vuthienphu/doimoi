@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_dcg_knowledge_article" model="ir.sequence">
+            <field name="name">DCG Knowledge Article</field>
+            <field name="code">dcg.knowledge.article</field>
+            <field name="prefix">KB/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="cat_sop" model="dcg.knowledge.category">
+            <field name="name">SOP - Standard Operating Procedure</field><field name="code">SOP</field><field name="sequence">10</field>
+        </record>
+        <record id="cat_faq" model="dcg.knowledge.category">
+            <field name="name">FAQ</field><field name="code">FAQ</field><field name="sequence">20</field>
+        </record>
+        <record id="cat_best_practice" model="dcg.knowledge.category">
+            <field name="name">Best Practice</field><field name="code">BP</field><field name="sequence">30</field>
+        </record>
+        <record id="cat_known_issue" model="dcg.knowledge.category">
+            <field name="name">Known Issue</field><field name="code">KI</field><field name="sequence">40</field>
+        </record>
+        <record id="cat_coding" model="dcg.knowledge.category">
+            <field name="name">Coding Standard</field><field name="code">CS</field><field name="sequence">50</field>
+        </record>
+        <record id="cat_guide" model="dcg.knowledge.category">
+            <field name="name">User Guide</field><field name="code">UG</field><field name="sequence">60</field>
+        </record>
+        <record id="cat_checklist" model="dcg.knowledge.category">
+            <field name="name">Checklist</field><field name="code">CL</field><field name="sequence">70</field>
+        </record>
+        <record id="cat_training" model="dcg.knowledge.category">
+            <field name="name">Training Material</field><field name="code">TM</field><field name="sequence">80</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,430 @@
+/* Rotating Cat Loading Indicator for Odoo - Based on CodePen */
+
+// Color variables (updated to match original exactly)
+$bgColor: rgba(255, 255, 255, 0.95);
+$catBody: rgb(230, 165, 100);
+$strokeColor: rgb(50, 50, 70);
+$catBodyInside: rgb(240, 190, 120);
+$catTail: rgb(190, 130, 80);
+
+// Keyframe animations (fixed mouth animation)
+@keyframes rotating {
+  0% {
+    transform: rotate(45deg);
+  }
+  10% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(765deg);
+  }
+}
+
+@keyframes rotating-ass {
+  0% {
+    transform: rotate(-65deg);
+  }
+  90% {
+    transform: rotate(655deg);
+  }
+  100% {
+    transform: rotate(655deg);
+  }
+}
+
+@keyframes mouth {
+  0% {
+    height: 0;
+    border-width: 0;
+  }
+  16% {
+    height: 0;
+    border-width: 0;
+  }
+  30% {
+    height: 2px;
+    border-width: 3px;
+  }
+  50% {
+    height: 2px;
+    border-width: 3px;
+  }
+  100% {
+    height: 0;
+    border-width: 0;
+  }
+}
+
+// Animation mixin (exact from original)
+@mixin animation($name: rotating) {
+  animation-name: $name;
+  animation-duration: 2.79s;
+  animation-direction: reverse;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+// Main loading indicator container
+.o_cat_loading {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: $zindex-modal + 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.4s ease;
+
+  &.o-fade-leave, &.o-fade-enter {
+    opacity: 0;
+  }
+}
+
+// Cat wrapper - properly scaled from original 300px to 120px
+.o_cat_wrapper {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.o_cat_mask {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;  // 250px scaled down to 100px (250/2.5)
+  height: 100px;
+  border-radius: 50%;
+}
+
+.o_cat {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 2px solid $strokeColor; // 5px scaled down to 2px
+  border-radius: 50%;
+
+  .shape-mask {
+    position: absolute;
+    width: 108px; // 270px scaled down (270/2.5)
+    height: 54px; // 135px scaled down (135/2.5)
+    top: -4px;   // -10px scaled down
+    left: -4px;  // -10px scaled down
+    border-radius: 54px 54px 0 0; // 135px scaled down
+    background: $bgColor;
+    transform-origin: center bottom;
+    transform: rotate(-65deg);
+    @include animation(rotating-ass);
+
+    &.second {
+      transform: rotate(45deg);
+      @include animation;
+    }
+  }
+
+  .body-up, .body-down {
+    width: 100px;  // 250px scaled down
+    height: 50px;  // 125px scaled down
+    border-radius: 50px 50px 0 0; // 125px scaled down
+    background: $catBody;
+  }
+
+  .body-down {
+    transform: rotate(180deg);
+  }
+
+  .body-inside {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px; // 220px scaled down (220/2.5)
+    height: 88px;
+    border-radius: 50%;
+    background: $catBodyInside;
+  }
+
+  .body-inside-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-65deg);
+    @include animation(rotating-ass);
+  }
+
+  .body-inside-wrapper-end {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    @include animation;
+  }
+
+  .body-inside-fix {
+    position: absolute;
+    top: 50%;
+    left: 4px; // 10px scaled down (10/2.5)
+    width: 20px; // 50px scaled down (50/2.5)
+    height: 20px;
+    transform: translateY(-50%);
+    background: $catBody;
+
+    &.end {
+      left: auto;
+      right: 4px; // 10px scaled down
+
+      &:after {
+        left: auto;
+        right: 3.6px; // 9px scaled down
+      }
+    }
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 14.4px; // 36px scaled down (36/2.5)
+      left: 3.6px; // 9px scaled down (9/2.5)
+      display: block;
+      width: 10px; // 25px scaled down (25/2.5)
+      height: 10px;
+      border-radius: 50%;
+      background: $catBodyInside;
+    }
+  }
+
+  .body-mask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px; // 170px scaled down (170/2.5)
+    height: 68px;
+    border-radius: 50%;
+    background: $catBody;
+  }
+
+  .cat-head-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    @include animation;
+  }
+
+  .cat-head {
+    position: absolute;
+    top: 36.4px; // 91px scaled down (91/2.5)
+    right: -2px; // -5px scaled down
+    width: 22px; // 55px scaled down (55/2.5)
+    height: 12px; // 30px scaled down (30/2.5)
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-bottom: none;
+    border-radius: 2px 2px 0 0; // 5px scaled down
+    background: $catBody;
+  }
+
+  .cat-ear {
+    position: absolute;
+    top: 32.4px; // 81px scaled down (81/2.5)
+    right: 17.2px; // 43px scaled down (43/2.5)
+    width: 2.8px; // 7px scaled down (7/2.5)
+    height: 4px; // 10px scaled down (10/2.5)
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-bottom: none;
+    border-radius: 2px 8px 0 0; // 5px 20px scaled down
+    background: $catBody;
+
+    &.right {
+      right: -2px; // -5px scaled down
+      border-radius: 8px 2px 0 0; // 20px 5px scaled down
+    }
+  }
+
+  .cat-eye {
+    position: absolute;
+    top: 4px; // 10px scaled down (10/2.5)
+    left: 4.4px; // 11px scaled down (11/2.5)
+    width: 2px; // 5px scaled down (5/2.5)
+    height: 2.4px; // 6px scaled down (6/2.5)
+    border-radius: 50%;
+    background: $strokeColor;
+
+    &.right {
+      left: 15.6px; // 39px scaled down (39/2.5)
+    }
+  }
+
+  .cat-mouth-wrapper {
+    position: absolute;
+    top: 9.2px; // 23px scaled down (23/2.5)
+    left: 9.2px; // 23px scaled down (23/2.5)
+  }
+
+  .cat-mouth {
+    position: absolute;
+    top: 0;
+    left: 0.8px; // 2px scaled down (2/2.5)
+    width: 0.8px; // 2px scaled down (2/2.5)
+    height: 1.2px; // 3px scaled down (3/2.5)
+    border: 0.8px solid $strokeColor; // 2px scaled down (2/2.5)
+    border-top: none;
+    border-radius: 0 0 2px 2px; // 5px scaled down
+    @include animation(mouth);
+  }
+
+  .cat-mouth-up {
+    position: absolute;
+    top: -1.2px; // -3px scaled down (-3/2.5)
+    left: 0;
+    width: 0.4px; // 1px scaled down (1/2.5)
+    height: 0.8px; // 2px scaled down (2/2.5)
+    border: 0.8px solid $strokeColor; // 2px scaled down (2/2.5)
+    border-top: none;
+    border-radius: 0 0 2px 2px; // 5px scaled down
+
+    &.right {
+      left: 2px; // 5px scaled down (5/2.5)
+    }
+  }
+
+  .cat-beard {
+    position: absolute;
+    top: 0;
+    left: -13.2px; // -33px scaled down (-33/2.5)
+    height: 0.4px; // 1px scaled down (1/2.5)
+    width: 6px; // 15px scaled down (15/2.5)
+    border-top: 0.8px solid $strokeColor; // 2px scaled down (2/2.5)
+    border-radius: 6px; // 15px scaled down
+    background: $strokeColor; // Use strokeColor instead of black to match original
+
+    &.right {
+      left: auto;
+      right: -17.2px; // -43px scaled down (-43/2.5)
+    }
+
+    &.up {
+      top: -2px; // -5px scaled down (-5/2.5)
+      transform: rotate(5deg);
+
+      &.right {
+        transform: rotate(-5deg);
+      }
+    }
+
+    &.down {
+      top: 2px; // 5px scaled down (5/2.5)
+      transform: rotate(-5deg);
+
+      &.right {
+        transform: rotate(5deg);
+      }
+    }
+  }
+
+  .cat-hand {
+    position: absolute;
+    top: 62px; // 155px scaled down (155/2.5)
+    right: 2px; // 5px scaled down (5/2.5)
+    width: 5.2px; // 13px scaled down (13/2.5)
+    height: 12px; // 30px scaled down (30/2.5)
+    transform: rotate(21deg);
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-top: none;
+    border-radius: 0 2px 6px 6px; // 0 5px 15px 15px scaled down
+    background: $catBody;
+
+    &.right {
+      top: 56px; // 140px scaled down (140/2.5)
+      right: 18px; // 45px scaled down (45/2.5)
+    }
+  }
+
+  .cat-ass-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-65deg);
+    @include animation(rotating-ass);
+  }
+
+  .cat-leg {
+    position: absolute;
+    top: 38px; // 95px scaled down (95/2.5)
+    left: -2px; // -5px scaled down (-5/2.5)
+    width: 5.2px; // 13px scaled down (13/2.5)
+    height: 12px; // 30px scaled down (30/2.5)
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-bottom: none;
+    border-radius: 6px 6px 0 0; // 15px scaled down
+    background: $catBody;
+
+    &.right {
+      left: auto;
+      right: 76px; // 190px scaled down (190/2.5)
+    }
+  }
+
+  .cat-ass {
+    position: absolute;
+    top: 46px; // 115px scaled down (115/2.5)
+    left: 5.2px; // 13px scaled down (13/2.5)
+    width: 7.2px; // 18px scaled down (18/2.5)
+    height: 2px; // 5px scaled down (5/2.5)
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-bottom: none;
+    border-radius: 12px 12px 0 0; // 30px scaled down
+    background: $catBody;
+  }
+
+  .cat-tail {
+    position: absolute;
+    top: 30px; // 75px scaled down (75/2.5)
+    left: 6.8px; // 17px scaled down (17/2.5)
+    width: 4.8px; // 12px scaled down (12/2.5)
+    height: 16px; // 40px scaled down (40/2.5)
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-bottom: none;
+    border-radius: 8px 8px 0 0; // 20px scaled down
+    background: $catTail;
+  }
+
+  .inner-mask {
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; // 140px scaled down (140/2.5)
+    height: 56px;
+    border: 2px solid $strokeColor; // 5px scaled down
+    border-radius: 50%;
+    background: $bgColor;
+  }
+}
+
+// Loading text
+.o_cat_text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  min-width: 60px;
+
+  .debug_count {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+}

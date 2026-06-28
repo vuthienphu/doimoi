@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+<!-- ============ HOME ============ -->
+<t t-name="dcg_dashboard_kpi.HomeDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header">
+        <h2>DCG Dashboard</h2>
+        <div class="dcg-dash-actions">
+            <button class="btn btn-sm btn-outline-secondary me-2" t-on-click="refresh"><i class="fa fa-refresh"/> Refresh</button>
+            <button class="btn btn-sm btn-primary" t-on-click="() => this.quickAction('crm.lead')"><i class="fa fa-plus"/> New Lead</button>
+        </div>
+    </div>
+    <div class="dcg-dash-nav">
+        <button class="btn btn-outline-primary m-1" t-on-click="() => this.nav('dcg_dashboard_executive')"><i class="fa fa-line-chart"/> Executive</button>
+        <button class="btn btn-outline-info m-1" t-on-click="() => this.nav('dcg_dashboard_sales')"><i class="fa fa-handshake-o"/> Sales</button>
+        <button class="btn btn-outline-success m-1" t-on-click="() => this.nav('dcg_dashboard_project')"><i class="fa fa-cogs"/> Project</button>
+        <button class="btn btn-outline-success m-1" t-on-click="() => this.nav('dcg_dashboard_project_task')"><i class="fa fa-tasks"/> Project Tasks</button>
+        <button class="btn btn-outline-secondary m-1" t-on-click="() => this.nav('dcg_dashboard_resource')"><i class="fa fa-users"/> Resource</button>
+        <button class="btn btn-outline-warning m-1" t-on-click="() => this.nav('dcg_dashboard_finance')"><i class="fa fa-money"/> Finance</button>
+        <button class="btn btn-outline-danger m-1" t-on-click="() => this.nav('dcg_dashboard_support')"><i class="fa fa-life-ring"/> Support</button>
+        <button class="btn btn-outline-dark m-1" t-on-click="() => this.nav('dcg_dashboard_asset')"><i class="fa fa-laptop"/> Asset</button>
+    </div>
+    <t t-if="state.exec">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Revenue'" value="state.exec.revenue" color="'primary'" onClick.bind="() => this.drill('dcg.contract', [])"/>
+            <KpiCard label="'Profit'" value="state.exec.profit" color="'success'"/>
+            <KpiCard label="'Margin'" value="state.exec.margin" suffix="'%'" color="'info'"/>
+            <KpiCard label="'Active Projects'" value="state.exec.active_projects" color="'primary'" onClick.bind="() => this.drill('dcg.project.delivery', [['state','in',['in_progress','uat']]])"/>
+            <KpiCard label="'Open Tickets'" value="state.exec.open_tickets" color="'warning'" onClick.bind="() => this.drill('dcg.warranty.ticket', [])"/>
+            <KpiCard label="'Critical'" value="state.exec.critical_tickets" color="'danger'"/>
+            <KpiCard label="'Customers'" value="state.exec.customer_count" color="'info'"/>
+            <KpiCard label="'Employees'" value="state.exec.employee_count" color="'secondary'"/>
+        </div>
+    </t>
+    <t t-if="state.notif and state.notif.count > 0">
+        <div class="dcg-dash-section mt-3"><h5><i class="fa fa-bell"/> Pending Activities (<t t-esc="state.notif.count"/>)</h5>
+            <table class="table table-sm table-hover mb-0"><tbody>
+                <tr t-foreach="state.notif.activities" t-as="a" t-key="a.id" t-on-click="() => this.openRec(a.model, a.res_id)" style="cursor:pointer;">
+                    <td><span t-attf-class="badge bg-{{a.overdue ? 'danger' : 'info'}}" t-esc="a.deadline"/></td>
+                    <td t-esc="a.summary"/>
+                </tr>
+            </tbody></table>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ EXECUTIVE ============ -->
+<t t-name="dcg_dashboard_kpi.ExecutiveDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-line-chart"/> Executive</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Revenue'" value="state.data.revenue" color="'primary'"/>
+            <KpiCard label="'Profit'" value="state.data.profit" color="'success'"/>
+            <KpiCard label="'Margin'" value="state.data.margin" suffix="'%'" color="'info'"/>
+            <KpiCard label="'Contracts'" value="state.data.contract_count" color="'primary'"/>
+            <KpiCard label="'Active Projects'" value="state.data.active_projects" color="'success'" onClick.bind="() => this.drill('dcg.project.delivery', [['state','in',['in_progress','uat']]])"/>
+            <KpiCard label="'Red Projects'" value="state.data.red_projects" color="'danger'" onClick.bind="() => this.drill('dcg.project.delivery', [['health_status','=','red']])"/>
+            <KpiCard label="'Open Tickets'" value="state.data.open_tickets" color="'warning'"/>
+            <KpiCard label="'SLA Breached'" value="state.data.sla_breached" color="'danger'"/>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ SALES ============ -->
+<t t-name="dcg_dashboard_kpi.SalesDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-handshake-o"/> Sales</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Leads'" value="state.data.lead_count" color="'primary'" onClick.bind="() => this.drill('crm.lead', [])"/>
+            <KpiCard label="'Opportunities'" value="state.data.opportunity_count" color="'info'"/>
+            <KpiCard label="'Won'" value="state.data.won_count" color="'success'"/>
+            <KpiCard label="'Win Rate'" value="state.data.win_rate" suffix="'%'" color="'success'"/>
+            <KpiCard label="'Contracts'" value="state.data.contract_count" color="'primary'" onClick.bind="() => this.drill('dcg.contract', [])"/>
+            <KpiCard label="'Expiring Soon'" value="state.data.expiring_contracts" color="'warning'"/>
+        </div>
+        <div class="dcg-dash-section mt-3" t-if="state.data.top_customers and state.data.top_customers.length">
+            <h5>Top Customers by Revenue</h5>
+            <table class="table table-sm table-hover mb-0"><thead><tr><th>Customer</th><th>Revenue</th></tr></thead><tbody>
+                <tr t-foreach="state.data.top_customers" t-as="c" t-key="c.id" t-on-click="() => this.openRec('res.partner', c.id)" style="cursor:pointer;">
+                    <td t-esc="c.name"/><td t-esc="fmtNum(c.revenue)"/>
+                </tr>
+            </tbody></table>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ PROJECT ============ -->
+<t t-name="dcg_dashboard_kpi.ProjectDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-cogs"/> Project</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Total'" value="state.data.total" color="'primary'"/>
+            <KpiCard label="'Active'" value="state.data.active" color="'success'"/>
+            <KpiCard label="'Green'" value="state.data.by_health.green || 0" color="'success'"/>
+            <KpiCard label="'Yellow'" value="state.data.by_health.yellow || 0" color="'warning'"/>
+            <KpiCard label="'Red'" value="state.data.by_health.red || 0" color="'danger'"/>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-7">
+                <div class="dcg-dash-section"><h5>Top Projects</h5>
+                    <table class="table table-sm table-hover mb-0"><thead><tr><th>Project</th><th>PM</th><th>Progress</th><th>Health</th></tr></thead><tbody>
+                        <tr t-foreach="state.data.top_projects" t-as="p" t-key="p.id" t-on-click="() => this.openRec('dcg.project.delivery', p.id)" style="cursor:pointer;">
+                            <td t-esc="p.name"/><td t-esc="p.pm"/>
+                            <td><div class="progress" style="height:18px;"><div class="progress-bar" t-attf-style="width:{{p.progress}}%" t-esc="Math.round(p.progress)+'%'"/></div></td>
+                            <td><span t-attf-class="badge bg-{{p.health==='red'?'danger':p.health==='yellow'?'warning':'success'}}" t-esc="p.health"/></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div class="col-md-5" t-if="state.data.delayed_projects and state.data.delayed_projects.length">
+                <div class="dcg-dash-section"><h5><i class="fa fa-exclamation-triangle text-warning"/> Delayed</h5>
+                    <table class="table table-sm mb-0"><tbody>
+                        <tr t-foreach="state.data.delayed_projects" t-as="d" t-key="d.id" t-on-click="() => this.openRec('dcg.project.delivery', d.id)" style="cursor:pointer;">
+                            <td t-esc="d.name"/><td class="text-danger"><t t-esc="d.delayed_days"/> days</td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ RESOURCE ============ -->
+<t t-name="dcg_dashboard_kpi.ResourceDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-users"/> Resource</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Employees'" value="state.data.employee_count" color="'primary'"/>
+            <KpiCard label="'Allocated'" value="state.data.allocated_count" color="'success'"/>
+            <KpiCard label="'On Bench'" value="state.data.bench_count" color="'warning'"/>
+            <KpiCard label="'Over-allocated'" value="state.data.over_allocated_count" color="'danger'"/>
+        </div>
+        <div class="dcg-dash-section mt-3"><h5>Resource Workload</h5>
+            <t t-foreach="state.data.workload" t-as="w" t-key="w.id">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="me-2" style="min-width:120px;" t-esc="w.name"/>
+                    <div class="progress flex-grow-1" style="height:22px;">
+                        <div t-attf-class="progress-bar bg-{{w.color}}" t-attf-style="width:{{Math.min(w.allocation, 100)}}%"
+                             t-esc="w.allocation + '%'"/>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ FINANCE ============ -->
+<t t-name="dcg_dashboard_kpi.FinanceDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-money"/> Finance</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Planned Revenue'" value="state.data.planned_revenue" color="'info'"/>
+            <KpiCard label="'Actual Revenue'" value="state.data.actual_revenue" color="'primary'"/>
+            <KpiCard label="'Actual Cost'" value="state.data.actual_cost" color="'warning'"/>
+            <KpiCard label="'Margin'" value="state.data.margin" color="'success'"/>
+            <KpiCard label="'Margin Rate'" value="state.data.margin_rate" suffix="'%'" color="'success'"/>
+            <KpiCard label="'Collected'" value="state.data.collected" color="'primary'"/>
+            <KpiCard label="'Outstanding'" value="state.data.outstanding" color="'danger'" onClick.bind="() => this.drill('dcg.project.finance', [['uncollected_amount', '>', 0]])"/>
+        </div>
+        <div class="dcg-dash-section mt-3" t-if="state.data.top_margin and state.data.top_margin.length">
+            <h5>Top Projects by Margin</h5>
+            <table class="table table-sm table-hover mb-0"><thead><tr><th>Project</th><th>Revenue</th><th>Cost</th><th>Margin</th><th>%</th></tr></thead><tbody>
+                <tr t-foreach="state.data.top_margin" t-as="f" t-key="f.id" t-on-click="() => this.openRec('dcg.project.finance', f.id)" style="cursor:pointer;">
+                    <td t-esc="f.project"/><td t-esc="fmtNum(f.revenue)"/><td t-esc="fmtNum(f.cost)"/>
+                    <td t-esc="fmtNum(f.margin)"/><td t-esc="(f.margin_rate||0).toFixed(1)+'%'"/>
+                </tr>
+            </tbody></table>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ SUPPORT ============ -->
+<t t-name="dcg_dashboard_kpi.SupportDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-life-ring"/> Support</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Open Tickets'" value="state.data.total_open" color="'primary'" onClick.bind="() => this.drill('dcg.warranty.ticket', [])"/>
+            <KpiCard label="'Critical'" value="state.data.critical" color="'danger'"/>
+            <KpiCard label="'SLA Breached'" value="state.data.sla_breached" color="'warning'"/>
+        </div>
+        <div class="dcg-dash-section mt-3" t-if="state.data.recent_critical and state.data.recent_critical.length">
+            <h5><i class="fa fa-exclamation-circle text-danger"/> Recent Critical</h5>
+            <table class="table table-sm table-hover mb-0"><thead><tr><th>Ticket</th><th>Title</th><th>Customer</th><th>Engineer</th></tr></thead><tbody>
+                <tr t-foreach="state.data.recent_critical" t-as="t" t-key="t.id" t-on-click="() => this.openRec('dcg.warranty.ticket', t.id)" style="cursor:pointer;">
+                    <td t-esc="t.name"/><td t-esc="t.title"/><td t-esc="t.customer"/><td t-esc="t.engineer"/>
+                </tr>
+            </tbody></table>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ ASSET ============ -->
+<t t-name="dcg_dashboard_kpi.AssetDashboard">
+<div class="dcg-dashboard">
+    <div class="dcg-dash-header"><h2><i class="fa fa-laptop"/> Asset</h2><button class="btn btn-sm btn-outline-primary" t-on-click="refresh"><i class="fa fa-refresh"/></button></div>
+    <t t-if="state.data">
+        <div class="dcg-dash-cards">
+            <KpiCard label="'Total Assets'" value="state.data.total" color="'primary'" onClick.bind="() => this.drill('dcg.asset', [])"/>
+            <KpiCard label="'Assigned'" value="state.data.assigned" color="'success'"/>
+            <KpiCard label="'Available'" value="state.data.available" color="'info'"/>
+            <KpiCard label="'Licenses'" value="state.data.license_total" color="'primary'" onClick.bind="() => this.drill('dcg.asset.license', [])"/>
+            <KpiCard label="'License Expired'" value="state.data.license_expired" color="'danger'"/>
+            <KpiCard label="'License Expiring'" value="state.data.license_expiring" color="'warning'"/>
+            <KpiCard label="'Warranty Expired'" value="state.data.warranty_expired" color="'danger'"/>
+            <KpiCard label="'Warranty Expiring'" value="state.data.warranty_expiring" color="'warning'"/>
+        </div>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+<!-- ============ PROJECT TASKS ============ -->
+<t t-name="dcg_dashboard_kpi.ProjectTaskDashboard">
+<div class="dcg-dashboard">
+    <t t-if="state.data">
+        <!-- HEADER -->
+        <div class="dcg-dash-header d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <t t-if="state.projectId">
+                    <button class="btn btn-sm btn-outline-secondary me-2" t-on-click="resetProject">
+                        <i class="fa fa-chevron-left"/> Back
+                    </button>
+                    <span class="fs-4 fw-bold">
+                        <t t-esc="state.data.project_code"/> — <t t-esc="state.data.project_name"/>
+                    </span>
+                    <span class="ms-2">
+                        Health: 
+                        <t t-if="state.data.project_health == 'green'">🟢</t>
+                        <t t-if="state.data.project_health == 'yellow'">🟡</t>
+                        <t t-if="state.data.project_health == 'red'">🔴</t>
+                    </span>
+                    <button class="btn btn-sm btn-link ms-2" t-on-click="() => this.openRec('dcg.project.delivery', state.projectId)">
+                        Open Project
+                    </button>
+                </t>
+                <t t-else="">
+                    <h2><i class="fa fa-tasks"/> Project Tasks</h2>
+                </t>
+            </div>
+            <div class="dcg-dash-actions d-flex align-items-center">
+                <!-- Select project filter -->
+                <select class="form-select form-select-sm d-inline-block w-auto me-2" t-model="state.projectFilter" t-on-change="(e) => this.selectProject(e.target.value === 'all' ? null : e.target.value)">
+                    <option value="all">All Projects</option>
+                    <t t-foreach="state.data.by_project or []" t-as="p" t-key="p.project_id">
+                        <option t-att-value="p.project_id" t-esc="p.project_name"/>
+                    </t>
+                </select>
+                <button class="btn btn-sm btn-outline-primary" t-on-click="refresh">
+                    <i class="fa fa-refresh"/> Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- KPI CARDS SUMMARY -->
+        <div class="dcg-dash-cards mb-4">
+            <KpiCard label="'TỔNG TASK'" value="state.data.summary.total" color="'primary'"/>
+            <KpiCard label="'TO DO'" value="state.data.summary.todo" color="'secondary'"/>
+            <KpiCard label="'ĐANG LÀM'" value="state.data.summary.in_progress" color="'info'"/>
+            <KpiCard label="'IN REVIEW'" value="state.data.summary.in_review" color="'warning'"/>
+            <KpiCard label="'DONE'" value="state.data.summary.done" color="'success'"/>
+            <KpiCard label="'QUÁ HẠN'" value="state.data.summary.overdue" color="'danger'"/>
+        </div>
+
+        <t t-if="!state.projectId">
+            <!-- GENERAL VIEW (ALL PROJECTS) -->
+            <div class="row">
+                <!-- Task By Project -->
+                <div class="col-md-7 mb-3">
+                    <div class="dcg-dash-section">
+                        <h5>Task theo Project</h5>
+                        <table class="table table-sm table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Todo</th>
+                                    <th>In Progress</th>
+                                    <th>Done</th>
+                                    <th>Total</th>
+                                    <th>Completion %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="state.data.by_project" t-as="p" t-key="p.project_id" t-on-click="() => this.selectProjectFromRow(p.project_id)" style="cursor:pointer;">
+                                    <td>
+                                        <span t-attf-class="badge bg-{{p.health==='red'?'danger':p.health==='yellow'?'warning':'success'}} me-1">●</span>
+                                        <t t-esc="p.project_name"/>
+                                    </td>
+                                    <td t-esc="p.todo"/>
+                                    <td t-esc="p.in_progress"/>
+                                    <td t-esc="p.done"/>
+                                    <td t-esc="p.total"/>
+                                    <td>
+                                        <div class="progress" style="height:15px;">
+                                            <div class="progress-bar" t-attf-style="width:{{p.completion_rate}}%" t-esc="p.completion_rate + '%'"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Task by Type -->
+                <div class="col-md-5 mb-3">
+                    <div class="dcg-dash-section">
+                        <h5>Task theo Loại</h5>
+                        <div t-foreach="state.data.by_type" t-as="t" t-key="t.task_type" class="mb-2">
+                            <div class="d-flex justify-content-between mb-1 small">
+                                <span t-esc="t.label"/>
+                                <span><t t-esc="t.total"/> tasks</span>
+                            </div>
+                            <div class="progress" style="height:15px;">
+                                <div class="progress-bar bg-info" t-attf-style="width:{{t.total ? (t.in_progress / t.total * 100) : 0}}%"/>
+                                <div class="progress-bar bg-success" t-attf-style="width:{{t.total ? (t.done / t.total * 100) : 0}}%"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Overdue Tasks -->
+                <div class="col-md-6 mb-3">
+                    <div class="dcg-dash-section">
+                        <h5 class="text-danger"><i class="fa fa-exclamation-circle"/> Task Quá hạn</h5>
+                        <table class="table table-sm table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Task</th>
+                                    <th>Assignee</th>
+                                    <th>Overdue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="state.data.overdue_tasks" t-as="t" t-key="t.task_id" t-on-click="() => this.openRec('dcg.project.task', t.task_id)" style="cursor:pointer;">
+                                    <td t-esc="t.code"/>
+                                    <td>
+                                        <div class="fw-bold" t-esc="t.name"/>
+                                        <div class="text-muted small" t-esc="t.project_name"/>
+                                    </td>
+                                    <td t-esc="t.assignee"/>
+                                    <td class="text-danger"><t t-esc="t.days_overdue"/> ngày</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Blocked Tasks -->
+                <div class="col-md-6 mb-3">
+                    <div class="dcg-dash-section">
+                        <h5 class="text-warning"><i class="fa fa-minus-circle"/> Task bị Blocked</h5>
+                        <table class="table table-sm table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Task</th>
+                                    <th>Assignee</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="state.data.blocked_tasks" t-as="t" t-key="t.task_id" t-on-click="() => this.openRec('dcg.project.task', t.task_id)" style="cursor:pointer;">
+                                    <td t-esc="t.code"/>
+                                    <td>
+                                        <div class="fw-bold" t-esc="t.name"/>
+                                        <div class="text-muted small" t-esc="t.project_name"/>
+                                    </td>
+                                    <td t-esc="t.assignee"/>
+                                    <td>
+                                        <span class="badge bg-secondary" t-esc="t.priority"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Workload -->
+            <div class="dcg-dash-section mt-3">
+                <h5>Workload theo Người</h5>
+                <div t-foreach="state.data.by_assignee" t-as="u" t-key="u.user_id" class="d-flex align-items-center mb-2">
+                    <img t-att-src="u.avatar" class="rounded-circle me-2" width="28" height="28"/>
+                    <span class="fw-bold me-2" style="min-width:120px;" t-esc="u.user_name"/>
+                    <span class="badge bg-secondary me-1">Todo: <t t-esc="u.todo"/></span>
+                    <span class="badge bg-info me-1">Doing: <t t-esc="u.in_progress"/></span>
+                    <span class="badge bg-danger me-2">Overdue: <t t-esc="u.overdue"/></span>
+                    <div class="progress flex-grow-1" style="height:20px;">
+                        <div class="progress-bar bg-primary" t-attf-style="width:{{Math.min(u.total * 7, 100)}}%" t-esc="u.total + ' tasks'"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+        <t t-else="">
+            <!-- PROJECT VIEW (SINGLE PROJECT DETAILS) -->
+            <!-- Scope Progress -->
+            <div class="dcg-dash-section mb-4">
+                <h5>Progress theo Scope / Work Package</h5>
+                <table class="table table-sm table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Scope Name</th>
+                            <th>Total</th>
+                            <th>Done</th>
+                            <th>Doing</th>
+                            <th>Todo</th>
+                            <th>Overdue</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="state.data.scopes" t-as="s" t-key="s.scope_id">
+                            <td t-esc="s.scope_name"/>
+                            <td t-esc="s.total"/>
+                            <td t-esc="s.done"/>
+                            <td t-esc="s.in_progress"/>
+                            <td t-esc="s.todo"/>
+                            <td class="text-danger" t-esc="s.overdue"/>
+                            <td>
+                                <div class="progress" style="height:15px;">
+                                    <div class="progress-bar bg-success" t-attf-style="width:{{s.completion}}%" t-esc="s.completion + '%'"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Task List (Kanban Mini) -->
+            <div class="dcg-dash-section">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Task List</h5>
+                    <div class="d-flex">
+                        <select class="form-select form-select-sm d-inline-block w-auto me-2" t-model="state.taskTypeFilter" t-on-change="(e) => this.setTaskTypeFilter(e.target.value)">
+                            <option value="all">All Types</option>
+                            <option value="ba">BA</option>
+                            <option value="dev">Dev</option>
+                            <option value="qa">QA</option>
+                            <option value="review">Review</option>
+                            <option value="deploy">Deploy</option>
+                        </select>
+                        <select class="form-select form-select-sm d-inline-block w-auto" t-model="state.taskStatusFilter" t-on-change="(e) => this.setTaskStatusFilter(e.target.value)">
+                            <option value="all">All States</option>
+                            <option value="todo">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="in_review">In Review</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Kanban Lanes -->
+                <div class="row">
+                    <!-- TO DO LANE -->
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded" style="min-height:300px;">
+                            <h6 class="fw-bold border-bottom pb-2 mb-2 text-secondary">TO DO</h6>
+                            <t t-foreach="getFilteredTasks().filter(t => t.is_start)" t-as="t" t-key="t.id">
+                                <div class="card shadow-sm mb-2 p-2" t-on-click="() => this.openRec('dcg.project.task', t.id)" style="cursor:pointer;">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small text-muted" t-esc="t.code"/>
+                                        <span class="badge bg-secondary text-capitalize" t-esc="t.task_type"/>
+                                    </div>
+                                    <div class="fw-bold mb-2 small" t-esc="t.name"/>
+                                    <div class="d-flex justify-content-between align-items-center small">
+                                        <span class="text-muted"><i class="fa fa-user-circle"/> <t t-esc="t.assignee or 'None'"/></span>
+                                        <span t-if="t.planned_end" class="text-danger"><i class="fa fa-clock-o"/> <t t-esc="t.planned_end"/></span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- IN PROGRESS LANE -->
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded" style="min-height:300px;">
+                            <h6 class="fw-bold border-bottom pb-2 mb-2 text-info">IN PROGRESS</h6>
+                            <t t-foreach="getFilteredTasks().filter(t => t.is_in_progress)" t-as="t" t-key="t.id">
+                                <div class="card shadow-sm mb-2 p-2" t-on-click="() => this.openRec('dcg.project.task', t.id)" style="cursor:pointer;">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small text-muted" t-esc="t.code"/>
+                                        <span class="badge bg-info text-capitalize" t-esc="t.task_type"/>
+                                    </div>
+                                    <div class="fw-bold mb-2 small" t-esc="t.name"/>
+                                    <div class="d-flex justify-content-between align-items-center small">
+                                        <span class="text-muted"><i class="fa fa-user-circle"/> <t t-esc="t.assignee or 'None'"/></span>
+                                        <span t-if="t.planned_end" class="text-danger"><i class="fa fa-clock-o"/> <t t-esc="t.planned_end"/></span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- IN REVIEW LANE -->
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded" style="min-height:300px;">
+                            <h6 class="fw-bold border-bottom pb-2 mb-2 text-warning">IN REVIEW</h6>
+                            <t t-foreach="getFilteredTasks().filter(t => t.is_review)" t-as="t" t-key="t.id">
+                                <div class="card shadow-sm mb-2 p-2" t-on-click="() => this.openRec('dcg.project.task', t.id)" style="cursor:pointer;">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small text-muted" t-esc="t.code"/>
+                                        <span class="badge bg-warning text-capitalize" t-esc="t.task_type"/>
+                                    </div>
+                                    <div class="fw-bold mb-2 small" t-esc="t.name"/>
+                                    <div class="d-flex justify-content-between align-items-center small">
+                                        <span class="text-muted"><i class="fa fa-user-circle"/> <t t-esc="t.assignee or 'None'"/></span>
+                                        <span t-if="t.planned_end" class="text-danger"><i class="fa fa-clock-o"/> <t t-esc="t.planned_end"/></span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- DONE LANE -->
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded" style="min-height:300px;">
+                            <h6 class="fw-bold border-bottom pb-2 mb-2 text-success">DONE</h6>
+                            <t t-foreach="getFilteredTasks().filter(t => t.is_done)" t-as="t" t-key="t.id">
+                                <div class="card shadow-sm mb-2 p-2" t-on-click="() => this.openRec('dcg.project.task', t.id)" style="cursor:pointer;">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small text-muted" t-esc="t.code"/>
+                                        <span class="badge bg-success text-capitalize" t-esc="t.task_type"/>
+                                    </div>
+                                    <div class="fw-bold mb-2 small" t-esc="t.name"/>
+                                    <div class="d-flex justify-content-between align-items-center small">
+                                        <span class="text-muted"><i class="fa fa-user-circle"/> <t t-esc="t.assignee or 'None'"/></span>
+                                        <span class="text-success fw-bold"><i class="fa fa-check-circle"/> Done</span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+    <div t-if="state.loading" class="text-center p-5"><i class="fa fa-spinner fa-spin fa-2x"/></div>
+</div>
+</t>
+
+</templates>

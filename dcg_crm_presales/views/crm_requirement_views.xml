@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dcg_crm_requirement_list" model="ir.ui.view">
+        <field name="name">dcg.crm.requirement.list</field>
+        <field name="model">dcg.crm.requirement</field>
+        <field name="arch" type="xml">
+            <list string="Requirement Surveys">
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="partner_id"/>
+                <field name="survey_date"/>
+                <field name="owner_id"/>
+                <field name="version"/>
+                <field name="state"
+                       decoration-success="state == 'confirmed'"
+                       decoration-muted="state == 'cancelled'"
+                       widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dcg_crm_requirement_form" model="ir.ui.view">
+        <field name="name">dcg.crm.requirement.form</field>
+        <field name="model">dcg.crm.requirement</field>
+        <field name="arch" type="xml">
+            <form string="Requirement Survey">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_update_lead_summary" type="object"
+                            string="Update Lead Summary"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state == 'cancelled'"/>
+                    <button name="action_set_draft" type="object" string="Set to Draft"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="lead_id"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="version"/>
+                        </group>
+                        <group>
+                            <field name="survey_date"/>
+                            <field name="owner_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Discovery" name="discovery">
+                            <group>
+                                <field name="current_system"/>
+                                <field name="pain_point"/>
+                                <field name="business_goal"/>
+                                <field name="scope_summary"/>
+                            </group>
+                        </page>
+                        <page string="Technical Details" name="technical">
+                            <group>
+                                <field name="department_involved"/>
+                                <field name="input_data_desc"/>
+                                <field name="output_data_desc"/>
+                                <field name="integration_requirement"/>
+                                <field name="reporting_requirement"/>
+                                <field name="deployment_requirement"/>
+                            </group>
+                        </page>
+                        <page string="Meeting &amp; Attachments" name="meeting">
+                            <field name="contact_person_ids" widget="many2many_tags"/>
+                            <field name="meeting_note"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Note" name="note">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dcg_crm_requirement_search" model="ir.ui.view">
+        <field name="name">dcg.crm.requirement.search</field>
+        <field name="model">dcg.crm.requirement</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="partner_id"/>
+                <field name="owner_id"/>
+                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="filter_confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Opportunity" name="group_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Owner" name="group_owner" context="{'group_by': 'owner_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_dcg_crm_requirement" model="ir.actions.act_window">
+        <field name="name">Requirement Surveys</field>
+        <field name="res_model">dcg.crm.requirement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first requirement survey
+            </p>
+        </field>
+    </record>
+
+</odoo>

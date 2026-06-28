@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_project_issue_list" model="ir.ui.view">
+        <field name="name">dcg.project.issue.list</field>
+        <field name="model">dcg.project.issue</field>
+        <field name="arch" type="xml">
+            <list string="Issues / Risks" multi_edit="1">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="issue_type"/>
+                <field name="priority" decoration-danger="priority == 'critical'"
+                       decoration-warning="priority == 'high'"/>
+                <field name="owner_id" widget="many2one_avatar_user"/>
+                <field name="target_date"/>
+                <field name="state" widget="badge"
+                       decoration-success="state in ('resolved', 'closed')"
+                       decoration-info="state == 'in_progress'"
+                       decoration-danger="state == 'open'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_dcg_project_issue_form" model="ir.ui.view">
+        <field name="name">dcg.project.issue.form</field>
+        <field name="model">dcg.project.issue</field>
+        <field name="arch" type="xml">
+            <form string="Issue / Risk">
+                <header>
+                    <button name="action_start" type="object" string="Start"
+                            invisible="state != 'open'"/>
+                    <button name="action_resolve" type="object" string="Resolve" class="btn-primary"
+                            invisible="state not in ('open', 'in_progress')"/>
+                    <button name="action_close" type="object" string="Close"
+                            invisible="state != 'resolved'"/>
+                    <button name="action_reopen" type="object" string="Re-open"
+                            invisible="state not in ('resolved', 'closed')"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('closed', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="open,in_progress,resolved,closed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id" readonly="1"/>
+                            <field name="name"/>
+                            <field name="issue_type"/>
+                            <field name="priority"/>
+                        </group>
+                        <group>
+                            <field name="owner_id"/>
+                            <field name="raised_by_id"/>
+                            <field name="scope_id"/>
+                            <field name="milestone_id"/>
+                            <field name="target_date"/>
+                            <field name="resolved_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Impact" name="impact">
+                            <field name="impact"/>
+                        </page>
+                        <page string="Action Plan" name="action_plan">
+                            <field name="action_plan"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_dcg_project_issue_search" model="ir.ui.view">
+        <field name="name">dcg.project.issue.search</field>
+        <field name="model">dcg.project.issue</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="issue_type"/>
+                <field name="owner_id"/>
+                <filter string="Open" name="filter_open" domain="[('state', '=', 'open')]"/>
+                <filter string="Critical" name="filter_critical" domain="[('priority', '=', 'critical')]"/>
+                <filter string="High" name="filter_high" domain="[('priority', '=', 'high')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Type" name="group_type" context="{'group_by': 'issue_type'}"/>
+                    <filter string="Priority" name="group_priority" context="{'group_by': 'priority'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_dcg_project_issue" model="ir.actions.act_window">
+        <field name="name">Issues / Risks</field>
+        <field name="res_model">dcg.project.issue</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

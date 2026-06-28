@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Application root menu -->
+    <menuitem
+        id="menu_dcg_approval_root"
+        name="Approvals"
+        sequence="91"
+        groups="dcg_approval_matrix.group_dcg_approval_user"
+        web_icon="dcg_approval_matrix,static/description/icon.png"/>
+
+    <!-- Operations -->
+    <menuitem
+        id="menu_dcg_approval_operations"
+        name="Operations"
+        parent="menu_dcg_approval_root"
+        sequence="10"/>
+
+    <!-- Configuration -->
+    <menuitem
+        id="menu_dcg_approval_config"
+        name="Configuration"
+        parent="menu_dcg_approval_root"
+        sequence="90"
+        groups="dcg_approval_matrix.group_dcg_approval_manager"/>
+
+</odoo>

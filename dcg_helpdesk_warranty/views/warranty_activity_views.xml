@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_warranty_activity_list" model="ir.ui.view">
+        <field name="name">dcg.warranty.activity.list</field>
+        <field name="model">dcg.warranty.activity</field>
+        <field name="arch" type="xml">
+            <list string="Activity Timeline" editable="bottom">
+                <field name="activity_datetime"/>
+                <field name="activity_type"/>
+                <field name="user_id"/>
+                <field name="description"/>
+                <field name="duration_hours" optional="show" sum="Total"/>
+            </list>
+        </field>
+    </record>
+</odoo>

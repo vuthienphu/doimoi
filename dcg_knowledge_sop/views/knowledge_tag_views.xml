@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dcg_knowledge_tag_list" model="ir.ui.view">
+        <field name="name">dcg.knowledge.tag.list</field>
+        <field name="model">dcg.knowledge.tag</field>
+        <field name="arch" type="xml">
+            <list string="Knowledge Tags" editable="bottom">
+                <field name="name"/><field name="group"/><field name="color" widget="color_picker"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_dcg_knowledge_tag" model="ir.actions.act_window">
+        <field name="name">Tags</field><field name="res_model">dcg.knowledge.tag</field><field name="view_mode">list</field>
+    </record>
+</odoo>

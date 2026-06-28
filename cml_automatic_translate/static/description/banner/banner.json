@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-03-13T18:25:19.329Z",
+  "module": {
+    "technical_name": "cml_automatic_translate",
+    "banner_dir": "static/description/banner"
+  },
+  "content": {
+    "title": "PO Auto Translate",
+    "brand": "CML",
+    "summary": "Translate exported PO files automatically in Odoo and download the translated result.",
+    "highlights": [
+      "Translate PO files",
+      "Use export wizard",
+      "Download translated result"
+    ]
+  },
+  "style": {
+    "theme": "graphite",
+    "accent": "#ff6a6a",
+    "glow": 62,
+    "depth": 54
+  },
+  "artwork": {
+    "file": "img_banner.png",
+    "path": "static/description/banner/img_banner.png",
+    "scale": 140,
+    "offset_x": -29,
+    "offset_y": 0
+  },
+  "output": {
+    "file": "static/description/banner.png",
+    "width": 1500,
+    "height": 750
+  }
+}
