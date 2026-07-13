@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Hide "Manage Databases" and "Powered by Odoo" footer -->
+    <record id="hide_login_footer" model="ir.ui.view">
+        <field name="name">bravestar.hide_login_footer</field>
+        <field name="inherit_id" ref="web.login_layout"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('text-center') and hasclass('small') and hasclass('mt-4')]" position="replace"/>
+        </field>
+    </record>
+
+    <!-- Deactivate auth_signup.login: removes "Reset Password" and "Don't have an account?" -->
+    <record id="auth_signup.login" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- Force show login form and hide "Log in as superuser" button -->
+    <record id="show_login_form" model="ir.ui.view">
+        <field name="name">bravestar.show_login_form</field>
+        <field name="inherit_id" ref="web.login"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[@method='post' and @role='form']" position="attributes">
+                <attribute name="t-attf-class">oe_login_form</attribute>
+            </xpath>
+            <xpath expr="//button[@name='redirect' and @value='/web/become']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- Hide passkey button: override auth_btns after all modules inject into web.login_oauth -->
+    <template id="hide_passkey_btn" inherit_id="web.login_oauth" priority="99">
+        <xpath expr="//div[hasclass('o_login_auth')]" position="before">
+            <t t-set="auth_btns" t-value="[p for p in auth_btns if 'passkey_login_link' not in (p.get('list_item_class') or '')]"/>
+        </xpath>
+    </template>
+
+    <!-- Uncomment below to hide password form and keep only Google OAuth:
+    <record id="auth_passkey.auth_passkey_login" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+    <record id="hide_password_form" model="ir.ui.view">
+        <field name="name">bravestar.hide_password_form</field>
+        <field name="inherit_id" ref="web.login"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[@method='post' and @role='form']" position="replace"/>
+        </field>
+    </record>
+    -->
+
+</odoo>

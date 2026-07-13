@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_dcg_business_trip_user,dcg.business.trip user,model_dcg_business_trip,dcg_business_trip.group_dcg_business_trip_user,1,1,1,0
-access_dcg_business_trip_manager,dcg.business.trip manager,model_dcg_business_trip,dcg_business_trip.group_dcg_business_trip_manager,1,1,1,1
-access_dcg_business_trip_member_user,dcg.business.trip.member user,model_dcg_business_trip_member,dcg_business_trip.group_dcg_business_trip_user,1,1,1,1
-access_dcg_business_trip_member_manager,dcg.business.trip.member manager,model_dcg_business_trip_member,dcg_business_trip.group_dcg_business_trip_manager,1,1,1,1
-access_dcg_business_trip_expense_user,dcg.business.trip.expense user,model_dcg_business_trip_expense,dcg_business_trip.group_dcg_business_trip_user,1,1,1,0
-access_dcg_business_trip_expense_manager,dcg.business.trip.expense manager,model_dcg_business_trip_expense,dcg_business_trip.group_dcg_business_trip_manager,1,1,1,1
