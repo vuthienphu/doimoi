@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_dcg_custom" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.dcg.custom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_set_won_rainbowman']" position="after">
+                <button name="action_complete_survey" string="Hoàn thành khảo sát" type="object"
+                        invisible="type == 'lead' or survey_done"/>
+                <button name="action_continue_survey" string="Tiếp tục khảo sát" type="object"
+                        invisible="type == 'lead' or not survey_done"/>
+                <button name="action_complete_demo" string="Hoàn thành demo" type="object"
+                        invisible="type == 'lead' or demo_done"/>
+                <button name="action_continue_demo" string="Tiếp tục demo" type="object"
+                        invisible="type == 'lead' or not demo_done"/>
+            </xpath>
+            <xpath expr="//sheet/field[@name='won_status']" position="after">
+                <field name="survey_done" invisible="1"/>
+                <field name="demo_done" invisible="1"/>
+            </xpath>
+            <xpath expr="(//field[@name='user_id'])[1]" position="after">
+                <label for="commission_rate"/>
+                <div class="o_row">
+                    <field name="commission_rate" readonly="1" class="oe_inline"/>
+                    <span>%</span>
+                </div>
+            </xpath>
+            <xpath expr="//group[@invisible=&quot;type == 'lead'&quot;]/field[@name='tag_ids']" position="after">
+                <field name="project_id"
+                       context="{'default_partner_id': partner_id, 'default_user_id': user_id}" readonly="1"/>
+            </xpath>
+            <xpath expr="//page[@name='lead']" position="before">
+                <page name="dcg_survey" string="Khảo sát" invisible="type == 'lead'">
+                    <group>
+                        <group string="Khảo sát">
+                            <field name="survey_done" readonly="1"/>
+                            <field name="survey_finish_date" readonly="1"/>
+                            <field name="survey_note"/>
+                        </group>
+                    </group>
+                    <group string="Người liên hệ khác">
+                        <field name="other_ids" nolabel="1" domain="[('is_company', '=', False)]">
+                            <list>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+                <page name="dcg_demo" string="Demo" invisible="type == 'lead'">
+                    <group>
+                        <group string="Demo">
+                            <field name="demo_done" readonly="1"/>
+                            <field name="demo_finish_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="File ước tính công việc">
+                        <field name="estimate_attachment_ids" nolabel="1" widget="many2many_binary"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_oppor_inherit_dcg_custom" model="ir.ui.view">
+        <field name="name">crm.lead.list.opportunity.inherit.dcg.custom</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expected_revenue']" position="after">
+                <field name="commission_rate" optional="show"/>
+                <field name="project_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

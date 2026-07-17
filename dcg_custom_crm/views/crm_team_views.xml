@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_team_view_form_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit.dcg.commission</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="priority">30</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_open_commission_update_wizard"
+                        type="object"
+                        string="Cập nhật toàn bộ hoa hồng"
+                        class="btn-primary"
+                        groups="sales_team.group_sale_manager"
+                        invisible="not id"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <label for="commission_rate"/>
+                <div class="o_row">
+                    <field name="commission_rate" class="oe_inline"/>
+                    <span>%</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_member_view_form_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.member.form.inherit.dcg.commission</field>
+        <field name="model">crm.team.member</field>
+        <field name="inherit_id" ref="sales_team.crm_team_member_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='crm_team_id']" position="after">
+                <group name="dcg_commission">
+                    <label for="commission_rate"/>
+                    <div class="o_row">
+                        <field name="commission_rate" class="oe_inline"/>
+                        <span>%</span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_member_view_tree_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.member.list.inherit.dcg.commission</field>
+        <field name="model">crm.team.member</field>
+        <field name="inherit_id" ref="sales_team.crm_team_member_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="commission_rate"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_member_view_form_from_team_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.member.form.from.team.inherit.dcg.commission</field>
+        <field name="model">crm.team.member</field>
+        <field name="inherit_id" ref="sales_team.crm_team_member_view_form_from_team"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="after">
+                <group name="dcg_commission_from_team">
+                    <label for="commission_rate"/>
+                    <div class="o_row">
+                        <field name="commission_rate" class="oe_inline"/>
+                        <span>%</span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_member_view_tree_from_team_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.member.list.from.team.inherit.dcg.commission</field>
+        <field name="model">crm.team.member</field>
+        <field name="inherit_id" ref="sales_team.crm_team_member_view_tree_from_team"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="commission_rate"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_member_view_kanban_inherit_dcg_commission" model="ir.ui.view">
+        <field name="name">crm.team.member.kanban.inherit.dcg.commission</field>
+        <field name="model">crm.team.member</field>
+        <field name="inherit_id" ref="sales_team.crm_team_member_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']/.." position="after">
+                <div class="d-flex align-items-baseline text-break">
+                    <span>Hoa hồng: </span>
+                    <field name="commission_rate"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

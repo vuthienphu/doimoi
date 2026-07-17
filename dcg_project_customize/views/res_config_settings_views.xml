@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_dcg_project_customize" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.dcg.project.customize</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="project.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='project']" position="inside">
+                <block title="Email thông báo DCG" name="dcg_project_mail_settings">
+                    <setting
+                        id="dcg_project_mail_from_setting"
+                        string="Email gửi thông báo"
+                        help="Email này sẽ được dùng làm người gửi cho các email thông báo Task và email nhắc việc hằng ngày."
+                    >
+                        <div class="content-group">
+                            <div class="mt8">
+                                <label for="dcg_project_mail_from" string="Email gửi" class="col-3 col-lg-3 o_light_label"/>
+                                <field name="dcg_project_mail_from" placeholder="noreply@company.com"/>
+                            </div>
+                            <div class="mt8">
+                                <label for="dcg_project_mail_from_name" string="Tên người gửi" class="col-3 col-lg-3 o_light_label"/>
+                                <field name="dcg_project_mail_from_name" placeholder="DCG Project"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
