@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="task_stage_todo" model="project.task.type">
+        <field name="name">Cần làm</field>
+        <field name="sequence">10</field>
+        <field name="is_dcg_default">True</field>
+    </record>
+
+    <record id="task_stage_processing" model="project.task.type">
+        <field name="name">Đang thực hiện</field>
+        <field name="sequence">20</field>
+        <field name="is_processing">True</field>
+        <field name="is_dcg_default">True</field>
+    </record>
+
+    <record id="task_stage_testing" model="project.task.type">
+        <field name="name">Chờ kiểm tra</field>
+        <field name="sequence">30</field>
+        <field name="is_test">True</field>
+        <field name="is_dcg_default">True</field>
+    </record>
+
+    <record id="task_stage_done" model="project.task.type">
+        <field name="name">Hoàn thành</field>
+        <field name="sequence">40</field>
+        <field name="is_done">True</field>
+        <field name="is_dcg_default">True</field>
+    </record>
+
+    <record id="task_stage_live" model="project.task.type">
+        <field name="name">Đã đưa lên Live</field>
+        <field name="sequence">50</field>
+        <field name="is_live">True</field>
+        <field name="is_dcg_default">True</field>
+    </record>
+
+    <function model="project.project" name="_dcg_assign_default_stages_to_all_projects"/>
+</odoo>

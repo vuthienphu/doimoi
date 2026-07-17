@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_type_view_form_inherit_dcg_customize" model="ir.ui.view">
+        <field name="name">project.task.type.form.inherit.dcg.customize</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">Ví dụ: Cần làm</attribute>
+            </xpath>
+            <xpath expr="//field[@name='fold']" position="after">
+                <field name="is_processing"/>
+                <field name="is_test"/>
+                <field name="is_done"/>
+                <field name="is_live"/>
+            </xpath>
+            <xpath expr="//field[@name='mail_template_id']/.." position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rotting_threshold_days']" position="attributes">
+                <attribute name="string">Số ngày báo chậm</attribute>
+            </xpath>
+            <xpath expr="//group[@name='group_customer_rating']" position="attributes">
+                <attribute name="string">Đánh giá của khách hàng</attribute>
+            </xpath>
+            <xpath expr="//field[@name='rating_active']" position="attributes">
+                <attribute name="string">Gửi yêu cầu đánh giá khách hàng</attribute>
+            </xpath>
+            <xpath expr="//span[@name='rating_status_helper']" position="replace">
+                <span name="rating_status_helper">
+                    <span invisible="rating_status == 'periodic'">Yêu cầu đánh giá sẽ được gửi ngay khi công việc chuyển đến giai đoạn này.</span>
+                    <span invisible="rating_status == 'stage'">Yêu cầu đánh giá sẽ được gửi khi công việc còn ở giai đoạn này.</span>
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>
