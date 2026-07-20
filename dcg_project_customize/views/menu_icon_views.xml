@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project.menu_main_pm" model="ir.ui.menu">
+        <field name="web_icon">dcg_project_customize,static/description/icon.svg</field>
+    </record>
+</odoo>
