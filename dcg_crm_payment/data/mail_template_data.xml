@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_payment_reminder" model="mail.template">
+        <field name="name">Cảnh báo thanh toán cơ hội</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="subject">[Nhắc thanh toán] {{ object.name }} - Sắp đến kỳ thanh toán</field>
+        <field name="email_from">{{ object.company_id.email or object.user_id.company_id.email or '' }}</field>
+        <field name="partner_to">{{ object.user_id.partner_id.id }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-family: 'Inter', 'Outfit', sans-serif;">
+                <p>Kính gửi <strong><t t-out="object.user_id.name"/></strong>,</p>
+                <p>Hệ thống xin thông báo Cơ hội bán hàng của bạn đang sắp đến kỳ thanh toán tiếp theo:</p>
+                <table style="border-collapse: collapse; width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Cơ hội:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Khách hàng:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.partner_id.name or 'Chưa xác định'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Loại thanh toán:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.payment_type_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Ngày đến hạn kế tiếp:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; color: #d9534f; font-weight: bold;">
+                                <t t-out="ctx.get('next_due_date')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Doanh thu dự kiến:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">
+                                <t t-out="format_amount(object.expected_revenue, object.currency_id)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Đã thanh toán:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; color: #5cb85c;">
+                                <t t-out="format_amount(object.total_paid, object.currency_id)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Số tiền còn lại:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; color: #f0ad4e; font-weight: bold;">
+                                <t t-out="format_amount(object.remaining_amount, object.currency_id)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Vui lòng theo dõi và cập nhật lịch sử thanh toán đầy đủ trên hệ thống.</p>
+                <p>Xin trân trọng cảm ơn!</p>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>

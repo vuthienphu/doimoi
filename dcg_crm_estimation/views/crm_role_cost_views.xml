@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_role_cost_view_form" model="ir.ui.view">
+        <field name="name">crm.role.cost.form</field>
+        <field name="model">crm.role.cost</field>
+        <field name="arch" type="xml">
+            <form string="Đơn giá nhân sự">
+                <sheet>
+                    <widget name="web_ribbon" title="Đã lưu trữ" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="role"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="cost_per_md" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_role_cost_view_tree" model="ir.ui.view">
+        <field name="name">crm.role.cost.list</field>
+        <field name="model">crm.role.cost</field>
+        <field name="arch" type="xml">
+            <list string="Đơn giá nhân sự">
+                <field name="role"/>
+                <field name="cost_per_md" widget="monetary"/>
+                <field name="currency_id"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_role_cost_action" model="ir.actions.act_window">
+        <field name="name">Đơn giá nhân sự</field>
+        <field name="res_model">crm.role.cost</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo đơn giá nhân sự mới
+            </p>
+            <p>
+                Đơn giá nhân sự giúp tự động tính toán chi phí nhân sự dựa trên số ngày công (Man-day) ước lượng trong các dự án Presales.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="crm_role_cost_menu"
+              name="Đơn giá nhân sự"
+              parent="crm.crm_menu_config"
+              action="crm_role_cost_action"
+              sequence="46"/>
+</odoo>

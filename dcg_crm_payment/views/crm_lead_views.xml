@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_dcg_payment" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.dcg.payment</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='lead']" position="before">
+                <page name="dcg_payment" string="Thanh toán" invisible="type == 'lead'">
+                    <group>
+                        <group string="Cấu hình thanh toán">
+                            <field name="payment_type_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="first_payment_date"/>
+                            <field name="last_payment_date"/>
+                        </group>
+                    </group>
+                    <group string="Chi tiết các đợt thanh toán">
+                        <field name="payment_ids" nolabel="1">
+                            <list editable="bottom" decoration-danger="paid_amount &lt; expected_amount or (payment_date and due_date and payment_date &gt; due_date)">
+                                <field name="payment_date"/>
+                                <field name="expected_amount" sum="Tổng dự kiến"/>
+                                <field name="paid_amount" sum="Tổng đã trả"/>
+                                <field name="due_date"/>
+                                <field name="currency_id" column_invisible="True"/>
+                            </list>
+                        </field>
+                    </group>
+                    <group class="oe_subtotal_footer">
+                        <field name="total_paid" widget="monetary" readonly="1"/>
+                        <field name="remaining_amount" widget="monetary" class="oe_subtotal_footer_separator" readonly="1"/>
+                    </group>
+                    <div class="clearfix"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

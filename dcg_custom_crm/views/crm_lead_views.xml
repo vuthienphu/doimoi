@@ -28,7 +28,7 @@
             </xpath>
             <xpath expr="//group[@invisible=&quot;type == 'lead'&quot;]/field[@name='tag_ids']" position="after">
                 <field name="project_id"
-                       context="{'default_partner_id': partner_id, 'default_user_id': user_id}" readonly="1"/>
+                       context="{'default_partner_id': partner_id, 'default_user_id': user_id}"/>
             </xpath>
             <xpath expr="//page[@name='lead']" position="before">
                 <page name="dcg_survey" string="Khảo sát" invisible="type == 'lead'">

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_payment_type_view_form" model="ir.ui.view">
+        <field name="name">crm.payment.type.form</field>
+        <field name="model">crm.payment.type</field>
+        <field name="arch" type="xml">
+            <form string="Loại thanh toán">
+                <sheet>
+                    <widget name="web_ribbon" title="Đã lưu trữ" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <label for="cycle_days"/>
+                            <div class="o_row">
+                                <field name="cycle_days"/>
+                                <span>ngày</span>
+                            </div>
+                            <label for="remind_before_days"/>
+                            <div class="o_row">
+                                <field name="remind_before_days"/>
+                                <span>ngày</span>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_payment_type_view_tree" model="ir.ui.view">
+        <field name="name">crm.payment.type.list</field>
+        <field name="model">crm.payment.type</field>
+        <field name="arch" type="xml">
+            <list string="Loại thanh toán">
+                <field name="name"/>
+                <field name="cycle_days"/>
+                <field name="remind_before_days"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_payment_type_action" model="ir.actions.act_window">
+        <field name="name">Loại thanh toán</field>
+        <field name="res_model">crm.payment.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo loại thanh toán mới
+            </p>
+            <p>
+                Khai báo các chu kỳ thanh toán và số ngày nhắc trước để hệ thống tự động cảnh báo và gửi email nhắc nhở.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="crm_payment_type_menu"
+              name="Loại thanh toán"
+              parent="crm.crm_menu_config"
+              action="crm_payment_type_action"
+              sequence="45"/>
+</odoo>

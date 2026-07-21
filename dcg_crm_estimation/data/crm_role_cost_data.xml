@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="crm_role_cost_ba" model="crm.role.cost">
+            <field name="role">ba</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+        <record id="crm_role_cost_backend" model="crm.role.cost">
+            <field name="role">backend</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+        <record id="crm_role_cost_frontend" model="crm.role.cost">
+            <field name="role">frontend</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+        <record id="crm_role_cost_qa" model="crm.role.cost">
+            <field name="role">qa</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+        <record id="crm_role_cost_devops" model="crm.role.cost">
+            <field name="role">devops</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+        <record id="crm_role_cost_uiux" model="crm.role.cost">
+            <field name="role">uiux</field>
+            <field name="cost_per_md">0.0</field>
+        </record>
+    </data>
+</odoo>

@@ -13,6 +13,7 @@
                 <field name="is_test"/>
                 <field name="is_done"/>
                 <field name="is_live"/>
+                <field name="is_dcg_default"/>
             </xpath>
             <xpath expr="//field[@name='mail_template_id']/.." position="attributes">
                 <attribute name="invisible">1</attribute>

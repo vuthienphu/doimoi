@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_role_cost_user,crm.role.cost.user,model_crm_role_cost,base.group_user,1,1,1,1
+access_crm_lead_work_estimation_user,crm.lead.work.estimation.user,model_crm_lead_work_estimation,base.group_user,1,1,1,1
+access_crm_lead_value_estimation_user,crm.lead.value.estimation.user,model_crm_lead_value_estimation,base.group_user,1,1,1,1

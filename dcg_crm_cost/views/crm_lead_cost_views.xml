@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_cost_view_tree_report" model="ir.ui.view">
+        <field name="name">crm.lead.cost.tree.report</field>
+        <field name="model">crm.lead.cost</field>
+        <field name="arch" type="xml">
+            <list string="Báo cáo chi phí" create="false" edit="false" delete="false">
+                <field name="lead_id" string="Cơ hội"/>
+                <field name="cost_type" string="Loại chi phí"/>
+                <field name="name" string="Tên chi phí"/>
+                <field name="date" string="Ngày"/>
+                <field name="amount" string="Số tiền" sum="Tổng chi phí"/>
+                <field name="user_id" string="Người ghi nhận"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_lead_cost_view_search" model="ir.ui.view">
+        <field name="name">crm.lead.cost.search</field>
+        <field name="model">crm.lead.cost</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm chi phí">
+                <field name="lead_id" string="Cơ hội"/>
+                <field name="cost_type"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="user_id"/>
+<!--                <group expand="0" string="Nhóm theo">-->
+<!--                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>-->
+<!--                    <filter string="Loại chi phí" name="group_by_cost_type" context="{'group_by': 'cost_type'}"/>-->
+<!--                    <filter string="Người ghi nhận" name="group_by_user" context="{'group_by': 'user_id'}"/>-->
+<!--                    <filter string="Tháng" name="group_by_date" context="{'group_by': 'date'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_lead_cost_action_report" model="ir.actions.act_window">
+        <field name="name">Chi phí</field>
+        <field name="res_model">crm.lead.cost</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="crm_lead_cost_view_search"/>
+        <field name="context">{'search_default_group_by_lead': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Không tìm thấy dữ liệu chi phí thực tế
+            </p>
+            <p>
+                Dữ liệu chi phí thực tế sẽ xuất hiện ở đây khi người dùng ghi nhận các khoản chi trong tab Chi phí của Cơ hội.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="crm_lead_cost_menu_report"
+              name="Chi phí"
+              parent="crm.crm_menu_report"
+              action="crm_lead_cost_action_report"
+              sequence="15"/>
+</odoo>

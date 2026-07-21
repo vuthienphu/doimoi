@@ -11,7 +11,6 @@ class CrmLead(models.Model):
     project_id = fields.Many2one(
         'project.project',
         string='Link dự án',
-        readonly=True,
         copy=False,
         ondelete='set null',
     )

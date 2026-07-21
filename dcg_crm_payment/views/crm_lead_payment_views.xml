@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_payment_view_tree_report" model="ir.ui.view">
+        <field name="name">crm.lead.payment.tree.report</field>
+        <field name="model">crm.lead.payment</field>
+        <field name="arch" type="xml">
+            <list string="Lịch sử thanh toán" create="false" edit="false" delete="false">
+                <field name="lead_id" string="Cơ hội"/>
+                <field name="payment_date" string="Thời gian thanh toán"/>
+                <field name="due_date" string="Ngày đến hạn"/>
+                <field name="expected_amount" string="Giá trị phải thanh toán" sum="Tổng dự kiến"/>
+                <field name="paid_amount" string="Giá trị thanh toán" sum="Tổng đã trả"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_lead_payment_view_search" model="ir.ui.view">
+        <field name="name">crm.lead.payment.search</field>
+        <field name="model">crm.lead.payment</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm lịch sử thanh toán">
+                <field name="lead_id" string="Cơ hội"/>
+                <field name="payment_date"/>
+                <field name="due_date"/>
+<!--                <group expand="0" string="Nhóm theo">-->
+<!--                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>-->
+<!--                    <filter string="Thời gian thanh toán" name="group_by_payment_date" context="{'group_by': 'payment_date'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_lead_payment_action_report" model="ir.actions.act_window">
+        <field name="name">Lịch sử thanh toán</field>
+        <field name="res_model">crm.lead.payment</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="crm_lead_payment_view_search"/>
+        <field name="context">{'search_default_group_by_lead': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Không tìm thấy dữ liệu lịch sử thanh toán
+            </p>
+            <p>
+                Dữ liệu lịch sử thanh toán sẽ tự động xuất hiện ở đây khi người dùng khai báo các đợt thanh toán trên Cơ hội.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="crm_lead_payment_menu_report"
+              name="Lịch sử thanh toán"
+              parent="crm.crm_menu_report"
+              action="crm_lead_payment_action_report"
+              sequence="20"/>
+</odoo>

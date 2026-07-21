@@ -13,7 +13,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-tasks"
-                        invisible="1">
+                        invisible="not project_id">
                     <div class="o_stat_info">
                         <span class="o_stat_text">Dự án</span>
                     </div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_dcg_cost" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.dcg.cost</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='lead']" position="before">
+                <page name="dcg_cost" string="Chi phí" invisible="type == 'lead'">
+                    <group string="Chi phí thực tế">
+                        <field name="cost_ids" nolabel="1">
+                            <list editable="bottom">
+                                <field name="cost_type"/>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="amount" sum="Tổng chi phí"/>
+                                <field name="user_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                                <field name="currency_id" column_invisible="True"/>
+                            </list>
+                        </field>
+                    </group>
+                    <group class="oe_subtotal_footer">
+                        <field name="total_cost" widget="monetary" readonly="1"/>
+                        <field name="profit_loss" widget="monetary" class="oe_subtotal_footer_separator" readonly="1"/>
+                    </group>
+                    <div class="clearfix"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_oppor_inherit_dcg_cost" model="ir.ui.view">
+        <field name="name">crm.lead.list.opportunity.inherit.dcg.cost</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-danger">profit_loss &lt; 0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expected_revenue']" position="after">
+                <field name="total_cost" string="Chi phí" optional="show"/>
+                <field name="profit_loss" string="Lãi/Lỗ" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
