@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="project_lesson_menu"
+              name="Bài học kinh nghiệm"
+              parent="project.menu_main_pm"
+              action="project_lesson_action"
+              sequence="80"/>
+</odoo>

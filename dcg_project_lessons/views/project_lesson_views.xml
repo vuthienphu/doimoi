@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_lesson_view_list" model="ir.ui.view">
+        <field name="name">project.lesson.list</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="category"/>
+                <field name="priority"/>
+                <field name="date"/>
+                <field name="state"/>
+                <field name="author_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="project_lesson_view_form" model="ir.ui.view">
+        <field name="name">project.lesson.form</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Xác nhận" type="object" class="btn-primary" invisible="state != 'draft'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
+                    <button name="action_archive_lesson" string="Lưu trữ" type="object" invisible="state == 'archived'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
+                    <button name="action_unarchive_lesson" string="Khôi phục" type="object" invisible="state != 'archived'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,archived"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id" readonly="context.get('default_project_id')"/>
+                            <field name="name"/>
+                            <field name="category"/>
+                            <field name="module"/>
+                            <field name="priority"/>
+                        </group>
+                        <group>
+                            <field name="task_id" domain="[('project_id', '=', project_id)]"/>
+                            <field name="milestone_id" domain="[('project_id', '=', project_id)]"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'no_quick_create': False}"/>
+                            <field name="author_id" readonly="state != 'draft'"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Nội dung bài học">
+                            <field name="problem" placeholder="Mô tả sự việc đã xảy ra, vị trí phát sinh và ảnh hưởng đến hoạt động kinh doanh."/>
+                            <field name="cause" placeholder="Phân tích nguyên nhân gốc rễ của vấn đề."/>
+                            <field name="solution" placeholder="Mô tả giải pháp đã áp dụng."/>
+                            <field name="result" placeholder="Mô tả kết quả sau khi áp dụng giải pháp."/>
+                            <field name="recommendation" placeholder="Các dự án sau nên thực hiện khác đi như thế nào?"/>
+                        </page>
+                        <page string="Tệp đính kèm">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_lesson_view_kanban" model="ir.ui.view">
+        <field name="name">project.lesson.kanban</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <templates>
+                    <t t-name="card">
+                        <field name="name"/>
+                        <field name="category"/>
+                        <field name="priority"/>
+                        <field name="project_id"/>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="project_lesson_view_search" model="ir.ui.view">
+        <field name="name">project.lesson.search</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="module"/>
+                <field name="category"/>
+                <field name="tag_ids"/>
+                <field name="project_id"/>
+                <field name="author_id"/>
+                <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Đã xác nhận" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Đã lưu trữ" name="archived" domain="[('state', '=', 'archived')]"/>
+                <filter string="Bình thường" name="priority_normal" domain="[('priority', '=', '0')]"/>
+                <filter string="Quan trọng" name="priority_important" domain="[('priority', '=', '1')]"/>
+                <filter string="Nghiêm trọng" name="priority_critical" domain="[('priority', '=', '2')]"/>
+                <separator/>
+                <field name="date"/>
+                <group>
+                    <filter string="Phân loại" name="group_category" context="{'group_by': 'category'}"/>
+                    <filter string="Dự án" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Trạng thái" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Mức độ ưu tiên" name="group_priority" context="{'group_by': 'priority'}"/>
+                    <filter string="Người ghi nhận" name="group_author" context="{'group_by': 'author_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="project_lesson_view_pivot" model="ir.ui.view">
+        <field name="name">project.lesson.pivot</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="category" type="row"/>
+                <field name="project_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="project_lesson_view_graph" model="ir.ui.view">
+        <field name="name">project.lesson.graph</field>
+        <field name="model">project.lesson</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="category"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="project_lesson_action" model="ir.actions.act_window">
+        <field name="name">Bài học kinh nghiệm</field>
+        <field name="res_model">project.lesson</field>
+        <field name="view_mode">kanban,list,form,pivot,graph</field>
+        <field name="search_view_id" ref="project_lesson_view_search"/>
+        <field name="context">{'search_default_group_state': 1}</field>
+    </record>
+</odoo>

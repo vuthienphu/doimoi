@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_view_form_inherit_lessons" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.lessons</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_project_lessons"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-lightbulb-o">
+                    <field name="lesson_count" widget="statinfo" string="Bài học kinh nghiệm"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

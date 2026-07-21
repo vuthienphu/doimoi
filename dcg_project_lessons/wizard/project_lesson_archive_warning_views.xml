@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_lesson_archive_warning_view_form" model="ir.ui.view">
+        <field name="name">project.lesson.archive.warning.form</field>
+        <field name="model">project.lesson.archive.warning</field>
+        <field name="arch" type="xml">
+            <form string="Bài học kinh nghiệm chưa xác nhận">
+                <sheet>
+                    <group>
+                        <field name="project_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="draft_lesson_count" readonly="1"/>
+                    </group>
+                    <p>
+                        Dự án còn bài học kinh nghiệm chưa được xác nhận. Bạn có muốn tiếp tục đóng không?
+                    </p>
+                </sheet>
+                <footer>
+                    <button name="action_continue_archive" string="Tiếp tục" type="object" class="btn-primary"/>
+                    <button name="action_open_draft_lessons" string="Hủy để xem lại" type="object" class="btn-secondary"/>
+                    <button string="Đóng" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

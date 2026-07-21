@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="project_deployment_menu_root"
+              name="Triển khai"
+              parent="project.menu_main_pm"
+              groups="project.group_project_manager,base.group_system"
+              sequence="90"/>
+
+    <menuitem id="project_account_menu"
+              name="Tài khoản"
+              parent="project_deployment_menu_root"
+              action="project_account_action"
+              groups="project.group_project_manager,base.group_system"
+              sequence="10"/>
+
+    <menuitem id="project_remote_menu"
+              name="Kết nối máy chủ"
+              parent="project_deployment_menu_root"
+              action="project_remote_action"
+              groups="base.group_system"
+              sequence="20"/>
+</odoo>
