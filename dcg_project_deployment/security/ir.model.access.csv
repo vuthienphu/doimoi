@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_account_manager,Tài khoản dự án - Quản lý dự án,model_project_account,project.group_project_manager,1,0,0,0
+access_project_account_system,Tài khoản dự án - Quản trị hệ thống,model_project_account,base.group_system,1,1,1,1
+access_project_remote_system,Kết nối máy chủ - Quản trị hệ thống,model_project_remote,base.group_system,1,1,1,1

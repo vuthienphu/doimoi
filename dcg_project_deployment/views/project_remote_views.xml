@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_remote_view_list" model="ir.ui.view">
+        <field name="name">project.remote.list</field>
+        <field name="model">project.remote</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="server_type"/>
+                <field name="connection_type"/>
+                <field name="host"/>
+                <field name="url" widget="url"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="project_remote_view_form" model="ir.ui.view">
+        <field name="name">project.remote.form</field>
+        <field name="model">project.remote</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="name"/>
+                            <field name="server_type"/>
+                            <field name="connection_type"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="host" invisible="connection_type not in ['ssh', 'rdp', 'ftp', 'sftp', 'database', 'vpn']"/>
+                            <field name="port" invisible="connection_type not in ['ssh', 'rdp', 'ftp', 'sftp', 'database', 'vpn']"/>
+                            <field name="database" invisible="connection_type != 'database'"/>
+                            <field name="path" invisible="connection_type != 'ssh'"/>
+                            <field name="url" widget="url" invisible="connection_type != 'webpanel'"/>
+                            <field name="partner_id_field" invisible="connection_type not in ['ultraviewer', 'teamviewer']"/>
+                            <field name="address_field" invisible="connection_type != 'anydesk'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="username" widget="CopyClipboardChar" invisible="connection_type not in ['ssh', 'rdp', 'webpanel', 'ftp', 'sftp', 'database', 'vpn']"/>
+                        <field name="password" widget="password" groups="base.group_system"/>
+                        <field name="password" string="Sao chép mật khẩu" widget="CopyClipboardButton" groups="base.group_system" options="{'btn_class': 'secondary'}"/>
+                        <field name="private_key" invisible="connection_type not in ['ssh', 'vpn']" groups="base.group_system"/>
+                        <field name="private_key" string="Sao chép khóa riêng" widget="CopyClipboardButton" invisible="connection_type not in ['ssh', 'vpn']" groups="base.group_system" options="{'btn_class': 'secondary'}"/>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_remote_view_search" model="ir.ui.view">
+        <field name="name">project.remote.search</field>
+        <field name="model">project.remote</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="server_type"/>
+                <field name="connection_type"/>
+                <field name="host"/>
+                <field name="url"/>
+                <filter string="Đang hoạt động" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Đã lưu trữ" name="inactive" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Dự án" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Loại máy chủ" name="group_server_type" context="{'group_by': 'server_type'}"/>
+                    <filter string="Phương thức kết nối" name="group_connection_type" context="{'group_by': 'connection_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="project_remote_action" model="ir.actions.act_window">
+        <field name="name">Kết nối máy chủ</field>
+        <field name="res_model">project.remote</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="project_remote_view_search"/>
+        <field name="context">{'active_test': False}</field>
+    </record>
+</odoo>

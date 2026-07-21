@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_lesson_employee,Bài học - Nhân viên,model_project_lesson,dcg_project_lessons.group_project_lesson_employee,1,1,1,0
+access_project_lesson_pm,Bài học - Quản lý dự án,model_project_lesson,dcg_project_lessons.group_project_lesson_pm,1,1,1,0
+access_project_lesson_director,Bài học - Giám đốc,model_project_lesson,dcg_project_lessons.group_project_lesson_director,1,1,1,1
+access_project_lesson_system,Bài học - Quản trị hệ thống,model_project_lesson,base.group_system,1,1,1,1
+access_project_lesson_archive_warning_user,Cảnh báo bài học - Người dùng dự án,model_project_lesson_archive_warning,project.group_project_user,1,1,1,1
+access_project_tags_lesson_employee,Thẻ dự án - Nhân viên ghi nhận bài học,project.model_project_tags,dcg_project_lessons.group_project_lesson_employee,1,1,1,0

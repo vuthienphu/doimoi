@@ -127,5 +127,5 @@ __pycache__/
 
 # Claude memory
 .claude/
-
+run_odoo19.ps1
 .gitignore
