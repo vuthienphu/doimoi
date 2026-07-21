@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="task_processing_notify" model="mail.template">
-        <field name="name">Email: Đang thực hiện</field>
+        <field name="name">Email: Đang làm</field>
         <field name="model_id" ref="project.model_project_task"/>
         <field name="email_from">{{ object._get_mail_from() }}</field>
-        <field name="subject">[Task] {{ object.name }} - Đang thực hiện</field>
+        <field name="subject">[Task] {{ object.name }} - Đang làm</field>
         <field name="body_html" type="html">
             <div>
                 <p>Công việc <strong><t t-out="object.name"/></strong> đang được thực hiện.</p>
@@ -16,13 +16,13 @@
     </record>
 
     <record id="task_test_notify" model="mail.template">
-        <field name="name">Email: Chờ kiểm tra</field>
+        <field name="name">Email: Chuyển test</field>
         <field name="model_id" ref="project.model_project_task"/>
         <field name="email_from">{{ object._get_mail_from() }}</field>
         <field name="subject">[Task] {{ object.name }} - Cần kiểm tra</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đang chờ kiểm tra.</p>
+                <p>Công việc <strong><t t-out="object.name"/></strong> đang chuyển test.</p>
                 <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
             </div>
         </field>
@@ -45,13 +45,13 @@
     </record>
 
     <record id="task_reminder_processing" model="mail.template">
-        <field name="name">Nhắc việc hàng ngày: Đang thực hiện</field>
+        <field name="name">Nhắc việc hàng ngày: Đang làm</field>
         <field name="model_id" ref="project.model_project_task"/>
         <field name="email_from">{{ object._get_mail_from() }}</field>
-        <field name="subject">[Nhắc việc] {{ object.name }} - Đang thực hiện</field>
+        <field name="subject">[Nhắc việc] {{ object.name }} - Đang làm</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đang thực hiện. Vui lòng cập nhật tiến độ.</p>
+                <p>Công việc <strong><t t-out="object.name"/></strong> đang làm. Vui lòng cập nhật tiến độ.</p>
                 <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
             </div>
         </field>
@@ -59,13 +59,13 @@
     </record>
 
     <record id="task_reminder_test" model="mail.template">
-        <field name="name">Nhắc việc hàng ngày: Chờ kiểm tra</field>
+        <field name="name">Nhắc việc hàng ngày: Chuyển test</field>
         <field name="model_id" ref="project.model_project_task"/>
         <field name="email_from">{{ object._get_mail_from() }}</field>
-        <field name="subject">[Nhắc việc] {{ object.name }} - Chờ kiểm tra</field>
+        <field name="subject">[Nhắc việc] {{ object.name }} - Chuyển test</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đang chờ kiểm tra. Vui lòng kiểm tra công việc.</p>
+                <p>Công việc <strong><t t-out="object.name"/></strong> đang chuyển test. Vui lòng kiểm tra công việc.</p>
                 <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
             </div>
         </field>

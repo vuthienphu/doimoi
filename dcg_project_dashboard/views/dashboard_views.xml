@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_dcg_project_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard Dự án</field>
+        <field name="path">dcg-project-dashboard</field>
+        <field name="tag">dcg_project_dashboard.project_dashboard</field>
+    </record>
+
+    <menuitem
+        id="menu_dcg_project_dashboard"
+        name="Dashboard Dự án"
+        action="action_dcg_project_dashboard"
+        sequence="38"
+        web_icon="dcg_project_dashboard,static/description/icon.svg"
+        groups="project.group_project_manager,dcg_project_dashboard.group_project_dashboard_director"
+    />
+</odoo>

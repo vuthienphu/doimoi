@@ -109,6 +109,10 @@ venv.bak/
 # mkdocs documentation
 /site
 
+.venv311/
+.odoo_data/
+odoo.conf
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -123,3 +127,5 @@ __pycache__/
 
 # Claude memory
 .claude/
+
+.gitignore
