@@ -1,0 +1,25 @@
+.o_kanban_renderer {
+    .o_kanban_record {
+        opacity: 1 !important;
+        background-color: $white;
+        color: #111827;
+
+        .o_kanban_record_title,
+        .o_kanban_record_title span,
+        .o_kanban_record_title a,
+        .o_kanban_record_body,
+        .o_kanban_record_body span,
+        .o_kanban_record_body div,
+        .o_kanban_record_bottom,
+        .o_kanban_record_bottom span {
+            color: #111827;
+            opacity: 1;
+        }
+
+        .text-muted,
+        .o_text-muted {
+            color: #6b7280 !important;
+            opacity: 1;
+        }
+    }
+}

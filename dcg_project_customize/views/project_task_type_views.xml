@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="project.open_task_type_form" model="ir.actions.act_window">
+        <field name="domain">[('is_dcg_default', '=', True)]</field>
+        <field name="context">{'default_user_id': False, 'default_is_dcg_default': True}</field>
+    </record>
+
     <record id="project_task_type_view_form_inherit_dcg_customize" model="ir.ui.view">
         <field name="name">project.task.type.form.inherit.dcg.customize</field>
         <field name="model">project.task.type</field>

@@ -22,6 +22,7 @@
         'wizard/crm_survey_wizard_views.xml',
         'views/crm_team_views.xml',
         'views/crm_lead_views.xml',
+        'views/menu_icon_views.xml',
     ],
     'demo': [],
     'installable': True,

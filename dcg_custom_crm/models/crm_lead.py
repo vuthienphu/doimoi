@@ -34,7 +34,7 @@ class CrmLead(models.Model):
     survey_finish_date = fields.Datetime(string='Ngày hoàn thành khảo sát', readonly=True)
     demo_done = fields.Boolean(string='Đã demo', default=False)
     demo_finish_date = fields.Datetime(string='Ngày hoàn thành demo', readonly=True)
-    project_id = fields.Many2one('project.project', string='Link dự án', copy=False)
+    project_id = fields.Many2one('project.project', string='Link dự án', copy=False, invisible = "1")
 
     @api.depends(
         'team_id',

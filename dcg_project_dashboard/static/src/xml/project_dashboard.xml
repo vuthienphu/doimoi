@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="dcg_project_dashboard.ProjectDashboard">
+        <div class="o_dcg_project_dashboard">
+            <div class="o_dcg_dashboard_header">
+                <div class="o_dcg_title_block">
+                    <h1>Dashboard</h1>
+                    <p>Quản trị tiến độ, workload và rủi ro dự án</p>
+                </div>
+                <div class="o_dcg_header_actions">
+                    <button class="btn o_dcg_refresh" t-on-click="loadDashboard" t-att-disabled="state.loading">
+                        <i class="fa fa-refresh"/>
+                        <span>Làm mới</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="o_dcg_filters">
+                <div class="o_dcg_filter_group main">
+                    <h3>Thông tin cơ bản</h3>
+                    <div class="o_dcg_filter_row">
+                        <label>
+                            <span>Khoảng thời gian</span>
+                            <select name="period" t-on-change="onFilterChange">
+                                <t t-foreach="periods" t-as="period" t-key="period[0]">
+                                    <option t-att-value="period[0]" t-att-selected="state.filters.period === period[0]" t-esc="period[1]"/>
+                                </t>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Kiểu thống kê</span>
+                            <select name="stats_basis" t-on-change="onFilterChange">
+                                <t t-foreach="statsBasis" t-as="basis" t-key="basis[0]">
+                                    <option t-att-value="basis[0]" t-att-selected="state.filters.stats_basis === basis[0]" t-esc="basis[1]"/>
+                                </t>
+                            </select>
+                        </label>
+                        <div class="o_dcg_date_range">
+                            <span>Lọc theo thời gian</span>
+                            <div>
+                                <input type="date" name="date_from" t-att-value="state.filters.date_from" t-on-change="onDateChange"/>
+                                <i class="fa fa-arrow-right"/>
+                                <input type="date" name="date_to" t-att-value="state.filters.date_to" t-on-change="onDateChange"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="o_dcg_filter_group people">
+                    <h3>Nhân sự &amp; khách hàng</h3>
+                    <div class="o_dcg_filter_row chips">
+                        <t t-call="dcg_project_dashboard.TagFilter">
+                            <t t-set="name" t-value="'project_ids'"/>
+                            <t t-set="label" t-value="'Dự án'"/>
+                            <t t-set="items" t-value="state.options.projects"/>
+                        </t>
+                        <t t-call="dcg_project_dashboard.TagFilter">
+                            <t t-set="name" t-value="'partner_ids'"/>
+                            <t t-set="label" t-value="'Khách hàng'"/>
+                            <t t-set="items" t-value="state.options.partners"/>
+                        </t>
+                        <t t-call="dcg_project_dashboard.TagFilter">
+                            <t t-set="name" t-value="'pm_ids'"/>
+                            <t t-set="label" t-value="'PM'"/>
+                            <t t-set="items" t-value="state.options.users"/>
+                        </t>
+                        <t t-call="dcg_project_dashboard.TagFilter">
+                            <t t-set="name" t-value="'user_ids'"/>
+                            <t t-set="label" t-value="'Nhân sự'"/>
+                            <t t-set="items" t-value="state.options.users"/>
+                        </t>
+                        <t t-call="dcg_project_dashboard.TagFilter">
+                            <t t-set="name" t-value="'stage_ids'"/>
+                            <t t-set="label" t-value="'Stage'"/>
+                            <t t-set="items" t-value="state.options.stages"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+            <div t-if="state.loading" class="o_dcg_loading">Đang tải dữ liệu...</div>
+
+            <div t-if="!state.loading">
+                <div class="o_dcg_kpis">
+                    <div class="o_dcg_kpi blue"><i class="fa fa-folder-open"/><span>Tổng Dự án</span><strong t-esc="state.summary.total_projects || 0"/></div>
+                    <div class="o_dcg_kpi cyan"><i class="fa fa-play-circle"/><span>Đang triển khai</span><strong t-esc="state.summary.active_projects || 0"/></div>
+                    <div class="o_dcg_kpi green"><i class="fa fa-check-circle"/><span>Dự án đã hoàn thành</span><strong t-esc="state.summary.done_projects || 0"/></div>
+                    <div class="o_dcg_kpi red"><i class="fa fa-exclamation-triangle"/><span>Dự  quá hạn</span><strong t-esc="state.summary.overdue_projects || 0"/></div>
+                    <div class="o_dcg_kpi slate"><i class="fa fa-tasks"/><span>Tổng Task</span><strong t-esc="state.summary.total_tasks || 0"/></div>
+                    <div class="o_dcg_kpi red"><i class="fa fa-clock-o"/><span>Task quá hạn</span><strong t-esc="state.summary.task_overdue || 0"/></div>
+                    <div class="o_dcg_kpi amber"><i class="fa fa-calendar-check-o"/><span>Task hôm nay</span><strong t-esc="state.summary.task_today || 0"/></div>
+                    <div class="o_dcg_kpi violet"><i class="fa fa-calendar"/><span>Task tháng này</span><strong t-esc="state.summary.task_month || 0"/></div>
+                </div>
+
+                <div class="o_dcg_stage_summary">
+                    <t t-foreach="state.stage" t-as="item" t-key="item.id || item.name">
+                        <div t-att-class="'o_dcg_stage_chip ' + stageTone(item_index)">
+                            <span t-esc="item.name"/>
+                            <strong t-esc="item.count"/>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="o_dcg_grid">
+                    <section class="o_dcg_card">
+                        <div class="o_dcg_section_title"><h2>Phân bố Task theo Stage</h2><span>Donut chart</span></div>
+                        <div class="o_dcg_donut_wrap">
+                            <svg class="o_dcg_donut" viewBox="0 0 42 42" role="img">
+                                <circle class="o_dcg_donut_bg" cx="21" cy="21" r="15.915"/>
+                                <t t-foreach="donutSegments()" t-as="segment" t-key="segment.id">
+                                    <circle class="o_dcg_donut_segment" cx="21" cy="21" r="15.915"
+                                        t-att-stroke="segment.color"
+                                        t-att-stroke-dasharray="segment.dasharray"
+                                        t-att-stroke-dashoffset="segment.dashoffset"/>
+                                </t>
+                                <text x="21" y="19.5" text-anchor="middle" class="o_dcg_donut_total" t-esc="state.summary.total_tasks || 0"/>
+                                <text x="21" y="24.5" text-anchor="middle" class="o_dcg_donut_label">Task</text>
+                            </svg>
+                            <div class="o_dcg_donut_legend">
+                                <t t-foreach="state.stage" t-as="item" t-key="item.id || item.name">
+                                    <div>
+                                        <i t-att-style="'background:' + stageColor(item_index)"/>
+                                        <span t-esc="item.name"/>
+                                        <strong><t t-esc="item.count"/> · <t t-esc="item.percent"/>%</strong>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="o_dcg_card">
+                        <div class="o_dcg_section_title"><h2>Xu hướng Task</h2><span t-esc="trendLastLabel()"/></div>
+                        <div class="o_dcg_line_legend">
+                            <span><i class="created"/>Tạo</span>
+                            <span><i class="done"/>Hoàn thành</span>
+                            <span><i class="overdue"/>Quá hạn</span>
+                        </div>
+                        <svg class="o_dcg_line_chart" viewBox="0 0 600 220" preserveAspectRatio="none">
+                            <line x1="32" y1="40" x2="32" y2="188"/>
+                            <line x1="32" y1="188" x2="568" y2="188"/>
+                            <text x="8" y="44" t-esc="maxTrendValue()"/>
+                            <text x="10" y="190">0</text>
+                            <polyline class="created" t-att-points="trendPoints('created')"/>
+                            <polyline class="done" t-att-points="trendPoints('done')"/>
+                            <polyline class="overdue" t-att-points="trendPoints('overdue')"/>
+                        </svg>
+                    </section>
+                </div>
+
+                <section class="o_dcg_card">
+                    <div class="o_dcg_section_title"><h2>Bảng tiến độ dự án</h2><span>Done / Tổng Task</span></div>
+                    <table class="o_dcg_table">
+                        <thead>
+                            <tr>
+                                <th><button class="o_dcg_sort" t-on-click="() => this.setSort('progress', 'name')">Dự án <i t-att-class="sortIcon('progress', 'name')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('progress', 'progress')">Tiến độ <i t-att-class="sortIcon('progress', 'progress')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('progress', 'done_ratio')">Done/Tổng <i t-att-class="sortIcon('progress', 'done_ratio')"/></button></th>
+                                <th>Stage</th>
+                                <th><button class="o_dcg_sort" t-on-click="() => this.setSort('progress', 'deadline')">Deadline <i t-att-class="sortIcon('progress', 'deadline')"/></button></th>
+                                <th><button class="o_dcg_sort" t-on-click="() => this.setSort('progress', 'pm')">PM <i t-att-class="sortIcon('progress', 'pm')"/></button></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="sortedProgress()" t-as="project" t-key="project.id">
+                                <tr>
+                                    <td><strong t-esc="project.name"/></td>
+                                    <td class="o_dcg_progress_cell">
+                                        <div class="o_dcg_progress"><i t-att-style="'width:' + project.progress + '%'"/></div>
+                                        <span t-esc="project.progress + '%'"/>
+                                    </td>
+                                    <td><t t-esc="project.done_tasks"/>/<t t-esc="project.total_tasks"/></td>
+                                    <td class="o_dcg_stage_cell">
+                                        <div class="o_dcg_stage_matrix">
+                                        <t t-foreach="project.stage_counts" t-as="stage" t-key="stage.id">
+                                            <span class="o_dcg_tag"><t t-esc="stage.name"/><strong t-esc="stage.count"/></span>
+                                        </t>
+                                        </div>
+                                    </td>
+                                    <td t-esc="project.deadline"/>
+                                    <td t-esc="project.pm"/>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </section>
+
+                <div class="o_dcg_grid">
+                    <section class="o_dcg_card">
+                        <div class="o_dcg_section_title"><h2>Workload nhân sự</h2><span>Top 10</span></div>
+                        <table class="o_dcg_table compact o_dcg_widget_table">
+                            <thead><tr>
+                                <th><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'name')">Nhân sự <i t-att-class="sortIcon('workload', 'name')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'processing')">Đang làm <i t-att-class="sortIcon('workload', 'processing')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'testing')">Test <i t-att-class="sortIcon('workload', 'testing')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'done_week')">Done tuần <i t-att-class="sortIcon('workload', 'done_week')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'overdue')">Quá hạn <i t-att-class="sortIcon('workload', 'overdue')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'total')">Tổng <i t-att-class="sortIcon('workload', 'total')"/></button></th>
+                                <th class="num"><button class="o_dcg_sort" t-on-click="() => this.setSort('workload', 'done_percent')">% <i t-att-class="sortIcon('workload', 'done_percent')"/></button></th>
+                            </tr></thead>
+                            <tbody>
+                                <t t-foreach="sortedWorkload()" t-as="item" t-key="item.id">
+                                    <tr>
+                                        <td>
+                                            <div class="o_dcg_person">
+                                                <span class="o_dcg_avatar" t-esc="firstInitial(item.name)"/>
+                                                <span class="o_dcg_clip" t-att-title="item.name" t-esc="item.name"/>
+                                            </div>
+                                        </td>
+                                        <td class="num" t-esc="item.processing"/>
+                                        <td class="num" t-esc="item.testing"/>
+                                        <td class="num" t-esc="item.done_week"/>
+                                        <td class="num"><span t-att-class="'o_dcg_badge ' + riskBadgeClass('overdue', item.overdue)" t-esc="item.overdue"/></td>
+                                        <td class="num" t-esc="item.total"/>
+                                        <td class="num o_dcg_percent_cell">
+                                            <span t-esc="item.done_percent + '%'"/>
+                                            <div class="o_dcg_mini_progress">
+                                                <i t-att-class="progressTone(item.done_percent)" t-att-style="'width:' + item.done_percent + '%'"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="o_dcg_card"><div class="o_dcg_section_title"><h2>Task quá hạn</h2><span>Top 10</span></div><t t-call="dcg_project_dashboard.TaskList"><t t-set="items" t-value="state.overdue"/><t t-set="variant" t-value="'overdue'"/></t></section>
+                    <section class="o_dcg_card"><div class="o_dcg_section_title"><h2>Task sắp đến hạn</h2><span>Top 10</span></div><t t-call="dcg_project_dashboard.TaskList"><t t-set="items" t-value="state.upcoming"/><t t-set="variant" t-value="'upcoming'"/></t></section>
+                    <section class="o_dcg_card"><div class="o_dcg_section_title"><h2>Task chuyển test</h2><span>QA</span></div><t t-call="dcg_project_dashboard.TaskList"><t t-set="items" t-value="state.testing"/></t></section>
+                    <section class="o_dcg_card"><div class="o_dcg_section_title"><h2>Task chưa đưa Live</h2><span>Release</span></div><t t-call="dcg_project_dashboard.TaskList"><t t-set="items" t-value="state.notLive"/></t></section>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="dcg_project_dashboard.TagFilter">
+        <div class="o_dcg_tag_filter">
+            <div class="o_dcg_tag_filter_head">
+                <span t-esc="label"/>
+                <button t-if="state.filters[name].length" type="button" t-on-click="() => this.clearTagFilter(name)">Xóa</button>
+            </div>
+            <details class="o_dcg_search_select" t-att-open="state.openFilter === name">
+                <summary t-on-click.prevent="() => this.toggleFilter(name)">
+                    <span t-att-title="filterSummary(name, items)" t-esc="filterSummary(name, items)"/>
+                    <i class="fa fa-chevron-down"/>
+                </summary>
+                <div class="o_dcg_search_select_panel">
+                    <label class="o_dcg_search_box">
+                        <i class="fa fa-search"/>
+                        <input type="search" placeholder="Tìm kiếm..." t-att-value="state.filterSearch[name]" t-on-input="(ev) => this.onTagSearch(name, ev)"/>
+                    </label>
+                    <div class="o_dcg_search_options">
+                        <t t-if="!filteredTagItems(name, items).length">
+                            <div class="o_dcg_search_empty">Không có dữ liệu</div>
+                        </t>
+                        <t t-foreach="filteredTagItems(name, items)" t-as="item" t-key="item.id">
+                            <label class="o_dcg_search_option">
+                                <input type="checkbox" t-att-checked="state.filters[name].includes(item.id)" t-on-change="() => this.toggleTag(name, item.id)"/>
+                                <span t-att-title="item.name" t-esc="item.name"/>
+                            </label>
+                        </t>
+                    </div>
+                </div>
+            </details>
+            <div class="o_dcg_selected_tags">
+                <t t-if="!state.filters[name].length"><small>Chưa lọc</small></t>
+                <t t-foreach="selectedItems(name, items)" t-as="item" t-key="item.id">
+                    <span><t t-esc="item.name"/><button type="button" t-on-click="() => this.removeTag(name, item.id)">×</button></span>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="dcg_project_dashboard.TaskList">
+        <table class="o_dcg_table compact o_dcg_widget_table">
+            <thead><tr><th>Task</th><th>Dự án</th><th>Người thực hiện</th><th>Deadline</th><th class="num">Trễ</th></tr></thead>
+            <tbody>
+                <tr t-if="!items.length">
+                    <td colspan="5" class="o_dcg_empty">Không có dữ liệu</td>
+                </tr>
+                <t t-foreach="items" t-as="task" t-key="task.id">
+                    <tr>
+                        <td><span class="o_dcg_line_clamp" t-att-title="task.name" t-esc="task.name"/></td>
+                        <td><span class="o_dcg_line_clamp" t-att-title="task.project" t-esc="task.project"/></td>
+                        <td>
+                            <div class="o_dcg_person">
+                                <span class="o_dcg_avatar" t-esc="firstInitial(firstName(task.users))"/>
+                                <span class="o_dcg_clip" t-att-title="task.users" t-esc="task.users || 'Chưa gán'"/>
+                            </div>
+                        </td>
+                        <td t-esc="task.deadline"/>
+                        <td class="num"><span t-att-class="'o_dcg_badge ' + riskBadgeClass(variant, task.overdue_days)" t-esc="task.overdue_days"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </t>
+</templates>

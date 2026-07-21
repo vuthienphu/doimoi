@@ -25,7 +25,7 @@ class ProjectTask(models.Model):
 
     def write(self, vals):
         result = super().write(vals)
-        if 'stage_id' in vals:
+        if 'stage_id' in vals and not self.env.context.get('dcg_skip_stage_notification'):
             for task in self:
                 task._send_stage_notification()
         return result

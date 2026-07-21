@@ -27,18 +27,15 @@ class ProjectProject(models.Model):
                 vals.setdefault('user_id', lead.user_id.id)
 
         projects = super().create(vals_list)
-        default_stages = self._get_dcg_default_task_stages()
-        if default_stages:
-            default_stages.write({'project_ids': [(4, project.id) for project in projects]})
+        if projects:
+            self.env['project.task.type']._dcg_standard_stages().write({
+                'project_ids': [(4, project.id) for project in projects],
+            })
         return projects
 
     @api.model
-    def _get_dcg_default_task_stages(self):
-        return self.env['project.task.type'].search([('is_dcg_default', '=', True)])
-
-    @api.model
-    def _dcg_assign_default_stages_to_all_projects(self):
-        default_stages = self._get_dcg_default_task_stages()
-        projects = self.search([])
-        if default_stages and projects:
-            default_stages.write({'project_ids': [(4, project.id) for project in projects]})
+    def _dcg_assign_all_stages_to_all_projects(self):
+        projects = self.with_context(active_test=False).search([])
+        stages = self.env['project.task.type']._dcg_standard_stages()
+        if projects and stages:
+            stages.write({'project_ids': [(4, project.id) for project in projects]})
