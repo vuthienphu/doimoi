@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Bravestar Login Custom',
+    'name': 'Dcg Login Custom',
     'version': '1.0',
     'summary': 'Remove unnecessary elements from the login page',
     'depends': ['web', 'auth_signup', 'auth_oauth', 'hr'],

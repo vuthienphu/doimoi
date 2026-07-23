@@ -6,6 +6,7 @@
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='lead']" position="before">
+                <field name="is_project_manager" invisible="1"/>
                 <page name="dcg_value_estimation" string="Giá trị ước tính" invisible="type == 'lead'">
                     <group>
                         <group string="Tài chính ước tính">
@@ -25,7 +26,7 @@
                         </group>
                     </group>
                     <group string="Chi tiết chi phí ngoài nhân sự">
-                        <field name="value_estimation_ids" nolabel="1">
+                        <field name="value_estimation_ids" nolabel="1" readonly="not is_project_manager">
                             <list editable="bottom">
                                 <field name="cost_type"/>
                                 <field name="name"/>
@@ -41,7 +42,7 @@
                 </page>
                 <page name="dcg_work_estimation" string="Công việc ước tính" invisible="type == 'lead'">
                     <group string="Chi tiết man-day kỹ thuật">
-                        <field name="work_estimation_ids" nolabel="1">
+                        <field name="work_estimation_ids" nolabel="1" readonly="not is_project_manager">
                             <list editable="bottom">
                                 <field name="module"/>
                                 <field name="name"/>

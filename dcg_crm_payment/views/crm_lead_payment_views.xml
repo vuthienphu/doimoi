@@ -4,12 +4,14 @@
         <field name="name">crm.lead.payment.tree.report</field>
         <field name="model">crm.lead.payment</field>
         <field name="arch" type="xml">
-            <list string="Lịch sử thanh toán" create="false" edit="false" delete="false">
+            <list string="Lịch sử thanh toán" create="false" edit="false" delete="false" decoration-danger="is_overdue" decoration-success="not is_underpaid">
                 <field name="lead_id" string="Cơ hội"/>
                 <field name="payment_date" string="Thời gian thanh toán"/>
                 <field name="due_date" string="Ngày đến hạn"/>
                 <field name="expected_amount" string="Giá trị phải thanh toán" sum="Tổng dự kiến"/>
                 <field name="paid_amount" string="Giá trị thanh toán" sum="Tổng đã trả"/>
+                <field name="is_overdue" column_invisible="True"/>
+                <field name="is_underpaid" column_invisible="True"/>
                 <field name="currency_id" column_invisible="True"/>
             </list>
         </field>
@@ -23,10 +25,14 @@
                 <field name="lead_id" string="Cơ hội"/>
                 <field name="payment_date"/>
                 <field name="due_date"/>
-<!--                <group expand="0" string="Nhóm theo">-->
-<!--                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>-->
-<!--                    <filter string="Thời gian thanh toán" name="group_by_payment_date" context="{'group_by': 'payment_date'}"/>-->
-<!--                </group>-->
+                <separator/>
+                <filter string="Chưa thanh toán đủ" name="underpaid" domain="[('is_underpaid', '=', True)]"/>
+                <filter string="Đã quá hạn" name="overdue" domain="[('is_overdue', '=', True)]"/>
+                <separator/>
+                <group>
+                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Thời gian thanh toán" name="group_by_payment_date" context="{'group_by': 'payment_date'}"/>
+                </group>
             </search>
         </field>
     </record>

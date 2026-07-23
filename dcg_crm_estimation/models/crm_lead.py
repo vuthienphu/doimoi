@@ -14,6 +14,15 @@ class CrmLead(models.Model):
     )
     work_estimation_ids = fields.One2many('crm.lead.work.estimation', 'lead_id', string='Công việc ước tính')
     value_estimation_ids = fields.One2many('crm.lead.value.estimation', 'lead_id', string='Chi phí ngoài nhân sự')
+    is_project_manager = fields.Boolean(
+        string='Là quản lý dự án',
+        compute='_compute_is_project_manager',
+    )
+
+    def _compute_is_project_manager(self):
+        is_pm = self.env.user.has_group('project.group_project_manager')
+        for lead in self:
+            lead.is_project_manager = is_pm
     
     total_effort = fields.Float(
         string='Tổng Effort (MD)',

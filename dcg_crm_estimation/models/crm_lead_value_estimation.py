@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class CrmLeadValueEstimation(models.Model):
@@ -40,3 +41,19 @@ class CrmLeadValueEstimation(models.Model):
     def _compute_subtotal(self):
         for record in self:
             record.subtotal = record.quantity * record.unit_price
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        if not (self.env.user.has_group('project.group_project_manager') or self.env.user.has_group('base.group_system')):
+            raise UserError("Chỉ có Quản lý dự án mới có quyền tạo ước tính!")
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if not (self.env.user.has_group('project.group_project_manager') or self.env.user.has_group('base.group_system')):
+            raise UserError("Chỉ có Quản lý dự án mới có quyền chỉnh sửa ước tính!")
+        return super().write(vals)
+
+    def unlink(self):
+        if not (self.env.user.has_group('project.group_project_manager') or self.env.user.has_group('base.group_system')):
+            raise UserError("Chỉ có Quản lý dự án mới có quyền xóa ước tính!")
+        return super().unlink()

@@ -11,6 +11,7 @@
                 <field name="priority"/>
                 <field name="date"/>
                 <field name="state"/>
+                <field name="shared"/>
                 <field name="author_id"/>
             </list>
         </field>
@@ -22,9 +23,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_confirm" string="Xác nhận" type="object" class="btn-primary" invisible="state != 'draft'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
-                    <button name="action_archive_lesson" string="Lưu trữ" type="object" invisible="state == 'archived'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
-                    <button name="action_unarchive_lesson" string="Khôi phục" type="object" invisible="state != 'archived'" groups="dcg_project_lessons.group_project_lesson_pm,dcg_project_lessons.group_project_lesson_director,base.group_system"/>
+                    <button name="action_confirm" string="Xác nhận" type="object" class="btn-primary" invisible="state != 'draft'" groups="project.group_project_manager,base.group_system"/>
+                    <button name="action_archive_lesson" string="Lưu trữ" type="object" invisible="state == 'archived'" groups="project.group_project_manager,base.group_system"/>
+                    <button name="action_unarchive_lesson" string="Khôi phục" type="object" invisible="state != 'archived'" groups="project.group_project_manager,base.group_system"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,archived"/>
                 </header>
                 <sheet>
@@ -42,6 +43,7 @@
                             <field name="tag_ids" widget="many2many_tags" options="{'no_quick_create': False}"/>
                             <field name="author_id" readonly="state != 'draft'"/>
                             <field name="date"/>
+                            <field name="shared" widget="boolean_toggle"/>
                         </group>
                     </group>
                     <notebook>

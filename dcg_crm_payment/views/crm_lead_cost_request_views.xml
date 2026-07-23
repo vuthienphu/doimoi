@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_cost_request_view_tree" model="ir.ui.view">
+        <field name="name">crm.lead.cost.request.tree</field>
+        <field name="model">crm.lead.cost.request</field>
+        <field name="arch" type="xml">
+            <list string="Yêu cầu duyệt chi phí" decoration-info="state == 'draft'" decoration-warning="state == 'submitted'" decoration-success="state == 'approved'" decoration-danger="state == 'rejected'">
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="cost_type"/>
+                <field name="date"/>
+                <field name="amount" sum="Tổng yêu cầu"/>
+                <field name="user_id"/>
+                <field name="manager_id"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'submitted'" decoration-success="state == 'approved'" decoration-danger="state == 'rejected'"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_lead_cost_request_view_form" model="ir.ui.view">
+        <field name="name">crm.lead.cost.request.form</field>
+        <field name="model">crm.lead.cost.request</field>
+        <field name="arch" type="xml">
+            <form string="Yêu cầu duyệt chi phí">
+                <header>
+                    <button name="action_submit" string="Gửi duyệt" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Duyệt" type="object" class="btn-success" groups="dcg_crm_payment.group_crm_payment_manager" invisible="state != 'submitted'"/>
+                    <button name="action_reject" string="Từ chối" type="object" class="btn-danger" groups="dcg_crm_payment.group_crm_payment_manager" invisible="state != 'submitted'"/>
+                    <button name="action_draft" string="Chuyển về Nháp" type="object" invisible="state != 'rejected'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,rejected"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Nội dung chi phí..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="lead_id" options="{'no_create': True}"/>
+                            <field name="cost_type"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="user_id"/>
+                            <field name="manager_id" options="{'no_create': True}"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="attachment_ids" widget="many2many_binary" string="Ảnh hóa đơn / Chứng từ"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_lead_cost_request_view_search" model="ir.ui.view">
+        <field name="name">crm.lead.cost.request.search</field>
+        <field name="model">crm.lead.cost.request</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm yêu cầu chi phí">
+                <field name="name"/>
+                <field name="lead_id"/>
+                <field name="user_id"/>
+                <field name="manager_id"/>
+                <separator/>
+                <filter string="Chi phí của tôi" name="my_requests" domain="[('user_id', '=', uid)]"/>
+                <filter string="Chờ duyệt" name="pending" domain="[('state', '=', 'submitted')]"/>
+                <filter string="Đã duyệt" name="approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Từ chối" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                <group>
+                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Người yêu cầu" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Trạng thái" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Ngày chi" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_lead_cost_request_action" model="ir.actions.act_window">
+        <field name="name">Yêu cầu duyệt chi phí</field>
+        <field name="res_model">crm.lead.cost.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="crm_lead_cost_request_view_search"/>
+        <field name="context">{'search_default_my_requests': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo yêu cầu chi phí đầu tiên
+            </p>
+            <p>
+                Khai báo các chi phí phát sinh khi làm việc với khách hàng, gửi quản lý phê duyệt trước khi đẩy vào Cơ hội.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu chính Chi phí -->
+    <menuitem id="menu_crm_cost_root"
+              name="Chi phí"
+              web_icon="hr_expense,static/description/icon.png"
+              sequence="25"/>
+
+    <!-- Menu con Chi phí của tôi -->
+    <menuitem id="menu_crm_cost_request"
+              name="Chi phí của tôi"
+              parent="menu_crm_cost_root"
+              action="crm_lead_cost_request_action"
+              sequence="10"/>
+
+    <!-- Menu con Chi phí theo dự án -->
+    <menuitem id="menu_crm_cost_report_project"
+              name="Chi phí theo dự án"
+              parent="menu_crm_cost_root"
+              action="dcg_crm_cost.crm_lead_cost_action_report"
+              sequence="20"/>
+</odoo>

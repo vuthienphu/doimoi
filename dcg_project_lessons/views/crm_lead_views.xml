@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_dcg_lessons" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.dcg.lessons</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="lessons" string="Bài học kinh nghiệm">
+                    <field name="lesson_ids" nolabel="1">
+                        <list>
+                            <field name="name"/>
+                            <field name="project_id"/>
+                            <field name="category"/>
+                            <field name="priority"/>
+                            <field name="state"/>
+                            <field name="author_id"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

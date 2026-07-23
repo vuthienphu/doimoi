@@ -59,6 +59,7 @@ class ProjectLesson(models.Model):
         ('confirmed', 'Đã xác nhận'),
         ('archived', 'Đã lưu trữ'),
     ], string='Trạng thái', default='draft', tracking=True)
+    shared = fields.Boolean(string='Chia sẻ công khai', default=False, tracking=True)
 
     @api.onchange('project_id')
     def _onchange_project_id(self):
@@ -95,11 +96,10 @@ class ProjectLesson(models.Model):
 
     def _check_pm_access(self):
         if not (
-            self.env.user.has_group('dcg_project_lessons.group_project_lesson_pm')
-            or self.env.user.has_group('dcg_project_lessons.group_project_lesson_director')
+            self.env.user.has_group('project.group_project_manager')
             or self.env.user.has_group('base.group_system')
         ):
-            raise AccessError(_('Chỉ Quản lý dự án hoặc Giám đốc được thực hiện thao tác này.'))
+            raise AccessError(_('Chỉ Quản lý dự án mới được thực hiện thao tác này.'))
 
     def action_confirm(self):
         self._check_pm_access()

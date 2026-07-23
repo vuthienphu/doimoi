@@ -5,22 +5,49 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_create_contract"
+                        string="Tạo hợp đồng"
+                        type="object"
+                        class="btn-primary"
+                        invisible="contract_id"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_contract"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        invisible="not contract_id">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Hợp đồng</span>
+                    </div>
+                </button>
+            </xpath>
             <xpath expr="//page[@name='lead']" position="before">
                 <page name="dcg_payment" string="Thanh toán" invisible="type == 'lead'">
                     <group>
                         <group string="Cấu hình thanh toán">
                             <field name="payment_type_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="payment_cycle_count"/>
                             <field name="first_payment_date"/>
                             <field name="last_payment_date"/>
+                            <field name="contract_id" options="{'no_create': True}"/>
+                            <button name="action_generate_payment_schedule"
+                                    string="Tự sinh lịch thanh toán"
+                                    type="object"
+                                    class="btn-primary"
+                                    invisible="not payment_type_id or not first_payment_date or expected_revenue &lt;= 0"/>
                         </group>
                     </group>
                     <group string="Chi tiết các đợt thanh toán">
                         <field name="payment_ids" nolabel="1">
-                            <list editable="bottom" decoration-danger="paid_amount &lt; expected_amount or (payment_date and due_date and payment_date &gt; due_date)">
+                            <list editable="bottom" decoration-danger="is_overdue" decoration-success="not is_underpaid">
+                                <field name="due_date" readonly="1" force_save="1"/>
+                                <field name="expected_amount" sum="Tổng dự kiến" readonly="1" force_save="1"/>
                                 <field name="payment_date"/>
-                                <field name="expected_amount" sum="Tổng dự kiến"/>
                                 <field name="paid_amount" sum="Tổng đã trả"/>
-                                <field name="due_date"/>
+                                <field name="is_overdue" column_invisible="True"/>
+                                <field name="is_underpaid" column_invisible="True"/>
                                 <field name="currency_id" column_invisible="True"/>
                             </list>
                         </field>
@@ -31,6 +58,20 @@
                     </group>
                     <div class="clearfix"/>
                 </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_form_inherit_dcg_payment_cost" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.dcg.payment.cost</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="dcg_crm_cost.crm_lead_view_form_inherit_dcg_cost"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='cost_ids']" position="before">
+                <field name="is_payment_manager" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='cost_ids']" position="attributes">
+                <attribute name="readonly">not is_payment_manager</attribute>
             </xpath>
         </field>
     </record>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_contract_view_tree" model="ir.ui.view">
+        <field name="name">crm.contract.tree</field>
+        <field name="model">crm.contract</field>
+        <field name="arch" type="xml">
+            <list string="Hợp đồng">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="lead_id"/>
+                <field name="project_id"/>
+                <field name="amount" sum="Tổng giá trị"/>
+                <field name="date_signed"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'waiting'" decoration-success="state == 'active'" decoration-primary="state == 'done'" decoration-muted="state == 'cancel'"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="crm_contract_view_form" model="ir.ui.view">
+        <field name="name">crm.contract.form</field>
+        <field name="model">crm.contract</field>
+        <field name="arch" type="xml">
+            <form string="Hợp đồng">
+                <header>
+                    <button name="action_waiting" string="Chờ ký" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_active" string="Kích hoạt" type="object" class="btn-primary" invisible="state != 'waiting'"/>
+                    <button name="action_done" string="Hoàn thành" type="object" class="btn-secondary" invisible="state != 'active'"/>
+                    <button name="action_cancel" string="Hủy bỏ" type="object" class="btn-muted" invisible="state in ('cancel', 'done')"/>
+                    <button name="action_draft" string="Chuyển về Nháp" type="object" invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting,active,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_lead"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-star"
+                                invisible="not lead_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Cơ hội</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Ví dụ: HĐ/2026/001"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="lead_id" options="{'no_create': True}"/>
+                            <field name="partner_id"/>
+                            <field name="project_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="date_signed"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_contract_view_search" model="ir.ui.view">
+        <field name="name">crm.contract.search</field>
+        <field name="model">crm.contract</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm hợp đồng">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="lead_id"/>
+                <field name="project_id"/>
+                <filter string="Mới tạo (Nháp)" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Chờ ký" name="state_waiting" domain="[('state', '=', 'waiting')]"/>
+                <filter string="Hiệu lực" name="state_active" domain="[('state', '=', 'active')]"/>
+                <filter string="Hoàn thành" name="state_done" domain="[('state', '=', 'done')]"/>
+                <group>
+                    <filter string="Khách hàng" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Trạng thái" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Ngày ký" name="group_by_date" context="{'group_by': 'date_signed'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_contract_action" model="ir.actions.act_window">
+        <field name="name">Hợp đồng</field>
+        <field name="res_model">crm.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="crm_contract_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo hợp đồng đầu tiên của bạn
+            </p>
+            <p>
+                Quản lý hợp đồng thương mại, theo dõi thông tin cơ hội và dự án liên kết.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="crm_contract_menu"
+              name="Hợp đồng"
+              parent="crm.crm_menu_root"
+              action="crm_contract_action"
+              sequence="6"/>
+</odoo>

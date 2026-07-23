@@ -56,4 +56,42 @@
         </field>
         <field name="auto_delete" eval="True"/>
     </record>
+    <record id="mail_template_cost_approval" model="mail.template">
+        <field name="name">Yêu cầu duyệt chi phí CRM</field>
+        <field name="model_id" ref="dcg_crm_payment.model_crm_lead_cost_request"/>
+        <field name="subject">[Duyệt Chi Phí] {{ object.user_id.name }} yêu cầu duyệt chi phí cho {{ object.lead_id.name }}</field>
+        <field name="email_from">{{ object.user_id.email_formatted }}</field>
+        <field name="partner_to">{{ object.manager_id.partner_id.id }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-family: 'Inter', 'Outfit', sans-serif;">
+                <p>Kính gửi <strong><t t-out="object.manager_id.name"/></strong>,</p>
+                <p>Nhân viên <strong><t t-out="object.user_id.name"/></strong> vừa gửi một yêu cầu duyệt chi phí cho Cơ hội <strong><t t-out="object.lead_id.name"/></strong>:</p>
+                <table style="border-collapse: collapse; width: 100%; max-width: 600px; margin-top: 15px; margin-bottom: 15px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9; width: 30%;">Nội dung chi phí:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Loại chi phí:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.cost_type"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Số tiền:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; color: #d9534f; font-weight: bold;">
+                                <t t-out="format_amount(object.amount, object.currency_id)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; background-color: #f9f9f9;">Ngày chi:</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><t t-out="object.date"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Vui lòng đăng nhập vào hệ thống để phê duyệt hoặc từ chối yêu cầu này.</p>
+                <p>Xin trân trọng cảm ơn!</p>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
 </odoo>

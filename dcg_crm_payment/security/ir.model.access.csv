@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_crm_payment_type_user,crm.payment.type.user,model_crm_payment_type,base.group_user,1,1,1,1
 access_crm_lead_payment_user,crm.lead.payment.user,model_crm_lead_payment,base.group_user,1,1,1,1
+access_crm_contract_user,crm.contract.user,model_crm_contract,base.group_user,1,1,1,1
+access_crm_lead_cost_request_user,crm.lead.cost.request.user,model_crm_lead_cost_request,base.group_user,1,1,1,1

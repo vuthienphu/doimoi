@@ -12,11 +12,11 @@
     'license': 'LGPL-3',
     'depends': [
         'project',
+        'crm',
         'mail',
+        'hr_timesheet',
     ],
     'data': [
-        'security/security_groups.xml',
-        'data/default_user_access.xml',
         'security/ir.model.access.csv',
         'security/record_rules.xml',
         'wizard/project_lesson_archive_warning_views.xml',
@@ -24,6 +24,7 @@
         'views/project_project_views.xml',
         'views/project_task_views.xml',
         'views/project_milestone_views.xml',
+        'views/crm_lead_views.xml',
         'views/menus.xml',
     ],
     'installable': True,

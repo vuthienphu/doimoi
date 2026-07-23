@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_crm_payment_manager" model="res.groups">
+        <field name="name">Quản lý thanh toán</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Quyền quản lý thanh toán, phê duyệt yêu cầu chi phí và ghi nhận chi phí trực tiếp trên Cơ hội.</field>
+    </record>
+</odoo>

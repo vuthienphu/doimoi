@@ -23,6 +23,20 @@ class ProjectTask(models.Model):
         string='Danh sách checklist',
     )
 
+    def action_open_subtasks(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Công việc con',
+            'res_model': 'project.task',
+            'view_mode': 'list,form',
+            'domain': [('parent_id', '=', self.id)],
+            'context': {
+                'default_parent_id': self.id,
+                'default_project_id': self.project_id.id,
+            },
+        }
+
     def write(self, vals):
         result = super().write(vals)
         if 'stage_id' in vals and not self.env.context.get('dcg_skip_stage_notification'):

@@ -26,12 +26,12 @@
                 <field name="name"/>
                 <field name="date"/>
                 <field name="user_id"/>
-<!--                <group expand="0" string="Nhóm theo">-->
-<!--                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>-->
-<!--                    <filter string="Loại chi phí" name="group_by_cost_type" context="{'group_by': 'cost_type'}"/>-->
-<!--                    <filter string="Người ghi nhận" name="group_by_user" context="{'group_by': 'user_id'}"/>-->
-<!--                    <filter string="Tháng" name="group_by_date" context="{'group_by': 'date'}"/>-->
-<!--                </group>-->
+                <group>
+                    <filter string="Cơ hội" name="group_by_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Loại chi phí" name="group_by_cost_type" context="{'group_by': 'cost_type'}"/>
+                    <filter string="Người ghi nhận" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Tháng" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
             </search>
         </field>
     </record>

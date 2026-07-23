@@ -10,8 +10,8 @@
         id="menu_dcg_project_dashboard"
         name="Dashboard Dự án"
         action="action_dcg_project_dashboard"
+        web_icon="dcg_project_dashboard,static/description/icon.png"
         sequence="38"
-        web_icon="dcg_project_dashboard,static/description/icon.svg"
         groups="project.group_project_manager,dcg_project_dashboard.group_project_dashboard_director"
     />
 </odoo>
