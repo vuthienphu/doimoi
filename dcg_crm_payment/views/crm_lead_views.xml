@@ -3,7 +3,7 @@
     <record id="crm_lead_view_form_inherit_dcg_payment" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.payment</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="inherit_id" ref="dcg_custom_crm.crm_lead_view_form_inherit_dcg_custom"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button name="action_create_contract"
@@ -23,7 +23,21 @@
                     </div>
                 </button>
             </xpath>
-            <xpath expr="//page[@name='lead']" position="before">
+            <xpath expr="//page[@name='dcg_cost']" position="after">
+                <page name="dcg_demo" string="Demo" invisible="type == 'lead'">
+                    <group>
+                        <group string="Thông tin Demo">
+                            <field name="demo_done" widget="boolean_toggle"/>
+                            <field name="demo_finish_date"/>
+                            <field name="is_internal_demo_done" widget="boolean_toggle"/>
+                            <field name="is_customer_demo_done" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Nhân sự">
+                            <field name="internal_demo_user_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="demo_reviewer_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
                 <page name="dcg_payment" string="Thanh toán" invisible="type == 'lead'">
                     <group>
                         <group string="Cấu hình thanh toán">
@@ -39,25 +53,27 @@
                                     invisible="not payment_type_id or not first_payment_date or expected_revenue &lt;= 0"/>
                         </group>
                     </group>
-                    <group string="Chi tiết các đợt thanh toán">
-                        <field name="payment_ids" nolabel="1">
-                            <list editable="bottom" decoration-danger="is_overdue" decoration-success="not is_underpaid">
-                                <field name="due_date" readonly="1" force_save="1"/>
-                                <field name="expected_amount" sum="Tổng dự kiến" readonly="1" force_save="1"/>
-                                <field name="payment_date"/>
-                                <field name="paid_amount" sum="Tổng đã trả"/>
-                                <field name="is_overdue" column_invisible="True"/>
-                                <field name="is_underpaid" column_invisible="True"/>
-                                <field name="currency_id" column_invisible="True"/>
-                            </list>
-                        </field>
-                    </group>
+                    <div class="h3">Chi tiết các đợt thanh toán</div>
+                    <field name="payment_ids" nolabel="1">
+                        <list editable="bottom" decoration-danger="is_overdue" decoration-success="not is_underpaid">
+                            <field name="due_date" readonly="1" force_save="1"/>
+                            <field name="expected_amount" sum="Tổng dự kiến" readonly="1" force_save="1"/>
+                            <field name="payment_date"/>
+                            <field name="paid_amount" sum="Tổng đã trả"/>
+                            <field name="is_overdue" column_invisible="True"/>
+                            <field name="is_underpaid" column_invisible="True"/>
+                            <field name="currency_id" column_invisible="True"/>
+                        </list>
+                    </field>
                     <group class="oe_subtotal_footer">
                         <field name="total_paid" widget="monetary" readonly="1"/>
                         <field name="remaining_amount" widget="monetary" class="oe_subtotal_footer_separator" readonly="1"/>
                     </group>
                     <div class="clearfix"/>
                 </page>
+            </xpath>
+            <xpath expr="//page[@name='lead']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
         </field>
     </record>

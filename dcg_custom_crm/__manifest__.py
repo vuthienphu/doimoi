@@ -15,6 +15,7 @@
         'project',
         'mail',
         'contacts',
+        'dcg_crm_cost',
     ],
     'data': [
         'security/ir.model.access.csv',

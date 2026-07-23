@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page name="lessons" string="Bài học kinh nghiệm">
+                <page name="lessons" string="Bài học kinh nghiệm" invisible="1">
                     <field name="lesson_ids" nolabel="1">
                         <list>
                             <field name="name"/>

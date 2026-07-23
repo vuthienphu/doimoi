@@ -15,6 +15,7 @@
         'mail',
         'project',
         'dcg_crm_cost',
+        'dcg_custom_crm',
     ],
     'data': [
         'security/security_groups.xml',

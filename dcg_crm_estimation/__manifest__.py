@@ -13,6 +13,7 @@
     'depends': [
         'crm',
         'mail',
+        'dcg_custom_crm',
     ],
     'data': [
         'security/ir.model.access.csv',

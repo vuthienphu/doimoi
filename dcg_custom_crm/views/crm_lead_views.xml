@@ -3,7 +3,7 @@
     <record id="crm_lead_view_form_inherit_dcg_custom" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.custom</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="inherit_id" ref="dcg_crm_cost.crm_lead_view_form_inherit_dcg_cost"/>
         <field name="arch" type="xml">
             <xpath expr="//header/button[@name='action_set_won_rainbowman']" position="after">
                 <button name="action_complete_survey" string="Hoàn thành khảo sát" type="object"
@@ -34,31 +34,45 @@
                 <page name="dcg_survey" string="Khảo sát" invisible="type == 'lead'">
                     <group>
                         <group string="Khảo sát">
-                            <field name="survey_done" readonly="1"/>
+                            <field name="survey_done" readonly="1" widget="boolean_toggle"/>
                             <field name="survey_finish_date" readonly="1"/>
                             <field name="survey_note"/>
                         </group>
                     </group>
-                    <group string="Người liên hệ khác">
-                        <field name="other_ids" nolabel="1" domain="[('is_company', '=', False)]">
-                            <list>
-                                <field name="name"/>
-                                <field name="email"/>
-                                <field name="phone"/>
-                            </list>
-                        </field>
-                    </group>
-                </page>
-                <page name="dcg_demo" string="Demo" invisible="type == 'lead'">
-                    <group>
-                        <group string="Demo">
-                            <field name="demo_done" readonly="1"/>
-                            <field name="demo_finish_date" readonly="1"/>
-                        </group>
-                    </group>
-                    <group string="File ước tính công việc">
-                        <field name="estimate_attachment_ids" nolabel="1" widget="many2many_binary"/>
-                    </group>
+                    <div class="h3">Chi tiết đầu mục khảo sát</div>
+                    <field name="survey_line_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="module"/>
+                            <field name="name"/>
+                            <field name="current_state"/>
+                            <field name="desired_state"/>
+                            <field name="priority"/>
+                            <field name="is_standard" widget="boolean_toggle"/>
+                            <field name="solution"/>
+                            <field name="notes"/>
+                        </list>
+                    </field>
+                    <div class="h3" style="margin-top: 20px;">Người liên hệ khác</div>
+                    <field name="other_ids" mode="kanban" domain="[('is_company', '=', False)]" nolabel="1" class="w-100">
+                        <kanban>
+                            <templates>
+                                <t t-name="card">
+                                    <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban d-flex align-items-center gap-3 p-3">
+                                        <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url('#{kanban_image('res.partner', 'avatar_128', record.id.raw_value)}')"/>
+                                        <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                            <div>
+                                                <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                                <div t-if="record.function.raw_value" class="text-muted"><field name="function"/></div>
+                                                <div t-if="record.email.raw_value" class="text-muted"><field name="email"/></div>
+                                                <div t-if="record.phone.raw_value" class="text-muted"><field name="phone"/></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
                 </page>
             </xpath>
         </field>

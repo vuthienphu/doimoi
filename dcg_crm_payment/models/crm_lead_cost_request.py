@@ -14,8 +14,8 @@ class CrmLeadCostRequest(models.Model):
     lead_id = fields.Many2one('crm.lead', string='Cơ hội', required=True, tracking=True, domain="[('type', '=', 'opportunity')]")
     cost_type = fields.Selection(
         [
-            ('license', 'License'),
-            ('infra', 'Infra'),
+            ('license', 'Bản quyền (License)'),
+            ('infra', 'Hạ tầng (Infra)'),
             ('partner', 'Đối tác (Partner)'),
             ('travel', 'Công tác (Travel)'),
             ('equipment', 'Thiết bị (Equipment)'),

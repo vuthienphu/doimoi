@@ -27,7 +27,7 @@
                             <field name="project_id"/>
                             <field name="name"/>
                             <field name="account_type"/>
-                            <field name="active"/>
+                            <field name="active" widget="boolean_toggle"/>
                         </group>
                         <group>
                             <field name="username" widget="CopyClipboardChar"/>

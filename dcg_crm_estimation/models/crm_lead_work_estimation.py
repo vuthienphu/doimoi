@@ -7,8 +7,9 @@ from odoo.exceptions import UserError
 class CrmLeadWorkEstimation(models.Model):
     _name = 'crm.lead.work.estimation'
     _description = 'Ước tính công việc cơ hội'
-    _order = 'module, id'
+    _order = 'sequence, id'
 
+    sequence = fields.Integer(string='Thứ tự', default=10)
     lead_id = fields.Many2one('crm.lead', string='Cơ hội', required=True, ondelete='cascade')
     module = fields.Char(string='Module', required=True)
     name = fields.Char(string='Chức năng', required=True)

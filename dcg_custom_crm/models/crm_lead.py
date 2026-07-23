@@ -32,8 +32,29 @@ class CrmLead(models.Model):
     )
     survey_done = fields.Boolean(string='Đã khảo sát', default=False)
     survey_finish_date = fields.Datetime(string='Ngày hoàn thành khảo sát', readonly=True)
-    demo_done = fields.Boolean(string='Đã demo', default=False)
-    demo_finish_date = fields.Datetime(string='Ngày hoàn thành demo', readonly=True)
+    survey_line_ids = fields.One2many(
+        'crm.lead.survey.line',
+        'lead_id',
+        string='Chi tiết khảo sát',
+    )
+    demo_done = fields.Boolean(string='Đã hoàn thành demo', default=False)
+    demo_finish_date = fields.Datetime(string='Thời gian demo', readonly=True)
+    is_internal_demo_done = fields.Boolean(string='Đã demo nội bộ', default=False)
+    internal_demo_user_ids = fields.Many2many(
+        'res.users',
+        'crm_lead_internal_demo_user_rel',
+        'lead_id',
+        'user_id',
+        string='Nhân sự demo nội bộ',
+    )
+    demo_reviewer_ids = fields.Many2many(
+        'res.users',
+        'crm_lead_demo_reviewer_rel',
+        'lead_id',
+        'user_id',
+        string='Người review demo',
+    )
+    is_customer_demo_done = fields.Boolean(string='Đã demo cho khách hàng', default=False)
     project_id = fields.Many2one('project.project', string='Link dự án', copy=False)
 
     @api.depends(

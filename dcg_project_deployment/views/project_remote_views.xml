@@ -28,7 +28,7 @@
                             <field name="name"/>
                             <field name="server_type"/>
                             <field name="connection_type"/>
-                            <field name="active"/>
+                            <field name="active" widget="boolean_toggle"/>
                         </group>
                         <group>
                             <field name="host" invisible="connection_type not in ['ssh', 'rdp', 'ftp', 'sftp', 'database', 'vpn']"/>

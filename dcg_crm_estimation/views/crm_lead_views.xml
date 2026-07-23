@@ -3,11 +3,29 @@
     <record id="crm_lead_view_form_inherit_dcg_estimation" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.estimation</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="inherit_id" ref="dcg_custom_crm.crm_lead_view_form_inherit_dcg_custom"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='lead']" position="before">
+            <xpath expr="//page[@name='dcg_survey']" position="after">
                 <field name="is_project_manager" invisible="1"/>
-                <page name="dcg_value_estimation" string="Giá trị ước tính" invisible="type == 'lead'">
+                <page name="dcg_work_estimation" string="Công việc ước tính" invisible="type == 'lead'">
+                    <div class="h3">Chi tiết Man-day kỹ thuật</div>
+                    <field name="work_estimation_ids" nolabel="1" readonly="not is_project_manager">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="module"/>
+                            <field name="name"/>
+                            <field name="priority"/>
+                            <field name="ba_md" sum="Tổng BA"/>
+                            <field name="backend_md" sum="Tổng Backend"/>
+                            <field name="frontend_md" sum="Tổng Frontend" optional="hide"/>
+                            <field name="qa_md" sum="Tổng QA" optional="hide"/>
+                            <field name="devops_md" sum="Tổng DevOps" optional="hide"/>
+                            <field name="uiux_md" sum="Tổng UI/UX" optional="hide"/>
+                            <field name="total_md" sum="Tổng MD"/>
+                        </list>
+                    </field>
+                </page>
+                <page name="dcg_value_estimation" string="Chi phí ước tính" invisible="type == 'lead'">
                     <group>
                         <group string="Tài chính ước tính">
                             <field name="expected_revenue" string="Doanh thu dự kiến"/>
@@ -25,38 +43,19 @@
                             <field name="total_effort" readonly="1"/>
                         </group>
                     </group>
-                    <group string="Chi tiết chi phí ngoài nhân sự">
-                        <field name="value_estimation_ids" nolabel="1" readonly="not is_project_manager">
-                            <list editable="bottom">
-                                <field name="cost_type"/>
-                                <field name="name"/>
-                                <field name="quantity"/>
-                                <field name="unit"/>
-                                <field name="unit_price"/>
-                                <field name="subtotal" sum="Tổng chi phí ngoài"/>
-                                <field name="note"/>
-                                <field name="currency_id" column_invisible="True"/>
-                            </list>
-                        </field>
-                    </group>
-                </page>
-                <page name="dcg_work_estimation" string="Công việc ước tính" invisible="type == 'lead'">
-                    <group string="Chi tiết man-day kỹ thuật">
-                        <field name="work_estimation_ids" nolabel="1" readonly="not is_project_manager">
-                            <list editable="bottom">
-                                <field name="module"/>
-                                <field name="name"/>
-                                <field name="priority"/>
-                                <field name="ba_md" sum="Tổng BA"/>
-                                <field name="backend_md" sum="Tổng Backend"/>
-                                <field name="frontend_md" sum="Tổng Frontend"/>
-                                <field name="qa_md" sum="Tổng QA"/>
-                                <field name="devops_md" sum="Tổng DevOps"/>
-                                <field name="uiux_md" sum="Tổng UI/UX"/>
-                                <field name="total_md" sum="Tổng MD"/>
-                            </list>
-                        </field>
-                    </group>
+                    <div class="h3">Chi tiết chi phí ngoài nhân sự</div>
+                    <field name="value_estimation_ids" nolabel="1" readonly="not is_project_manager">
+                        <list editable="bottom">
+                            <field name="cost_type"/>
+                            <field name="name"/>
+                            <field name="quantity"/>
+                            <field name="unit"/>
+                            <field name="unit_price"/>
+                            <field name="subtotal" sum="Tổng chi phí ngoài"/>
+                            <field name="note"/>
+                            <field name="currency_id" column_invisible="True"/>
+                        </list>
+                    </field>
                 </page>
             </xpath>
         </field>
