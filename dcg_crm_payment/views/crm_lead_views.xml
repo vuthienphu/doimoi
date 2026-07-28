@@ -3,7 +3,7 @@
     <record id="crm_lead_view_form_inherit_dcg_payment" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.payment</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="dcg_custom_crm.crm_lead_view_form_inherit_dcg_custom"/>
+        <field name="inherit_id" ref="dcg_crm_cost.crm_lead_view_form_inherit_dcg_cost"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button name="action_create_contract"

@@ -3,7 +3,7 @@
     <record id="crm_lead_view_form_inherit_dcg_custom" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.custom</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="dcg_crm_cost.crm_lead_view_form_inherit_dcg_cost"/>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//header/button[@name='action_set_won_rainbowman']" position="after">
                 <button name="action_complete_survey" string="Hoàn thành khảo sát" type="object"
