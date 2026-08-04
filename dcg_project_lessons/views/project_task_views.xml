@@ -13,6 +13,9 @@
                     <field name="lesson_count" widget="statinfo" string="Bài học"/>
                 </button>
             </xpath>
+            <xpath expr="//page[@id='timesheets_tab']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//notebook" position="inside">
                 <page name="caution_lessons" string="Bài học cần lưu ý">
                     <field name="caution_lesson_ids" nolabel="1">
@@ -26,13 +29,6 @@
                         </list>
                     </field>
                 </page>
-            </xpath>
-            <xpath expr="//sheet/group" position="inside">
-                <group string="Ước tính &amp; Thực tế (MD)">
-                    <field name="estimated_md"/>
-                    <field name="actual_md" readonly="1"/>
-                    <field name="variance_md" readonly="1" decoration-danger="variance_md &gt; 0" decoration-success="variance_md &lt;= 0"/>
-                </group>
             </xpath>
         </field>
     </record>

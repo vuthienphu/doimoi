@@ -4,7 +4,6 @@ from datetime import timedelta
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
-
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
@@ -43,7 +42,7 @@ class CrmLead(models.Model):
         for lead in self:
             lead.total_paid = sum(lead.payment_ids.mapped('paid_amount'))
             lead.remaining_amount = lead.expected_revenue - lead.total_paid
-            
+
             payment_dates = lead.payment_ids.filtered(lambda p: p.payment_date).mapped('payment_date')
             lead.last_payment_date = max(payment_dates) if payment_dates else False
 
@@ -51,15 +50,15 @@ class CrmLead(models.Model):
         self.ensure_one()
         if not self.payment_type_id or self.payment_cycle_count <= 0 or not self.first_payment_date or self.expected_revenue <= 0:
             return
-            
+
         commands = [(5, 0, 0)]  # Xóa các dòng lịch sử cũ nếu có
         cycle_days = self.payment_type_id.cycle_days
         amount_per_cycle = self.expected_revenue / self.payment_cycle_count
-        
+
         company_currency = self.company_id.currency_id or self.currency_id
         if company_currency:
             amount_per_cycle = company_currency.round(amount_per_cycle)
-            
+
         for i in range(self.payment_cycle_count):
             due_date = self.first_payment_date + timedelta(days=i * cycle_days)
             commands.append((0, 0, {
@@ -75,7 +74,6 @@ class CrmLead(models.Model):
         for lead in self:
             if not lead.payment_type_id or lead.payment_cycle_count <= 0 or not lead.first_payment_date or lead.expected_revenue <= 0:
                 continue
-            # Chỉ sinh tự động khi chưa có bất kỳ đợt thanh toán thực tế nào
             if any(line.paid_amount > 0 for line in lead.payment_ids):
                 continue
             lead._generate_payment_schedule()
@@ -84,18 +82,16 @@ class CrmLead(models.Model):
         for lead in self:
             if not lead.payment_type_id or lead.payment_cycle_count <= 0 or not lead.first_payment_date or lead.expected_revenue <= 0:
                 raise UserError("Vui lòng điền đầy đủ cấu hình thanh toán và doanh thu dự kiến trước khi sinh lịch!")
-            
+
             if any(line.paid_amount > 0 for line in lead.payment_ids):
                 raise UserError("Không thể tạo lại lịch thanh toán vì đã có đợt thanh toán được thực tế hóa (Số tiền thanh toán > 0)!")
-                
+
             lead._generate_payment_schedule()
 
     def action_create_contract(self):
         self.ensure_one()
         if self.contract_id:
             raise UserError("Cơ hội này đã có hợp đồng!")
-
-        # Nếu đang là Lead (type == 'lead'), chuyển thành Opportunity và reload để hiện tab Thanh toán
         if self.type == 'lead':
             self.write({'type': 'opportunity'})
             return {
@@ -106,8 +102,6 @@ class CrmLead(models.Model):
                 'view_mode': 'form',
                 'target': 'current',
             }
-
-        # Kiểm tra các trường cần thiết để tạo lịch thanh toán (chỉ kiểm tra khi đã là Opportunity)
         missing_fields = []
         if not self.payment_type_id:
             missing_fields.append("- Loại thanh toán")
@@ -117,14 +111,12 @@ class CrmLead(models.Model):
             missing_fields.append("- Ngày thanh toán đầu tiên")
         if self.expected_revenue <= 0:
             missing_fields.append("- Doanh thu dự kiến / Giá trị hợp đồng (phải lớn hơn 0)")
-            
+
         if missing_fields:
             raise UserError("Để tạo hợp đồng, vui lòng bổ sung đầy đủ thông tin thanh toán:\n" + "\n".join(missing_fields))
-            
-        # Tự sinh lịch thanh toán nếu chưa có dòng nào
         if not self.payment_ids:
             self._generate_payment_schedule()
-            
+
         contract_vals = {
             'name': f"HĐ/{self.name}",
             'lead_id': self.id,
@@ -132,11 +124,9 @@ class CrmLead(models.Model):
         }
         contract = self.env['crm.contract'].create(contract_vals)
         self.contract_id = contract.id
-        
-        # Nếu đã có dự án thì gán hợp đồng cho dự án đó
         if self.project_id:
             self.project_id.contract_id = contract.id
-            
+
         return {
             'type': 'ir.actions.act_window',
             'name': 'Hợp đồng',
@@ -165,13 +155,13 @@ class CrmLead(models.Model):
             lead = payment.lead_id
             if not lead.payment_type_id or not lead.user_id:
                 continue
-                
+
             if payment.paid_amount >= payment.expected_amount:
                 continue
-                
+
             remind_before_days = lead.payment_type_id.remind_before_days
             days_to_due = (payment.due_date - today).days
-            
+
             if 0 <= days_to_due <= remind_before_days:
                 lead._send_payment_reminder_email(payment.due_date)
                 payment.reminder_sent = True

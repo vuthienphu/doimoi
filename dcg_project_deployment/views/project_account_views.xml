@@ -9,13 +9,12 @@
                 <field name="project_id"/>
                 <field name="account_type"/>
                 <field name="username"/>
-                <field name="password_masked" groups="project.group_project_manager"/>
+                <field name="password_masked" groups="project.group_project_manager" invisible="1"/>
                 <field name="url" widget="url"/>
                 <field name="active"/>
             </list>
         </field>
     </record>
-
     <record id="project_account_view_form" model="ir.ui.view">
         <field name="name">project.account.form</field>
         <field name="model">project.account</field>
@@ -33,7 +32,7 @@
                             <field name="username" widget="CopyClipboardChar"/>
                             <field name="password" widget="password" groups="base.group_system"/>
                             <field name="password" string="Sao chép mật khẩu" widget="CopyClipboardButton" groups="base.group_system" options="{'btn_class': 'secondary'}"/>
-                            <field name="password_masked" readonly="1" groups="project.group_project_manager"/>
+                            <field name="password_masked" readonly="1" groups="project.group_project_manager" invisible="1"/>
                             <field name="url" widget="url"/>
                         </group>
                     </group>
@@ -45,7 +44,6 @@
             </form>
         </field>
     </record>
-
     <record id="project_account_view_search" model="ir.ui.view">
         <field name="name">project.account.search</field>
         <field name="model">project.account</field>
@@ -65,7 +63,6 @@
             </search>
         </field>
     </record>
-
     <record id="project_account_action" model="ir.actions.act_window">
         <field name="name">Tài khoản dự án</field>
         <field name="res_model">project.account</field>

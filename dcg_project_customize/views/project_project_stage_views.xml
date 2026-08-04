@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_stage_view_form_inherit_dcg" model="ir.ui.view">
+        <field name="name">project.project.stage.form.inherit.dcg</field>
+        <field name="model">project.project.stage</field>
+        <field name="inherit_id" ref="project.project_project_stage_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Template Checklist Bàn Giao">
+                    <field name="checklist_template_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </list>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_project_project_stage" model="ir.actions.act_window">
+        <field name="name">Trạng thái Dự án</field>
+        <field name="res_model">project.project.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_project_project_stage" 
+              name="Trạng thái Dự án" 
+              parent="project.menu_project_config" 
+              action="action_project_project_stage" 
+              sequence="3"/>
+</odoo>

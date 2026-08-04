@@ -2,7 +2,6 @@
 
 from odoo import fields, models
 
-
 class CrmLeadSurveyLine(models.Model):
     _name = 'crm.lead.survey.line'
     _description = 'Chi tiết đầu mục khảo sát Cơ hội'
@@ -26,4 +25,8 @@ class CrmLeadSurveyLine(models.Model):
     )
     is_standard = fields.Boolean(string='Chuẩn Odoo', default=True)
     solution = fields.Text(string='Giải pháp')
+    survey_date = fields.Date(string='Ngày khảo sát')
+    surveyor_id = fields.Many2one('res.users', string='Người khảo sát')
+    customer_contact_id = fields.Many2one('res.partner', string='Người liên hệ KH')
+    dev_requirement_clear = fields.Boolean(string='Rõ yêu cầu Dev')
     notes = fields.Text(string='Ghi chú')

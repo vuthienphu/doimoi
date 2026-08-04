@@ -17,9 +17,11 @@
         'contacts',
     ],
     'data': [
+        'views/res_partner_views.xml',
         'security/ir.model.access.csv',
         'wizard/crm_team_commission_wizard_views.xml',
         'wizard/crm_survey_wizard_views.xml',
+        'wizard/crm_demo_checklist_wizard_views.xml',
         'views/crm_team_views.xml',
         'views/crm_lead_views.xml',
     ],

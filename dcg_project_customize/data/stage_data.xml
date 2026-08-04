@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="project_stage_init" model="project.project.stage">
+        <field name="name">Khởi tạo</field>
+        <field name="sequence">10</field>
+        <field name="active">True</field>
+    </record>
+    <record id="project_stage_implement" model="project.project.stage">
+        <field name="name">Triển khai</field>
+        <field name="sequence">20</field>
+        <field name="active">True</field>
+    </record>
+    <record id="project_stage_test" model="project.project.stage">
+        <field name="name">Test</field>
+        <field name="sequence">30</field>
+        <field name="active">True</field>
+    </record>
+    <record id="project_stage_golive" model="project.project.stage">
+        <field name="name">GoLive</field>
+        <field name="sequence">40</field>
+        <field name="active">True</field>
+    </record>
+    <record id="project_stage_done" model="project.project.stage">
+        <field name="name">Hoàn thành</field>
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+    </record>
     <record id="task_stage_todo" model="project.task.type">
         <field name="name">Cần làm</field>
         <field name="sequence">10</field>
         <field name="active">True</field>
         <field name="is_dcg_default">True</field>
     </record>
-
     <record id="task_stage_processing" model="project.task.type">
         <field name="name">Đang làm</field>
         <field name="sequence">20</field>
@@ -14,7 +38,6 @@
         <field name="is_processing">True</field>
         <field name="is_dcg_default">True</field>
     </record>
-
     <record id="task_stage_testing" model="project.task.type">
         <field name="name">Chuyển test</field>
         <field name="sequence">30</field>
@@ -22,7 +45,6 @@
         <field name="is_test">True</field>
         <field name="is_dcg_default">True</field>
     </record>
-
     <record id="task_stage_done" model="project.task.type">
         <field name="name">Hoàn thành</field>
         <field name="sequence">40</field>
@@ -30,7 +52,6 @@
         <field name="is_done">True</field>
         <field name="is_dcg_default">True</field>
     </record>
-
     <record id="task_stage_live" model="project.task.type">
         <field name="name">Đã đưa lên Live</field>
         <field name="sequence">50</field>
@@ -38,7 +59,6 @@
         <field name="is_live">True</field>
         <field name="is_dcg_default">True</field>
     </record>
-
     <function model="project.task.type" name="_dcg_cleanup_duplicate_stages"/>
     <function model="project.task.type" name="_dcg_cleanup_non_standard_project_stages"/>
     <function model="project.project" name="_dcg_assign_all_stages_to_all_projects"/>

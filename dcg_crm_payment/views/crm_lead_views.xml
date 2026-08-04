@@ -23,22 +23,15 @@
                     </div>
                 </button>
             </xpath>
+            <xpath expr="//page[@name='dcg_value_estimation']" position="attributes">
+                <attribute name="groups">dcg_crm_payment.group_crm_payment_manager</attribute>
+            </xpath>
+            <xpath expr="//page[@name='dcg_cost']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="groups">dcg_crm_payment.group_crm_payment_manager</attribute>
+            </xpath>
             <xpath expr="//page[@name='dcg_cost']" position="after">
-                <page name="dcg_demo" string="Demo" invisible="type == 'lead'">
-                    <group>
-                        <group string="Thông tin Demo">
-                            <field name="demo_done" widget="boolean_toggle"/>
-                            <field name="demo_finish_date"/>
-                            <field name="is_internal_demo_done" widget="boolean_toggle"/>
-                            <field name="is_customer_demo_done" widget="boolean_toggle"/>
-                        </group>
-                        <group string="Nhân sự">
-                            <field name="internal_demo_user_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                            <field name="demo_reviewer_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                        </group>
-                    </group>
-                </page>
-                <page name="dcg_payment" string="Thanh toán" invisible="type == 'lead'">
+                <page name="dcg_payment" string="Thanh toán" invisible="type == 'lead'" groups="dcg_crm_payment.group_crm_payment_manager">
                     <group>
                         <group string="Cấu hình thanh toán">
                             <field name="payment_type_id" options="{'no_create': True, 'no_open': True}"/>
@@ -77,7 +70,6 @@
             </xpath>
         </field>
     </record>
-
     <record id="crm_lead_view_form_inherit_dcg_payment_cost" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.dcg.payment.cost</field>
         <field name="model">crm.lead</field>
