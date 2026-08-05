@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="dcg_crm_estimation.crm_lead_view_form_inherit_dcg_estimation"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='dcg_value_estimation']" position="after">
-                <page name="dcg_cost" string="Chi phí thực tế" invisible="type == 'lead'">
+                <page name="dcg_cost" string="Chi phí thực tế" invisible="1">
                     <div class="h3">Chi phí thực tế</div>
                     <field name="cost_ids" nolabel="1">
                         <list editable="bottom">
@@ -28,7 +28,6 @@
             </xpath>
         </field>
     </record>
-
     <record id="crm_case_tree_view_oppor_inherit_dcg_cost" model="ir.ui.view">
         <field name="name">crm.lead.list.opportunity.inherit.dcg.cost</field>
         <field name="model">crm.lead</field>

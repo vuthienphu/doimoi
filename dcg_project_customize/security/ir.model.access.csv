@@ -2,3 +2,6 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_task_checklist_user,task.checklist user,model_task_checklist,project.group_project_user,1,1,1,1
 access_task_checklist_manager,task.checklist manager,model_task_checklist,project.group_project_manager,1,1,1,1
 access_project_task_type_manager_dcg,project.task.type manager dcg,project.model_project_task_type,project.group_project_manager,1,1,1,0
+access_project_handover_checklist_user,project.handover.checklist user,model_project_handover_checklist,project.group_project_user,1,1,1,1
+access_project_stage_checklist_template_manager,project.stage.checklist.template manager,model_project_stage_checklist_template,project.group_project_manager,1,1,1,1
+access_project_stage_checklist_template_user,project.stage.checklist.template user,model_project_stage_checklist_template,project.group_project_user,1,0,0,0

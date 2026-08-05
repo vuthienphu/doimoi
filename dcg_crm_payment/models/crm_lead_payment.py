@@ -2,7 +2,6 @@
 
 from odoo import api, fields, models
 
-
 class CrmLeadPayment(models.Model):
     _name = 'crm.lead.payment'
     _description = 'Chi tiết thanh toán cơ hội'
@@ -21,7 +20,6 @@ class CrmLeadPayment(models.Model):
         readonly=True,
     )
     reminder_sent = fields.Boolean(string='Đã gửi nhắc nhở', default=False)
-    
     is_underpaid = fields.Boolean(
         string='Chưa thanh toán đủ',
         compute='_compute_is_underpaid',
@@ -51,7 +49,7 @@ class CrmLeadPayment(models.Model):
             condition = '>=' if value else '<'
         else:
             condition = '<'
-            
+
         self.env.cr.execute(f"SELECT id FROM crm_lead_payment WHERE paid_amount {condition} expected_amount")
         res = self.env.cr.fetchall()
         return [('id', 'in', [r[0] for r in res])]
@@ -68,7 +66,7 @@ class CrmLeadPayment(models.Model):
                 self.env.cr.execute("SELECT id FROM crm_lead_payment WHERE paid_amount >= expected_amount OR due_date >= %s OR due_date IS NULL", (today,))
             else:
                 self.env.cr.execute("SELECT id FROM crm_lead_payment WHERE paid_amount < expected_amount AND due_date < %s", (today,))
-                
+
         res = self.env.cr.fetchall()
         return [('id', 'in', [r[0] for r in res])]
 

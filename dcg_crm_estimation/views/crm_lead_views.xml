@@ -25,7 +25,7 @@
                         </list>
                     </field>
                 </page>
-                <page name="dcg_value_estimation" string="Chi phí ước tính" invisible="type == 'lead'">
+                <page name="dcg_value_estimation" string="Chi phí ước tính" invisible="1">
                     <group>
                         <group string="Tài chính ước tính">
                             <field name="expected_revenue" string="Doanh thu dự kiến"/>

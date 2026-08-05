@@ -15,6 +15,8 @@
         'project',
         'crm',
         'mail',
+        'hr',
+        'survey',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -23,6 +25,7 @@
         'data/cron_data.xml',
         'views/crm_lead_views.xml',
         'views/project_project_views.xml',
+        'views/project_project_stage_views.xml',
         'views/project_task_type_views.xml',
         'views/project_task_views.xml',
         'views/res_config_settings_views.xml',

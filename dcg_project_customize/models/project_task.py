@@ -4,7 +4,6 @@ from email.utils import formataddr
 
 from odoo import api, fields, models
 
-
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
@@ -15,8 +14,21 @@ class ProjectTask(models.Model):
         'user_id',
         string='Danh sách người kiểm tra',
     )
+    request_date = fields.Date(
+        string='Ngày yêu cầu',
+        default=fields.Date.context_today,
+        readonly=True,
+        copy=False,
+    )
+    requester_id = fields.Many2one('res.partner', string='Người yêu cầu')
+    customer_company_id = fields.Many2one(
+        'res.partner',
+        string='Khách hàng',
+        related='project_id.partner_id',
+        readonly=True,
+    )
     planned_finish_date = fields.Datetime(string='Thời gian dự kiến hoàn thành')
-    actual_finish_date = fields.Datetime(string='Thời gian thực tế hoàn thành')
+    actual_finish_date = fields.Datetime(string='Thời gian thực tế hoàn thành', readonly=True)
     checklist_ids = fields.One2many(
         'task.checklist',
         'task_id',
@@ -38,6 +50,14 @@ class ProjectTask(models.Model):
         }
 
     def write(self, vals):
+        if 'stage_id' in vals:
+            stage = self.env['project.task.type'].browse(vals['stage_id'])
+            if stage.is_done:
+                unfinished_tasks = self.filtered(lambda task: not task.actual_finish_date)
+                if unfinished_tasks:
+                    super(ProjectTask, unfinished_tasks).write({
+                        'actual_finish_date': fields.Datetime.now(),
+                    })
         result = super().write(vals)
         if 'stage_id' in vals and not self.env.context.get('dcg_skip_stage_notification'):
             for task in self:

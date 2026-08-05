@@ -2,7 +2,6 @@
 
 from odoo import api, fields, models
 
-
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
@@ -12,8 +11,6 @@ class ProjectProject(models.Model):
     def create(self, vals_list):
         projects = super(ProjectProject, self).create(vals_list)
         for project in projects:
-            # Nếu dự án được sinh ra từ Cơ hội và Cơ hội đó có Hợp đồng,
-            # tự động liên kết dự án với hợp đồng.
             if project.lead_id and project.lead_id.contract_id:
                 contract = project.lead_id.contract_id
                 project.contract_id = contract.id

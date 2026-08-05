@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_dcg_person_contacts" model="ir.actions.act_window">
+        <field name="name">Liên hệ</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('is_company', '=', False)]</field>
+        <field name="context">{'default_is_company': False, 'search_default_group_company': 1}</field>
+    </record>
+    <menuitem id="contacts.menu_contacts" action="action_dcg_person_contacts"/>
+    <record id="dcg_custom_crm_view_partner_tree" model="ir.ui.view">
+        <field name="name">dcg.custom.crm.res.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="function" string="Chức danh" optional="show"/>
+                <field name="department_name" string="Phòng ban" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="dcg_custom_crm_view_partner_form" model="ir.ui.view">
+        <field name="name">dcg.custom.crm.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_supplier" invisible="not is_company"/>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="department_name" invisible="is_company"/>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']//field[@name='comment']" position="replace">
+            </xpath>
+            <xpath expr="//page[@name='contact_addresses']//field[@name='child_ids']" position="after">
+                <separator string="Ghi chú"/>
+                <field name="comment" nolabel="1" placeholder="Nhập ghi chú..."/>
+</xpath>
+            <xpath expr="//field[@name='child_ids']/form//field[@name='function']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="string">Chức danh</attribute>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/form//div[@class='row flex-row']" position="after">
+                <div class="d-flex gap-4 mt-2" invisible="is_company or type != 'contact'">
+                    <label for="is_decision_maker"/>
+                    <field name="is_decision_maker"/>
+                </div>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="payment_info" string="Thanh toán">
+                    <field name="bank_ids">
+                        <list editable="bottom">
+                            <field name="acc_holder_name" string="Chủ tài khoản"/>
+                            <field name="bank_id" string="Tên ngân hàng"/>
+                            <field name="acc_number" string="Số tài khoản"/>
+                            <field name="branch_name" string="Chi nhánh"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,5 +1,5 @@
-from odoo import api, fields, models
-
+# -*- coding: utf-8 -*-
+from odoo import fields, models
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
@@ -13,6 +13,18 @@ class HrEmployee(models.Model):
         string='Salary Structure',
         store=True,
         readonly=False
+    )
+    identification_issue_date = fields.Date(string='Ngày cấp CCCD')
+    identification_issue_place = fields.Char(string='Nơi cấp CCCD')
+    identification_expiry_date = fields.Date(string='Ngày hết hạn CCCD')
+    passport_issue_date = fields.Date(string='Ngày cấp hộ chiếu')
+    passport_expiry_date = fields.Date(string='Ngày hết hạn hộ chiếu')
+    labor_contract_ids = fields.Many2many(
+        'ir.attachment',
+        'hr_employee_labor_contract_rel',
+        'employee_id',
+        'attachment_id',
+        string='Hợp đồng lao động'
     )
     def _compute_payslip_count(self):
         for employee in self:
