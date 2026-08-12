@@ -7,3 +7,4 @@ access_crm_demo_checklist_manager,crm.demo.checklist.manager,model_crm_demo_chec
 access_crm_demo_customer_line_user,crm.demo.customer.line.user,model_crm_demo_customer_line,base.group_user,1,1,1,0
 access_crm_demo_customer_line_manager,crm.demo.customer.line.manager,model_crm_demo_customer_line,sales_team.group_sale_manager,1,1,1,1
 access_crm_demo_checklist_wizard,crm.demo.checklist.wizard,model_crm_demo_checklist_wizard,base.group_user,1,1,1,1
+access_crm_exchange_history,crm.exchange.history,model_crm_exchange_history,base.group_user,1,1,1,1

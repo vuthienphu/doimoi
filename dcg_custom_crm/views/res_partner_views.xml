@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="dcg_custom_crm_view_partner_filter" model="ir.ui.view">
+        <field name="name">dcg.custom.crm.res.partner.filter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <filter string="Công ty" name="group_by_parent_id" context="{'group_by': 'parent_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
     <record id="action_dcg_person_contacts" model="ir.actions.act_window">
-        <field name="name">Liên hệ</field>
+        <field name="name">Khách hàng</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="domain">[('is_company', '=', False)]</field>
-        <field name="context">{'default_is_company': False, 'search_default_group_company': 1}</field>
+        <field name="context">{'default_is_company': False, 'search_default_group_by_parent_id': 1}</field>
     </record>
-    <menuitem id="contacts.menu_contacts" action="action_dcg_person_contacts"/>
+
+    <record id="action_dcg_company_contacts" model="ir.actions.act_window">
+        <field name="name">Công ty</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('is_company', '=', True)]</field>
+        <field name="context">{'default_is_company': True}</field>
+    </record>
+
+    <menuitem id="contacts.menu_contacts" name="Liên hệ"/>
+
+    <record id="contacts.res_partner_menu_contacts" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <menuitem id="menu_dcg_person_contacts" 
+              name="Khách hàng" 
+              parent="contacts.menu_contacts" 
+              action="action_dcg_person_contacts" 
+              sequence="1"/>
+
+    <menuitem id="menu_dcg_company_contacts" 
+              name="Công ty" 
+              parent="contacts.menu_contacts" 
+              action="action_dcg_company_contacts" 
+              sequence="2"/>
+
     <record id="dcg_custom_crm_view_partner_tree" model="ir.ui.view">
         <field name="name">dcg.custom.crm.res.partner.tree</field>
         <field name="model">res.partner</field>
