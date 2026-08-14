@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_doimoi_service_tree" model="ir.ui.view">
+        <field name="name">doimoi.service.tree</field>
+        <field name="model">doimoi.service</field>
+        <field name="arch" type="xml">
+            <list string="Dịch vụ">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="website_id" optional="show"/>
+                <field name="service_group_id"/>
+                <field name="is_published" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_doimoi_service_form" model="ir.ui.view">
+        <field name="name">doimoi.service.form</field>
+        <field name="model">doimoi.service</field>
+        <field name="arch" type="xml">
+            <form string="Dịch vụ">
+                <sheet>
+                    <field name="icon" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Tên dịch vụ..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="service_group_id"/>
+                            <field name="website_id"/>
+                            <field name="sequence"/>
+                            <field name="is_published" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Mô tả">
+                            <field name="short_description" placeholder="Mô tả ngắn..."/>
+                        </page>
+                        <page string="Tính năng nổi bật">
+                            <field name="features" placeholder="Nhập các tính năng nổi bật, cách nhau bởi dấu phẩy (Ví dụ: React, Node.js, GraphQL)"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doimoi_service" model="ir.actions.act_window">
+        <field name="name">Dịch vụ</field>
+        <field name="res_model">doimoi.service</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

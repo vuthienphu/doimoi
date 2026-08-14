@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_doimoi_industry_list" model="ir.ui.view">
+        <field name="name">doimoi.industry.list</field>
+        <field name="model">doimoi.industry</field>
+        <field name="arch" type="xml">
+            <list string="Ngành trọng tâm">
+                <field name="sequence" widget="handle"/>
+                <field name="cover_image" string="Ảnh đại diện" widget="image"
+                       options="{'size': [96, 54]}"/>
+                <field name="icon"/>
+                <field name="name"/>
+                <field name="website_id" optional="show"/>
+                <field name="theme"/>
+                <field name="is_published" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_doimoi_industry_form" model="ir.ui.view">
+        <field name="name">doimoi.industry.form</field>
+        <field name="model">doimoi.industry</field>
+        <field name="arch" type="xml">
+            <form string="Ngành trọng tâm">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Ví dụ: Nhiệt điện"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="icon" placeholder="⚡"/>
+                            <field name="website_id"/>
+                            <field name="theme"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="is_published" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ảnh đại diện">
+                            <group>
+                                <group string="Ảnh hiển thị phía trên card">
+                                    <field name="cover_image" widget="image"
+                                           options="{'preview_image': 'cover_image', 'size': [800, 450]}"
+                                           class="oe_left"/>
+                                    <div class="text-muted">
+                                        Nên tải ảnh ngang tỷ lệ 16:9, dung lượng vừa phải.
+                                        Hệ thống tự thu ảnh về tối đa 1600 × 900 px.
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Nội dung">
+                            <field name="short_description" placeholder="Mô tả ngắn về kinh nghiệm và giải pháp trong ngành..."/>
+                        </page>
+                        <page string="Năng lực nổi bật">
+                            <field name="feature_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" placeholder="Ví dụ: Nhật ký vận hành tổ máy"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doimoi_industry" model="ir.actions.act_window">
+        <field name="name">Ngành trọng tâm</field>
+        <field name="res_model">doimoi.industry</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

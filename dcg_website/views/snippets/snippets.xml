@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_doimoi_cta" name="Đổi Mới - CTA">
+        <section class="s_doimoi_cta common-cta-section">
+            <div class="container-doimoi">
+                <div class="common-cta">
+                    <div>
+                        <h2>Đồng hành cùng Đổi Mới</h2>
+                        <p class="mb-0">Tùy chỉnh nội dung này trực tiếp bằng Website Builder.</p>
+                    </div>
+                    <a href="/contactus" class="btn btn-doimoi common-cta__button">Liên hệ tư vấn →</a>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_doimoi_highlights" name="Đổi Mới - Điểm nổi bật">
+        <section class="s_doimoi_highlights py-5 bg-doimoi-gray">
+            <div class="container-doimoi">
+                <div class="row g-4 text-center">
+                    <div class="col-md-4"><h3 class="text-doimoi">15+</h3><p>Năm kinh nghiệm</p></div>
+                    <div class="col-md-4"><h3 class="text-doimoi">500+</h3><p>Khách hàng đồng hành</p></div>
+                    <div class="col-md-4"><h3 class="text-doimoi">24/7</h3><p>Hỗ trợ vận hành</p></div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="doimoi_snippets" inherit_id="website.snippets" name="Doimoi snippets">
+        <xpath expr="//snippets[@id='snippet_groups']" position="inside">
+            <t snippet-group="doimoi" t-snippet="website.s_snippet_group" string="Đổi Mới"/>
+        </xpath>
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="dcg_website.s_doimoi_cta" string="CTA Đổi Mới" group="doimoi">
+                <keywords>cta contact doimoi</keywords>
+            </t>
+            <t t-snippet="dcg_website.s_doimoi_highlights" string="Điểm nổi bật" group="doimoi">
+                <keywords>statistics highlights doimoi</keywords>
+            </t>
+        </xpath>
+    </template>
+</odoo>

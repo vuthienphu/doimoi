@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="project_cards" name="Danh sách dự án">
+        <section t-if="projects" class="project-section py-5 bg-white">
+            <div class="container-doimoi py-lg-4">
+                <div class="row g-4">
+                    <t t-foreach="projects" t-as="project">
+                        <div class="col-12 col-md-6 col-lg-4 d-flex">
+                            <article class="project-card w-100">
+                                <div class="project-card__image">
+                                    <img t-if="project.image" t-att-src="'/web/image/doimoi.project/%s/image' % project.id" t-att-alt="project.name" loading="lazy"/>
+                                    <div t-else="" class="project-card__placeholder">DỰ ÁN</div>
+                                </div>
+                                <div class="project-card__body">
+                                    <span t-if="project.industry_id" class="badge badge-doimoi mb-3" t-out="project.industry_id.name"/>
+                                    <h2 t-out="project.name"/>
+                                    <p t-if="project.client_name" class="project-card__client" t-out="project.client_name"/>
+                                    <p t-if="project.summary" t-out="project.summary"/>
+                                    <strong t-if="project.result" t-out="project.result"/>
+                                    <a t-if="project.project_url" t-att-href="project.project_url" class="project-card__link">Xem chi tiết →</a>
+                                </div>
+                            </article>
+                        </div>
+                    </t>
+                </div>
+                <t t-if="pager"><t t-call="website.pager"/></t>
+            </div>
+        </section>
+    </template>
+    <template id="projects_page" name="Dự án tiêu biểu">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <t t-call="dcg_website.common_page_banner"/>
+                <t t-call="dcg_website.project_cards"/>
+                <t t-call="dcg_website.common_page_cta"/>
+            </div>
+        </t>
+    </template>
+</odoo>

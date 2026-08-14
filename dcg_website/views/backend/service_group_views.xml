@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_doimoi_service_group_tree" model="ir.ui.view">
+        <field name="name">doimoi.service.group.tree</field>
+        <field name="model">doimoi.service.group</field>
+        <field name="arch" type="xml">
+            <list string="Nhóm dịch vụ">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_doimoi_service_group_form" model="ir.ui.view">
+        <field name="name">doimoi.service.group.form</field>
+        <field name="model">doimoi.service.group</field>
+        <field name="arch" type="xml">
+            <form string="Nhóm dịch vụ">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="title"/>
+                        <field name="subtitle"/>
+                        <field name="sequence"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doimoi_service_group" model="ir.actions.act_window">
+        <field name="name">Nhóm dịch vụ</field>
+        <field name="res_model">doimoi.service.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

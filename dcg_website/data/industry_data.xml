@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="industry_power" model="doimoi.industry">
+            <field name="name">Nhiệt điện</field><field name="icon">⚡</field>
+            <field name="short_description">Số hóa nhật ký vận hành tổ máy, quản lý nhiên liệu, theo dõi thông số tổ máy và báo cáo sản lượng điện tự động.</field>
+            <field name="theme">orange</field><field name="sequence">10</field><field name="is_published" eval="True"/>
+        </record>
+        <record id="industry_cement" model="doimoi.industry">
+            <field name="name">Xi măng</field><field name="icon">🏭</field>
+            <field name="short_description">Tối ưu hóa quy trình sản xuất từ khai thác đá vôi đến đóng bao thành phẩm, kiểm soát chất lượng và năng lượng.</field>
+            <field name="theme">teal</field><field name="sequence">20</field><field name="is_published" eval="True"/>
+        </record>
+        <record id="industry_coal" model="doimoi.industry">
+            <field name="name">Khai thác than</field><field name="icon">⛏️</field>
+            <field name="short_description">Theo dõi sản lượng khai thác, quản lý thiết bị mỏ, an toàn lao động và vận chuyển than từ mỏ về cảng.</field>
+            <field name="theme">purple</field><field name="sequence">30</field><field name="is_published" eval="True"/>
+        </record>
+        <record id="industry_metallurgy" model="doimoi.industry">
+            <field name="name">Luyện kim</field><field name="icon">⚙️</field>
+            <field name="short_description">Kiểm soát quy trình luyện nhôm, thép, theo dõi tiêu hao năng lượng, quản lý chất lượng mẻ sản xuất.</field>
+            <field name="theme">rose</field><field name="sequence">40</field><field name="is_published" eval="True"/>
+        </record>
+        <record id="industry_pharma" model="doimoi.industry">
+            <field name="name">Dược &amp; Thực phẩm</field><field name="icon">💊</field>
+            <field name="short_description">Truy xuất nguồn gốc, quản lý batch sản xuất, GMP compliance và kiểm soát chất lượng sản phẩm.</field>
+            <field name="theme">blue</field><field name="sequence">50</field><field name="is_published" eval="True"/>
+        </record>
+        <record id="industry_logistics" model="doimoi.industry">
+            <field name="name">Cảng &amp; Logistics</field><field name="icon">🚢</field>
+            <field name="short_description">Quản lý hoạt động cảng, theo dõi tàu ra vào, tác nghiệp bốc xếp hàng và lưu thông hàng hóa.</field>
+            <field name="theme">green</field><field name="sequence">60</field><field name="is_published" eval="True"/>
+        </record>
+
+        <record id="feature_power_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_power"/><field name="name">Nhật ký vận hành tổ máy</field><field name="sequence">10</field></record>
+        <record id="feature_power_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_power"/><field name="name">Quản lý nhiên liệu (than, dầu, gas)</field><field name="sequence">20</field></record>
+        <record id="feature_power_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_power"/><field name="name">KPI sản lượng và hiệu suất</field><field name="sequence">30</field></record>
+        <record id="feature_power_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_power"/><field name="name">Bảo trì đại tu tổ máy</field><field name="sequence">40</field></record>
+        <record id="feature_cement_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_cement"/><field name="name">Quản lý dây chuyền nung clinker</field><field name="sequence">10</field></record>
+        <record id="feature_cement_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_cement"/><field name="name">Kiểm soát chất lượng QC</field><field name="sequence">20</field></record>
+        <record id="feature_cement_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_cement"/><field name="name">Theo dõi tiêu thụ điện/than</field><field name="sequence">30</field></record>
+        <record id="feature_cement_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_cement"/><field name="name">Quản lý kho thành phẩm</field><field name="sequence">40</field></record>
+        <record id="feature_coal_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_coal"/><field name="name">Sản lượng theo ca/lò</field><field name="sequence">10</field></record>
+        <record id="feature_coal_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_coal"/><field name="name">Quản lý máy đào, ô tô mỏ</field><field name="sequence">20</field></record>
+        <record id="feature_coal_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_coal"/><field name="name">An toàn lao động mỏ</field><field name="sequence">30</field></record>
+        <record id="feature_coal_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_coal"/><field name="name">Logistics vận chuyển</field><field name="sequence">40</field></record>
+        <record id="feature_metal_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_metallurgy"/><field name="name">Nhật ký vận hành lò điện</field><field name="sequence">10</field></record>
+        <record id="feature_metal_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_metallurgy"/><field name="name">Kiểm soát chất lượng mẻ</field><field name="sequence">20</field></record>
+        <record id="feature_metal_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_metallurgy"/><field name="name">Quản lý nguyên liệu đầu vào</field><field name="sequence">30</field></record>
+        <record id="feature_metal_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_metallurgy"/><field name="name">Báo cáo năng lượng tháng</field><field name="sequence">40</field></record>
+        <record id="feature_pharma_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_pharma"/><field name="name">Batch management</field><field name="sequence">10</field></record>
+        <record id="feature_pharma_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_pharma"/><field name="name">GMP documentation</field><field name="sequence">20</field></record>
+        <record id="feature_pharma_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_pharma"/><field name="name">Truy xuất nguồn gốc</field><field name="sequence">30</field></record>
+        <record id="feature_pharma_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_pharma"/><field name="name">Kiểm soát hạn sử dụng</field><field name="sequence">40</field></record>
+        <record id="feature_logistics_1" model="doimoi.industry.feature"><field name="industry_id" ref="industry_logistics"/><field name="name">Tác nghiệp tàu</field><field name="sequence">10</field></record>
+        <record id="feature_logistics_2" model="doimoi.industry.feature"><field name="industry_id" ref="industry_logistics"/><field name="name">Bốc xếp container</field><field name="sequence">20</field></record>
+        <record id="feature_logistics_3" model="doimoi.industry.feature"><field name="industry_id" ref="industry_logistics"/><field name="name">Quản lý bãi hàng</field><field name="sequence">30</field></record>
+        <record id="feature_logistics_4" model="doimoi.industry.feature"><field name="industry_id" ref="industry_logistics"/><field name="name">Chứng từ xuất nhập khẩu</field><field name="sequence">40</field></record>
+    </data>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contact_page" name="Liên hệ">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure contact-page">
+                <t t-call="dcg_website.common_page_banner"/>
+
+                <section class="pt-5 pb-5 contact-main bg-white" id="contact-form">
+                    <div class="container-doimoi">
+                        <div class="row g-5 align-items-start">
+                            <div class="col-lg-5">
+                                <t t-set="contact_info" t-value="page_sections.get('info')"/>
+                                <span t-if="contact_info and contact_info.eyebrow" class="badge badge-doimoi text-uppercase mb-3" t-out="contact_info.eyebrow"/>
+                                <h2 t-if="contact_info" class="about-section__title" t-out="contact_info.title"/>
+                                <div class="contact-details">
+                                    <article class="contact-detail">
+                                        <span class="contact-detail__icon">📍</span>
+                                        <div><h3>Địa chỉ</h3><p class="mb-0" t-out="site_settings.address"/></div>
+                                    </article>
+                                    <article class="contact-detail">
+                                        <span class="contact-detail__icon">☎</span>
+                                        <div><h3>Điện thoại</h3><a t-if="site_settings.phone" t-att-href="'tel:%s' % site_settings.phone" t-out="site_settings.phone"/></div>
+                                    </article>
+                                    <article class="contact-detail">
+                                        <span class="contact-detail__icon">✉</span>
+                                        <div><h3>Email</h3><a t-if="site_settings.email" t-att-href="'mailto:%s' % site_settings.email" t-out="site_settings.email"/></div>
+                                    </article>
+                                    <article class="contact-detail">
+                                        <span class="contact-detail__icon">◎</span>
+                                        <div><h3>Website</h3><a t-if="site_settings.website_url" t-att-href="site_settings.website_url" target="_blank" rel="noopener" t-out="site_settings.website_url"/></div>
+                                    </article>
+                                </div>
+                                <t t-set="response_section" t-value="page_sections.get('response')"/>
+                                <div t-if="response_section" class="contact-response-note">
+                                    <strong>◷ <t t-out="response_section.title"/></strong>
+                                    <div class="mt-2" t-field="response_section.body"/>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <t t-set="form_section" t-value="page_sections.get('form')"/>
+                                <div class="contact-form-card">
+                                    <h2 class="about-section__title" t-out="form_section.title if form_section else ''"/>
+                                    <div t-if="form_success" class="alert alert-success">Cảm ơn bạn! Yêu cầu đã được gửi và đội ngũ tư vấn sẽ sớm liên hệ.</div>
+                                    <div t-if="form_error == 'required'" class="alert alert-danger">Vui lòng nhập đầy đủ họ tên, công ty và số điện thoại.</div>
+                                    <div t-if="form_error == 'spam'" class="alert alert-warning">Yêu cầu được gửi quá nhanh hoặc lặp lại. Vui lòng chờ một phút rồi thử lại.</div>
+                                    <form action="/contactus/submit" method="post">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="request_type" t-att-value="request_type"/>
+                                        <div class="d-none" aria-hidden="true"><label>Website</label><input name="website_check" type="text" tabindex="-1" autocomplete="off"/></div>
+                                        <div class="row g-3">
+                                            <div class="col-md-6"><label for="contact_name">Họ và tên *</label><input id="contact_name" name="name" type="text" class="form-control" required="required" placeholder="Nguyễn Văn A"/></div>
+                                            <div class="col-md-6"><label for="contact_company">Công ty *</label><input id="contact_company" name="company_name" type="text" class="form-control" required="required" placeholder="Tên công ty"/></div>
+                                            <div class="col-md-6"><label for="contact_phone">Số điện thoại *</label><input id="contact_phone" name="phone" type="tel" class="form-control" required="required" placeholder="0912 345 678"/></div>
+                                            <div class="col-md-6"><label for="contact_email">Email</label><input id="contact_email" name="email" type="email" class="form-control" placeholder="email@company.com"/></div>
+                                            <div class="col-12"><label for="contact_description">Mô tả nhu cầu</label><textarea id="contact_description" name="description" class="form-control" rows="5" placeholder="Doanh nghiệp bạn đang cần giải pháp gì? Ngành sản xuất, quy mô, hệ thống hiện có..."/></div>
+                                            <div class="col-12"><button type="submit" class="btn btn-doimoi w-100 py-3"><t t-out="form_section.button_label if form_section else ''"/> →</button></div>
+                                        </div>
+                                        <p t-if="form_section and form_section.subtitle" class="contact-form-card__privacy mb-0" t-out="form_section.subtitle"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

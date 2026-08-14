@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_doimoi_website_root" 
+              name="Quản lý Nội dung" 
+              parent="website.menu_website_configuration"
+              sequence="10"/>
+
+    <menuitem id="menu_doimoi_client" 
+              name="Khách hàng tiêu biểu" 
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_client" 
+              sequence="10"/>
+    <menuitem id="menu_doimoi_project" name="Dự án tiêu biểu" parent="menu_doimoi_website_root" action="action_doimoi_project" sequence="12"/>
+
+    <menuitem id="menu_doimoi_hero"
+              name="Banner và CTA"
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_hero"
+              sequence="5"/>
+    <menuitem id="menu_doimoi_page_section" name="Nội dung các trang" parent="menu_doimoi_website_root" action="action_doimoi_page_section" sequence="7"/>
+    <menuitem id="menu_doimoi_site_settings" name="Header &amp; Footer" parent="menu_doimoi_website_root" action="action_doimoi_site_settings" sequence="3"/>
+    <menuitem id="menu_doimoi_service_group" 
+              name="Nhóm dịch vụ" 
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_service_group" 
+              groups="dcg_website.group_doimoi_website_admin"
+              sequence="20"/>
+
+    <menuitem id="menu_doimoi_service" 
+              name="Dịch vụ" 
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_service" 
+              sequence="25"/>
+              
+    <menuitem id="menu_doimoi_statistic" 
+              name="Số liệu nổi bật" 
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_statistic" 
+              sequence="30"/>
+
+    <menuitem id="menu_doimoi_industry"
+              name="Ngành trọng tâm"
+              parent="menu_doimoi_website_root"
+              action="action_doimoi_industry"
+              sequence="27"/>
+</odoo>

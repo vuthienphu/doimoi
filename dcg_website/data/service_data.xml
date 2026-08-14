@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Group: Vận hành & nhà máy (Giải pháp vận hành) -->
+        <record id="service_group_vanhanh" model="doimoi.service.group">
+            <field name="name">Vận hành &amp; nhà máy</field>
+            <field name="title">Số hóa hiện trường — dữ liệu vận hành theo thời gian thực</field>
+            <field name="subtitle">Nền tảng DCG-MIS tự phát triển, linh hoạt cấu hình theo từng ngành và quy mô doanh nghiệp.</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Services for Vận hành -->
+        <record id="service_nhatky" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/so.png"/>
+            <field name="name">Sổ nhật ký vận hành</field>
+            <field name="short_description">Ghi chép, theo dõi thông số vận hành theo ca. Tự động nhắc nhở, cảnh báo khi vượt ngưỡng.</field>
+            <field name="features">Nhật ký đa ca,Cảnh báo thông số,Xuất báo cáo tự động,Phân quyền chi tiết</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">1</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_quytrinh" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/quytrinh.png"/>
+            <field name="name">Quy trình nội bộ (Workflow)</field>
+            <field name="short_description">Số hóa quy trình phê duyệt, luân chuyển văn bản, kiểm soát tiến độ xử lý công việc.</field>
+            <field name="features">Thiết kế quy trình kéo-thả,Thông báo tức thì,Theo dõi SLA,Audit trail</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">2</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_thietbi" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/maintenance.png"/>
+            <field name="name">Quản lý thiết bị &amp; bảo trì</field>
+            <field name="short_description">Hồ sơ thiết bị, lịch bảo trì định kỳ, quản lý vật tư và lịch sử sửa chữa.</field>
+            <field name="features">QR code thiết bị,Lịch bảo trì PM,Kho vật tư,Báo cáo MTBF</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">3</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_dashboard" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/so.png"/>
+            <field name="name">Dashboard điều hành</field>
+            <field name="short_description">Tổng hợp KPI thời gian thực, báo cáo trực quan hỗ trợ ra quyết định nhanh.</field>
+            <field name="features">Biểu đồ realtime,KPI tùy chỉnh,Drill-down,Xuất PDF/Excel</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">4</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_kho" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/quytrinh.png"/>
+            <field name="name">Quản lý kho &amp; vật tư</field>
+            <field name="short_description">Theo dõi tồn kho, xuất nhập, cảnh báo tồn kho tối thiểu và dự báo nhu cầu.</field>
+            <field name="features">Barcode/QR,FIFO/LIFO,Kiểm kê định kỳ,Dự báo tiêu thụ</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">5</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_canhbao" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/maintenance.png"/>
+            <field name="name">Cảnh báo &amp; thông báo</field>
+            <field name="short_description">Hệ thống cảnh báo đa kênh — SMS, email, Zalo, Telegram — khi có sự cố hoặc vượt ngưỡng.</field>
+            <field name="features">Multi-channel,Escalation rules,On-call schedule,Incident timeline</field>
+            <field name="service_group_id" ref="service_group_vanhanh"/>
+            <field name="sequence">6</field>
+            <field name="is_published" eval="True"/>
+        </record>
+
+        <!-- Group: Phần mềm & ERP (Phát triển phần mềm) -->
+        <record id="service_group_phanmem" model="doimoi.service.group">
+            <field name="name">Phần mềm &amp; ERP</field>
+            <field name="title">Xây dựng hệ thống công nghệ cho mọi ngành</field>
+            <field name="subtitle">Đội ngũ kỹ sư phần mềm và tư vấn ERP giúp doanh nghiệp xây dựng hệ thống riêng, không giới hạn lĩnh vực.</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Services for Phần mềm & ERP -->
+        <record id="service_phanmem_yeucau" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/so.png"/>
+            <field name="name">Phần mềm theo yêu cầu</field>
+            <field name="short_description">Phân tích nghiệp vụ, thiết kế và xây dựng ứng dụng web, hệ thống quản trị theo đặc thù của khách hàng.</field>
+            <field name="features">React / Next.js,Node.js / Python,PostgreSQL / MongoDB,REST API / GraphQL</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">10</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_trienkhai_odoo" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/quytrinh.png"/>
+            <field name="name">Triển khai Odoo ERP</field>
+            <field name="short_description">Tư vấn, cấu hình, tùy biến hệ sinh thái Odoo cho kế toán, nhân sự, bán hàng, kho vận.</field>
+            <field name="features">Odoo 16/17,Tùy biến module,Data migration,Training người dùng</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">20</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_ungdung_didong" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/so.png"/>
+            <field name="name">Ứng dụng di động</field>
+            <field name="short_description">Phát triển app hiện trường và quản trị cho iOS &amp; Android, đồng bộ dữ liệu thời gian thực.</field>
+            <field name="features">React Native,Offline-first,Push notifications,Barcode scanner</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">30</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_tichhop_cloud" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/quytrinh.png"/>
+            <field name="name">Cloud &amp; Tích hợp hệ thống</field>
+            <field name="short_description">Kết nối ERP, SCADA, IoT và hạ tầng cloud hoặc on-premise an toàn, hiệu suất cao.</field>
+            <field name="features">AWS / Azure / GCP,API Gateway,IoT Hub,Message Queue</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">40</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_baomat" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/maintenance.png"/>
+            <field name="name">Bảo mật &amp; Hạ tầng</field>
+            <field name="short_description">Thiết lập hạ tầng bảo mật, backup, monitoring và disaster recovery cho hệ thống doanh nghiệp.</field>
+            <field name="features">SSL/TLS,RBAC,Audit logging,Automated backup</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">50</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="service_bi" model="doimoi.service">
+            <field name="icon" type="base64" file="dcg_website/data/img/so.png"/>
+            <field name="name">Business Intelligence</field>
+            <field name="short_description">Xây dựng data warehouse, dashboard phân tích và báo cáo tự động phục vụ ra quyết định.</field>
+            <field name="features">Power BI / Metabase,ETL pipeline,Scheduled reports,Predictive analytics</field>
+            <field name="service_group_id" ref="service_group_phanmem"/>
+            <field name="sequence">60</field>
+            <field name="is_published" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Khách hàng tiêu biểu -->
+        <record id="client_vnpt" model="doimoi.client">
+            <field name="name">VNPT Technology</field>
+            <field name="short_name">VNPT</field>
+            <field name="industry">Viễn thông</field>
+            <field name="sequence">1</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="client_tkh" model="doimoi.client">
+            <field name="name">Than Khánh Hòa</field>
+            <field name="short_name">TKH</field>
+            <field name="industry">Khai khoáng</field>
+            <field name="sequence">2</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="client_lh" model="doimoi.client">
+            <field name="name">Xi măng La Hiên</field>
+            <field name="short_name">LH</field>
+            <field name="industry">Vật liệu xây dựng</field>
+            <field name="sequence">3</field>
+            <field name="is_published" eval="True"/>
+        </record>
+        <record id="client_dn" model="doimoi.client">
+            <field name="name">Nhôm Đắk Nông</field>
+            <field name="short_name">ĐN</field>
+            <field name="industry">Luyện kim</field>
+            <field name="sequence">4</field>
+            <field name="is_published" eval="True"/>
+        </record>
+    </data>
+</odoo>

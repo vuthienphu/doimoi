@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hero_home_default" model="doimoi.hero">
+            <field name="name">Banner trang chủ mặc định</field>
+            <field name="page">home</field>
+            <field name="eyebrow">Chuyển đổi số - Phát triển phần mềm</field>
+            <field name="title">Đồng hành cùng doanh nghiệp số hóa từ nhà máy đến nền tảng phần mềm</field>
+            <field name="highlighted_text">số hóa</field>
+            <field name="subtitle">Đổi Mới Group tư vấn, thiết kế và triển khai giải pháp chuyển đổi số cho doanh nghiệp công nghiệp, đồng thời phát triển phần mềm, ERP và tích hợp hệ thống cho mọi lĩnh vực.</field>
+            <field name="primary_button_label">Khám phá giải pháp</field>
+            <field name="primary_button_url">/solutions</field>
+            <field name="secondary_button_label">Đăng ký demo</field>
+            <field name="secondary_button_url">/contactus?request_type=demo#contact-form</field>
+            <field name="visual_mode">dashboard</field>
+            <field name="dashboard_eyebrow">Dashboard điều hành</field>
+            <field name="dashboard_title">Tổng quan vận hành</field>
+            <field name="metric_1_label">Nhật ký</field><field name="metric_1_value">1.248</field><field name="metric_1_trend">+12%</field>
+            <field name="metric_2_label">Thiết bị</field><field name="metric_2_value">356</field><field name="metric_2_trend">+4</field>
+            <field name="metric_3_label">Công việc</field><field name="metric_3_value">128</field><field name="metric_3_trend">-3</field>
+            <field name="chart_title">Hiệu suất vận hành (7 ngày)</field>
+            <field name="status_1">Hệ thống ổn định</field><field name="status_2">2 cảnh báo</field>
+            <field name="seo_title">Đổi Mới Group | Chuyển đổi số doanh nghiệp</field><field name="seo_description">Tư vấn và triển khai chuyển đổi số, phần mềm, ERP và giải pháp vận hành cho doanh nghiệp công nghiệp.</field><field name="seo_keywords">chuyển đổi số, phần mềm doanh nghiệp, ERP, quản lý vận hành</field>
+            <field name="sequence">10</field>
+            <field name="is_published" eval="True"/>
+            <field name="cta_title">Bắt đầu hành trình chuyển đổi số cùng Đổi Mới</field>
+            <field name="cta_subtitle">Đội ngũ chuyên gia sẵn sàng khảo sát và tư vấn miễn phí cho doanh nghiệp bạn.</field>
+            <field name="cta_button_label">Đăng ký tư vấn</field>
+            <field name="cta_button_url">/contactus?request_type=survey#contact-form</field>
+        </record>
+        <record id="hero_solutions_default" model="doimoi.hero">
+            <field name="name">Banner trang Giải pháp</field><field name="page">solutions</field>
+            <field name="eyebrow">Giải pháp toàn diện</field><field name="title">Đa mảng dịch vụ, một mục tiêu</field>
+            <field name="subtitle">Từ số hóa hiện trường sản xuất đến phát triển phần mềm tổng thể — Đổi Mới đồng hành mọi giai đoạn chuyển đổi.</field>
+            <field name="primary_button_label">Tư vấn giải pháp</field><field name="primary_button_url">/contactus?request_type=solutions#contact-form</field>
+            <field name="cta_title">Không tìm thấy giải pháp phù hợp?</field><field name="cta_subtitle">Liên hệ để chúng tôi tư vấn giải pháp riêng cho doanh nghiệp bạn.</field>
+            <field name="cta_button_label">Tư vấn miễn phí</field><field name="cta_button_url">/contactus?request_type=solutions#contact-form</field>
+            <field name="sequence">10</field><field name="is_published" eval="True"/>
+            <field name="seo_title">Giải pháp chuyển đổi số | Đổi Mới Group</field><field name="seo_description">Các giải pháp số hóa vận hành, Odoo ERP, phát triển phần mềm và tích hợp hệ thống.</field>
+        </record>
+        <record id="hero_industries_default" model="doimoi.hero">
+            <field name="name">Banner trang Ngành</field><field name="page">industries</field>
+            <field name="eyebrow">Ngành trọng tâm</field><field name="title">Chuyên sâu theo từng ngành</field>
+            <field name="subtitle">Kinh nghiệm triển khai thực tế tại các nhà máy, mỏ và khu công nghiệp trên toàn quốc.</field>
+            <field name="primary_button_label">Trao đổi chuyên gia</field><field name="primary_button_url">/contactus?request_type=industries#contact-form</field>
+            <field name="cta_title">Ngành của bạn chưa có trong danh sách?</field><field name="cta_subtitle">Chúng tôi luôn sẵn sàng tư vấn giải pháp riêng.</field>
+            <field name="cta_button_label">Trao đổi với chuyên gia</field><field name="cta_button_url">/contactus?request_type=industries#contact-form</field>
+            <field name="sequence">10</field><field name="is_published" eval="True"/>
+            <field name="seo_title">Giải pháp theo ngành | Đổi Mới Group</field><field name="seo_description">Kinh nghiệm triển khai công nghệ tại nhà máy, mỏ, cảng và doanh nghiệp công nghiệp.</field>
+        </record>
+        <record id="hero_about_default" model="doimoi.hero">
+            <field name="name">Banner trang Về Đổi Mới</field><field name="page">about</field>
+            <field name="eyebrow">Về chúng tôi</field><field name="title">Đổi Mới Group — Con đường phát triển</field>
+            <field name="subtitle">Thành lập với sứ mệnh đưa công nghệ số vào từng nhà máy, từng quy trình vận hành của doanh nghiệp Việt Nam.</field>
+            <field name="primary_button_label">Liên hệ với chúng tôi</field><field name="primary_button_url">/contactus</field>
+            <field name="cta_title">Bạn muốn đồng hành cùng Đổi Mới?</field><field name="cta_subtitle">Chúng tôi luôn tìm kiếm người có đam mê với công nghệ và ngành công nghiệp.</field>
+            <field name="cta_button_label">Trao đổi với chúng tôi</field><field name="cta_button_url">/contactus</field>
+            <field name="sequence">10</field><field name="is_published" eval="True"/>
+            <field name="seo_title">Về Đổi Mới Group</field><field name="seo_description">Đội ngũ am hiểu nghiệp vụ và công nghệ, đồng hành cùng doanh nghiệp từ tư vấn đến vận hành thực tế.</field>
+        </record>
+        <record id="hero_contact_default" model="doimoi.hero">
+            <field name="name">Banner trang Liên hệ</field><field name="page">contact</field>
+            <field name="eyebrow">Liên hệ</field><field name="title">Nói chuyện với chúng tôi</field>
+            <field name="subtitle">Đội ngũ chuyên gia sẵn sàng tư vấn và đề xuất giải pháp phù hợp với doanh nghiệp bạn.</field>
+            <field name="primary_button_label">Đăng ký tư vấn</field><field name="primary_button_url">#contact-form</field>
+            <field name="show_cta" eval="False"/>
+            <field name="sequence">10</field><field name="is_published" eval="True"/>
+            <field name="seo_title">Liên hệ tư vấn | Đổi Mới Group</field><field name="seo_description">Đăng ký tư vấn giải pháp chuyển đổi số và phần mềm phù hợp cho doanh nghiệp.</field>
+        </record>
+        <record id="hero_projects_default" model="doimoi.hero">
+            <field name="name">Banner trang Dự án</field><field name="page">projects</field>
+            <field name="eyebrow">Dự án tiêu biểu</field><field name="title">Kết quả triển khai thực tế</field>
+            <field name="subtitle">Những bài toán Đổi Mới đã đồng hành cùng doanh nghiệp giải quyết.</field>
+            <field name="primary_button_label">Trao đổi dự án</field><field name="primary_button_url">/contactus?request_type=projects#contact-form</field>
+            <field name="cta_title">Bạn có bài toán cần triển khai?</field><field name="cta_subtitle">Trao đổi với đội ngũ chuyên gia để xây dựng lộ trình phù hợp.</field>
+            <field name="cta_button_label">Liên hệ tư vấn</field><field name="cta_button_url">/contactus?request_type=projects#contact-form</field>
+            <field name="sequence">10</field><field name="is_published" eval="True"/>
+            <field name="seo_title">Dự án tiêu biểu | Đổi Mới Group</field><field name="seo_description">Các dự án chuyển đổi số và phần mềm đã được Đổi Mới Group triển khai thực tế.</field>
+        </record>
+    </data>
+</odoo>

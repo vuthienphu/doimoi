@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data noupdate="1">
+    <record id="section_home_why_choose" model="doimoi.page.section">
+        <field name="name">Trang chủ - Vì sao chọn Đổi Mới</field>
+        <field name="page">home</field><field name="key">why_choose</field>
+        <field name="eyebrow">Vì sao chọn Đổi Mới</field>
+        <field name="title">Hiểu nghiệp vụ, làm chủ công nghệ</field>
+        <field name="button_label">Tìm hiểu về chúng tôi</field><field name="button_url">/about</field>
+        <field name="sequence">40</field><field name="is_published" eval="True"/>
+    </record>
+    <record id="section_home_clients" model="doimoi.page.section">
+        <field name="name">Trang chủ - Khách hàng tiêu biểu</field>
+        <field name="page">home</field><field name="key">clients</field>
+        <field name="eyebrow">Khách hàng tiêu biểu</field>
+        <field name="title">Được tin tưởng bởi các đơn vị hàng đầu</field>
+        <field name="sequence">50</field><field name="is_published" eval="True"/>
+    </record>
+    <record id="item_home_benefit_1" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Hiểu nghiệp vụ sản xuất lẫn vận hành phần mềm doanh nghiệp</field><field name="item_group">benefit</field><field name="sequence">10</field></record>
+    <record id="item_home_benefit_2" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Đội ngũ triển khai thực tế tại hiện trường, không chỉ tư vấn trên giấy</field><field name="item_group">benefit</field><field name="sequence">20</field></record>
+    <record id="item_home_benefit_3" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Nền tảng DCG-MIS tự phát triển, linh hoạt cấu hình theo nhu cầu</field><field name="item_group">benefit</field><field name="sequence">30</field></record>
+    <record id="item_home_benefit_4" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Tích hợp linh hoạt với hệ thống và thiết bị sẵn có</field><field name="item_group">benefit</field><field name="sequence">40</field></record>
+    <record id="item_home_benefit_5" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Đồng hành trọn gói: khảo sát — triển khai — vận hành — hỗ trợ dài hạn</field><field name="item_group">benefit</field><field name="sequence">50</field></record>
+    <record id="item_home_process_1" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Khảo sát &amp; tư vấn</field><field name="subtitle">Hiểu bài toán thực tế, đề xuất giải pháp phù hợp với ngân sách và lộ trình.</field><field name="item_group">process</field><field name="sequence">10</field></record>
+    <record id="item_home_process_2" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Thiết kế &amp; triển khai</field><field name="subtitle">Theo từng giai đoạn, tiến độ rõ ràng, milestone cụ thể.</field><field name="item_group">process</field><field name="sequence">20</field></record>
+    <record id="item_home_process_3" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Đào tạo &amp; bàn giao</field><field name="subtitle">Hướng dẫn người dùng thực tế, tài liệu đầy đủ, kiểm thử nghiệm thu.</field><field name="item_group">process</field><field name="sequence">30</field></record>
+    <record id="item_home_process_4" model="doimoi.page.item"><field name="section_id" ref="section_home_why_choose"/><field name="title">Hỗ trợ 24/7</field><field name="subtitle">Đường dây nóng, cập nhật định kỳ, đồng hành lâu dài cùng doanh nghiệp.</field><field name="item_group">process</field><field name="sequence">40</field></record>
+
+    <record id="section_about_mission" model="doimoi.page.section">
+        <field name="name">About - Sứ mệnh</field><field name="page">about</field><field name="key">mission</field><field name="eyebrow">Sứ mệnh</field>
+        <field name="title">Hiểu nghiệp vụ, đồng hành thực tế</field>
+        <field name="body"><![CDATA[<p>Đổi Mới Group tin rằng chuyển đổi số không thể thành công nếu chỉ đến từ ngoài vào — cần người hiểu nghiệp vụ, hiểu máy móc và hiểu người vận hành tại hiện trường.</p>]]></field>
+        <field name="secondary_body"><![CDATA[<p>Đội ngũ của chúng tôi gồm cả kỹ sư công nghiệp lẫn kỹ sư phần mềm — sự kết hợp giúp chúng tôi xây dựng giải pháp thực sự phù hợp với thực tế vận hành.</p>]]></field>
+        <field name="sequence">10</field><field name="is_published" eval="True"/>
+    </record>
+    <record id="item_value_1" model="doimoi.page.item"><field name="section_id" ref="section_about_mission"/><field name="icon">🎯</field><field name="title">Thực chiến</field><field name="subtitle">Triển khai tại hiện trường, không chỉ tư vấn trên giấy</field><field name="sequence">10</field></record>
+    <record id="item_value_2" model="doimoi.page.item"><field name="section_id" ref="section_about_mission"/><field name="icon">🤝</field><field name="title">Đồng hành</field><field name="subtitle">Hỗ trợ lâu dài sau khi bàn giao hệ thống</field><field name="theme">teal</field><field name="sequence">20</field></record>
+    <record id="item_value_3" model="doimoi.page.item"><field name="section_id" ref="section_about_mission"/><field name="icon">🔧</field><field name="title">Linh hoạt</field><field name="subtitle">Giải pháp tùy chỉnh theo đặc thù từng doanh nghiệp</field><field name="theme">blue</field><field name="sequence">30</field></record>
+    <record id="item_value_4" model="doimoi.page.item"><field name="section_id" ref="section_about_mission"/><field name="icon">📈</field><field name="title">Kết quả</field><field name="subtitle">Đo lường hiệu quả bằng số liệu cụ thể, không mơ hồ</field><field name="theme">purple</field><field name="sequence">40</field></record>
+
+    <record id="section_about_timeline" model="doimoi.page.section"><field name="name">About - Hành trình</field><field name="page">about</field><field name="key">timeline</field><field name="eyebrow">Dấu mốc</field><field name="title">Hành trình phát triển</field><field name="sequence">20</field><field name="is_published" eval="True"/></record>
+    <record id="item_timeline_1" model="doimoi.page.item"><field name="section_id" ref="section_about_timeline"/><field name="title">2009</field><field name="subtitle">Thành lập Đổi Mới Group, tập trung tư vấn chuyển đổi quy trình cho nhà máy công nghiệp</field><field name="sequence">10</field></record>
+    <record id="item_timeline_2" model="doimoi.page.item"><field name="section_id" ref="section_about_timeline"/><field name="title">2013</field><field name="subtitle">Ra mắt phiên bản đầu tiên của DCG-MIS, triển khai tại 3 nhà máy nhiệt điện</field><field name="sequence">20</field></record>
+    <record id="item_timeline_3" model="doimoi.page.item"><field name="section_id" ref="section_about_timeline"/><field name="title">2017</field><field name="subtitle">Mở rộng sang phát triển phần mềm theo yêu cầu và triển khai Odoo ERP</field><field name="sequence">30</field></record>
+    <record id="item_timeline_4" model="doimoi.page.item"><field name="section_id" ref="section_about_timeline"/><field name="title">2020</field><field name="subtitle">Vượt mốc 500 khách hàng, ra mắt module di động eMobile cho hiện trường</field><field name="sequence">40</field></record>
+    <record id="item_timeline_5" model="doimoi.page.item"><field name="section_id" ref="section_about_timeline"/><field name="title">2024</field><field name="subtitle">DCG-MIS 4.0 với AI-assisted analytics và tích hợp IoT mở rộng</field><field name="sequence">50</field></record>
+
+    <record id="section_about_team" model="doimoi.page.section"><field name="name">About - Lãnh đạo</field><field name="page">about</field><field name="key">team</field><field name="eyebrow">Con người</field><field name="title">Đội ngũ lãnh đạo</field><field name="sequence">30</field><field name="is_published" eval="True"/></record>
+    <record id="item_team_1" model="doimoi.page.item"><field name="section_id" ref="section_about_team"/><field name="icon">PL</field><field name="title">Phạm Tấn Lực</field><field name="subtitle">CEO &amp; Co-founder</field><field name="sequence">10</field></record>
+    <record id="item_team_2" model="doimoi.page.item"><field name="section_id" ref="section_about_team"/><field name="icon">TL</field><field name="title">Trần Thị Lan</field><field name="subtitle">CTO</field><field name="theme">teal</field><field name="sequence">20</field></record>
+    <record id="item_team_3" model="doimoi.page.item"><field name="section_id" ref="section_about_team"/><field name="icon">MT</field><field name="title">Lê Minh Tuấn</field><field name="subtitle">Head of Engineering</field><field name="theme">blue</field><field name="sequence">30</field></record>
+    <record id="item_team_4" model="doimoi.page.item"><field name="section_id" ref="section_about_team"/><field name="icon">TH</field><field name="title">Phạm Thu Hương</field><field name="subtitle">Head of Consulting</field><field name="theme">purple</field><field name="sequence">40</field></record>
+
+    <record id="section_contact_info" model="doimoi.page.section"><field name="name">Contact - Thông tin</field><field name="page">contact</field><field name="key">info</field><field name="eyebrow">Kết nối</field><field name="title">Thông tin liên hệ</field><field name="sequence">10</field><field name="is_published" eval="True"/></record>
+    <record id="section_contact_response" model="doimoi.page.section"><field name="name">Contact - Phản hồi</field><field name="page">contact</field><field name="key">response</field><field name="title">Thời gian phản hồi</field><field name="body"><![CDATA[<p>Chúng tôi phản hồi trong vòng <strong>2 giờ</strong> trong giờ hành chính. Hỗ trợ khẩn cấp qua hotline.</p>]]></field><field name="sequence">20</field><field name="is_published" eval="True"/></record>
+    <record id="section_contact_form" model="doimoi.page.section"><field name="name">Contact - Form</field><field name="page">contact</field><field name="key">form</field><field name="title">Đăng ký tư vấn miễn phí</field><field name="subtitle">Thông tin của bạn được bảo mật và chỉ sử dụng để liên hệ tư vấn.</field><field name="button_label">Gửi yêu cầu tư vấn</field><field name="sequence">30</field><field name="is_published" eval="True"/></record>
+
+</data></odoo>
