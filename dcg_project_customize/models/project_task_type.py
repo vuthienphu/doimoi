@@ -12,6 +12,7 @@ class ProjectTaskType(models.Model):
     is_done = fields.Boolean(string='Hoàn thành')
     is_live = fields.Boolean(string='Đã đưa lên Live')
     is_dcg_default = fields.Boolean(string='Giai đoạn mặc định DCG')
+    is_draft = fields.Boolean(string='Bản nháp')
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -58,6 +59,7 @@ class ProjectTaskType(models.Model):
                         'is_test': canonical_flags[canonical_name].get('is_test', False),
                         'is_done': canonical_flags[canonical_name].get('is_done', False),
                         'is_live': canonical_flags[canonical_name].get('is_live', False),
+                        'is_draft': canonical_name == 'Cần làm',
                         'is_dcg_default': True,
                     })
                 continue
@@ -73,6 +75,7 @@ class ProjectTaskType(models.Model):
                 'is_test': canonical_flags[canonical_name].get('is_test', False),
                 'is_done': canonical_flags[canonical_name].get('is_done', False),
                 'is_live': canonical_flags[canonical_name].get('is_live', False),
+                'is_draft': canonical_name == 'Cần làm',
                 'is_dcg_default': True,
                 'project_ids': [(6, 0, projects.ids)],
             })

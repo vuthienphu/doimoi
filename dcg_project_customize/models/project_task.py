@@ -2,6 +2,7 @@
 
 from email.utils import formataddr
 
+import odoo
 from odoo import api, fields, models
 
 class ProjectTask(models.Model):
@@ -34,6 +35,110 @@ class ProjectTask(models.Model):
         'task_id',
         string='Danh sách checklist',
     )
+    is_draft = fields.Boolean(related='stage_id.is_draft', string='Bản nháp', readonly=True)
+    estimate_hours = fields.Float(string='Số giờ estimate')
+    actual_hours = fields.Float(
+        string='Số giờ hoàn thành thực tế',
+        compute='_compute_actual_hours',
+        store=True,
+    )
+    work_log_ids = fields.One2many(
+        'project.task.work.log',
+        'task_id',
+        string='Lịch sử làm việc',
+    )
+    current_user_status = fields.Selection([
+        ('not_started', 'Chưa bắt đầu'),
+        ('running', 'Đang thực hiện'),
+        ('paused', 'Tạm dừng'),
+        ('finished', 'Đã kết thúc'),
+    ], string='Trạng thái thực hiện (Cá nhân)', compute='_compute_current_user_status')
+    is_over_estimate = fields.Boolean(compute='_compute_is_over_estimate')
+    is_over_deadline = fields.Boolean(compute='_compute_is_over_deadline')
+    over_deadline_reason = fields.Text(string='Lý do quá hạn', readonly=True)
+    
+    is_current_user_assignee = fields.Boolean(compute='_compute_is_current_user_assignee')
+
+    @api.depends('user_ids')
+    def _compute_is_current_user_assignee(self):
+        for task in self:
+            task.is_current_user_assignee = self.env.user in task.user_ids
+
+    @api.depends('work_log_ids.duration')
+    def _compute_actual_hours(self):
+        for task in self:
+            task.actual_hours = sum(task.work_log_ids.mapped('duration'))
+
+    @api.depends('work_log_ids.is_running', 'work_log_ids.user_id', 'stage_id.is_done', 'stage_id.is_live')
+    def _compute_current_user_status(self):
+        for task in self:
+            if task.stage_id.is_done or task.stage_id.is_live:
+                task.current_user_status = 'finished'
+                continue
+                
+            user_logs = task.work_log_ids.filtered(lambda l: l.user_id == self.env.user)
+            if user_logs.filtered('is_running'):
+                task.current_user_status = 'running'
+            elif user_logs:
+                task.current_user_status = 'paused'
+            else:
+                task.current_user_status = 'not_started'
+
+    @api.depends('actual_hours', 'estimate_hours')
+    def _compute_is_over_estimate(self):
+        for task in self:
+            task.is_over_estimate = task.estimate_hours > 0 and task.actual_hours > task.estimate_hours
+
+    @api.depends('date_deadline', 'stage_id.is_done', 'stage_id.is_live')
+    def _compute_is_over_deadline(self):
+        for task in self:
+            if task.date_deadline and not (task.stage_id.is_done or task.stage_id.is_live):
+                if hasattr(task.date_deadline, 'hour'):
+                    task.is_over_deadline = fields.Datetime.now() > task.date_deadline
+                else:
+                    task.is_over_deadline = fields.Date.today() > task.date_deadline
+            else:
+                task.is_over_deadline = False
+
+    def action_timer_start(self):
+        self.ensure_one()
+        running_log = self.work_log_ids.filtered(lambda l: l.user_id == self.env.user and l.is_running)
+        if running_log:
+            raise odoo.exceptions.UserError('Bạn đang có một phiên làm việc đang chạy trên task này.')
+            
+        self.env['project.task.work.log'].create({
+            'task_id': self.id,
+            'user_id': self.env.user.id,
+            'start_time': fields.Datetime.now(),
+        })
+        
+        # Nếu đang ở Cần làm (Draft) thì tự động chuyển sang Đang làm
+        if self.stage_id.is_draft:
+            processing_stage = self.env['project.task.type'].search([('is_processing', '=', True)], limit=1)
+            if processing_stage:
+                self.stage_id = processing_stage.id
+
+    def action_timer_pause(self):
+        self.ensure_one()
+        running_log = self.work_log_ids.filtered(lambda l: l.user_id == self.env.user and l.is_running)
+        if running_log:
+            running_log.write({'end_time': fields.Datetime.now()})
+
+    def action_timer_stop(self):
+        self.ensure_one()
+        if self.is_over_deadline and not self.over_deadline_reason:
+            return {
+                'name': 'Nhập lý do quá hạn',
+                'type': 'ir.actions.act_window',
+                'res_model': 'project.task.finish.wizard',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': {'default_task_id': self.id},
+            }
+        self.action_timer_pause()
+        done_stage = self.env['project.task.type'].search([('is_done', '=', True)], limit=1)
+        if done_stage:
+            self.stage_id = done_stage.id
 
     def action_open_subtasks(self):
         self.ensure_one()

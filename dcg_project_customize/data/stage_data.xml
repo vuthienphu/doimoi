@@ -29,6 +29,7 @@
         <field name="name">Cần làm</field>
         <field name="sequence">10</field>
         <field name="active">True</field>
+        <field name="is_draft">True</field>
         <field name="is_dcg_default">True</field>
     </record>
     <record id="task_stage_processing" model="project.task.type">

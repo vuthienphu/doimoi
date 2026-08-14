@@ -14,6 +14,7 @@
                 <attribute name="placeholder">Ví dụ: Cần làm</attribute>
             </xpath>
             <xpath expr="//field[@name='fold']" position="after">
+                <field name="is_draft" widget="boolean_toggle"/>
                 <field name="is_processing" widget="boolean_toggle"/>
                 <field name="is_test" widget="boolean_toggle"/>
                 <field name="is_done" widget="boolean_toggle"/>
