@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="about_page" name="Về Đổi Mới">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure about-page">
+                <t t-call="dcg_website.common_page_banner"/>
+
+                <t t-set="mission" t-value="page_sections.get('mission')"/>
+                <section t-if="mission" class="about-section bg-white">
+                    <div class="container-doimoi"><div class="row g-5 align-items-center">
+                        <div class="col-lg-6 pe-lg-5">
+                            <span t-if="mission.eyebrow" class="badge badge-doimoi text-uppercase mb-3" t-out="mission.eyebrow"/>
+                            <h2 class="about-section__title" t-out="mission.title"/>
+                            <div class="about-richtext" t-field="mission.body"/>
+                            <div class="about-richtext" t-field="mission.secondary_body"/>
+                        </div>
+                        <div class="col-lg-6"><div class="row g-3">
+                            <t t-foreach="mission.item_ids.filtered('is_published')" t-as="item">
+                                <div class="col-sm-6 d-flex"><article class="about-value-card w-100">
+                                    <span t-if="item.icon" class="about-value-card__icon" t-out="item.icon"/>
+                                    <h3 t-out="item.title"/><p class="mb-0" t-out="item.subtitle"/>
+                                </article></div>
+                            </t>
+                        </div></div>
+                    </div></div>
+                </section>
+
+                <t t-set="timeline" t-value="page_sections.get('timeline')"/>
+                <section t-if="timeline" class="about-section bg-doimoi-gray">
+                    <div class="container-doimoi">
+                        <div class="about-section__heading"><span t-if="timeline.eyebrow" class="badge badge-doimoi text-uppercase mb-3" t-out="timeline.eyebrow"/><h2 class="about-section__title mb-0" t-out="timeline.title"/></div>
+                        <div class="about-timeline"><t t-foreach="timeline.item_ids.filtered('is_published')" t-as="item">
+                            <article class="about-timeline__item"><div class="about-timeline__dot"/><div class="about-timeline__year" t-out="item.title"/><p class="mb-0" t-out="item.subtitle"/></article>
+                        </t></div>
+                    </div>
+                </section>
+
+                <t t-set="team" t-value="page_sections.get('team')"/>
+                <section t-if="team" class="about-section bg-white">
+                    <div class="container-doimoi">
+                        <div class="about-section__heading"><span t-if="team.eyebrow" class="badge badge-doimoi text-uppercase mb-3" t-out="team.eyebrow"/><h2 class="about-section__title mb-0" t-out="team.title"/></div>
+                        <div class="row g-4"><t t-foreach="team.item_ids.filtered('is_published')" t-as="item">
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex"><article class="about-team-card w-100">
+                                <div t-attf-class="about-team-card__avatar about-team-card__avatar--#{item.theme}">
+                                    <img t-if="item.image" t-att-src="'/web/image/doimoi.page.item/%s/image' % item.id" t-att-alt="item.title"/>
+                                    <t t-else="" t-out="item.icon"/>
+                                </div>
+                                <h3 t-out="item.title"/><p class="mb-0" t-out="item.subtitle"/>
+                            </article></div>
+                        </t></div>
+                    </div>
+                </section>
+                <t t-call="dcg_website.common_page_cta"/>
+            </div>
+        </t>
+    </template>
+</odoo>

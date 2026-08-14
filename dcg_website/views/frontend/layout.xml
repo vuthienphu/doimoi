@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="doimoi_custom_fonts" inherit_id="website.layout" name="Doimoi Custom Fonts">
+        <xpath expr="//head" position="inside">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+            <t t-if="page_banner">
+                <meta t-if="page_banner.seo_description" name="description" t-att-content="page_banner.seo_description"/>
+                <meta t-if="page_banner.seo_keywords" name="keywords" t-att-content="page_banner.seo_keywords"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:title" t-att-content="page_banner.seo_title or page_banner.title"/>
+                <meta property="og:description" t-att-content="page_banner.seo_description or page_banner.subtitle"/>
+                <meta property="og:url" t-att-content="request.httprequest.url"/>
+                <meta t-if="page_banner.seo_image" property="og:image" t-att-content="request.httprequest.url_root.rstrip('/') + '/web/image/doimoi.hero/%s/seo_image' % page_banner.id"/>
+                <meta name="twitter:card" content="summary_large_image"/>
+                <link rel="canonical" t-att-href="request.httprequest.base_url"/>
+            </t>
+            <script t-if="structured_data" type="application/ld+json" t-out="structured_data"/>
+        </xpath>
+    </template>
+
+    <template id="doimoi_custom_header" inherit_id="website.layout" name="Doimoi Custom Header">
+        <xpath expr="//header" position="replace">
+            <t t-set="site_settings" t-value="request.env['doimoi.site.settings'].sudo().search([('website_id', 'in', [False, website.id])], order='website_id desc', limit=1)"/>
+            <header class="bg-white shadow-sm sticky-top">
+                <style>
+                    .navbar-brand img {
+                        max-height: 45px !important;
+                        width: auto !important;
+                    }
+                </style>
+                <div class="container-doimoi">
+                    <nav class="navbar navbar-expand-lg navbar-light py-2 py-lg-3">
+                        <a href="/" class="navbar-brand">
+                            <img t-if="site_settings.header_logo" t-att-src="'/web/image/doimoi.site.settings/%s/header_logo' % site_settings.id" t-att-alt="site_settings.copyright_name or website.name"/>
+                            <span t-else="" t-field="website.logo" t-options="{'widget': 'image'}" style="max-height: 50px;"/>
+                        </a>
+                        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#doimoiMainNavigation" aria-controls="doimoiMainNavigation"
+                                aria-expanded="false" aria-label="Mở menu điều hướng">
+                            <span class="navbar-toggler-icon"/>
+                        </button>
+                        <div class="collapse navbar-collapse" id="doimoiMainNavigation">
+                            <ul class="navbar-nav mx-lg-auto mb-3 mb-lg-0 gap-lg-2 fw-bold">
+                                <li class="nav-item"><a t-attf-class="nav-link px-3 py-2 rounded #{request.httprequest.path == (site_settings.home_url or '/') and 'bg-doimoi-light text-doimoi' or 'text-dark'}" t-att-href="site_settings.home_url or '/'" t-out="site_settings.home_label"/></li>
+                                <li class="nav-item"><a t-attf-class="nav-link px-3 py-2 rounded #{request.httprequest.path == (site_settings.solutions_url or '/solutions') and 'bg-doimoi-light text-doimoi' or 'text-dark'}" t-att-href="site_settings.solutions_url or '/solutions'" t-out="site_settings.solutions_label"/></li>
+                                <li class="nav-item"><a t-attf-class="nav-link px-3 py-2 rounded #{request.httprequest.path == (site_settings.industries_url or '/industries') and 'bg-doimoi-light text-doimoi' or 'text-dark'}" t-att-href="site_settings.industries_url or '/industries'" t-out="site_settings.industries_label"/></li>
+                                <li class="nav-item"><a t-attf-class="nav-link px-3 py-2 rounded #{request.httprequest.path == (site_settings.about_url or '/about') and 'bg-doimoi-light text-doimoi' or 'text-dark'}" t-att-href="site_settings.about_url or '/about'" t-out="site_settings.about_label"/></li>
+                                <li class="nav-item"><a t-attf-class="nav-link px-3 py-2 rounded #{request.httprequest.path == (site_settings.contact_url or '/contactus') and 'bg-doimoi-light text-doimoi' or 'text-dark'}" t-att-href="site_settings.contact_url or '/contactus'" t-out="site_settings.contact_label"/></li>
+                            </ul>
+                            <div class="header-consultation" t-if="site_settings.header_cta_label">
+                                <a t-att-href="site_settings.header_cta_url or '/contactus'" class="btn btn-doimoi px-4 py-2 w-100 w-lg-auto" t-out="site_settings.header_cta_label"/>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+        </xpath>
+    </template>
+
+    <template id="doimoi_custom_footer" inherit_id="website.layout" name="Doimoi Custom Footer">
+        <xpath expr="//footer" position="replace">
+            <footer class="doimoi-footer">
+                <div id="footer">
+                    <t t-set="site_settings" t-value="request.env['doimoi.site.settings'].sudo().search([('website_id', 'in', [False, website.id])], order='website_id desc', limit=1)"/>
+                    <div class="container-doimoi">
+                        <div class="row footer-main">
+                            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 pe-lg-5">
+                                <a href="/" class="doimoi-footer-logo mb-4">
+                                    <img t-if="site_settings.footer_logo" t-att-src="'/web/image/doimoi.site.settings/%s/footer_logo' % site_settings.id" t-att-alt="site_settings.copyright_name or website.name"/>
+                                    <img t-else="" t-att-src="'/web/image/website/%s/logo' % website.id" t-att-alt="website.name"/>
+                                </a>
+                                <p class="doimoi-footer-text mb-4" t-if="site_settings.address" t-out="site_settings.address"/>
+                                <div class="doimoi-footer-social">
+                                    <a t-if="site_settings.facebook_url" t-att-href="site_settings.facebook_url" target="_blank" rel="noopener noreferrer" title="Facebook">f</a>
+                                    <a t-if="site_settings.linkedin_url" t-att-href="site_settings.linkedin_url" target="_blank" rel="noopener noreferrer" title="LinkedIn">in</a>
+                                    <a t-if="site_settings.youtube_url" t-att-href="site_settings.youtube_url" target="_blank" rel="noopener noreferrer" title="YouTube">yt</a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                                <h6 class="doimoi-footer-heading mb-4">Giải pháp</h6>
+                                <ul class="list-unstyled doimoi-footer-link">
+                                    <t t-foreach="request.env['doimoi.service'].sudo().search([('is_published', '=', True), ('website_id', 'in', [False, website.id])], order='sequence', limit=4)" t-as="footer_service">
+                                        <li><a href="/solutions" t-out="footer_service.name"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 pl-lg-4">
+                                <h6 class="doimoi-footer-heading mb-4">Ngành</h6>
+                                <ul class="list-unstyled doimoi-footer-link">
+                                    <t t-foreach="request.env['doimoi.industry'].sudo().search([('is_published', '=', True), ('website_id', 'in', [False, website.id])], order='sequence', limit=4)" t-as="footer_industry">
+                                        <li><a href="/industries" t-out="footer_industry.name"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <h6 class="doimoi-footer-heading mb-4">Liên hệ</h6>
+                                <ul class="list-unstyled doimoi-footer-link">
+                                    <li t-if="site_settings.phone"><a t-att-href="'tel:%s' % site_settings.phone" t-out="site_settings.phone"/></li>
+                                    <li t-if="site_settings.email"><a t-att-href="'mailto:%s' % site_settings.email" t-out="site_settings.email"/></li>
+                                    <li t-if="site_settings.website_url"><a t-att-href="site_settings.website_url" target="_blank" rel="noopener noreferrer" t-out="site_settings.website_url.replace('https://', '').replace('http://', '')"/></li>
+                                    <li t-if="site_settings.location" t-out="site_settings.location"/>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="doimoi-footer-bottom">
+                            <span>© <t t-out="time.strftime('%Y')"/> <t t-out="site_settings.copyright_name"/>. All rights reserved.</span>
+                            <div class="doimoi-footer-legal">
+                                <a t-if="site_settings.privacy_label and site_settings.privacy_url" t-att-href="site_settings.privacy_url" t-out="site_settings.privacy_label"/>
+                                <a t-if="site_settings.terms_label and site_settings.terms_url" t-att-href="site_settings.terms_url" t-out="site_settings.terms_label"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    </template>
+</odoo>

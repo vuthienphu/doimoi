@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="solutions_page" name="Giải pháp">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <t t-call="dcg_website.common_page_banner"/>
+                
+                <div class="w-100">
+                    <t t-set="pager" t-value="pager"/>
+                    <t t-call="dcg_website.dynamic_services_tabs"/>
+                </div>
+                
+                <t t-call="dcg_website.common_page_cta"/>
+            </div>
+        </t>
+    </template>
+</odoo>

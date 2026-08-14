@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="industries_page" name="Ngành">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <t t-call="dcg_website.common_page_banner"/>
+                
+                <section t-if="doimoi_industries" class="industries-grid-section py-5">
+                    <div class="container-doimoi py-lg-4">
+                        <div class="row g-4">
+                            <t t-foreach="doimoi_industries" t-as="industry">
+                                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                                    <article t-attf-class="industry-card industry-theme-#{industry.theme} w-100">
+                                        <div class="industry-card__cover">
+                                            <img t-if="industry.cover_image"
+                                                 t-att-src="'/web/image/doimoi.industry/%s/cover_image' % industry.id"
+                                                 t-att-alt="industry.name"
+                                                 loading="lazy"/>
+                                            <div t-else="" class="industry-card__cover-placeholder" aria-hidden="true">
+                                                <span t-out="industry.icon"/>
+                                            </div>
+                                        </div>
+                                        <div class="industry-card__content">
+                                            <div class="industry-card__heading">
+                                                <span class="industry-card__icon" t-out="industry.icon"/>
+                                                <h2 t-out="industry.name"/>
+                                            </div>
+                                            <p class="industry-card__description" t-out="industry.short_description"/>
+                                            <div t-if="industry.feature_ids" class="industry-card__features">
+                                                <span t-foreach="industry.feature_ids" t-as="feature"
+                                                      class="industry-card__feature"
+                                                      t-out="feature.name"/>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </t>
+                        </div>
+                        <t t-if="pager"><t t-call="website.pager"/></t>
+                    </div>
+                </section>
+                
+                <t t-call="dcg_website.common_page_cta"/>
+            </div>
+        </t>
+    </template>
+</odoo>

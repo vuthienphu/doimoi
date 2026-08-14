@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_doimoi_statistic_tree" model="ir.ui.view">
+        <field name="name">doimoi.statistic.tree</field>
+        <field name="model">doimoi.statistic</field>
+        <field name="arch" type="xml">
+            <list string="Số liệu">
+                <field name="sequence" widget="handle"/>
+                <field name="value"/>
+                <field name="website_id" optional="show"/>
+                <field name="label"/>
+                <field name="is_published" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_doimoi_statistic_form" model="ir.ui.view">
+        <field name="name">doimoi.statistic.form</field>
+        <field name="model">doimoi.statistic</field>
+        <field name="arch" type="xml">
+            <form string="Số liệu">
+                <sheet>
+                    <group>
+                        <field name="value"/>
+                        <field name="website_id"/>
+                        <field name="label"/>
+                        <field name="sequence"/>
+                        <field name="is_published" widget="boolean_toggle"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doimoi_statistic" model="ir.actions.act_window">
+        <field name="name">Số liệu nổi bật</field>
+        <field name="res_model">doimoi.statistic</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

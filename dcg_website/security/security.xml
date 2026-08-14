@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Group: Website Editor -->
+        <record id="group_doimoi_website_editor" model="res.groups">
+            <field name="name">Doimoi Website Editor</field>
+            <field name="comment">Có quyền thêm/sửa/xóa nội dung nhưng không cấu hình hệ thống.</field>
+        </record>
+
+        <!-- Group: Website Admin -->
+        <record id="group_doimoi_website_admin" model="res.groups">
+            <field name="name">Doimoi Website Admin</field>
+            <!-- Cho phép kế thừa quyền của Editor và quyền Designer của Website Odoo -->
+            <field name="implied_ids" eval="[(4, ref('group_doimoi_website_editor')), (4, ref('website.group_website_designer', raise_if_not_found=False))]"/>
+            <field name="comment">Toàn quyền quản trị nội dung website, chỉnh sửa cấu trúc trang (snippet layout).</field>
+        </record>
+
+        <!-- Tự động cấp quyền Website Admin cho nhóm Administration / Settings -->
+        <record id="base.group_system" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('dcg_website.group_doimoi_website_admin'))]"/>
+        </record>
+    </data>
+</odoo>

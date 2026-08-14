@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="common_page_banner" name="Banner dùng chung">
+        <section t-if="page_banner" class="common-page-hero bg-hero-split position-relative overflow-hidden">
+            <svg class="common-page-hero__shape" width="300" height="300" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+                <polygon points="110,20 190,65 190,155 110,200 30,155 30,65" stroke="var(--doimoi-primary)" stroke-width="3"/>
+            </svg>
+            <div class="container-doimoi position-relative">
+                <div class="row align-items-center g-5">
+                    <div t-attf-class="#{page_banner.image and 'col-lg-7' or 'col-lg-8'}">
+                        <span class="badge badge-doimoi text-uppercase mb-3" t-out="page_banner.eyebrow"/>
+                        <h1 class="doimoi-hero-title mb-4">
+                            <t t-if="page_banner.highlighted_text and page_banner.highlighted_text in page_banner.title">
+                                <t t-out="page_banner.title.split(page_banner.highlighted_text, 1)[0]"/><span class="text-doimoi" t-out="page_banner.highlighted_text"/><t t-out="page_banner.title.split(page_banner.highlighted_text, 1)[1]"/>
+                            </t>
+                            <t t-else="" t-out="page_banner.title"/>
+                        </h1>
+                        <p class="doimoi-subtitle mb-0" t-out="page_banner.subtitle"/>
+                        <div t-if="page_banner.primary_button_label and page_banner.primary_button_url" class="d-flex flex-wrap gap-3 mt-4">
+                            <a t-att-href="page_banner.primary_button_url" class="btn btn-doimoi px-4 py-3">
+                                <t t-out="page_banner.primary_button_label"/> →
+                            </a>
+                            <a t-if="page_banner.secondary_button_label and page_banner.secondary_button_url"
+                               t-att-href="page_banner.secondary_button_url" class="btn btn-doimoi-outline px-4 py-3"
+                               t-out="page_banner.secondary_button_label"/>
+                        </div>
+                    </div>
+                    <div t-if="page_banner.image" class="col-lg-5">
+                        <div class="common-page-hero__image">
+                            <img t-att-src="'/web/image/doimoi.hero/%s/image' % page_banner.id" t-att-alt="page_banner.title"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="common_page_cta" name="CTA dùng chung">
+        <section t-if="page_banner and page_banner.show_cta and page_banner.cta_title" class="common-cta-section bg-white">
+            <div class="container-doimoi">
+                <div class="common-cta">
+                    <div>
+                        <h2 class="doimoi-section-title mb-2" t-out="page_banner.cta_title"/>
+                        <p t-if="page_banner.cta_subtitle" class="mb-0" t-out="page_banner.cta_subtitle"/>
+                    </div>
+                    <a t-if="page_banner.cta_button_label and page_banner.cta_button_url"
+                       t-att-href="page_banner.cta_button_url" class="btn btn-doimoi common-cta__button">
+                        <t t-out="page_banner.cta_button_label"/> →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

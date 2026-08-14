@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="dynamic_hero">
+        <section t-if="doimoi_hero" class="pt-5 pb-5 bg-hero-split position-relative overflow-hidden">
+            <svg class="homepage-hero-decoration homepage-hero-decoration--circle position-absolute bottom-0 start-0 translate-middle-x" width="280" height="280" viewBox="0 0 280 280" fill="none">
+                <circle cx="140" cy="140" r="80" stroke="var(--doimoi-primary)" stroke-width="2"/>
+                <circle cx="140" cy="140" r="130" stroke="var(--doimoi-primary)" stroke-width="1"/>
+            </svg>
+            <svg class="homepage-hero-decoration homepage-hero-decoration--hexagon position-absolute top-0 end-0" width="220" height="220" viewBox="0 0 220 220" fill="none">
+                <polygon points="110,20 190,65 190,155 110,200 30,155 30,65" stroke="var(--doimoi-teal)" stroke-width="3"/>
+                <polygon points="110,50 160,80 160,140 110,170 60,140 60,80" fill="var(--doimoi-teal)" opacity="0.4"/>
+            </svg>
+
+            <div class="container-doimoi position-relative homepage-hero-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <span class="badge badge-doimoi text-uppercase mb-3">
+                            <t t-out="doimoi_hero.eyebrow"/>
+                        </span>
+                        <h1 class="doimoi-hero-title mb-4">
+                            <t t-if="doimoi_hero.highlighted_text and doimoi_hero.highlighted_text in doimoi_hero.title">
+                                <t t-out="doimoi_hero.title.split(doimoi_hero.highlighted_text, 1)[0]"/><span class="text-doimoi" t-out="doimoi_hero.highlighted_text"/><t t-out="doimoi_hero.title.split(doimoi_hero.highlighted_text, 1)[1]"/>
+                            </t>
+                            <t t-else="" t-out="doimoi_hero.title"/>
+                        </h1>
+                        <p class="doimoi-subtitle mb-5">
+                            <t t-out="doimoi_hero.subtitle"/>
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a t-att-href="doimoi_hero.primary_button_url" class="btn btn-doimoi btn-lg px-4 py-2">
+                                <t t-out="doimoi_hero.primary_button_label"/> &amp;rarr;
+                            </a>
+                            <a t-if="doimoi_hero.secondary_button_label and doimoi_hero.secondary_button_url"
+                               t-att-href="doimoi_hero.secondary_button_url" class="btn btn-doimoi-outline btn-lg px-4 py-2">
+                                <t t-out="doimoi_hero.secondary_button_label"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 position-relative">
+                        <t t-if="doimoi_hero.visual_mode == 'image' and doimoi_hero.image">
+                            <div class="homepage-hero-image">
+                                <img t-att-src="'/web/image/doimoi.hero/%s/image' % doimoi_hero.id"
+                                     t-att-alt="doimoi_hero.title" loading="eager"/>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="homepage-dashboard bg-white border rounded-4 p-4 position-relative shadow-sm">
+                                <div class="d-flex justify-content-between align-items-start mb-4">
+                                    <div>
+                                        <div class="doimoi-caption mb-1" t-out="doimoi_hero.dashboard_eyebrow"/>
+                                        <h3 class="doimoi-card-title mb-0" t-out="doimoi_hero.dashboard_title"/>
+                                    </div>
+                                    <div class="homepage-dashboard__lights d-flex gap-1 mt-1">
+                                        <i/><i/><i/>
+                                    </div>
+                                </div>
+                                <t t-set="metrics" t-value="[(doimoi_hero.metric_1_label, doimoi_hero.metric_1_value, doimoi_hero.metric_1_trend), (doimoi_hero.metric_2_label, doimoi_hero.metric_2_value, doimoi_hero.metric_2_trend), (doimoi_hero.metric_3_label, doimoi_hero.metric_3_value, doimoi_hero.metric_3_trend)]"/>
+                                <div class="row g-2 mb-4">
+                                    <div t-foreach="metrics" t-as="metric" class="col-4">
+                                        <div class="homepage-dashboard__panel rounded-3 p-3">
+                                            <div class="doimoi-label-sm mb-1" t-out="metric[0]"/>
+                                            <div class="doimoi-stat-num mb-1" t-out="metric[1]"/>
+                                            <div class="doimoi-stat-trend" t-out="metric[2]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="homepage-dashboard__panel rounded-3 p-3 mb-3">
+                                    <div class="homepage-dashboard__label text-muted font-inter mb-3" t-out="doimoi_hero.chart_title"/>
+                                    <div class="homepage-dashboard__chart d-flex align-items-end gap-2">
+                                        <i t-foreach="range(10)" t-as="bar" class="flex-grow-1 rounded-top"/>
+                                    </div>
+                                </div>
+                                <t t-set="statuses" t-value="[doimoi_hero.status_1, doimoi_hero.status_2]"/>
+                                <div class="row g-2">
+                                    <div t-foreach="statuses" t-as="status" class="col-6">
+                                        <div t-attf-class="homepage-dashboard__status homepage-dashboard__status--#{status_index and 'primary' or 'teal'} homepage-dashboard__panel rounded-3 px-3 py-2 d-flex align-items-center gap-2">
+                                            <i class="rounded-circle"/>
+                                            <span class="homepage-dashboard__label text-muted font-inter" t-out="status"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+        <template id="dynamic_statistics">
+            <t t-set="statistics" t-value="doimoi_statistics"/>
+            <t t-if="statistics">
+            <section class="pt-3 pb-3 bg-doimoi-gray">
+                <div class="container-doimoi">
+                        <div class="row w-100 mx-0">
+                            <t t-foreach="statistics" t-as="stat">
+                                <div t-attf-class="doimoi-stat col-6 col-md-3 mb-3 mb-md-0 text-center #{not stat_last and 'border-end' or ''}">
+                                    <h2 class="doimoi-stat__value font-sora text-doimoi mb-1 fw-bold">
+                                        <t t-out="stat.value"/>
+                                    </h2>
+                                    <p class="doimoi-stat__label mb-0 text-muted font-inter">
+                                        <t t-out="stat.label"/>
+                                    </p>
+                                </div>
+                            </t>
+                        </div>
+                </div>
+            </section>
+            </t>
+        </template>
+
+    <template id="dynamic_clients">
+        <t t-set="clients" t-value="doimoi_clients"/>
+        <t t-set="clients_section" t-value="page_sections.get('clients') if page_sections else False"/>
+        <t t-if="clients and clients_section">
+            <div class="mb-5">
+                <span t-if="clients_section.eyebrow" class="badge badge-doimoi-teal text-uppercase mb-3" t-out="clients_section.eyebrow"/>
+                <h2 class="doimoi-content-heading" t-out="clients_section.title"/>
+                <p t-if="clients_section.subtitle" class="doimoi-content-subtitle" t-out="clients_section.subtitle"/>
+            </div>
+
+            <div class="client-carousel" data-client-carousel="1">
+                <button t-if="len(clients) &gt; 1" type="button" class="client-carousel__control client-carousel__control--prev" aria-label="Khách hàng trước">&#8249;</button>
+                <div class="client-carousel__viewport">
+                  <div class="client-carousel__track">
+                    <t t-foreach="clients" t-as="client">
+                    <div class="client-carousel__item">
+                        <div class="card h-100 border-0 shadow-sm rounded-4">
+                            <div class="card-body text-center p-4">
+                                <a t-if="client.website_url" t-att-href="client.website_url" target="_blank" rel="noopener" class="text-decoration-none">
+                                    <t t-call="dcg_website.client_card_content"/>
+                                </a>
+                                <div t-else="">
+                                    <t t-call="dcg_website.client_card_content"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                  </div>
+                </div>
+                <button t-if="len(clients) &gt; 1" type="button" class="client-carousel__control client-carousel__control--next" aria-label="Khách hàng tiếp theo">&#8250;</button>
+            </div>
+        </t>
+    </template>
+
+    <template id="client_card_content">
+        <div class="d-flex flex-column align-items-center">
+            <div t-attf-class="client-logo-box d-flex align-items-center justify-content-center mb-3 #{client.logo and 'client-logo-box--image' or 'client-logo-box--placeholder'}">
+                <img t-if="client.logo" t-att-src="'/web/image/doimoi.client/%s/logo' % client.id" class="img-fluid" t-att-alt="client.name" loading="lazy"/>
+                <span t-else="" class="client-logo-placeholder font-sora fw-bold">
+                    <t t-out="client.short_name or client.name[:2].upper()"/>
+                </span>
+            </div>
+            <h6 class="client-card-title font-sora fw-bold mb-1" t-out="client.name"/>
+            <span class="client-card-industry text-muted font-inter" t-out="client.industry or 'Khách hàng'"/>
+        </div>
+    </template>
+
+    <template id="service_card" name="Thẻ dịch vụ dùng chung">
+        <div t-att-class="service_card_column_class">
+            <article t-attf-class="card card-doimoi doimoi-service-card h-100 border-0 shadow-sm #{service_card_compact and 'doimoi-service-card--compact' or ''}">
+                <div class="card-body p-0">
+                    <div t-attf-class="doimoi-service-card__icon-wrap mb-3 #{service_card_accent_class}">
+                        <img t-if="service.icon" t-att-src="'/web/image/doimoi.service/%s/icon' % service.id" class="doimoi-service-card__icon" t-att-alt="service.name" loading="lazy"/>
+                        <i t-else="" class="fa fa-cogs fs-20" aria-hidden="true"/>
+                    </div>
+                    <h3 class="doimoi-service-card__title" t-out="service.name"/>
+                    <p t-if="service.short_description" class="doimoi-service-card__description" t-out="service.short_description"/>
+                    <ul t-if="service.features" class="doimoi-service-card__features list-unstyled mb-0">
+                        <t t-foreach="service.features.split(',')" t-as="feature">
+                            <li t-if="feature.strip()" class="d-flex align-items-start">
+                                <span class="doimoi-service-card__bullet" aria-hidden="true">&#9679;</span>
+                                <span t-out="feature.strip()"/>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </template>
+
+    <template id="dynamic_services">
+        <t t-set="service_groups" t-value="doimoi_service_groups"/>
+        
+        <t t-if="service_groups">
+            <t t-foreach="service_groups" t-as="group">
+                <t t-set="services" t-value="doimoi_all_services.filtered(lambda s: s.service_group_id.id == group.id)[:4]"/>
+                
+                
+                <t t-if="services">
+                    <t t-set="is_odd" t-value="group_index % 2 != 0"/>
+                    <div t-attf-class="pt-5 pb-5 #{is_odd and 'bg-doimoi-gray' or ''}">
+                        <div class="container-doimoi text-start">
+                            <span t-attf-class="badge text-uppercase mb-3 #{is_odd and 'badge-doimoi-teal' or 'badge-doimoi'}">
+                                <t t-out="group.name"/>
+                            </span>
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 gap-3">
+                                <div class="flex-grow-1 pe-md-4">
+                                    <h2 class="doimoi-content-heading mb-3">
+                                        <t t-if="group.title" t-out="group.title"/>
+                                        <t t-else="">Giải pháp <t t-out="group.name"/></t>
+                                    </h2>
+                                    <p t-if="group.subtitle" class="doimoi-content-subtitle mb-0">
+                                        <t t-out="group.subtitle"/>
+                                    </p>
+                                </div>
+                                <div>
+                                    <a href="/solutions" class="btn btn-doimoi-outline text-nowrap">Xem tất cả &amp;rarr;</a>
+                                </div>
+                            </div>
+
+                            <div class="row g-4 mt-2">
+                                <t t-foreach="services" t-as="service">
+                                    <t t-set="service_card_column_class" t-value="'col-12 col-md-6 col-lg-3'"/>
+                                    <t t-set="service_card_compact" t-value="True"/>
+                                    <t t-set="service_card_accent_class" t-value="is_odd and 'doimoi-service-card__icon-wrap--teal' or 'doimoi-service-card__icon-wrap--orange'"/>
+                                    <t t-call="dcg_website.service_card"/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+<template id="dynamic_services_tabs">
+        <t t-set="service_groups" t-value="doimoi_service_groups"/>
+        
+        <t t-if="service_groups">
+            <div class="container-doimoi py-5">
+                <ul class="nav nav-tabs border-bottom-0 justify-content-start mb-5" id="servicesTabs" role="tablist">
+                    <t t-foreach="service_groups" t-as="group">
+                        <li class="nav-item mx-2" role="presentation">
+                            <button t-attf-class="nav-link border-0 border-bottom border-3 bg-transparent font-inter fw-bold px-4 py-3 #{group_index == 0 and 'active' or ''}"
+                                    t-attf-id="tab-#{group.id}"
+                                    data-bs-toggle="tab"
+                                    t-attf-data-bs-target="#content-#{group.id}"
+                                    type="button"
+                                    role="tab"
+                                    t-attf-aria-controls="content-#{group.id}"
+                                    t-attf-aria-selected="#{group_index == 0 and 'true' or 'false'}">
+                                <i t-attf-class="fa #{group_index == 0 and 'fa-cogs text-secondary' or 'fa-desktop text-info'} me-2"></i> <t t-out="group.name"/>
+                            </button>
+                        </li>
+                    </t>
+                </ul>
+
+                <div class="tab-content" id="servicesTabsContent">
+                    <t t-foreach="service_groups" t-as="group">
+                        <div t-attf-class="tab-pane fade #{group_index == 0 and 'show active' or ''}"
+                             t-attf-id="content-#{group.id}"
+                             role="tabpanel"
+                             t-attf-aria-labelledby="tab-#{group.id}">
+                             
+                            <t t-set="services" t-value="doimoi_all_services.filtered(lambda s: s.service_group_id.id == group.id)"/>
+                            
+                            <t t-if="services">
+                                <div class="row g-4">
+                                    <t t-foreach="services" t-as="service">
+                                        <t t-set="service_card_column_class" t-value="'col-12 col-md-6 col-lg-4'"/>
+                                        <t t-set="service_card_compact" t-value="False"/>
+                                        <t t-set="service_card_accent_class" t-value="'doimoi-service-card__icon-wrap--neutral'"/>
+                                        <t t-call="dcg_website.service_card"/>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+                <t t-if="pager"><t t-call="website.pager"/></t>
+            </div>
+        </t>
+    </template>
+
+    <template id="dynamic_why_choose_us">
+        <t t-set="why_section" t-value="page_sections.get('why_choose') if page_sections else False"/>
+        <section t-if="why_section" class="pt-5 pb-5">
+            <div class="container-doimoi">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 text-start">
+                        <span t-if="why_section.eyebrow" class="badge badge-doimoi text-uppercase mb-3 px-3 py-2 why-choose__eyebrow" t-out="why_section.eyebrow"/>
+                        <h2 class="why-choose__title mb-4" t-out="why_section.title"/>
+                        <ul class="why-choose__benefits list-unstyled mb-5">
+                            <t t-foreach="why_section.item_ids.filtered(lambda item: item.is_published and item.item_group == 'benefit').sorted(key=lambda item: (item.sequence, item.id))" t-as="benefit">
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="fa fa-check text-doimoi mt-1 me-3"></i>
+                                <span t-out="benefit.title"/>
+                            </li>
+                            </t>
+                        </ul>
+                        <a t-if="why_section.button_label" t-att-href="why_section.button_url or '#'" class="btn btn-doimoi px-4 py-2" t-out="why_section.button_label"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="why-choose__process p-4 p-md-5 rounded-4">
+                            <t t-foreach="why_section.item_ids.filtered(lambda item: item.is_published and item.item_group == 'process').sorted(key=lambda item: (item.sequence, item.id))" t-as="process">
+                            <div t-attf-class="why-choose__card card border-0 shadow-sm rounded-3 #{not process_last and 'mb-3' or ''}">
+                                <div class="card-body d-flex align-items-center p-3 p-md-4">
+                                    <div class="why-choose__step rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0">
+                                        <span class="text-doimoi fw-bold font-sora" t-out="'%02d' % (process_index + 1)"/>
+                                    </div>
+                                    <div class="text-start">
+                                        <h6 class="fw-bold font-sora mb-1 text-dark" t-out="process.title"/>
+                                        <p t-if="process.subtitle" class="why-choose__description mb-0" t-out="process.subtitle"/>
+                                    </div>
+                                </div>
+                            </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="homepage_cta">
+        <t t-set="page_banner" t-value="doimoi_hero"/>
+        <t t-call="dcg_website.common_page_cta"/>
+    </template>
+
+    <template id="doimoi_homepage_hardcoded" inherit_id="website.homepage" name="Doimoi Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure">
+                <t t-call="dcg_website.dynamic_hero"/>
+                <t t-call="dcg_website.dynamic_statistics"/>
+                <div class="w-100">
+                    <t t-call="dcg_website.dynamic_services"/>
+                </div>
+                <t t-call="dcg_website.dynamic_why_choose_us"/>
+
+                <t t-if="doimoi_projects">
+                    <t t-set="projects" t-value="doimoi_projects"/>
+                    <t t-set="pager" t-value="False"/>
+                    <t t-call="dcg_website.project_cards"/>
+                    <div class="text-center pb-5 bg-white"><a href="/projects" class="btn btn-doimoi-outline px-4 py-2">Xem tất cả dự án →</a></div>
+                </t>
+                
+                <div t-if="doimoi_clients" class="pt-5 pb-5 bg-doimoi-gray">
+                    <div class="container-doimoi">
+                        <t t-call="dcg_website.dynamic_clients"/>
+                    </div>
+                </div>
+                
+                <t t-call="dcg_website.homepage_cta"/>
+
+                <div id="doimoi_homepage_snippet_area"
+                     class="oe_structure oe_empty"
+                     data-name="Nội dung tùy chỉnh trang chủ"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
