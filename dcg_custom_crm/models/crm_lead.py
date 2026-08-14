@@ -57,6 +57,7 @@ class CrmLead(models.Model):
     survey_date = fields.Date(string='Ngày khảo sát')
     surveyor_id = fields.Many2one('res.users', string='Người khảo sát')
     customer_contact_id = fields.Many2one('res.partner', string='Người liên hệ KH')
+    customer_company_id = fields.Many2one('res.partner', related='partner_id.commercial_partner_id', string='Công ty của Khách')
     dev_requirement_clear = fields.Boolean(string='Rõ yêu cầu Dev (PM tích)')
 
     internal_demo_checklist_ids = fields.One2many(
@@ -83,6 +84,11 @@ class CrmLead(models.Model):
         'partner_id',
         string='Người liên hệ khác',
         domain=[('is_company', '=', False)],
+    )
+    exchange_history_ids = fields.One2many(
+        'crm.exchange.history', 
+        'lead_id', 
+        string='Lịch sử trao đổi'
     )
     survey_note = fields.Text(string='Tài liệu')
     estimate_attachment_ids = fields.Many2many(
@@ -121,7 +127,6 @@ class CrmLead(models.Model):
 
     @api.onchange('partner_id')
     def _onchange_partner_id_for_decision_maker(self):
-        # Khi chọn công ty, tự động tìm liên hệ "Người quyết định" để gán email/sđt
         for lead in self:
             if lead.partner_id and lead.partner_id.is_company:
                 decision_maker = self.env['res.partner'].search([
@@ -229,8 +234,6 @@ class CrmLead(models.Model):
                 'user_id': lead.user_id.id,
                 'x_lead_id': lead.id,
             }
-            # dcg_project_customize provides lead_id. Keep both links in sync
-            # when that optional module is installed.
             if 'lead_id' in Project._fields:
                 project_vals['lead_id'] = lead.id
             project = Project.create(project_vals)

@@ -46,6 +46,39 @@
                        context="{'default_partner_id': partner_id, 'default_user_id': user_id}"/>
             </xpath>
             <xpath expr="//page[@name='lead']" position="before">
+                <page name="exchange_history" string="Lịch sử trao đổi">
+                    <field name="exchange_history_ids">
+                        <list editable="bottom">
+                            <field name="user_id"/>
+                            <field name="date"/>
+                            <field name="partner_id" domain="[('parent_id', '=', parent.customer_company_id)]"/>
+                            <field name="exchange_method"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </list>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="user_id"/>
+                                        <field name="partner_id" domain="[('parent_id', '=', parent.customer_company_id)]"/>
+                                    </group>
+                                    <group>
+                                        <field name="date"/>
+                                        <field name="exchange_method"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Nội dung">
+                                        <field name="content"/>
+                                    </page>
+                                    <page string="Đính kèm">
+                                        <field name="attachment_ids" widget="many2many_binary"/>
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
                 <page name="dcg_survey" string="Khảo sát" invisible="type == 'lead'">
                     <group>
                         <group string="Khảo sát">
