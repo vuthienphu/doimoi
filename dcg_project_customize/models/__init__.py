@@ -7,3 +7,5 @@ from . import res_config_settings
 from . import project_task_type
 from . import task_checklist
 from . import project_task
+from . import project_task_work_log
+from . import project_task_finish_wizard

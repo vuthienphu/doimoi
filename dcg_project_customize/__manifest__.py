@@ -17,6 +17,7 @@
         'mail',
         'hr',
         'survey',
+        'hr_timesheet',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -28,6 +29,7 @@
         'views/project_project_stage_views.xml',
         'views/project_task_type_views.xml',
         'views/project_task_views.xml',
+        'views/project_task_time_tracking_views.xml',
         'views/res_config_settings_views.xml',
     ],
     'installable': True,

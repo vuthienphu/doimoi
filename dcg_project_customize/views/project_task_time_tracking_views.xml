@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_finish_wizard_view_form" model="ir.ui.view">
+        <field name="name">project.task.finish.wizard.form</field>
+        <field name="model">project.task.finish.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lý do quá hạn">
+
+                <group>
+                    <field name="task_id" invisible="1"/>
+                    <field name="over_deadline_reason" placeholder="Ví dụ: Chờ khách hàng phản hồi..."/>
+                </group>
+                <footer>
+                    <button name="action_confirm_finish" string="Kết thúc Task" type="object" class="btn-danger"/>
+                    <button special="cancel" string="Hủy bỏ" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
