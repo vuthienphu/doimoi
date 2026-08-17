@@ -8,3 +8,6 @@ access_crm_demo_customer_line_user,crm.demo.customer.line.user,model_crm_demo_cu
 access_crm_demo_customer_line_manager,crm.demo.customer.line.manager,model_crm_demo_customer_line,sales_team.group_sale_manager,1,1,1,1
 access_crm_demo_checklist_wizard,crm.demo.checklist.wizard,model_crm_demo_checklist_wizard,base.group_user,1,1,1,1
 access_crm_exchange_history,crm.exchange.history,model_crm_exchange_history,base.group_user,1,1,1,1
+access_res_partner_product_status_user,res.partner.product.status,model_res_partner_product_status,base.group_user,1,1,1,1
+access_res_partner_upsell_user,res.partner.upsell,model_res_partner_upsell,base.group_user,1,1,1,1
+access_res_partner_risk_reason_user,res.partner.risk.reason,model_res_partner_risk_reason,base.group_user,1,1,1,1

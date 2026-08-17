@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_lost_view_form_inherit_dcg" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form.inherit.dcg</field>
+        <field name="model">crm.lead.lost</field>
+        <field name="inherit_id" ref="crm.crm_lead_lost_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lost_reason_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lost_reason_id']" position="after">
+                <field name="is_competitor_reason" invisible="1"/>
+                <group invisible="not is_competitor_reason">
+                    <field name="competitor" required="is_competitor_reason" string="Đối thủ"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

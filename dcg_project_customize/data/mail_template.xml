@@ -7,9 +7,7 @@
         <field name="subject">[Task] {{ object.name }} - Đang làm</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đang được thực hiện.</p>
-                <p>Nhân sự thực hiện: <t t-out="', '.join(object.user_ids.mapped('name')) or ''"/></p>
-                <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
+                <p>Task <strong><t t-out="object.name"/></strong> chuyển qua trạng thái <strong>Đang làm</strong>. Vui lòng truy cập <a t-att-href="object._get_task_url()">tại đây</a> để kiểm tra.</p>
             </div>
         </field>
         <field name="auto_delete" eval="True"/>
@@ -22,8 +20,7 @@
         <field name="subject">[Task] {{ object.name }} - Cần kiểm tra</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đang chuyển test.</p>
-                <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
+                <p>Task <strong><t t-out="object.name"/></strong> chuyển qua trạng thái <strong>Cần kiểm tra</strong>. Vui lòng truy cập <a t-att-href="object._get_task_url()">tại đây</a> để kiểm tra.</p>
             </div>
         </field>
         <field name="auto_delete" eval="True"/>
@@ -36,9 +33,7 @@
         <field name="subject">[Task] {{ object.name }} - Đã hoàn thành</field>
         <field name="body_html" type="html">
             <div>
-                <p>Công việc <strong><t t-out="object.name"/></strong> đã hoàn thành.</p>
-                <p>Vui lòng đưa công việc lên môi trường Live.</p>
-                <p><a t-att-href="object._get_task_url()">Mở công việc</a></p>
+                <p>Task <strong><t t-out="object.name"/></strong> chuyển qua trạng thái <strong>Hoàn thành</strong>. Vui lòng truy cập <a t-att-href="object._get_task_url()">tại đây</a> để kiểm tra.</p>
             </div>
         </field>
         <field name="auto_delete" eval="True"/>
