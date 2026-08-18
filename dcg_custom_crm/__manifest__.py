@@ -17,6 +17,9 @@
         'contacts',
     ],
     'data': [
+        'data/crm_lost_reason_data.xml',
+        'data/res_partner_risk_reason_data.xml',
+        'wizard/crm_lead_lost_views.xml',
         'views/res_partner_views.xml',
         'security/ir.model.access.csv',
         'wizard/crm_team_commission_wizard_views.xml',

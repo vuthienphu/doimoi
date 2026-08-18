@@ -59,7 +59,7 @@ class CrmLead(models.Model):
     customer_contact_id = fields.Many2one('res.partner', string='Người liên hệ KH')
     customer_company_id = fields.Many2one('res.partner', related='partner_id.commercial_partner_id', string='Công ty của Khách')
     dev_requirement_clear = fields.Boolean(string='Rõ yêu cầu Dev (PM tích)')
-
+    competitor = fields.Char(string='Đối thủ', tracking=True)
     internal_demo_checklist_ids = fields.One2many(
         'crm.demo.checklist',
         'lead_id',
@@ -205,17 +205,41 @@ class CrmLead(models.Model):
         result = super().write(vals)
         if {'stage_id', 'probability'} & set(vals):
             self._create_project_for_won_opportunities()
+            self._create_product_status_for_won_opportunities()
         return result
 
     def action_set_won(self):
         result = super().action_set_won()
         self._create_project_for_won_opportunities()
+        self._create_product_status_for_won_opportunities()
         return result
 
     def action_set_won_rainbowman(self):
         result = super().action_set_won_rainbowman()
         self._create_project_for_won_opportunities()
+        self._create_product_status_for_won_opportunities()
         return result
+
+    def _create_product_status_for_won_opportunities(self):
+        won_leads = self.filtered(
+            lambda lead: lead.type == 'opportunity'
+            and (lead.probability >= 100 or (lead.stage_id and lead.stage_id.is_won))
+        )
+        for lead in won_leads:
+            if not lead.partner_id:
+                continue
+            existing = self.env['res.partner.product.status'].search([
+                ('lead_id', '=', lead.id),
+                ('partner_id', '=', lead.partner_id.id)
+            ], limit=1)
+            if not existing:
+                self.env['res.partner.product.status'].create({
+                    'partner_id': lead.partner_id.id,
+                    'name': lead.name,
+                    'status': 'deploying',
+                    'project_id': lead.project_id.id if lead.project_id else False,
+                    'lead_id': lead.id,
+                })
 
     def _create_project_for_won_opportunities(self, force_create=False):
         Project = self.env['project.project']

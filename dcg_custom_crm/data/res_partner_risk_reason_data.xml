@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="risk_reason_1" model="res.partner.risk.reason">
+            <field name="name">Không phát sinh giao dịch</field>
+        </record>
+        <record id="risk_reason_2" model="res.partner.risk.reason">
+            <field name="name">Giảm sử dụng</field>
+        </record>
+        <record id="risk_reason_3" model="res.partner.risk.reason">
+            <field name="name">Khách hàng không hài lòng</field>
+        </record>
+        <record id="risk_reason_4" model="res.partner.risk.reason">
+            <field name="name">Thay đổi người quyết định</field>
+        </record>
+        <record id="risk_reason_5" model="res.partner.risk.reason">
+            <field name="name">Cạnh tranh</field>
+        </record>
+        <record id="risk_reason_6" model="res.partner.risk.reason">
+            <field name="name">Giá</field>
+        </record>
+        <record id="risk_reason_7" model="res.partner.risk.reason">
+            <field name="name">Chậm thanh toán</field>
+        </record>
+        <record id="risk_reason_8" model="res.partner.risk.reason">
+            <field name="name">Thay đổi chiến lược</field>
+        </record>
+        <record id="risk_reason_9" model="res.partner.risk.reason">
+            <field name="name">Khác</field>
+        </record>
+    </data>
+</odoo>

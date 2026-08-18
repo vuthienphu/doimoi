@@ -154,6 +154,13 @@ class ProjectTask(models.Model):
             },
         }
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        tasks = super().create(vals_list)
+        for task in tasks:
+            task._auto_subscribe_related_users()
+        return tasks
+
     def write(self, vals):
         if 'stage_id' in vals:
             stage = self.env['project.task.type'].browse(vals['stage_id'])
@@ -164,10 +171,36 @@ class ProjectTask(models.Model):
                         'actual_finish_date': fields.Datetime.now(),
                     })
         result = super().write(vals)
+        if 'reviewer_ids' in vals or 'user_ids' in vals:
+            for task in self:
+                task._auto_subscribe_related_users()
         if 'stage_id' in vals and not self.env.context.get('dcg_skip_stage_notification'):
             for task in self:
                 task._send_stage_notification()
         return result
+
+    def _auto_subscribe_related_users(self):
+        for task in self:
+            users_to_subscribe = task.reviewer_ids
+            for user in task.user_ids:
+                employee = self.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+                if employee and employee.parent_id and employee.parent_id.user_id:
+                    users_to_subscribe |= employee.parent_id.user_id
+            
+            if users_to_subscribe:
+                partner_ids = users_to_subscribe.mapped('partner_id').ids
+                existing_partners = task.message_follower_ids.mapped('partner_id').ids
+                new_partners = [p for p in partner_ids if p not in existing_partners]
+                
+                task.message_subscribe(partner_ids=partner_ids)
+                
+                if new_partners:
+                    task.message_post(
+                        body="Bạn vừa được thêm vào theo dõi công việc này (vai trò Người kiểm tra / Quản lý).",
+                        partner_ids=new_partners,
+                        subtype_xmlid='mail.mt_comment',
+                        message_type='comment'
+                    )
 
     def _send_stage_notification(self):
         self.ensure_one()
@@ -223,7 +256,14 @@ class ProjectTask(models.Model):
 
     def _send_task_template(self, template_xmlid, users):
         self.ensure_one()
-        emails = list(dict.fromkeys(users.filtered(lambda user: user.email).mapped('email')))
+        
+        all_users = users | self.reviewer_ids
+        for user in self.user_ids:
+            employee = self.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+            if employee and employee.parent_id and employee.parent_id.user_id:
+                all_users |= employee.parent_id.user_id
+                
+        emails = list(dict.fromkeys(all_users.filtered(lambda user: user.email).mapped('email')))
         if not emails:
             return False
 

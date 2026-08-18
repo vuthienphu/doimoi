@@ -78,7 +78,7 @@
             <xpath expr="//page[@name='contact_addresses']//field[@name='child_ids']" position="after">
                 <separator string="Ghi chú"/>
                 <field name="comment" nolabel="1" placeholder="Nhập ghi chú..."/>
-</xpath>
+            </xpath>
             <xpath expr="//field[@name='child_ids']/form//field[@name='function']" position="attributes">
                 <attribute name="invisible">0</attribute>
                 <attribute name="string">Chức danh</attribute>
@@ -100,6 +100,95 @@
                         </list>
                     </field>
                 </page>
+                <page string="Kế hoạch khách hàng" name="account_plan" invisible="not is_company">
+                    <!-- Dòng 1: Tổng hợp thông tin khách hàng (Dữ liệu tự động) -->
+                    <div class="row mt-2 mb-4">
+                        <div class="col-12">
+                            <h3 style="color: #017e84;">Tổng hợp dữ liệu Khách hàng</h3>
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_total_opportunity_count"/></strong><br/>Tổng Cơ hội
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_open_opportunity_count"/></strong><br/>Cơ hội đang mở
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_won_opportunity_count"/></strong><br/>Cơ hội đã thắng
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_total_revenue"/></strong><br/>Tổng Doanh thu
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_pipeline_value"/></strong><br/>Pipeline dự kiến
+                        </div>
+                        <div class="col border-end text-center">
+                            <strong><field name="account_active_contract_count"/></strong><br/>Hợp đồng (Kích hoạt)
+                        </div>
+                        <div class="col text-center">
+                            <strong><field name="account_active_project_count"/></strong><br/>Dự án / Ticket đang mở
+                        </div>
+                    </div>
+
+                    <group>
+                        <group string="1. Đánh giá tổng quan">
+                            <field name="account_customer_status" required="is_company"/>
+                            <field name="account_relationship_level" required="is_company"/>
+                            <field name="account_customer_potential" required="is_company"/>
+                            <field name="account_next_evaluation_date"/>
+                        </group>
+                        <group string="2. Đánh giá rủi ro">
+                            <field name="account_risk_level"/>
+                            <field name="account_risk_reason_ids" widget="many2many_tags" invisible="account_risk_level not in ('low','medium','high','critical')"/>
+                            <field name="account_risk_description" invisible="account_risk_level not in ('low','medium','high','critical')" rows="2"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="3. Mục tiêu &amp; Nhu cầu">
+                            <field name="account_customer_goal"/>
+                            <field name="account_business_goal"/>
+                            <field name="account_current_issues"/>
+                            <field name="account_current_needs"/>
+                            <field name="account_expected_needs"/>
+                        </group>
+                        <group string="4. Định hướng phát triển">
+                            <field name="account_tech_orientation"/>
+                            <field name="account_development_strategy"/>
+                            <field name="account_internal_note"/>
+                        </group>
+                    </group>
+
+                    <separator string="5. Sản phẩm / Dịch vụ đang sử dụng"/>
+                    <field name="account_product_status_ids" nolabel="1" colspan="2">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="status"/>
+                            <field name="project_id"/>
+                            <field name="lead_id"/>
+                            <field name="notes"/>
+                        </list>
+                    </field>
+
+                    <separator string="6. Cơ hội Bán thêm / Bán chéo (Upsell / Cross-sell)"/>
+                    <field name="account_upsell_ids" nolabel="1" colspan="2">
+                        <list editable="bottom" decoration-success="state=='converted'" decoration-muted="state=='lost'">
+                            <field name="type"/>
+                            <field name="product_name"/>
+                            <field name="expected_revenue"/>
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="expected_date"/>
+                            <field name="user_id"/>
+                            <field name="state"/>
+                            <field name="opportunity_id" readonly="1" invisible="not opportunity_id"/>
+                            <button name="action_create_opportunity" type="object" string="Tạo Cơ hội CRM" icon="fa-plus-circle" invisible="state != 'qualified' or opportunity_id"/>
+                        </list>
+                    </field>
+                </page>
+
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/form//field[@name='is_decision_maker']" position="after">
+                <label for="account_role" invisible="is_company or type != 'contact'"/>
+                <field name="account_role" invisible="is_company or type != 'contact'"/>
             </xpath>
         </field>
     </record>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Cấu hình 10 lý do mất cơ hội chuẩn hóa -->
+    <record id="lost_reason_price" model="crm.lost.reason">
+        <field name="name">Giá cao</field>
+    </record>
+    <record id="lost_reason_budget" model="crm.lost.reason">
+        <field name="name">Khách hàng chưa có ngân sách</field>
+    </record>
+    <record id="lost_reason_delay" model="crm.lost.reason">
+        <field name="name">Khách hàng trì hoãn</field>
+    </record>
+    <record id="lost_reason_competitor" model="crm.lost.reason">
+        <field name="name">Chọn đối thủ</field>
+    </record>
+    <record id="lost_reason_solution" model="crm.lost.reason">
+        <field name="name">Không phù hợp giải pháp</field>
+    </record>
+    <record id="lost_reason_requirement" model="crm.lost.reason">
+        <field name="name">Không đáp ứng yêu cầu</field>
+    </record>
+    <record id="lost_reason_change" model="crm.lost.reason">
+        <field name="name">Thay đổi nhu cầu</field>
+    </record>
+    <record id="lost_reason_contact" model="crm.lost.reason">
+        <field name="name">Không liên hệ được</field>
+    </record>
+    <record id="lost_reason_internal" model="crm.lost.reason">
+        <field name="name">Nguyên nhân nội bộ</field>
+    </record>
+    <record id="lost_reason_other" model="crm.lost.reason">
+        <field name="name">Khác</field>
+    </record>
+</odoo>
