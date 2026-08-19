@@ -68,7 +68,7 @@
                 <field name="customer_company_id" invisible="1"/>
                 <field name="request_date" readonly="1"/>
                 <field name="requester_id"
-                       domain="[('parent_id', '=', customer_company_id), ('is_company', '=', False)]"
+                       domain="['|', ('parent_id', '=', partner_id), ('id', '=', partner_id), ('is_company', '=', False)]"
                        options="{'no_create': True}"
                        readonly="not is_draft"/>
                 <field name="planned_finish_date" readonly="not is_draft"/>
