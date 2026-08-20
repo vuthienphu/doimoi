@@ -57,7 +57,15 @@ class ProjectTask(models.Model):
     over_deadline_reason = fields.Text(string='Lý do quá hạn', readonly=True)
     
     is_current_user_assignee = fields.Boolean(compute='_compute_is_current_user_assignee')
-
+    project_member_user_ids = fields.Many2many(
+        'res.users',
+        compute='_compute_project_member_user_ids',
+        string='Người dùng trong dự án'
+    )
+    @api.depends('project_id.member_ids.user_id')
+    def _compute_project_member_user_ids(self):
+        for task in self:
+            task.project_member_user_ids = task.project_id.member_ids.mapped('user_id')
     @api.depends('user_ids')
     def _compute_is_current_user_assignee(self):
         for task in self:
