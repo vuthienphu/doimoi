@@ -18,7 +18,6 @@ class ProjectTask(models.Model):
     request_date = fields.Date(
         string='Ngày yêu cầu',
         default=fields.Date.context_today,
-        readonly=True,
         copy=False,
     )
     requester_id = fields.Many2one('res.partner', string='Người yêu cầu')

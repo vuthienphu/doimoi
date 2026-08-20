@@ -66,7 +66,7 @@
             <xpath expr="//field[@name='user_ids']" position="after">
                 <field name="reviewer_ids" widget="many2many_tags" string="Danh sách người kiểm tra" readonly="not is_draft"/>
                 <field name="customer_company_id" invisible="1"/>
-                <field name="request_date" readonly="1"/>
+                <field name="request_date"/>
                 <field name="requester_id"
                        domain="['|', ('parent_id', '=', partner_id), ('id', '=', partner_id), ('is_company', '=', False)]"
                        options="{'no_create': True}"
