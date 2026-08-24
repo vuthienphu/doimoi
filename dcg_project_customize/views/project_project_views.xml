@@ -21,7 +21,9 @@
                     <field name="handover_checklist_ids" nolabel="1">
                         <list editable="bottom">
                             <field name="name"/>
+                            <field name="task_id" readonly="1"/>
                             <field name="is_done" widget="boolean_toggle"/>
+                            <field name="handover_date" required="1"/>
                             <field name="attachment_ids" widget="many2many_binary"/>
                         </list>
                     </field>

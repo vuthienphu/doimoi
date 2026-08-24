@@ -10,6 +10,21 @@
             </xpath>
         </field>
     </record>
+
+    <record id="project_task_view_quick_create_inherit_dcg" model="ir.ui.view">
+        <field name="name">project.task.quick.create.inherit.dcg</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="before">
+                <field name="project_member_user_ids" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='user_ids']" position="attributes">
+                <attribute name="domain">[('id', 'in', project_member_user_ids)]</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <record id="project_task_view_form_inherit_dcg_customize" model="ir.ui.view">
         <field name="name">project.task.form.inherit.dcg.customize</field>
         <field name="model">project.task</field>
@@ -17,11 +32,13 @@
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
+                <field name="is_live" invisible="1"/>
                 <field name="is_draft" invisible="1"/>
                 <field name="current_user_status" invisible="1"/>
                 <field name="is_over_estimate" invisible="1"/>
                 <field name="is_over_deadline" invisible="1"/>
                 <field name="is_current_user_assignee" invisible="1"/>
+                <field name="can_edit_manager_fields" invisible="1"/>
                 <button name="action_timer_start" type="object" string="Bắt đầu" class="btn-primary" 
                         invisible="not is_current_user_assignee or current_user_status != 'not_started'"/>
                 <button name="action_timer_pause" type="object" string="Tạm dừng" class="btn-warning" 
@@ -30,25 +47,27 @@
                         invisible="not is_current_user_assignee or current_user_status != 'paused'"/>
                 <button name="action_timer_stop" type="object" string="Kết thúc" class="btn-danger" 
                         invisible="not is_current_user_assignee or current_user_status not in ('running', 'paused')"/>
+                <button name="action_send_reminder" string="Nhắc nhở" type="object" class="oe_highlight" invisible="not is_draft"/>
+                <button name="action_open_document_wizard" string="Lưu trữ" type="object" class="oe_highlight" invisible="task_type !='documentation'"/>
             </xpath>
             <xpath expr="//field[@name='date_deadline']" position="attributes">
-                <attribute name="readonly">not is_draft</attribute>
+                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
             </xpath>
             <xpath expr="//field[@name='user_ids']" position="attributes">
-                <attribute name="readonly">not is_draft</attribute>
+                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
                 <attribute name="domain">[('id', 'in', project_member_user_ids)]</attribute>
             </xpath>
             <xpath expr="//field[@name='project_id']" position="attributes">
-                <attribute name="readonly">not is_draft</attribute>
+                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
             </xpath>
             <xpath expr="//field[@name='tag_ids']" position="attributes">
-                <attribute name="readonly">not is_draft</attribute>
+                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
             </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="readonly">not is_draft</attribute>
             </xpath>
             <xpath expr="//field[@name='description']" position="attributes">
-                <attribute name="readonly">not is_draft</attribute>
+                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
             </xpath>
             <xpath expr="//sheet" position="before">
                 <div class="alert alert-danger mb-0" role="alert" invisible="not is_over_estimate">
@@ -60,28 +79,38 @@
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="readonly">not is_draft</attribute>
+                <attribute name="domain">[('is_company','=',True)]</attribute>
             </xpath>
             <xpath expr="//field[@name='allocated_hours']" position="attributes">
                 <attribute name="readonly">not is_draft</attribute>
             </xpath>
             <xpath expr="//field[@name='user_ids']" position="after">
                 <field name="project_member_user_ids" invisible="1"/>
-                <field name="reviewer_ids" widget="many2many_tags" string="Danh sách người kiểm tra" readonly="not is_draft" domain="[('id', 'in', project_member_user_ids)]"/>
+                <field name="reviewer_ids" widget="many2many_tags" string="Danh sách người kiểm tra" readonly="id and not can_edit_manager_fields" domain="[('id', 'in', project_member_user_ids)]"/>
+                <field name="task_type" readonly="not is_draft"/>
+                <field name="bug_reason"
+                    invisible="task_type !='bug'"
+                    required="task_type == 'bug'"
+                    readonly="is_live"/>
+                <field name="bug_solution"
+                    invisible="task_type !='bug'"
+                    required="task_type == 'bug'"
+                    readonly="is_live"/>
                 <field name="customer_company_id" invisible="1"/>
-                <field name="request_date"/>
+                <field name="request_date" readonly="id and not can_edit_manager_fields"/>
                 <field name="requester_id"
                        domain="['|', ('parent_id', '=', partner_id), ('id', '=', partner_id), ('is_company', '=', False)]"
                        options="{'no_create': True}"
                        readonly="not is_draft"/>
                 <field name="planned_finish_date" readonly="not is_draft"/>
                 <field name="actual_finish_date" readonly="not is_draft"/>
-                <field name="estimate_hours" widget="float_time" readonly="not is_draft"/>
+                <field name="estimate_hours" widget="float_time" readonly="id and not can_edit_manager_fields"/>
                 <field name="actual_hours" widget="float_time"/>
                 <field name="over_deadline_reason" invisible="not over_deadline_reason"/>
             </xpath>
             <xpath expr="//page[@name='description_page']" position="after">
                 <page name="dcg_checklist" string="Danh sách kiểm tra">
-                    <field name="checklist_ids" nolabel="1">
+                    <field name="checklist_ids" nolabel="1" readonly="id and not can_edit_manager_fields">
                         <list editable="bottom">
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
@@ -105,4 +134,33 @@
             </xpath>
         </field>
     </record>
+    <record id="project.action_view_my_task" model="ir.actions.act_window">
+        <field name="context">
+            {'search_default_my_task': 1,
+            'all_task':0,
+            'default_user_ids':[(4,uid)],
+            'search_default_stage':1}
+        </field>
+    </record>
+        <record id="view_task_document_wizard_form" model="ir.ui.view">
+        <field name="name">project.task.document.wizard.form</field>
+        <field name="model">project.task.document.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lưu trữ tài liệu">
+                <group>
+                    <field name="task_id" invisible="1"/>
+                    <field name="project_id" invisible="1"/>
+                    <field name="name"/>
+                    <field name="attachment_ids" widget="many2many_binary"/>
+                    <field name="is_handed_over"/>
+                    <field name="handover_date" invisible="not is_handed_over" required="is_handed_over"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Xác nhận" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Hủy" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
 </odoo>
