@@ -5,6 +5,13 @@ from odoo import api, fields, models
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
+    stage_id = fields.Many2one(
+        'project.project.stage',
+        string='Trạng thái dự án',
+        tracking=True,
+        ondelete='set null',
+    )
+
     lead_id = fields.Many2one(
         'crm.lead',
         string='Cơ hội',

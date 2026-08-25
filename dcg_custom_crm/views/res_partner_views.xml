@@ -131,9 +131,9 @@
 
                     <group>
                         <group string="1. Đánh giá tổng quan">
-                            <field name="account_customer_status" required="is_company"/>
-                            <field name="account_relationship_level" required="is_company"/>
-                            <field name="account_customer_potential" required="is_company"/>
+                            <field name="account_customer_status"/>
+                            <field name="account_relationship_level"/>
+                            <field name="account_customer_potential"/>
                             <field name="account_next_evaluation_date"/>
                         </group>
                         <group string="2. Đánh giá rủi ro">

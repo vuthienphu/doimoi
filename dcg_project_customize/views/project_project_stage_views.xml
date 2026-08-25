@@ -6,6 +6,9 @@
         <field name="inherit_id" ref="project.project_project_stage_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
+                <group>
+                    <field name="description"/>
+                </group>
                 <group string="Template Checklist Bàn Giao">
                     <field name="checklist_template_ids" nolabel="1">
                         <list editable="bottom">
@@ -14,7 +17,9 @@
                         </list>
                     </field>
                 </group>
+                
             </xpath>
+
         </field>
     </record>
     <record id="action_project_project_stage" model="ir.actions.act_window">

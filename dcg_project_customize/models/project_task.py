@@ -158,7 +158,6 @@ class ProjectTask(models.Model):
             'start_time': fields.Datetime.now(),
         })
         
-        # Nếu đang ở Cần làm (Draft) thì tự động chuyển sang Đang làm
         if self.stage_id.is_draft:
             processing_stage = self.env['project.task.type'].search([('is_processing', '=', True)], limit=1)
             if processing_stage:
@@ -202,9 +201,7 @@ class ProjectTask(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        # Users may set the protected fields while creating a new task.
         tasks = super(ProjectTask, self.with_context(dcg_task_creation=True)).create(vals_list)
-        # Do not leak the creation bypass into later operations on the result.
         tasks = tasks.with_env(self.env)
         for task in tasks:
             task._auto_subscribe_related_users()

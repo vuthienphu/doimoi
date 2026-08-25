@@ -21,9 +21,9 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'data/stage_data.xml',
         'data/mail_template.xml',
         'data/cron_data.xml',
+        'data/stage_data.xml',
         'views/crm_lead_views.xml',
         'views/project_project_views.xml',
         'views/project_project_stage_views.xml',
