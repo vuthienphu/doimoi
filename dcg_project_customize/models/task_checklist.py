@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 class TaskChecklist(models.Model):
     _name = 'task.checklist'
@@ -19,7 +20,23 @@ class TaskChecklist(models.Model):
         ondelete='cascade',
     )
 
+    def _check_task_manager_edit_access(self):
+        if (
+            not self.env.context.get('dcg_task_creation')
+            and not self.env.su
+            and not self.env.user.has_group('project.group_project_manager')
+        ):
+            raise UserError(_(
+                'Bạn cần có quyền Quản lý dự án để chỉnh sửa Danh sách kiểm tra.'
+            ))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        self._check_task_manager_edit_access()
+        return super().create(vals_list)
+
     def write(self, vals):
+        self._check_task_manager_edit_access()
         if vals.get('is_done'):
             unchecked = self.filtered(lambda checklist: not checklist.is_done)
             if unchecked:
@@ -28,3 +45,7 @@ class TaskChecklist(models.Model):
                     'reviewer_id': self.env.user.id,
                 })
         return super().write(vals)
+
+    def unlink(self):
+        self._check_task_manager_edit_access()
+        return super().unlink()

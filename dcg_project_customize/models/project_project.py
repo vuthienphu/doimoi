@@ -85,6 +85,7 @@ class ProjectHandoverChecklist(models.Model):
 
     project_id = fields.Many2one('project.project', string='Dự án', ondelete='cascade')
     name = fields.Char(string='Tên tài liệu', required=True)
+    task_id = fields.Many2one('project.task', string='Task gốc')
     template_id = fields.Many2one(
         'project.stage.checklist.template',
         string='Mẫu checklist',
@@ -92,4 +93,5 @@ class ProjectHandoverChecklist(models.Model):
         ondelete='set null',
     )
     is_done = fields.Boolean(string='Đã bàn giao')
+    handover_date = fields.Date(string='Ngày bàn giao', default=fields.Date.context_today)
     attachment_ids = fields.Many2many('ir.attachment', string='File đính kèm')

@@ -3,10 +3,29 @@
 from email.utils import formataddr
 
 import odoo
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
+
+    _MANAGER_EDITABLE_FIELDS = {
+        'date_deadline',
+        'request_date',
+        'reviewer_ids',
+        'user_ids',
+        'project_id',
+        'estimate_hours',
+        'tag_ids',
+        'description',
+        'checklist_ids',
+    }
+
+    can_edit_manager_fields = fields.Boolean(
+        string='Có thể chỉnh sửa các trường quản lý',
+        compute='_compute_can_edit_manager_fields',
+    )
 
     reviewer_ids = fields.Many2many(
         'res.users',
@@ -18,7 +37,6 @@ class ProjectTask(models.Model):
     request_date = fields.Date(
         string='Ngày yêu cầu',
         default=fields.Date.context_today,
-        readonly=True,
         copy=False,
     )
     requester_id = fields.Many2one('res.partner', string='Người yêu cầu')
@@ -58,6 +76,33 @@ class ProjectTask(models.Model):
     over_deadline_reason = fields.Text(string='Lý do quá hạn', readonly=True)
     
     is_current_user_assignee = fields.Boolean(compute='_compute_is_current_user_assignee')
+    project_member_user_ids = fields.Many2many(
+        'res.users',
+        compute='_compute_project_member_user_ids',
+        string='Người dùng trong dự án'
+    )
+    task_type= fields.Selection([
+        ('feature','Chức năng'),
+        ('bug','Lỗi'),
+        ('enhancement','Cải tiến'),
+        ('change','Thay đổi'),
+        ('technical','Kỹ thuật'),
+        ('documentation','Tài liệu')
+    ],string='Phân loại Task')
+    is_live=fields.Boolean(related='stage_id.is_live',string='Đã Go-live',readonly=True)
+    bug_reason=fields.Text(string='Nguyên nhân')
+    bug_solution=fields.Text(string='Cách xử lý')
+
+    @api.depends_context('uid')
+    def _compute_can_edit_manager_fields(self):
+        can_edit = self.env.user.has_group('project.group_project_manager')
+        for task in self:
+            task.can_edit_manager_fields = can_edit
+
+    @api.depends('project_id.member_ids.user_id')
+    def _compute_project_member_user_ids(self):
+        for task in self:
+            task.project_member_user_ids = task.project_id.sudo().member_ids.mapped('user_id')
 
     @api.depends('user_ids')
     def _compute_is_current_user_assignee(self):
@@ -75,7 +120,7 @@ class ProjectTask(models.Model):
             if task.stage_id.is_done or task.stage_id.is_live:
                 task.current_user_status = 'finished'
                 continue
-                
+
             user_logs = task.work_log_ids.filtered(lambda l: l.user_id == self.env.user)
             if user_logs.filtered('is_running'):
                 task.current_user_status = 'running'
@@ -106,6 +151,7 @@ class ProjectTask(models.Model):
         if running_log:
             raise odoo.exceptions.UserError('Bạn đang có một phiên làm việc đang chạy trên task này.')
             
+
         self.env['project.task.work.log'].create({
             'task_id': self.id,
             'user_id': self.env.user.id,
@@ -156,12 +202,28 @@ class ProjectTask(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        tasks = super().create(vals_list)
+        # Users may set the protected fields while creating a new task.
+        tasks = super(ProjectTask, self.with_context(dcg_task_creation=True)).create(vals_list)
+        # Do not leak the creation bypass into later operations on the result.
+        tasks = tasks.with_env(self.env)
         for task in tasks:
             task._auto_subscribe_related_users()
         return tasks
 
     def write(self, vals):
+        protected_fields = self._MANAGER_EDITABLE_FIELDS.intersection(vals)
+        if (
+            protected_fields
+            and not self.env.su
+            and not self.env.user.has_group('project.group_project_manager')
+        ):
+            field_labels = sorted(
+                self._fields[field_name].string for field_name in protected_fields
+            )
+            raise UserError(_(
+                'Bạn cần có quyền Quản lý dự án để chỉnh sửa các trường: %s'
+            ) % ', '.join(field_labels))
+
         if 'stage_id' in vals:
             stage = self.env['project.task.type'].browse(vals['stage_id'])
             if stage.is_done:
@@ -186,7 +248,6 @@ class ProjectTask(models.Model):
                 employee = self.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
                 if employee and employee.parent_id and employee.parent_id.user_id:
                     users_to_subscribe |= employee.parent_id.user_id
-            
             if users_to_subscribe:
                 partner_ids = users_to_subscribe.mapped('partner_id').ids
                 existing_partners = task.message_follower_ids.mapped('partner_id').ids
@@ -300,7 +361,25 @@ class ProjectTask(models.Model):
             or self.env.user.name
         )
         return formataddr((name, email)) if name else email
-
+    def action_send_reminder(self):
+        for task in self:
+            if not task.user_ids:
+                continue
+            task._send_task_template('dcg_project_customize.task_processing_notify',task.user_ids)
+            task.message_post(body="Đã gửi email nhắc nhở thực hiện công việc")
+    def action_open_document_wizard(self):
+        self.ensure_one()
+        return{
+            'name':'Lưu trữ tài liệu',
+            'type':'ir.actions.act_window',
+            'res_model':'project.task.document.wizard',
+            'view_mode':'form',
+            'target':'new',
+            'context':{
+                'default_task_id':self.id,
+                'default_project_id':self.project_id.id,
+            }
+        }
     @api.model
     def _cron_send_daily_reminders(self):
         processing = self.search([('stage_id.is_processing', '=', True)])
@@ -317,3 +396,31 @@ class ProjectTask(models.Model):
         ])
         for task in done_not_live:
             task._send_reminder_done_not_live()
+
+class TaskDocumentWizard(models.TransientModel):
+    _name = 'project.task.document.wizard'
+    _description = 'Popup lưu trữ tài liệu'
+
+    task_id = fields.Many2one('project.task', required=True)
+    project_id = fields.Many2one('project.project', required=True)
+    name = fields.Char(string='Tên tài liệu', required=True)
+    attachment_ids = fields.Many2many('ir.attachment', string='File đính kèm')
+    is_handed_over = fields.Boolean(string='Đã bàn giao khách hàng')
+    handover_date = fields.Date(string='Ngày bàn giao')
+
+    def action_confirm(self):
+        existing_doc = self.env['project.handover.checklist'].search([
+            ('task_id', '=', self.task_id.id)
+        ], limit=1)
+        val = {
+            'name': self.name,
+            'project_id': self.project_id.id,
+            'task_id': self.task_id.id,
+            'is_done': self.is_handed_over,
+            'handover_date': self.handover_date,
+            'attachment_ids': [(6, 0, self.attachment_ids.ids)]
+        }
+        if existing_doc:
+            existing_doc.write(val)
+        else:
+            self.env['project.handover.checklist'].create(val)
