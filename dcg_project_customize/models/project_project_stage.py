@@ -4,7 +4,7 @@ from odoo import api, fields, models
 
 class ProjectProjectStage(models.Model):
     _inherit = 'project.project.stage'
-
+    description = fields.Text(string='Ý nghĩa')
     checklist_template_ids = fields.One2many(
         'project.stage.checklist.template',
         'stage_id',

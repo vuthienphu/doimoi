@@ -1,30 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="project_stage_init" model="project.project.stage">
-        <field name="name">Khởi tạo</field>
-        <field name="sequence">10</field>
-        <field name="active">True</field>
-    </record>
-    <record id="project_stage_implement" model="project.project.stage">
-        <field name="name">Triển khai</field>
-        <field name="sequence">20</field>
-        <field name="active">True</field>
-    </record>
-    <record id="project_stage_test" model="project.project.stage">
-        <field name="name">Test</field>
-        <field name="sequence">30</field>
-        <field name="active">True</field>
-    </record>
-    <record id="project_stage_golive" model="project.project.stage">
-        <field name="name">GoLive</field>
-        <field name="sequence">40</field>
-        <field name="active">True</field>
-    </record>
-    <record id="project_stage_done" model="project.project.stage">
-        <field name="name">Hoàn thành</field>
-        <field name="sequence">50</field>
-        <field name="active">True</field>
-    </record>
+    <data noupdate="1">
+        <record id="project_stage_expected" model="project.project.stage">
+            <field name="name">Dự kiến</field>
+            <field name="description">Dự án đã được xác định nhưng chưa bắt đầu triển khai</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="project_stage_preparing" model="project.project.stage">
+            <field name="name">Đang chuẩn bị</field>
+            <field name="description">Đang chuẩn bị nhân sự, hồ sơ, kế hoạch, môi trường, thiết bị...</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="project_stage_implementing" model="project.project.stage">
+            <field name="name">Đang triển khai</field>
+            <field name="sequence">30</field>
+            <field name="description">Dự án đang thực hiện các công việc theo phạm vi Hợp đồng</field>
+        </record>
+
+        <record id="project_stage_waiting_acceptance" model="project.project.stage">
+            <field name="name">Chờ nghiệm thu</field>
+            <field name="sequence">40</field>
+            <field name="description">Đã hoàn thành phần công việc chính, đang hoàn thiện hồ sơ/chờ nghiệm thu</field>
+        </record>
+
+        <record id="project_stage_accepted" model="project.project.stage">
+            <field name="name">Đã nghiệm thu</field>
+            <field name="sequence">50</field>
+            <field name="description">Đã nghiệm thu/bàn giao theo phạm vi</field>
+        </record>
+
+        <record id="project_stage_done" model="project.project.stage">
+            <field name="name">Hoàn thành</field>
+            <field name="sequence">60</field>
+            <field name="description">Dự án đã hoàn tất và không còn công việc triển khai chính</field>
+            <field name="fold" eval="True"/>
+        </record>
+
+        <record id="project_stage_maintaining" model="project.project.stage">
+            <field name="name">Đang bảo trì</field>
+            <field name="sequence">70</field>
+            <field name="description">Dự án đã hoàn thành nhưng đang trong thời gian bảo hành/bảo trì/hỗ trợ</field>
+        </record>
+
+        <record id="project_stage_paused" model="project.project.stage">
+            <field name="name">Tạm dừng</field>
+            <field name="sequence">80</field>
+            <field name="description">Dự án tạm thời không triển khai</field>
+            <field name="fold" eval="True"/>
+        </record>
+
+        <record id="project_stage_cancelled" model="project.project.stage">
+            <field name="name">Hủy</field>
+            <field name="sequence">90</field>
+            <field name="description">Dự án không tiếp tục thực hiện</field>
+            <field name="fold" eval="True"/>
+        </record>
+    </data>
+
     <record id="task_stage_todo" model="project.task.type">
         <field name="name">Cần làm</field>
         <field name="sequence">10</field>

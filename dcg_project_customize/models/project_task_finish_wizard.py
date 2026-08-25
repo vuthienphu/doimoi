@@ -15,10 +15,8 @@ class ProjectTaskFinishWizard(models.TransientModel):
         if not self.over_deadline_reason.strip():
             raise ValidationError('Bạn bắt buộc phải nhập lý do quá hạn.')
             
-        # Lưu lý do vào task
         self.task_id.write({'over_deadline_reason': self.over_deadline_reason})
         
-        # Kết thúc (stop timer và đổi stage)
         self.task_id.action_timer_pause()
         done_stage = self.env['project.task.type'].search([('is_done', '=', True)], limit=1)
         if done_stage:
