@@ -18,9 +18,11 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_ids']" position="before">
                 <field name="project_member_user_ids" invisible="1"/>
+                <field name="is_external_project_user" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='user_ids']" position="attributes">
                 <attribute name="domain">[('id', 'in', project_member_user_ids)]</attribute>
+                <attribute name="readonly">is_external_project_user</attribute>
             </xpath>
         </field>
     </record>
@@ -39,6 +41,7 @@
                 <field name="is_over_deadline" invisible="1"/>
                 <field name="is_current_user_assignee" invisible="1"/>
                 <field name="can_edit_manager_fields" invisible="1"/>
+                <field name="is_external_project_user" invisible="1"/>
                 <button name="action_timer_start" type="object" string="Bắt đầu" class="btn-primary" 
                         invisible="not is_current_user_assignee or current_user_status != 'not_started'"/>
                 <button name="action_timer_pause" type="object" string="Tạm dừng" class="btn-warning" 
@@ -51,10 +54,10 @@
                 <button name="action_open_document_wizard" string="Lưu trữ" type="object" class="oe_highlight" invisible="task_type !='documentation'"/>
             </xpath>
             <xpath expr="//field[@name='date_deadline']" position="attributes">
-                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
+                <attribute name="readonly">is_external_project_user or (id and not can_edit_manager_fields)</attribute>
             </xpath>
             <xpath expr="//field[@name='user_ids']" position="attributes">
-                <attribute name="readonly">id and not can_edit_manager_fields</attribute>
+                <attribute name="readonly">is_external_project_user or (id and not can_edit_manager_fields)</attribute>
                 <attribute name="domain">[('id', 'in', project_member_user_ids)]</attribute>
             </xpath>
             <xpath expr="//field[@name='project_id']" position="attributes">
@@ -86,7 +89,7 @@
             </xpath>
             <xpath expr="//field[@name='user_ids']" position="after">
                 <field name="project_member_user_ids" invisible="1"/>
-                <field name="reviewer_ids" widget="many2many_tags" string="Danh sách người kiểm tra" readonly="id and not can_edit_manager_fields" domain="[('id', 'in', project_member_user_ids)]"/>
+                <field name="reviewer_ids" widget="many2many_tags" string="Danh sách người kiểm tra" readonly="is_external_project_user or (id and not can_edit_manager_fields)" domain="[('id', 'in', project_member_user_ids)]"/>
                 <field name="task_type" readonly="not is_draft"/>
                 <field name="bug_reason"
                     invisible="task_type !='bug'"

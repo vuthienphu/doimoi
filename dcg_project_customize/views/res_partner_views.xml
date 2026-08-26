@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_external_project_fields" model="ir.ui.view">
+        <field name="name">res.partner.form.external.project.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="partner_department_id"
+                       invisible="is_company"
+                       context="{'default_company_id': parent_id}"/>
+                <field name="birthdate" invisible="is_company"/>
+                <field name="account_user_id" invisible="is_company" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

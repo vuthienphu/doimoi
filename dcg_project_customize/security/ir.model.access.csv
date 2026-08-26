@@ -8,3 +8,4 @@ access_project_stage_checklist_template_user,project.stage.checklist.template us
 access_project_task_work_log_user,project.task.work.log user,model_project_task_work_log,project.group_project_user,1,1,1,1
 access_project_task_finish_wizard_user,project.task.finish.wizard user,model_project_task_finish_wizard,project.group_project_user,1,1,1,1
 access_project_task_document_wizard_user,project.task.document.wizard user,model_project_task_document_wizard,base.group_user,1,1,1,1
+access_partner_department_user,res.partner.department user,model_res_partner_department,base.group_user,1,1,1,0

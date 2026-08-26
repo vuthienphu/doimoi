@@ -4,7 +4,7 @@ from email.utils import formataddr
 
 import odoo
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
 
 
 class ProjectTask(models.Model):
@@ -25,6 +25,9 @@ class ProjectTask(models.Model):
     can_edit_manager_fields = fields.Boolean(
         string='Có thể chỉnh sửa các trường quản lý',
         compute='_compute_can_edit_manager_fields',
+    )
+    is_external_project_user = fields.Boolean(
+        compute='_compute_is_external_project_user',
     )
 
     reviewer_ids = fields.Many2many(
@@ -98,6 +101,14 @@ class ProjectTask(models.Model):
         can_edit = self.env.user.has_group('project.group_project_manager')
         for task in self:
             task.can_edit_manager_fields = can_edit
+
+    @api.depends_context('uid')
+    def _compute_is_external_project_user(self):
+        is_external = self.env.user.has_group(
+            'dcg_project_customize.group_external_project_user'
+        )
+        for task in self:
+            task.is_external_project_user = is_external
 
     @api.depends('project_id.member_ids.user_id')
     def _compute_project_member_user_ids(self):
@@ -201,6 +212,16 @@ class ProjectTask(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        if self.env.user.has_group('dcg_project_customize.group_external_project_user'):
+            allowed_project_ids = set(self.env['project.project'].search([
+                ('external_user_ids', 'in', self.env.user.id),
+            ]).ids)
+            for vals in vals_list:
+                project_id = vals.get('project_id') or self.env.context.get('default_project_id')
+                if not project_id or project_id not in allowed_project_ids:
+                    raise AccessError(_('Bạn chỉ có thể tạo task trong dự án đã được cấp quyền.'))
+                vals['user_ids'] = [(5, 0, 0)]
+                vals['reviewer_ids'] = [(5, 0, 0)]
         tasks = super(ProjectTask, self.with_context(dcg_task_creation=True)).create(vals_list)
         tasks = tasks.with_env(self.env)
         for task in tasks:
