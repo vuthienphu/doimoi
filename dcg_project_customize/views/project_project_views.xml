@@ -38,6 +38,21 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="member_ids" widget="many2many_tags" string="Thành viên tham gia" optional="show"/>
+                <field name="stage_id" optional="show" widget="badge"/>
+            </xpath>
+            <xpath expr="//list" position="attributes">
+                <attribute name="default_group_by">stage_id</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_project_view_kanban_inherit_dcg_customize" model="ir.ui.view">
+        <field name="name">project.project.kanban.inherit.dcg.customize</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="default_group_by">stage_id</attribute>
             </xpath>
         </field>
     </record>
