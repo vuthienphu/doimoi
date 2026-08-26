@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'DCG Project Customize',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.2',
     'category': 'Project',
     'summary': 'Customize Project and Task workflow for DCG',
     'description': """
@@ -20,12 +20,15 @@
         'hr_timesheet',
     ],
     'data': [
+        'security/external_project_security.xml',
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
         'data/mail_template.xml',
         'data/cron_data.xml',
         'data/stage_data.xml',
         'views/crm_lead_views.xml',
         'views/project_project_views.xml',
+        'views/res_partner_views.xml',
         'views/project_project_stage_views.xml',
         'views/project_task_type_views.xml',
         'views/project_task_views.xml',

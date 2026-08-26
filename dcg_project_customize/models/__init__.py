@@ -9,3 +9,6 @@ from . import task_checklist
 from . import project_task
 from . import project_task_work_log
 from . import project_task_finish_wizard
+from . import hr_employee_public
+from . import res_partner
+from . import ir_ui_menu
