@@ -18,6 +18,7 @@
         'hr',
         'survey',
         'hr_timesheet',
+        'om_hr_payroll'
     ],
     'data': [
         'security/external_project_security.xml',
