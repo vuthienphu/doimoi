@@ -9,16 +9,14 @@
     </function>
 
     <data noupdate="0">
-        <!-- Ghi đè Rule Project của Nhân sự -->
+        <!-- Ghi đè Rule Project của Nhân sự: Chỉ người phụ trách dự án mới thấy dự án -->
         <record id="project.project_public_members_rule" model="ir.rule">
             <field name="name">Project: employees: custom visibility</field>
             <field name="model_id" ref="project.model_project_project"/>
             <field name="domain_force">[
-                '|', '|', '|',
+                '|',
                     ('manager_ids', 'in', user.id),
-                    ('member_ids.user_id', '=', user.id),
-                    ('external_user_ids', 'in', user.id),
-                    ('message_partner_ids', 'in', [user.partner_id.id])
+                    ('user_id', '=', user.id)
             ]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
@@ -28,25 +26,31 @@
             <field name="name">Project/Task: employees: custom visibility</field>
             <field name="model_id" ref="project.model_project_task"/>
             <field name="domain_force">[
-                '|', '|', '|',
+                '|', '|', '|', '|', '|', '|',
                     ('user_ids', 'in', user.id),
                     ('reviewer_ids', 'in', user.id),
+                    ('user_ids.employee_ids.parent_id.user_id', '=', user.id),
+                    ('reviewer_ids.employee_ids.parent_id.user_id', '=', user.id),
                     ('project_id.manager_ids', 'in', user.id),
-                    ('project_id.external_user_ids', 'in', user.id)
+                    ('project_id.user_id', '=', user.id),
+                    ('message_partner_ids', 'in', [user.partner_id.id])
             ]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
-        <!-- Ghi đè Rule Task của Project User (để tránh bị lộ task) -->
+        <!-- Ghi đè Rule Task của Project User -->
         <record id="project.task_visibility_rule_project_user" model="ir.rule">
             <field name="name">Project/Task: project users: custom visibility</field>
             <field name="model_id" ref="project.model_project_task"/>
             <field name="domain_force">[
-                '|', '|', '|',
+                '|', '|', '|', '|', '|', '|',
                     ('user_ids', 'in', user.id),
                     ('reviewer_ids', 'in', user.id),
+                    ('user_ids.employee_ids.parent_id.user_id', '=', user.id),
+                    ('reviewer_ids.employee_ids.parent_id.user_id', '=', user.id),
                     ('project_id.manager_ids', 'in', user.id),
-                    ('project_id.external_user_ids', 'in', user.id)
+                    ('project_id.user_id', '=', user.id),
+                    ('message_partner_ids', 'in', [user.partner_id.id])
             ]</field>
             <field name="groups" eval="[(4, ref('project.group_project_user'))]"/>
         </record>
@@ -56,25 +60,31 @@
             <field name="name">Project/Task: project manager: custom visibility</field>
             <field name="model_id" ref="project.model_project_task"/>
             <field name="domain_force">[
-                '|', '|', '|',
+                '|', '|', '|', '|', '|', '|',
                     ('user_ids', 'in', user.id),
                     ('reviewer_ids', 'in', user.id),
+                    ('user_ids.employee_ids.parent_id.user_id', '=', user.id),
+                    ('reviewer_ids.employee_ids.parent_id.user_id', '=', user.id),
                     ('project_id.manager_ids', 'in', user.id),
-                    ('project_id.external_user_ids', 'in', user.id)
+                    ('project_id.user_id', '=', user.id),
+                    ('message_partner_ids', 'in', [user.partner_id.id])
             ]</field>
             <field name="groups" eval="[(4, ref('project.group_project_manager'))]"/>
         </record>
 
-        <!-- Ghi đè ir_rule_private_task để tránh mọi nhân sự đều thấy task của project -->
+        <!-- Ghi đè ir_rule_private_task -->
         <record id="project.ir_rule_private_task" model="ir.rule">
             <field name="name">Project: See private tasks: custom visibility</field>
             <field name="model_id" ref="project.model_project_task"/>
             <field name="domain_force">[
-                '|', '|', '|',
+                '|', '|', '|', '|', '|', '|',
                     ('user_ids', 'in', user.id),
                     ('reviewer_ids', 'in', user.id),
+                    ('user_ids.employee_ids.parent_id.user_id', '=', user.id),
+                    ('reviewer_ids.employee_ids.parent_id.user_id', '=', user.id),
                     ('project_id.manager_ids', 'in', user.id),
-                    ('project_id.external_user_ids', 'in', user.id)
+                    ('project_id.user_id', '=', user.id),
+                    ('message_partner_ids', 'in', [user.partner_id.id])
             ]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
