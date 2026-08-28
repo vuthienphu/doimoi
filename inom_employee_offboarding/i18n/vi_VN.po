@@ -1,0 +1,1311 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* inom_employee_offboarding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-12 02:21+0000\n"
+"PO-Revision-Date: 2026-08-12 02:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_relieved
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.employee_id.name or ''\"/>,</p>\n"
+"                    <p>Quy trình nghỉ việc của bạn đã được <strong>hoàn tất</strong>.</p>\n"
+"                    <p><strong>Mã yêu cầu:</strong> <t t-out=\"object.name or ''\"/></p>\n"
+"                    <p><strong>Ngày làm việc cuối cùng:</strong> <t t-out=\"object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''\"/></p>\n"
+"                    <p>Mọi thủ tục nghỉ việc đã được hoàn thành. Vui lòng truy cập hệ thống nếu bạn\n"
+"                        muốn xem lại thông tin.</p>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Bravestars Games chân thành cảm ơn những đóng góp của bạn trong thời gian đồng\n"
+"                        hành cùng Công ty. Kính chúc bạn nhiều sức khỏe, thành công và gặt hái nhiều\n"
+"                        thành tựu trên chặng đường sắp tới.</p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_rejected
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.employee_id.name or ''\"/>,</p>\n"
+"                    <p>Đơn xin nghỉ việc của bạn <strong>đã bị từ chối</strong>.</p>\n"
+"                    <p><strong>Mã yêu cầu:</strong> <t t-out=\"object.name or ''\"/></p>\n"
+"                    <p><strong>Lý do:</strong> <t t-out=\"object.rejection_reason or ''\"/></p>\n"
+"                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết. Nếu cần thêm thông tin\n"
+"                        hoặc có bất kỳ thắc mắc nào, bạn hãy liên hệ Phòng Nhân sự để được giải đáp.</p>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_approved
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.employee_id.name or ''\"/>,</p>\n"
+"                    <p>Đơn xin nghỉ việc của bạn đã <strong>được phê duyệt</strong>.</p>\n"
+"                    <p>\n"
+"                        <strong>Mã yêu cầu:</strong> <t t-out=\"object.name or ''\"/><br/>\n"
+"                        <strong>Ngày làm việc cuối cùng:</strong> <t t-out=\"object.proposed_last_day or ''\"/>\n"
+"                    </p>\n"
+"                    <p>Trong thời gian còn lại, vui lòng thực hiện bàn giao công việc theo quy định của Công ty.</p>\n"
+"                    <p>Đồng thời, vui lòng truy cập hệ thống để:</p>\n"
+"                    <ul>\n"
+"                        <li>Xem các thông tin và hướng dẫn cần thực hiện trước ngày nghỉ việc.</li>\n"
+"                        <li>Theo dõi tiến độ của quy trình nghỉ việc.</li>\n"
+"                        <li>Kiểm tra các khoản thanh toán liên quan.</li>\n"
+"                    </ul>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Nếu cần hỗ trợ thêm bất cứ thông tin nào, bạn vui lòng liên hệ Phòng Nhân sự.</p>\n"
+"                    <p>Cảm ơn bạn đã đồng hành cùng Bravestars Games. Chúc bạn nhiều thành công trên chặng đường sắp tới.</p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_hr_review
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.env.context.get('hr_recipient_name') or 'anh/chị'\"/>,</p>\n"
+"                    <p>Bạn có <strong>một đơn xin nghỉ việc mới</strong> đang chờ phê duyệt.</p>\n"
+"                    <p><strong>Mã yêu cầu:</strong> <t t-out=\"object.name or ''\"/></p>\n"
+"                    <p><strong>Nhân viên:</strong> <t t-out=\"object.employee_id.name or ''\"/></p>\n"
+"                    <p><strong>Phòng ban:</strong> <t t-out=\"object.department_id.name or ''\"/></p>\n"
+"                    <p><strong>Loại nghỉ việc:</strong> <t t-out=\"dict(object._fields['offboarding_type'].selection).get(object.offboarding_type) or ''\"/></p>\n"
+"                    <p><strong>Ngày làm việc cuối cùng (dự kiến):</strong> <t t-out=\"object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''\"/></p>\n"
+"                    <p><strong>Lý do:</strong> <t t-out=\"object.reason_id.name or ''\"/></p>\n"
+"                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết và thực hiện phê duyệt\n"
+"                        <strong>trước ngày <t t-out=\"object.env.context.get('hr_deadline') or ''\"/></strong>.</p>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_reminder
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.env.context.get('reminder_recipient_name') or 'anh/chị'\"/>,</p>\n"
+"                    <p>Đây là email nhắc phê duyệt cho Đơn xin nghỉ việc của\n"
+"                        <t t-out=\"object.employee_id.name or ''\"/>. Đơn xin nghỉ việc này cần được\n"
+"                        hoàn tất phê duyệt trong ngày hôm nay để quy trình nghỉ việc của nhân viên\n"
+"                        được xử lý đúng tiến độ.</p>\n"
+"                    <p>Vui lòng truy cập hệ thống và thực hiện phê duyệt tại đây.</p>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Nếu anh/chị đã hoàn tất, vui lòng bỏ qua email này.</p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,body_html:inom_employee_offboarding.mail_template_offboarding_submitted
+msgid ""
+"<div style=\"font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;\">\n"
+"                    <p>Xin chào <t t-out=\"object.manager_id.name or 'anh/chị'\"/>,</p>\n"
+"                    <p>Bạn có <strong>một đơn xin nghỉ việc mới</strong> đang chờ phê duyệt.</p>\n"
+"                    <p><strong>Mã yêu cầu:</strong> <t t-out=\"object.name or ''\"/></p>\n"
+"                    <p><strong>Nhân viên:</strong> <t t-out=\"object.employee_id.name or ''\"/></p>\n"
+"                    <p><strong>Phòng ban:</strong> <t t-out=\"object.department_id.name or ''\"/></p>\n"
+"                    <p><strong>Ngày làm việc cuối cùng (dự kiến):</strong> <t t-out=\"object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''\"/></p>\n"
+"                    <p><strong>Lý do:</strong> <t t-out=\"object.reason_id.name or ''\"/></p>\n"
+"                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết và thực hiện phê duyệt\n"
+"                        <strong>trước ngày <t t-out=\"object.env.context.get('manager_deadline') or ''\"/></strong>.</p>\n"
+"                    <p style=\"margin: 16px 0;\">\n"
+"                        <a t-att-href=\"object.env.context.get('record_url') or '#'\" style=\"background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;\">\n"
+"                            Xem chi tiết yêu cầu\n"
+"                        </a>\n"
+"                    </p>\n"
+"                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_line__responsible__admin
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_template__responsible__admin
+msgid "Admin"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Archived"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_dashboard
+msgid "Báo cáo"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+#: model:ir.actions.client,name:inom_employee_offboarding.action_offboarding_dashboard
+msgid "Báo cáo xu hướng nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Bạn chắc chắn muốn duyệt yêu cầu nghỉ việc này?"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Bạn chỉ được tạo đơn cho bản thân hoặc nhân viên cấp dưới."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid ""
+"Bạn cần hoàn thành form khảo sát nghỉ việc trước khi gửi đơn cho quản lý phê"
+" duyệt."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_reminder
+msgid ""
+"Bạn cần hoàn tất phê duyệt cho đơn xin nghỉ việc của nhân viên {{ "
+"object.employee_id.name }}"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Bạn không có quyền làm khảo sát thay cho %s."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Bạn không phải là quản lý trực tiếp của nhân viên này."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Bắt đầu khảo sát nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:survey.survey,title:inom_employee_offboarding.offboarding_exit_interview_survey
+msgid "Bộ câu hỏi phỏng vấn nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_line__responsible__cnb
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_template__responsible__cnb
+msgid "C&B"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_checklist_template
+msgid "Checklist"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_checklist_template_form
+msgid "Checklist Template"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_checklist_template_list
+msgid "Checklist Templates"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Chưa có dữ liệu"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Chưa cấu hình khảo sát nghỉ việc."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Chỉ cho phép xóa đơn xin nghỉ việc khi trạng thái hiện tại là Nháp."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Chỉ có thể gửi duyệt đơn ở trạng thái Nháp."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Chỉ có thể xác nhận nghỉ việc khi đơn đã được duyệt."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Chỉ có thể đưa về nháp đơn bị từ chối hoặc đã hủy."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__checklist_line_ids
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Clearance Checklist"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__company_id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__company_id
+msgid "Company"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:inom.offboarding.checklist.template,name:inom_employee_offboarding.checklist_exit_interview
+msgid "Conduct exit interview"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.actions.act_window,help:inom_employee_offboarding.action_offboarding_request
+msgid "Create the first offboarding request"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__create_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__create_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__create_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__create_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__create_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__create_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__create_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__create_date
+msgid "Created on"
+msgstr "Thời điểm tạo"
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Câu hỏi"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__survey_user_input_id
+msgid "Câu trả lời khảo sát"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__company_id
+msgid "Công ty"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__offboarding_type__layoff
+msgid "Công ty cho nghỉ"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_config
+msgid "Cấu hình"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__can_log_for_subordinates
+msgid ""
+"Cờ kỹ thuật: True khi người dùng hiện tại là quản lý trực tiếp của ít nhất "
+"một nhân viên, nên được tạo yêu cầu cho cấp dưới."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Department"
+msgstr "Phòng"
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__display_name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__display_name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__display_name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__display_name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__display_name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_survey_user_input__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: inom_employee_offboarding
+#: model:res.groups.privilege,name:inom_employee_offboarding.offboarding_privilege
+msgid "Employee Offboarding"
+msgstr "Nhân viên nghỉ việc"
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_inom_offboarding_reason
+msgid "Employee Offboarding Reason"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_inom_offboarding_request
+msgid "Employee Offboarding Request"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__exit_survey_completed
+msgid "Exit Survey Completed"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_exit_interview_survey
+msgid "Form Exit Interview"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__exit_interview_line_ids
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Form exit interview"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__remarks
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Ghi chú"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__hr_remarks
+msgid "Ghi chú (từ HRM)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__employee_remarks
+msgid "Ghi chú (từ Nhân viên)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__manager_remarks
+msgid "Ghi chú (từ Quản lý)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Group By"
+msgstr "Nhóm theo"
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Gửi phê duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__hr_approval
+msgid "HRM duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:inom.offboarding.checklist.template,name:inom_employee_offboarding.checklist_handover_documents
+msgid "Handover of pending work and documents"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_line__responsible__helpdesk
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_template__responsible__helpdesk
+msgid "Helpdesk"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__is_done
+msgid "Hoàn thành"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__active
+msgid "Hoạt động"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid ""
+"Hành động này sẽ lưu trữ bản ghi nhân viên tương ứng. Bạn có chắc muốn tiếp "
+"tục?"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reject_wizard_form
+msgid "Hủy"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__id
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_survey_user_input__id
+msgid "ID"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__message_has_error
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "In Progress"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__is_own_request
+msgid "Is Own Request"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+msgid "Không xác định"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__write_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__write_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__write_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__write_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__write_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__write_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__write_date
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__proposed_last_day
+msgid "Last Working Day dự kiến"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__level_id
+msgid "Level"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__offboarding_type
+msgid "Loại nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.act_window,name:inom_employee_offboarding.action_offboarding_reason
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__reason_id
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_reason
+msgid "Lý do nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__reason_manager_confirm_id
+msgid "Lý do nghỉ việc (QL ghi nhận)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Lý do nổi bật"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__rejection_reason
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Lý do từ chối"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__name
+msgid "Mã đơn"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__description
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__description
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__description
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_checklist_template_form
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reason_form
+msgid "Mô tả"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__template_id
+msgid "Mẫu"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.act_window,name:inom_employee_offboarding.action_offboarding_checklist_template
+msgid "Mẫu checklist"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_mail_template
+msgid "Mẫu email"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.act_window,name:inom_employee_offboarding.action_offboarding_mail_template
+msgid "Mẫu email nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_root
+msgid "Nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_hr_review
+msgid "Nghỉ việc: Gửi HR duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_submitted
+msgid "Nghỉ việc: Gửi quản lý duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_approved
+msgid "Nghỉ việc: HR đã duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_reminder
+msgid "Nghỉ việc: Nhắc nhở phê duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_relieved
+msgid "Nghỉ việc: Đã hoàn tất nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,name:inom_employee_offboarding.mail_template_offboarding_rejected
+msgid "Nghỉ việc: Đơn bị từ chối"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__hr_approval_date
+msgid "Ngày gửi duyệt HR"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__manager_approval_date
+msgid "Ngày gửi duyệt quản lý"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Ngày làm việc cuối cùng dự kiến phải lớn hơn ngày tạo đơn."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__last_day
+msgid "Ngày nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Ngày tạo đơn"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__responsible
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__responsible
+msgid "Người phụ trách"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__draft
+msgid "Nháp"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__employee_id
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_line__responsible__employee
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_checklist_template__responsible__employee
+msgid "Nhân viên"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Nhân viên này chưa có tài khoản người dùng liên kết."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Nhân viên này đã có đơn nghỉ việc đang xử lý hoặc đã hoàn tất."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__offboarding_type__voluntarily
+msgid "Nhân viên tự nguyện nghỉ"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reject_wizard_form
+msgid "Nhập lý do từ chối..."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__notice_period_days
+msgid "Notice period decided by HR during the process."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Notification email could not be sent."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Năm"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:res.groups,name:inom_employee_offboarding.inom_group_offboarding_officer
+msgid "Offboarding C&B"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:res.groups,name:inom_employee_offboarding.inom_group_offboarding_ceo
+msgid "Offboarding CEO"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_inom_offboarding_checklist_line
+msgid "Offboarding Checklist Line"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_inom_offboarding_checklist_template
+msgid "Offboarding Checklist Template"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:res.groups,name:inom_employee_offboarding.inom_group_offboarding_hr
+msgid "Offboarding HR Manager"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reason_form
+msgid "Offboarding Reason"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reason_list
+msgid "Offboarding Reasons"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__request_id
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Offboarding Request"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_inom_offboarding_reject_wizard
+msgid "Offboarding Request Rejection Wizard"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.act_window,name:inom_employee_offboarding.action_offboarding_request
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_list
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Offboarding Requests"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Offboarding Type"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.server,name:inom_employee_offboarding.ir_cron_offboarding_auto_relieve_ir_actions_server
+msgid "Offboarding: Auto Relieve Due Requests"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.server,name:inom_employee_offboarding.ir_cron_offboarding_approval_reminder_ir_actions_server
+msgid "Offboarding: Send Approval Reminders"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Phê duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Phòng ban"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Phòng ban"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__department_id
+msgid "Phòng ban"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.actions.act_window,name:inom_employee_offboarding.action_offboarding_exit_interview_survey
+msgid "Phỏng vấn nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:inom.offboarding.checklist.template,name:inom_employee_offboarding.checklist_final_settlement
+msgid "Process full and final settlement"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_relieved
+msgid "Quy trình nghỉ việc của bạn đã được hoàn tất"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Quý"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__manager_approval
+msgid "Quản lý duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__manager_id
+msgid "Quản lý trực tiếp"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reject_wizard__rejection_reason
+msgid "Rejection Reason"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Relieved"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/wizard/offboarding_reject_wizard.py:0
+msgid "Request rejected. Reason: %s"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:inom.offboarding.checklist.template,name:inom_employee_offboarding.checklist_return_assets
+msgid "Return of company assets"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:inom.offboarding.checklist.template,name:inom_employee_offboarding.checklist_revoke_access
+msgid "Revoke system and email access"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_search
+msgid "Status"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model,name:inom_employee_offboarding.model_survey_user_input
+msgid "Survey User Input"
+msgstr "Dữ liệu người dùng nhập vào khảo sát"
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Số lượng nhân sự"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Số nghỉ"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Số nghỉ việc theo Level"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Số nghỉ việc theo Lý do"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Số nghỉ việc theo Phòng ban"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+msgid "Số nghỉ việc theo năm"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+msgid "Số nghỉ việc theo quý"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.js:0
+msgid "Số nghỉ việc theo tháng"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__name
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__name
+msgid "Task"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "This request can no longer be cancelled."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/wizard/offboarding_reject_wizard.py:0
+msgid "This request can no longer be rejected."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Tháng"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Thâm niên TB khi nghỉ"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Thông tin nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__notice_period_days
+msgid "Thời gian thông báo (ngày)"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Thời gian thông báo không được là số âm."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__sequence
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_template__sequence
+msgid "Thứ tự"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__hr_approval_date
+msgid "Timestamp when the request moved to the HR approval stage."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__manager_approval_date
+msgid "Timestamp when the request moved to the manager approval stage."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__checklist_progress
+msgid "Tiến độ checklist"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.actions.act_window,help:inom_employee_offboarding.action_offboarding_request
+msgid ""
+"Track employee resignations and relieving through a\n"
+"                structured multi-level approval workflow."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__state
+msgid "Trạng thái"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Trả lời"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_reason__name
+msgid "Tên lý do"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Tất cả"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Tổng nhân viên nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__rejected
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reject_wizard_form
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Từ chối"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Từ chối đơn nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_reject_wizard_form
+msgid "Từ chối đơn xin nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Tỷ lệ Turnover"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "Tỷ lệ turnover trung bình"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__job_id
+msgid "Vị trí công việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,help:inom_employee_offboarding.field_inom_offboarding_request__exit_survey_completed
+msgid ""
+"Whether the requesting employee has completed the exit interview survey. "
+"Read live from survey.user_input; not stored."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Xác nhận nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_checklist_line__request_id
+msgid "Yêu cầu nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-javascript
+#: code:addons/inom_employee_offboarding/static/src/dashboard/offboarding_dashboard.xml:0
+msgid "năm"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__approved
+msgid "Đã duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields.selection,name:inom_employee_offboarding.selection__inom_offboarding_request__state__relieved
+msgid "Đã nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Đơn này không đang chờ HRM phê duyệt."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#. odoo-python
+#: code:addons/inom_employee_offboarding/models/offboarding_request.py:0
+msgid "Đơn này không đang chờ quản lý phê duyệt."
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.ui.menu,name:inom_employee_offboarding.menu_offboarding_request
+msgid "Đơn xin nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_rejected
+msgid "Đơn xin nghỉ việc của bạn bị từ chối"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid ""
+"Đơn xin nghỉ việc của bạn sẽ được gửi đến quản lý để phê duyệt sau khi bạn "
+"hoàn thành form khảo sát nghỉ việc"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_hr_review
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_submitted
+msgid "Đơn xin nghỉ việc của {{ object.employee_id.name }} đang chờ phê duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:mail.template,subject:inom_employee_offboarding.mail_template_offboarding_approved
+msgid "Đơn xin nghỉ việc của {{ object.employee_id.name }} được phê duyệt"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model_terms:ir.ui.view,arch_db:inom_employee_offboarding.view_offboarding_request_form
+msgid "Đưa về nháp"
+msgstr ""
+
+#. module: inom_employee_offboarding
+#: model:ir.model.fields,field_description:inom_employee_offboarding.field_inom_offboarding_request__can_log_for_subordinates
+msgid "Được tạo cho cấp dưới"
+msgstr ""

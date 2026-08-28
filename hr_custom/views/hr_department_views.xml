@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_department_form_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.custom</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='manager_id']" position="before">
+                <field name="org_level"/>
+            </xpath>
+
+            <xpath expr="//field[@name='manager_id']" position="after">
+                <field name="hiring_manager_id" widget="many2one_avatar_employee"
+                       options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='manager_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+
+            <xpath expr="//group[@col='12']" position="after">
+                <group string="Tài liệu">
+                    <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                </group>
+            </xpath>
+            
+            <!-- Ẩn smart button "Plan" -->
+            <xpath expr="//button[@name='action_plan_from_department']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Thêm Group By "Cấp" vào search view -->
+    <record id="view_department_filter_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.department.search.inherit.custom</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter name="group_org_level" string="Cấp"
+                        context="{'group_by': 'org_level'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Mặc định group by theo Cấp (user tự tắt được) -->
+    <record id="hr.hr_department_kanban_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_group_org_level': 1}</field>
+    </record>
+
+</odoo>

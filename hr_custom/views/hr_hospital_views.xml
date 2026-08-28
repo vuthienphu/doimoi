@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_hr_hospital" model="ir.actions.act_window">
+        <field name="name">Bệnh viện</field>
+        <field name="res_model">hr.hospital</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_hr_hospital_list" model="ir.ui.view">
+        <field name="name">hr.hospital.list</field>
+        <field name="model">hr.hospital</field>
+        <field name="arch" type="xml">
+            <list string="Bệnh viện" editable="top">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_hospital_form" model="ir.ui.view">
+        <field name="name">hr.hospital.form</field>
+        <field name="model">hr.hospital</field>
+        <field name="arch" type="xml">
+            <form string="Bệnh viện">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_hr_hospital"
+              name="Bệnh viện khám chữa bệnh"
+              parent="hr.menu_config_recruitment"
+              action="action_hr_hospital"
+              groups="hr.group_hr_user,hr_custom.group_hr_ceo"
+              sequence="10"/>
+
+</odoo>

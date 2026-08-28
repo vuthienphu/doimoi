@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_offboarding_reason_list" model="ir.ui.view">
+        <field name="name">inom.offboarding.reason.list</field>
+        <field name="model">inom.offboarding.reason</field>
+        <field name="arch" type="xml">
+            <list string="Offboarding Reasons">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_offboarding_reason_form" model="ir.ui.view">
+        <field name="name">inom.offboarding.reason.form</field>
+        <field name="model">inom.offboarding.reason</field>
+        <field name="arch" type="xml">
+            <form string="Offboarding Reason">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="require_extra_reason"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Mô tả">
+                        <field name="description" colspan="4" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_offboarding_reason" model="ir.actions.act_window">
+        <field name="name">Lý do nghỉ việc</field>
+        <field name="res_model">inom.offboarding.reason</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

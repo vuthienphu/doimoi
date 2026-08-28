@@ -1,0 +1,94 @@
+/* Spacing so the workflow buttons don't sit flush against each other. */
+button.o_offboarding_submit_btn,
+button.o_offboarding_approve_btn,
+button.o_offboarding_relieve_btn,
+button.o_offboarding_danger_btn,
+button.o_offboarding_reset_btn {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+/* Green "Submit to Manager" button on the offboarding request form. */
+button.o_offboarding_submit_btn {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #ffffff;
+    padding: 8px 22px;
+    font-size: 15px;
+}
+
+button.o_offboarding_submit_btn:hover,
+button.o_offboarding_submit_btn:focus,
+button.o_offboarding_submit_btn:active {
+    background-color: #218838;
+    border-color: #218838;
+    color: #ffffff;
+}
+
+/* Approve buttons (Manager / HR): green like the submit button. */
+button.o_offboarding_approve_btn {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #ffffff;
+    padding: 8px 22px;
+    font-size: 15px;
+}
+
+button.o_offboarding_approve_btn:hover,
+button.o_offboarding_approve_btn:focus,
+button.o_offboarding_approve_btn:active {
+    background-color: #218838;
+    border-color: #218838;
+    color: #ffffff;
+}
+
+/* Relieve button: blue. */
+button.o_offboarding_relieve_btn {
+    background-color: #0b3954;
+    border-color: #0b3954;
+    color: #ffffff;
+    padding: 8px 22px;
+    font-size: 15px;
+}
+
+button.o_offboarding_relieve_btn:hover,
+button.o_offboarding_relieve_btn:focus,
+button.o_offboarding_relieve_btn:active {
+    background-color: #082a3f;
+    border-color: #082a3f;
+    color: #ffffff;
+}
+
+/* Reject / Cancel buttons: red. */
+button.o_offboarding_danger_btn {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #ffffff;
+    padding: 8px 22px;
+    font-size: 15px;
+}
+
+button.o_offboarding_danger_btn:hover,
+button.o_offboarding_danger_btn:focus,
+button.o_offboarding_danger_btn:active {
+    background-color: #c82333;
+    border-color: #c82333;
+    color: #ffffff;
+}
+
+/* Reset to Draft button: grey. */
+button.o_offboarding_reset_btn {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 8px 22px;
+    font-size: 15px;
+}
+
+button.o_offboarding_reset_btn:hover,
+button.o_offboarding_reset_btn:focus,
+button.o_offboarding_reset_btn:active {
+    background-color: #5a6268;
+    border-color: #5a6268;
+    color: #ffffff;
+}

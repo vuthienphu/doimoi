@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_ticket_assigned" model="mail.template">
+            <field name="name">Helpdesk Ticket: Assigned</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">Ticket {{ object.ticket_number }} assigned to you</field>
+            <field name="email_to">{{ object.user_id.email or '' }}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hello,</p>
+                    <p>Ticket <strong t-out="object.ticket_number or ''">HD00001</strong> has been assigned to you.</p>
+                    <p><strong>Subject:</strong> <t t-out="object.name or ''">Subject</t></p>
+                    <p><strong>Priority:</strong> <t t-out="object.priority or ''">medium</t></p>
+                    <div t-if="object.description">
+                        <p><strong>Description:</strong></p>
+                        <div t-out="object.description">Description</div>
+                    </div>
+                    <p>
+                        <a t-attf-href="/odoo/action-helpdesk_community.action_helpdesk_ticket_tree/{{ object.id }}">View Ticket</a>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_ticket_stage_change" model="mail.template">
+            <field name="name">Helpdesk Ticket: Stage Change</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="subject">Ticket {{ object.ticket_number }} moved to {{ object.stage_id.name }}</field>
+            <field name="email_to">{{ object.partner_id.email or '' }}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hello <t t-out="object.partner_id.name or ''">Customer</t>,</p>
+                    <p>Your ticket <strong t-out="object.ticket_number or ''">HD00001</strong> has been updated.</p>
+                    <p><strong>Status:</strong> <t t-out="object.stage_id.name or ''">Stage</t></p>
+                    <p><strong>Subject:</strong> <t t-out="object.name or ''">Subject</t></p>
+                    <p>
+                        <a t-attf-href="/my/ticket/{{ object.id }}">View Ticket</a>
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

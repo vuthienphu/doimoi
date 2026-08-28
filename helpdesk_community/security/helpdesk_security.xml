@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- User: own team tickets -->
+        <record id="helpdesk_ticket_user_rule" model="ir.rule">
+            <field name="name">Ticket: user sees own team tickets</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="groups" eval="[(4, ref('group_helpdesk_user'))]"/>
+            <field name="domain_force">[('team_id.member_ids', 'in', [user.id])]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Team Leader: own team tickets + manage stages/categories -->
+        <record id="helpdesk_ticket_team_leader_rule" model="ir.rule">
+            <field name="name">Ticket: team leader sees own team tickets</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="groups" eval="[(4, ref('group_helpdesk_team_leader'))]"/>
+            <field name="domain_force">[('team_id.member_ids', 'in', [user.id])]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Manager: full access -->
+        <record id="helpdesk_ticket_manager_rule" model="ir.rule">
+            <field name="name">Ticket: manager full access</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="groups" eval="[(4, ref('group_helpdesk_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Portal: own tickets only -->
+        <record id="helpdesk_ticket_portal_rule" model="ir.rule">
+            <field name="name">Ticket: portal own tickets</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('partner_id', '=', user.partner_id.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_offboarding_request_list" model="ir.ui.view">
+        <field name="name">inom.offboarding.request.list</field>
+        <field name="model">inom.offboarding.request</field>
+        <field name="arch" type="xml">
+            <list string="Đơn xin nghỉ việc">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="job_title"/>
+                <field name="department_id"/>
+                <field name="offboarding_type"/>
+                <field name="create_date"/>
+                <field name="proposed_last_day"/>
+                <field name="checklist_progress" widget="progressbar"/>
+                <field name="state" widget="badge"
+                       decoration-info="state in ('manager_approval','hr_approval')"
+                       decoration-success="state in ('approved','relieved')"
+                       decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_offboarding_request_form" model="ir.ui.view">
+        <field name="name">inom.offboarding.request.form</field>
+        <field name="model">inom.offboarding.request</field>
+        <field name="arch" type="xml">
+            <form string="Đơn xin nghỉ việc">
+                <header>
+                    <button name="action_reset_to_draft" type="object"
+                            string="Đưa về nháp"
+                            icon="fa-undo"
+                            class="btn btn-lg o_offboarding_reset_btn"
+                            invisible="state != 'rejected' or not is_created_request"/>
+                    <button name="action_relieve_employee" type="object"
+                            string="Xác nhận nghỉ việc"
+                            icon="fa-user-times"
+                            class="btn btn-lg o_offboarding_relieve_btn"
+                            invisible="state != 'approved'"
+                            groups="inom_employee_offboarding.inom_group_offboarding_hr,inom_employee_offboarding.inom_group_offboarding_officer"
+                            confirm="Hành động này sẽ lưu trữ bản ghi nhân viên tương ứng. Bạn có chắc muốn tiếp tục?"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,manager_approval,hr_approval,approved,relieved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title" invisible="not id">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group string ="1. Thông tin nhân viên">
+                        <group>
+                            <field name="can_log_for_subordinates" invisible="1"/>
+                            <field name="employee_id" groups="!hr.group_hr_user" 
+                                   readonly="not can_log_for_subordinates or state != 'draft'"
+                                   domain="['|', ('user_id', '=', uid), ('parent_id.user_id', '=', uid)]"
+                                   options="{'relation': 'hr.employee.public', 'no_create': True}"/>
+                            <field name="employee_id" groups="hr.group_hr_user" 
+                                   readonly="not can_log_for_subordinates or state != 'draft'"
+                                   domain="['|', ('user_id', '=', uid), ('parent_id.user_id', '=', uid)]"
+                                   options="{'relation': 'hr.employee', 'no_create': True}"/>
+                            <field name="work_email" force_save="1"/>
+                            <field name="job_title" force_save="1"/>
+                            <field name="level_id" force_save="1" invisible="1"/>
+                        </group>
+
+                        <group>
+                            <field name="contract_type_id" force_save="1"/>
+                            <field name="department_id" force_save="1"/>
+                            <field name="manager_id" force_save="1"/>
+                            <field name="survey_user_input_state" invisible="1"/>
+                            <field name="is_own_request" invisible="1"/>
+                            <field name="is_created_request" invisible="1"/>
+                            <field name="hide_reject" invisible="1"/>
+                            <field name="is_manager" invisible="1"/>
+                            <field name="is_hrm" invisible="1"/>
+                            <field name="is_cb" invisible="1"/>
+                            <field name="is_ceo" invisible="1"/>
+                            <field name="can_log_for_subordinates" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="2. Thông tin nghỉ việc">
+                            <field name="reason_id" options="{'no_create_edit': True}"
+                                   readonly="state != 'draft'"/>
+                            <field name="reason_id_require_extra" invisible="1"/>
+                            <field name="extra_reason"
+                                   invisible="not reason_id_require_extra"
+                                   required="reason_id_require_extra"
+                                   readonly="state != 'draft'"/>
+                            <field name="reason_manager_confirm_id" options="{'no_create_edit': True}"
+                                   readonly="state not in ('draft', 'manager_approval') or not is_manager"
+                                   required="is_manager"
+                                   invisible="is_own_request"/>
+                            <field name="reason_manager_confirm_id_require_extra" invisible="1"/>
+                            <field name="extra_reason_manager"
+                                   invisible="is_own_request or not reason_manager_confirm_id_require_extra"
+                                   required="is_manager and reason_manager_confirm_id_require_extra"
+                                   readonly="state not in ('draft', 'manager_approval') or not is_manager"/>
+                            <field name="offboarding_type" readonly="state not in ('draft', 'manager_approval') or not is_manager" invisible="is_own_request" required="is_manager"/>
+                            <field name="company_id" groups="base.group_multi_company"
+                                   readonly="state == 'relieved'"/>
+                            <field name="create_date"/>
+                            <field name="proposed_last_day" readonly="state != 'draft'"/>
+                            <field name="last_day"/>
+                            <field name="checklist_progress" widget="progressbar" invisible="state == 'draft'"/>
+                        </group>
+
+                        <group string="Ghi chú">
+                            <field name="employee_remarks" readonly="state != 'draft'"/>
+                            <field name="manager_remarks" readonly="state not in ('draft', 'manager_approval') or not is_manager" invisible="is_own_request"/>
+                            <field name="hr_remarks" readonly="state != 'hr_approval' or not is_hrm"
+                                   groups="inom_employee_offboarding.inom_group_offboarding_ceo,inom_employee_offboarding.inom_group_offboarding_hr,inom_employee_offboarding.inom_group_offboarding_officer"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info text-center" role="status"
+                         invisible="survey_user_input_state == 'done' or not is_own_request
+                                    or (is_manager and not create_uid)">
+                        <p class="text-danger fw-bold mb-2">
+                            Đơn xin nghỉ việc của bạn sẽ được gửi đến quản lý để phê duyệt sau khi bạn hoàn thành form khảo sát nghỉ việc
+                        </p>
+                        <button name="action_start_exit_survey" type="object"
+                                string="Bắt đầu khảo sát nghỉ việc"
+                                class="btn btn-primary"/>
+                    </div>
+                    <div class="mb-3">
+                        <!--Nút này cần ẩn nếu QL đang tạo mới cho nhân viên, 
+                        nhưng khi QL đưa về nháp thì lại phải hiển thị-->
+                        <button name="action_submit_to_manager" type="object"
+                                string="Gửi phê duyệt"
+                                icon="fa-paper-plane-o"
+                                class="btn btn-lg o_offboarding_submit_btn"
+                                invisible="state != 'draft' or (is_manager and not create_uid)"/>
+                        <button name="action_manager_approve" type="object"
+                                string="Phê duyệt"
+                                icon="fa-check"
+                                class="btn btn-lg o_offboarding_approve_btn"
+                                invisible="state != 'manager_approval' or not is_manager"
+                                confirm="Bạn chắc chắn muốn duyệt yêu cầu nghỉ việc này?"/>
+                        <button name="action_hr_approve" type="object"
+                                string="Phê duyệt"
+                                icon="fa-check"
+                                class="btn btn-lg o_offboarding_approve_btn"
+                                invisible="state != 'hr_approval'"
+                                groups="inom_employee_offboarding.inom_group_offboarding_hr"
+                                confirm="Bạn chắc chắn muốn duyệt yêu cầu nghỉ việc này?"/>
+                        <button name="action_open_reject_wizard" type="object"
+                                string="Từ chối"
+                                icon="fa-times"
+                                class="btn btn-lg o_offboarding_danger_btn"
+                                invisible="hide_reject"/>
+                    </div>
+                    <notebook>
+                        <page string="Clearance Checklist" name="checklist"
+                            invisible="not checklist_line_ids">
+                            <field name="checklist_line_ids" readonly="is_own_request">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" readonly="not parent.is_cb"/>
+                                    <field name="responsible" readonly="not parent.is_cb"/>
+                                    <field name="is_done" widget="boolean_toggle"/>
+                                    <field name="remarks"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Form exit interview" name="exit_interview"
+                              invisible="survey_user_input_state != 'done'">
+                            <field name="exit_interview_line_ids" readonly="1" nolabel="1">
+                                <list>
+                                    <field name="question_id" string="Câu hỏi"/>
+                                    <field name="display_name" string="Trả lời"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Lý do từ chối" name="rejection"
+                              invisible="state != 'rejected'">
+                            <group>
+                                <field name="rejection_reason" readonly="1" nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Khoản thanh toán" name="payment"
+                              invisible="not payment_line_ids or (not is_created_request and not is_hrm and not is_cb and not is_ceo and not is_own_request)">
+                            <field name="payment_line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"
+                                           readonly="not parent.is_hrm and not parent.is_cb or parent.state not in ('hr_approval',)"/>
+                                    <field name="is_paid" widget="boolean_toggle"
+                                           readonly="not parent.is_hrm and not parent.is_cb"/>
+                                    <field name="notes"
+                                           readonly="not parent.is_hrm and not parent.is_cb"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_offboarding_request_search" model="ir.ui.view">
+        <field name="name">inom.offboarding.request.search</field>
+        <field name="model">inom.offboarding.request</field>
+        <field name="arch" type="xml">
+            <search string="Đơn xin nghỉ việc">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="offboarding_type"/>
+                <field name="job_title"/>
+                <field name="state"/>
+                <separator/>
+                <filter name="filter_draft" string="Nháp"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_in_progress" string="Đang xử lý"
+                        domain="[('state', 'in', ('manager_approval','hr_approval','approved'))]"/>
+                <filter name="filter_relieved" string="Đã nghỉ việc"
+                        domain="[('state', '=', 'relieved')]"/>
+                <separator/>
+                <filter name="filter_archived" string="Lưu trữ"
+                        domain="[('active', '=', False)]"/>
+                <separator string="Group By"/>
+                <group>
+                    <filter name="group_state" string="Trạng thái"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_department" string="Phòng ban"
+                            context="{'group_by': 'department_id'}"/>
+                    <filter name="group_type" string="Loại nghỉ việc"
+                            context="{'group_by': 'offboarding_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_offboarding_request" model="ir.actions.act_window">
+        <field name="name">Danh sách đơn xin nghỉ việc</field>
+        <field name="res_model">inom.offboarding.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_offboarding_request_search"/>
+    </record>
+
+</odoo>

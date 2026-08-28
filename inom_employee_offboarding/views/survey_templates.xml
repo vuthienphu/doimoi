@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Ẩn nút "Take Again"/"Retry" với khảo sát phỏng vấn nghỉ việc:
+         nhân viên không được làm lại sau khi đã hoàn thành. -->
+    <template id="survey_button_retake_offboarding"
+              inherit_id="survey.survey_button_retake">
+        <xpath expr="//div[hasclass('d-print-none')]" position="attributes">
+            <attribute name="t-if" add="not survey.is_exit_interview"
+                       separator=" and "/>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Submitted to manager: notify the reporting manager -->
+        <record id="mail_template_offboarding_submitted" model="mail.template">
+            <field name="name">Nghỉ việc: Gửi quản lý duyệt</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Đơn xin nghỉ việc của {{ object.employee_id.name }} đang chờ phê duyệt</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="object.manager_id.name or 'anh/chị'"/>,</p>
+                    <p>Bạn có <strong>một đơn xin nghỉ việc mới</strong> đang chờ phê duyệt.</p>
+                    <p><strong>Mã yêu cầu:</strong> <t t-out="object.name or ''"/></p>
+                    <p><strong>Nhân viên:</strong> <t t-out="object.employee_id.name or ''"/></p>
+                    <p><strong>Phòng ban:</strong> <t t-out="object.department_id.name or ''"/></p>
+                    <p><strong>Ngày làm việc cuối cùng (dự kiến):</strong> <t t-out="object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''"/></p>
+                    <p><strong>Lý do:</strong> <t t-out="object.reason_id.name or ''"/></p>
+                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết và thực hiện phê duyệt
+                        <strong>trước ngày <t t-out="ctx.get('manager_deadline') or ''"/></strong>.</p>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="lang">{{ object.employee_id.user_id.lang or user.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Submitted to HR: notify the HR team -->
+        <record id="mail_template_offboarding_hr_review" model="mail.template">
+            <field name="name">Nghỉ việc: Gửi HR duyệt</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Đơn xin nghỉ việc của {{ object.employee_id.name }} đang chờ phê duyệt</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="ctx.get('hr_recipient_name') or 'anh/chị'"/>,</p>
+                    <p>Bạn có <strong>một đơn xin nghỉ việc mới</strong> đang chờ phê duyệt.</p>
+                    <p><strong>Mã yêu cầu:</strong> <t t-out="object.name or ''"/></p>
+                    <p><strong>Nhân viên:</strong> <t t-out="object.employee_id.name or ''"/></p>
+                    <p><strong>Phòng ban:</strong> <t t-out="object.department_id.name or ''"/></p>
+                    <p><strong>Loại nghỉ việc:</strong> <t t-out="dict(object._fields['offboarding_type'].selection).get(object.offboarding_type) or ''"/></p>
+                    <p><strong>Ngày làm việc cuối cùng (dự kiến):</strong> <t t-out="object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''"/></p>
+                    <p><strong>Lý do:</strong> <t t-out="object.reason_id.name or ''"/></p>
+                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết và thực hiện phê duyệt
+                        <strong>trước ngày <t t-out="ctx.get('hr_deadline') or ''"/></strong>.</p>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Approved by HR: notify the employee -->
+        <record id="mail_template_offboarding_approved" model="mail.template">
+            <field name="name">Nghỉ việc: HR đã duyệt</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Đơn xin nghỉ việc của {{ object.employee_id.name }} được phê duyệt</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="object.employee_id.name or ''"/>,</p>
+                    <p>Đơn xin nghỉ việc của bạn đã <strong>được phê duyệt</strong>.</p>
+                    <p>
+                        <strong>Mã yêu cầu:</strong> <t t-out="object.name or ''"/><br/>
+                        <strong>Ngày làm việc cuối cùng:</strong> <t t-out="object.proposed_last_day or ''"/>
+                    </p>
+                    <p>Trong thời gian còn lại, vui lòng thực hiện bàn giao công việc theo quy định của Công ty.</p>
+                    <p>Đồng thời, vui lòng truy cập hệ thống để:</p>
+                    <ul>
+                        <li>Xem các thông tin và hướng dẫn cần thực hiện trước ngày nghỉ việc.</li>
+                        <li>Theo dõi tiến độ của quy trình nghỉ việc.</li>
+                        <li>Kiểm tra các khoản thanh toán liên quan.</li>
+                    </ul>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Nếu cần hỗ trợ thêm bất cứ thông tin nào, bạn vui lòng liên hệ Phòng Nhân sự.</p>
+                    <p>Cảm ơn bạn đã đồng hành cùng Bravestars Games. Chúc bạn nhiều thành công trên chặng đường sắp tới.</p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="lang">{{ object.employee_id.user_id.lang or user.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Relieved: notify the employee -->
+        <record id="mail_template_offboarding_relieved" model="mail.template">
+            <field name="name">Nghỉ việc: Đã hoàn tất nghỉ việc</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Quy trình nghỉ việc của bạn đã được hoàn tất</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="object.employee_id.name or ''"/>,</p>
+                    <p>Quy trình nghỉ việc của bạn đã được <strong>hoàn tất</strong>.</p>
+                    <p><strong>Mã yêu cầu:</strong> <t t-out="object.name or ''"/></p>
+                    <p><strong>Ngày làm việc cuối cùng:</strong> <t t-out="object.proposed_last_day and object.proposed_last_day.strftime('%d/%m/%Y') or ''"/></p>
+                    <p>Mọi thủ tục nghỉ việc đã được hoàn thành. Vui lòng truy cập hệ thống nếu bạn
+                        muốn xem lại thông tin.</p>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Bravestars Games chân thành cảm ơn những đóng góp của bạn trong thời gian đồng
+                        hành cùng Công ty. Kính chúc bạn nhiều sức khỏe, thành công và gặt hái nhiều
+                        thành tựu trên chặng đường sắp tới.</p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="lang">{{ object.employee_id.user_id.lang or user.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Rejected: notify the employee with the reason -->
+        <record id="mail_template_offboarding_rejected" model="mail.template">
+            <field name="name">Nghỉ việc: Đơn bị từ chối</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Đơn xin nghỉ việc của bạn bị từ chối</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="object.employee_id.name or ''"/>,</p>
+                    <p>Đơn xin nghỉ việc của bạn <strong>đã bị từ chối</strong>.</p>
+                    <p><strong>Mã yêu cầu:</strong> <t t-out="object.name or ''"/></p>
+                    <p><strong>Lý do:</strong> <t t-out="object.rejection_reason or ''"/></p>
+                    <p>Vui lòng truy cập hệ thống để xem thông tin chi tiết. Nếu cần thêm thông tin
+                        hoặc có bất kỳ thắc mắc nào, bạn hãy liên hệ Phòng Nhân sự để được giải đáp.</p>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="lang">{{ object.employee_id.user_id.lang or user.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Reminder: shared template for manager and HR pending approval -->
+        <record id="mail_template_offboarding_reminder" model="mail.template">
+            <field name="name">Nghỉ việc: Nhắc nhở phê duyệt</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="subject">Bạn cần hoàn tất phê duyệt cho đơn xin nghỉ việc của nhân viên {{ object.employee_id.name }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #2b2b2b;">
+                    <p>Xin chào <t t-out="ctx.get('reminder_recipient_name') or 'anh/chị'"/>,</p>
+                    <p>Đây là email nhắc phê duyệt cho Đơn xin nghỉ việc của
+                        <t t-out="object.employee_id.name or ''"/>. Đơn xin nghỉ việc này cần được
+                        hoàn tất phê duyệt trong ngày hôm nay để quy trình nghỉ việc của nhân viên
+                        được xử lý đúng tiến độ.</p>
+                    <p>Vui lòng truy cập hệ thống và thực hiện phê duyệt tại đây.</p>
+                    <p style="margin: 16px 0;">
+                        <a t-att-href="ctx.get('record_url') or '#'"
+                           style="background-color: #0b3954; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                            Xem chi tiết yêu cầu
+                        </a>
+                    </p>
+                    <p>Nếu anh/chị đã hoàn tất, vui lòng bỏ qua email này.</p>
+                    <p>Trân trọng,<br/><strong>Phòng Nhân Sự Bravestars Games</strong></p>
+                </div>
+            </field>
+            <field name="lang">{{ object.employee_id.user_id.lang or user.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+    </data>
+</odoo>
