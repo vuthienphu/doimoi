@@ -94,6 +94,13 @@ class ResUsers(models.Model):
         _logger.info("=== CREATE USER START ===")
         _logger.info("vals_list=%s", vals_list)
 
+        default_password = self.env['ir.config_parameter'].sudo().get_param('dcg.default_user_password')
+        if default_password:
+            for vals in vals_list:
+                if not vals.get('password'):
+                    vals['password'] = default_password
+                    _logger.info("Set default password from config parameter for user login=%s", vals.get('login'))
+
         users = super().create(vals_list)
 
         _logger.info("Created users=%s", users.ids)
@@ -136,17 +143,10 @@ class ResUsers(models.Model):
 
         if employee:
             _logger.info("Existing employee found id=%s", employee.id)
-            employee.user_id = user
-            _logger.info("Linked employee to user")
+            if not employee.user_id:
+                employee.user_id = user
+                _logger.info("Linked employee to user")
         else:
-            _logger.info("Creating new employee")
-
-            employee = Employee.create({
-                'name': user.name,
-                'work_email': email,
-                'user_id': user.id,
-            })
-
-            _logger.info("Created employee id=%s", employee.id)
+            _logger.info("No existing employee found. Skipping employee creation.")
 
         _logger.info("=== LINK EMPLOYEE END ===")
