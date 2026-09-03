@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_zalo_channel" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.zalo.channel</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Kênh Zalo" invisible="not is_company">
+                    <field name="zalo_channel_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="channel_id"/>
+                            <field name="active"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_task_form2_inherit_solution" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.solution</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="solution_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Chọn giải pháp liên quan..."/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_tree2_inherit_solution" model="ir.ui.view">
+        <field name="name">project.task.tree.inherit.solution</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.project_task_view_tree_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="solution_ids" widget="many2many_tags" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_search_inherit_solution" model="ir.ui.view">
+        <field name="name">project.task.search.inherit.solution</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="solution_ids"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Giải pháp" name="group_by_solution" context="{'group_by': 'solution_ids'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="solution_solution_view_tree" model="ir.ui.view">
+        <field name="name">solution.solution.tree</field>
+        <field name="model">solution.solution</field>
+        <field name="arch" type="xml">
+            <list string="Danh mục Giải pháp" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="solution_solution_view_form" model="ir.ui.view">
+        <field name="name">solution.solution.form</field>
+        <field name="model">solution.solution</field>
+        <field name="arch" type="xml">
+            <form string="Giải pháp">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Mô tả">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="solution_solution_action" model="ir.actions.act_window">
+        <field name="name">Danh mục Giải pháp</field>
+        <field name="res_model">solution.solution</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

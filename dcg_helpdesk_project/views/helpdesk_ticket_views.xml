@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="helpdesk_ticket_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.tree</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <list string="Yêu cầu Khách hàng">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="project_id"/>
+                <field name="request_source"/>
+                <field name="user_id"/>
+                <field name="priority" widget="priority"/>
+                <field name="task_count"/>
+                <field name="stage_id" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="helpdesk_ticket_view_kanban" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column">
+                <field name="stage_id"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="priority"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold fs-5"/>
+                            <field name="priority" widget="priority"/>
+                        </div>
+                        <div class="text-muted small">
+                            <field name="partner_id"/>
+                        </div>
+                        <footer class="pt-1 d-flex justify-content-between align-items-center">
+                            <span class="badge text-bg-info"><field name="request_source"/></span>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Yêu cầu Khách hàng">
+                <header>
+                    <button name="action_create_task_wizard"
+                        class="btn-primary"
+                        type="object"
+                        string="Tạo Task"
+                        invisible="not partner_id or not project_id"/>
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_open_ticket_tasks" icon="fa-puzzle-piece">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="task_count"/>
+                                </span>
+                                <span class="o_stat_text">Task</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Tiêu đề Yêu cầu"/>
+                        <h1>
+                            <field name="name" placeholder="Ví dụ: Lỗi không đăng nhập được hệ thống..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Thông tin chính">
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="company_name" readonly="1" invisible="not company_name"/>
+                            <field name="project_id" options="{'no_create': True}"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                        </group>
+                        <group string="Phân loại &amp; Ưu tiên">
+                            <field name="request_source"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="team_id" options="{'no_create': True}"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Chi tiết Yêu cầu Khách hàng">
+                            <group>
+                                <group string="Nguồn &amp; Công ty">
+                                    <field name="request_source"/>
+                                    <field name="company_name"/>
+                                </group>
+                                <group string="Thông tin người liên hệ">
+                                    <field name="contact_name"/>
+                                    <field name="contact_phone"/>
+                                    <field name="contact_email"/>
+                                    <field name="contact_department"/>
+                                    <field name="contact_position"/>
+                                </group>
+                            </group>
+                            <separator string="Nội dung mô tả"/>
+                            <field name="description" placeholder="Nội dung chi tiết của yêu cầu..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="helpdesk_ticket_view_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Yêu cầu">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="project_id"/>
+                <field name="user_id"/>
+                <filter string="Của tôi" name="my_ticket" domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Từ Website" name="source_web" domain="[('request_source', '=', 'web')]"/>
+                <filter string="Từ Zalo" name="source_zalo" domain="[('request_source', '=', 'zalo')]"/>
+                <filter string="Nội bộ" name="source_internal" domain="[('request_source', '=', 'internal')]"/>
+                <group>
+                    <filter string="Khách hàng" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Dự án" name="group_by_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Trạng thái" name="group_by_stage" context="{'group_by': 'stage_id'}"/>
+                    <filter string="Người phụ trách" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

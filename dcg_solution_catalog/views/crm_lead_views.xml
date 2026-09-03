@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_solution" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.solution</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="solution_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Chọn các giải pháp triển khai..."/>
+                <field name="total_solution_planned_hours" widget="float_time" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

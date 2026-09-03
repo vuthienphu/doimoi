@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Master Data Solutions -->
+        <record id="solution_solution_hrm" model="solution.solution">
+            <field name="name">Quản trị Nhân sự (HRM)</field>
+            <field name="code">HRM</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="solution_solution_crm_sale" model="solution.solution">
+            <field name="name">Quản trị Bán hàng &amp; CRM</field>
+            <field name="code">CRM_SALE</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="solution_solution_scm" model="solution.solution">
+            <field name="name">Quản trị Kho &amp; Chuỗi cung ứng</field>
+            <field name="code">SCM</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="solution_solution_finance" model="solution.solution">
+            <field name="name">Quản trị Tài chính &amp; Kế toán</field>
+            <field name="code">FINANCE</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Master Data Configurations -->
+        <record id="solution_config_hr" model="solution.configuration">
+            <field name="name">Phân hệ Nhân sự</field>
+            <field name="code">CFG_HR</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="solution_config_crm" model="solution.configuration">
+            <field name="name">Phân hệ CRM &amp; Khách hàng</field>
+            <field name="code">CFG_CRM</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="solution_config_sale" model="solution.configuration">
+            <field name="name">Phân hệ Bán hàng &amp; Hóa đơn</field>
+            <field name="code">CFG_SALE</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="solution_config_stock" model="solution.configuration">
+            <field name="name">Phân hệ Kho hàng</field>
+            <field name="code">CFG_STOCK</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Sample Module Data: Quản lý Hồ sơ Nhân viên (hr_employee) -->
+        <record id="solution_module_employee" model="solution.module">
+            <field name="name">Quản lý Hồ sơ Nhân viên</field>
+            <field name="code">hr_employee</field>
+            <field name="solution_id" ref="solution_solution_hrm"/>
+            <field name="configuration_id" ref="solution_config_hr"/>
+            <field name="version">19</field>
+            <field name="state">ready</field>
+            <field name="description"><![CDATA[<p>Giải pháp quản lý thông tin hồ sơ nhân sự, sơ đồ tổ chức, hợp đồng lao động và phòng ban doanh nghiệp.</p>]]></field>
+        </record>
+
+        <!-- Task Templates for hr_employee -->
+        <record id="task_tmpl_emp_1" model="solution.module.task.template">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Khảo sát sơ đồ tổ chức &amp; hồ sơ nhân sự</field>
+            <field name="description">Thu thập thông tin phòng ban, chức danh, mẫu hồ sơ nhân viên hiện tại của khách hàng.</field>
+            <field name="planned_hours">4.0</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="task_tmpl_emp_2" model="solution.module.task.template">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Cấu hình Cơ cấu tổ chức &amp; Quyền nhân sự</field>
+            <field name="description">Tạo phòng ban, chức danh, thiết lập phân quyền quản lý nhân sự trên Odoo.</field>
+            <field name="planned_hours">8.0</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="task_tmpl_emp_3" model="solution.module.task.template">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Import dữ liệu Hồ sơ nhân viên ban đầu</field>
+            <field name="description">Chuẩn hóa template Excel và import danh sách nhân sự hiện hữu.</field>
+            <field name="planned_hours">6.0</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="task_tmpl_emp_4" model="solution.module.task.template">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Hướng dẫn sử dụng &amp; Bàn giao Phân hệ Nhân sự</field>
+            <field name="description">Đào tạo nhân sự HR cách tạo/sửa hồ sơ, tra cứu sơ đồ tổ chức và ký biên bản nghiệm thu.</field>
+            <field name="planned_hours">4.0</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Checklists for hr_employee -->
+        <record id="survey_chk_emp_1" model="solution.module.survey.checklist">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Thu thập Sơ đồ cây phòng ban doanh nghiệp</field>
+            <field name="description">Cần sơ đồ phòng ban chính xác đến từng cấp quản lý.</field>
+            <field name="required">1</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="impl_chk_emp_1" model="solution.module.implementation.checklist">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Tạo đầy đủ Phòng ban và Chức danh công việc</field>
+            <field name="required">1</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="handover_chk_emp_1" model="solution.module.handover.checklist">
+            <field name="module_id" ref="solution_module_employee"/>
+            <field name="name">Khách hàng nghiệm thu danh sách Nhân viên đã import</field>
+            <field name="required">1</field>
+            <field name="sequence">1</field>
+        </record>
+    </data>
+</odoo>

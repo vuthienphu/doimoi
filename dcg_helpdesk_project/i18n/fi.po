@@ -1,0 +1,260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_project_sync
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-10 12:44+0000\n"
+"PO-Revision-Date: 2026-06-10 12:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/project_task.py:0
+#: code:addons/helpdesk_project_sync/wizard/project_task_convert_wizard.py:0
+msgid "<p><small><i>Message synced from task {task_link}:</i></small></p>"
+msgstr ""
+"<p><small><i>Viesti synkronoitu tehtävästä {task_link}:</i></small></p>"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/helpdesk_ticket.py:0
+#: code:addons/helpdesk_project_sync/wizard/helpdesk_ticket_convert_wizard.py:0
+msgid "<p><small><i>Message synced from ticket {ticket_link}:</i></small></p>"
+msgstr ""
+"<p><small><i>Viesti synkronoitu tukipyynnöstä {ticket_link}:</i></small></p>"
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.helpdesk_ticket_view_form_inherit_ahkio
+msgid "<span class=\"o_stat_text order-2\">Tasks</span>"
+msgstr "<span class=\"o_stat_text order-2\">Tehtävät</span>"
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.view_task_form2_inherit_ahkio
+msgid "<span class=\"o_stat_text order-2\">Tickets</span>"
+msgstr "<span class=\"o_stat_text order-2\">Tukipyynnöt</span>"
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.view_task_form2_inherit_ahkio
+msgid "<span invisible=\"not helpdesk_ticket_id\">1</span>"
+msgstr ""
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.helpdesk_ticket_view_form_inherit_ahkio
+msgid "<span invisible=\"not project_task_id\">1</span>"
+msgstr ""
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__task_ids_count
+msgid "Amount of converted tasks"
+msgstr "Muunnettujen tehtävien määrä"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__ticket_ids_count
+msgid "Amount of converted tickets"
+msgstr "Muunnettujen tukipyyntöjen määrä"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task_convert_wizard__archive_task
+msgid "Archive Task"
+msgstr "Arkistoi tehtävä"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket_convert_wizard__archive_ticket
+msgid "Archive Ticket"
+msgstr "Arkistoi tiketti"
+
+#. module: helpdesk_project_sync
+#: model:ir.model,name:helpdesk_project_sync.model_helpdesk_ticket_convert_wizard
+msgid "Convert Helpdesk Tickets to Tasks"
+msgstr "Muunna asiakaspalvelun tukipyynnöt tehtäviksi"
+
+#. module: helpdesk_project_sync
+#: model:ir.model,name:helpdesk_project_sync.model_project_task_convert_wizard
+msgid "Convert Project Tasks to Tickets"
+msgstr "Muunna projektin tehtävät tukipyynnöiksi"
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.helpdesk_ticket_view_form_inherit_ahkio
+msgid "Convert to Task"
+msgstr "Muunna tehtäväksi"
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.view_task_form2_inherit_ahkio
+msgid "Convert to Ticket"
+msgstr "Muunna tukipyynnöksi"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__task_ids
+msgid "Converted Tasks"
+msgstr "Muunnetut tehtävät"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__ticket_ids
+msgid "Converted Tickets"
+msgstr "Muunnetut tukipyynnöt"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__display_name
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket_convert_wizard__display_name
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__display_name
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task_convert_wizard__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: helpdesk_project_sync
+#: model:ir.model,name:helpdesk_project_sync.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr "Asiakaspalvelun tukipyyntö"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_project_task__linked_ticket_ids
+msgid ""
+"Helpdesk tickets linked to this task, filtered by tickets with the same "
+"customer."
+msgstr ""
+"Tähän tehtävään yhdistetyt tukipyynnöt, suodatettuna saman asiakkaan "
+"perusteella."
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__id
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket_convert_wizard__id
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__id
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task_convert_wizard__id
+msgid "ID"
+msgstr "Tunnus"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_project_task_convert_wizard__archive_task
+msgid "If checked, the task will be archived after conversion to ticket."
+msgstr "Jos valittu, tehtävä arkistoidaan tukipyynnöksi muunnon jälkeen."
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_helpdesk_ticket_convert_wizard__archive_ticket
+msgid "If checked, the ticket will be archived after conversion to task."
+msgstr "Jos valittu, tiketti arkistoidaan tehtäväksi muunnon yhteydessä."
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.helpdesk_ticket_view_form_inherit_ahkio
+msgid "Link existing tasks…"
+msgstr "Yhdistä tehtäviä..."
+
+#. module: helpdesk_project_sync
+#: model_terms:ir.ui.view,arch_db:helpdesk_project_sync.view_task_form2_inherit_ahkio
+msgid "Link existing tickets…"
+msgstr "Yhdistä tukipyyntöjä..."
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__linked_task_ids_domain
+msgid "Linked Task Ids Domain"
+msgstr "Yhdistettyjen tehtävien domain"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__linked_task_ids
+msgid "Linked Tasks"
+msgstr "Yhdistetyt tehtävät"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__linked_ticket_ids_domain
+msgid "Linked Ticket Ids Domain"
+msgstr "Yhdistettyjen tukipyyntöjen domain"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__linked_ticket_ids
+msgid "Linked Tickets"
+msgstr "Yhdistetyt tukipyynnöt"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_helpdesk_ticket__project_task_id
+msgid "Original Task"
+msgstr "Alkuperäinen tehtävä"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,field_description:helpdesk_project_sync.field_project_task__helpdesk_ticket_id
+msgid "Original Ticket"
+msgstr "Alkuperäinen tiketti"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_helpdesk_ticket__linked_task_ids
+msgid ""
+"Project tasks linked to this ticket, filtered by tasks with the same "
+"customer."
+msgstr ""
+"Tähän tukipyyntöön yhdistetyt projektin tehtävät, suodatettuna saman "
+"asiakkaan perusteella."
+
+#. module: helpdesk_project_sync
+#: model:ir.model,name:helpdesk_project_sync.model_project_task
+msgid "Task"
+msgstr "Tehtävä"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/helpdesk_ticket.py:0
+msgid "Tasks"
+msgstr "Tehtävät"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/project_task.py:0
+msgid ""
+"Tasks that were converted from tickets cannot be converted back to tickets."
+msgstr ""
+"Tehtäviä, jotka luotiin alun perin tukipyynnöistä ei voida muuntaa edelleen "
+"tukipyynnöiksi."
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_project_task__helpdesk_ticket_id
+msgid "The helpdesk ticket this task was converted from"
+msgstr "Helpdesk tiketti, josta tämä tehtävä muunnettiin"
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_helpdesk_ticket__project_task_id
+msgid "The project task this ticket was converted from"
+msgstr "Projektin tehtävä, josta tämä tukipyyntö muunnettiin"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/project_task.py:0
+msgid "Tickets"
+msgstr "Tukipyynnöt"
+
+#. module: helpdesk_project_sync
+#. odoo-python
+#: code:addons/helpdesk_project_sync/models/helpdesk_ticket.py:0
+msgid ""
+"Tickets that were converted from tasks cannot be converted back to tasks."
+msgstr ""
+"Tukipyyntöjä, jotka luotiin alun perin tehtävistä ei voida muuntaa edelleen "
+"tehtäviksi."
+
+#. module: helpdesk_project_sync
+#: model:ir.model.fields,help:helpdesk_project_sync.field_project_task__display_name
+msgid ""
+"Use these keywords in the title to set new tasks:\n"
+"\n"
+"            #tags Set tags on the task\n"
+"            @user Assign the task to a user\n"
+"            ! Set the task a medium priority\n"
+"            !! Set the task a high priority\n"
+"            !!! Set the task a urgent priority\n"
+"\n"
+"            Make sure to use the right format and order e.g. Improve the configuration screen #feature #v16 @Mitchell !"
+msgstr ""
+"Käytä näitä avansanoja otsikossa määrittääksesi uusia tehtäviä:\n"
+"\n"
+"                     30h Varaa 30 tuntia tehtävään\n"
+"                     #tunnisteet Aseta tunnisteita tehtävälle\n"
+"                     @käyttäjä Määritä tehtävä käyttäjälle\n"
+"                     ! Aseta tehtävälle keskisuuri prioriteetti\n"
+"                     !! Aseta tehtävälle korkea prioriteetti\n"
+"                     !!! Aseta tehtävä kiireelliseksi\n"
+"\n"
+"                    Varmista, että käytät oikeaa muotoa ja järjestystä, esim. Paranna ruudun konfiguraatiota 5h #ominaisuus #v16 @Mitchell !"

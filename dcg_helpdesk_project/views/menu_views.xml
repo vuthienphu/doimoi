@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. Top-Level App Root Menu -->
+    <menuitem id="menu_dcg_helpdesk_root"
+        name="Yêu cầu &amp; Helpdesk"
+        web_icon="dcg_helpdesk_project,static/description/icon.png"
+        sequence="25"/>
+
+    <!-- 2. Actions -->
+    <!-- Action: Dashboard -->
+    <record id="action_customer_request_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard Yêu cầu Khách hàng</field>
+        <field name="tag">helpdesk_customer_request_dashboard</field>
+    </record>
+
+    <!-- Action: Yêu cầu Khách hàng (Helpdesk Tickets) -->
+    <record id="action_helpdesk_ticket_customer_request" model="ir.actions.act_window">
+        <field name="name">Yêu cầu Khách hàng</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có yêu cầu nào từ khách hàng!
+            </p>
+        </field>
+    </record>
+
+    <!-- Action: Kênh Zalo -->
+    <record id="action_res_partner_zalo_channel" model="ir.actions.act_window">
+        <field name="name">Kênh Zalo Khách hàng</field>
+        <field name="res_model">res.partner.zalo.channel</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- 3. Submenus under menu_dcg_helpdesk_root -->
+    <!-- Submenu 1: Dashboard -->
+    <menuitem id="menu_customer_request_dashboard"
+        name="Dashboard"
+        action="action_customer_request_dashboard"
+        parent="menu_dcg_helpdesk_root"
+        sequence="1"/>
+
+    <!-- Submenu 2: Yêu cầu Khách hàng -->
+    <menuitem id="menu_helpdesk_ticket_customer_request"
+        name="Yêu cầu Khách hàng"
+        action="action_helpdesk_ticket_customer_request"
+        parent="menu_dcg_helpdesk_root"
+        sequence="2"/>
+
+    <!-- Submenu Category: Cấu hình -->
+    <menuitem id="menu_dcg_helpdesk_config"
+        name="Cấu hình"
+        parent="menu_dcg_helpdesk_root"
+        sequence="99"/>
+
+    <!-- Submenu under Cấu hình: Kênh Zalo -->
+    <menuitem id="menu_res_partner_zalo_channel"
+        name="Kênh Zalo Khách hàng"
+        action="action_res_partner_zalo_channel"
+        parent="menu_dcg_helpdesk_config"
+        sequence="10"/>
+</odoo>

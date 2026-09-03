@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Stages -->
+        <record id="stage_new" model="helpdesk.stage">
+            <field name="name">Mới</field>
+            <field name="sequence">1</field>
+            <field name="fold" eval="False"/>
+        </record>
+
+        <record id="stage_in_progress" model="helpdesk.stage">
+            <field name="name">Đang xử lý</field>
+            <field name="sequence">2</field>
+            <field name="fold" eval="False"/>
+        </record>
+
+        <record id="stage_done" model="helpdesk.stage">
+            <field name="name">Đã giải quyết</field>
+            <field name="sequence">3</field>
+            <field name="fold" eval="True"/>
+        </record>
+
+        <record id="stage_closed" model="helpdesk.stage">
+            <field name="name">Đã đóng</field>
+            <field name="sequence">4</field>
+            <field name="fold" eval="True"/>
+        </record>
+    </data>
+</odoo>

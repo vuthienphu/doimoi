@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Public Request Form Template -->
+    <template id="customer_request_form_template" name="Public Customer Request Form">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty bg-doimoi-light-bg py-5">
+                <div class="container container-doimoi">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10">
+                            <div class="card card-doimoi border-0 shadow-lg rounded-4 overflow-hidden">
+                                <div class="card-header text-white text-center py-4 bg-doimoi-primary">
+                                    <h3 class="mb-0 text-white font-sora fw-bold">GỬI YÊU CẦU HỖ TRỢ</h3>
+                                    <p class="mb-0 text-white-50 small mt-1">Đội ngũ kỹ thuật sẽ tiếp nhận và xử lý yêu cầu của quý khách</p>
+                                </div>
+                                <div class="card-body p-4 p-md-5 bg-white">
+                                    <t t-if="errors">
+                                        <div class="alert alert-danger rounded-3 mb-4">
+                                            <ul class="mb-0 ps-3">
+                                                <t t-foreach="errors" t-as="error">
+                                                    <li><t t-esc="error"/></li>
+                                                </t>
+                                            </ul>
+                                        </div>
+                                    </t>
+
+                                    <form action="/customer/request/submit" method="post" enctype="multipart/form-data" class="js_website_submit_form">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                        <!-- Section: Thông tin Công ty -->
+                                        <div class="mb-4">
+                                            <label for="company_name" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                Tên công ty <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-doimoi" id="company_name" name="company_name" required="required" placeholder="Nhập tên đầy đủ của công ty..." t-att-value="post.get('company_name') if post else ''"/>
+                                        </div>
+
+                                        <!-- Section: Thông tin Liên hệ -->
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label for="contact_name" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                    Họ và tên <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control form-control-doimoi" id="contact_name" name="contact_name" required="required" placeholder="Nhập họ và tên người liên hệ..." t-att-value="post.get('contact_name') if post else ''"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="contact_phone" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                    Số điện thoại <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="tel" class="form-control form-control-doimoi" id="contact_phone" name="contact_phone" required="required" placeholder="Nhập số điện thoại liên hệ..." t-att-value="post.get('contact_phone') if post else ''"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label for="contact_email" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                    Email
+                                                </label>
+                                                <input type="email" class="form-control form-control-doimoi" id="contact_email" name="contact_email" placeholder="example@company.com" t-att-value="post.get('contact_email') if post else ''"/>
+                                                <div class="form-text text-muted small mt-1">
+                                                    <i class="fa fa-info-circle me-1 text-doimoi-orange"></i>
+                                                    Nếu điền email, khi yêu cầu được xử lý hệ thống có thể gửi thông báo về email này.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="contact_department" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                    Phòng ban
+                                                </label>
+                                                <input type="text" class="form-control form-control-doimoi" id="contact_department" name="contact_department" placeholder="Ví dụ: Phòng IT, Phòng Kế toán..." t-att-value="post.get('contact_department') if post else ''"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="contact_position" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                Chức vụ
+                                            </label>
+                                            <input type="text" class="form-control form-control-doimoi" id="contact_position" name="contact_position" placeholder="Ví dụ: Trưởng phòng, Chuyên viên..." t-att-value="post.get('contact_position') if post else ''"/>
+                                        </div>
+
+                                        <hr class="my-4 border-doimoi-divider"/>
+
+                                        <!-- Section: Nội dung Yêu cầu -->
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                Tiêu đề <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-doimoi" id="name" name="name" required="required" placeholder="Tóm tắt yêu cầu cần xử lý..." t-att-value="post.get('name') if post else ''"/>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="description" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                Nội dung <span class="text-danger">*</span>
+                                            </label>
+                                            <textarea class="form-control form-control-doimoi" id="description" name="description" rows="5" required="required" placeholder="Mô tả chi tiết vấn đề hoặc yêu cầu hỗ trợ..."><t t-esc="post.get('description') if post else ''"/></textarea>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="attachments" class="form-label font-sora text-doimoi-navy fw-semibold">
+                                                File đính kèm
+                                            </label>
+                                            <input type="file" class="form-control form-control-doimoi" id="attachments" name="attachments" multiple="multiple"/>
+                                            <div class="form-text text-muted small mt-1">Đính kèm ảnh chụp màn hình hoặc tài liệu đính kèm (nếu có).</div>
+                                        </div>
+
+                                        <div class="d-grid mt-4">
+                                            <button type="submit" class="btn btn-doimoi-primary btn-lg font-sora fw-bold shadow-sm py-3">
+                                                <i class="fa fa-paper-plane me-2"></i> GỬI YÊU CẦU
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Success Page Template -->
+    <template id="customer_request_success_template" name="Public Customer Request Success">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty bg-doimoi-light-bg py-5">
+                <div class="container container-doimoi">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-8 text-center">
+                            <div class="card card-doimoi border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                                <div class="success-icon-wrap mb-4 mx-auto d-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle" style="width: 80px; height: 80px;">
+                                    <i class="fa fa-check fa-3x"></i>
+                                </div>
+                                <h2 class="font-sora text-doimoi-navy fw-bold mb-3">Gửi yêu cầu thành công!</h2>
+                                
+                                <t t-if="req_code">
+                                    <div class="badge bg-doimoi-light text-doimoi-orange border border-doimoi-orange px-4 py-2 rounded-pill fs-5 font-sora fw-bold mb-4">
+                                        Mã yêu cầu: <t t-esc="req_code"/>
+                                    </div>
+                                </t>
+
+                                <p class="text-doimoi-muted fs-6 mb-4">
+                                    Yêu cầu của bạn đã được tiếp nhận. Đội ngũ phụ trách sẽ kiểm tra và xử lý trong thời gian sớm nhất.
+                                </p>
+
+                                <div>
+                                    <a href="/customer/request" class="btn btn-doimoi-primary px-4 py-2 rounded-pill font-sora fw-semibold">
+                                        <i class="fa fa-plus me-1"></i> Gửi yêu cầu khác
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

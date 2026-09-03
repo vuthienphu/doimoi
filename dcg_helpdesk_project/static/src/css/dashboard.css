@@ -1,0 +1,94 @@
+.o_customer_request_dashboard {
+    padding: 20px;
+    background-color: #F8F9FB;
+    min-height: 100%;
+}
+
+.o_dashboard_header {
+    margin-bottom: 24px;
+}
+
+.o_dashboard_title {
+    font-family: 'Sora', sans-serif;
+    color: #132A3E;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.o_dashboard_subtitle {
+    color: #5B6472;
+    font-size: 0.875rem;
+}
+
+.o_dashboard_filters {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(19, 42, 62, 0.05);
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.o_kpi_card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(19, 42, 62, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+}
+
+.o_kpi_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(19, 42, 62, 0.1);
+}
+
+.o_kpi_card.kpi_total { border-left-color: #F0631A; }
+.o_kpi_card.kpi_task { border-left-color: #0E7C66; }
+.o_kpi_card.kpi_in_progress { border-left-color: #3B82F6; }
+.o_kpi_card.kpi_done { border-left-color: #10B981; }
+
+.o_kpi_title {
+    font-size: 0.875rem;
+    color: #5B6472;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.o_kpi_value {
+    font-family: 'Sora', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #132A3E;
+}
+
+.o_dashboard_section {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(19, 42, 62, 0.06);
+    margin-bottom: 24px;
+}
+
+.o_dashboard_section_title {
+    font-family: 'Sora', sans-serif;
+    color: #132A3E;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge-source-web { background-color: #FFF1E6; color: #F0631A; border: 1px solid #F0631A; }
+.badge-source-zalo { background-color: #E6F6F1; color: #0E7C66; border: 1px solid #0E7C66; }
+.badge-source-internal { background-color: #EBF5FF; color: #3B82F6; border: 1px solid #3B82F6; }
+.badge-source-other { background-color: #F3F4F6; color: #6B7280; border: 1px solid #9CA3AF; }

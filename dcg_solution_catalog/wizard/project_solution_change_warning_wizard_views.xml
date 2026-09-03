@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_solution_change_warning_wizard_view_form" model="ir.ui.view">
+        <field name="name">project.solution.change.warning.wizard.form</field>
+        <field name="model">project.solution.change.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cảnh Báo Thay Đổi Giải Pháp Dự Án">
+                <sheet>
+                    <div class="alert alert-warning border-warning" role="alert">
+                        <h4 class="alert-heading font-sora fw-bold mb-2">
+                            <i class="fa fa-exclamation-triangle me-2"></i> CẢNH BÁO THAY ĐỔI GIẢI PHÁP
+                        </h4>
+                        <p class="mb-0">
+                            Bạn đang loại bỏ một số Giải pháp khỏi phạm vi Dự án. Các Giải pháp này hiện đang được sử dụng bởi các Task bên dưới.
+                        </p>
+                    </div>
+
+                    <group string="Chi tiết ảnh hưởng">
+                        <field name="project_id" readonly="1"/>
+                        <field name="removed_solution_ids" widget="many2many_tags" readonly="1"/>
+                    </group>
+
+                    <group string="Danh sách Task đang sử dụng Giải pháp bị loại bỏ">
+                        <field name="affected_task_ids" readonly="1">
+                            <list no_open="1">
+                                <field name="name"/>
+                                <field name="stage_id"/>
+                                <field name="user_ids" widget="many2many_tags"/>
+                                <field name="solution_ids" widget="many2many_tags"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <p class="text-muted small">
+                        * Việc tiếp tục thay đổi sẽ lưu danh sách Giải pháp mới cho Dự án nhưng KHÔNG tự động xóa Giải pháp khỏi các Task đã tồn tại ở trên.
+                    </p>
+                </sheet>
+                <footer>
+                    <button name="action_continue" string="Tiếp tục thay đổi" type="object" class="btn-warning"/>
+                    <button name="action_cancel" string="Hủy bỏ" type="object" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

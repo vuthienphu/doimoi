@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="solution_module_view_tree" model="ir.ui.view">
+        <field name="name">solution.module.tree</field>
+        <field name="model">solution.module</field>
+        <field name="arch" type="xml">
+            <list string="Module Giải Pháp Odoo">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="solution_id"/>
+                <field name="configuration_id"/>
+                <field name="version"/>
+                <field name="total_planned_hours" widget="float_time"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'ready'" decoration-muted="state == 'deprecated'"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="solution_module_view_form" model="ir.ui.view">
+        <field name="name">solution.module.form</field>
+        <field name="model">solution.module</field>
+        <field name="arch" type="xml">
+            <form string="Module Giải Pháp Odoo">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ready,deprecated" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Tên Module"/>
+                        <h1>
+                            <field name="name" placeholder="Ví dụ: Quản lý Hồ sơ Nhân viên"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="Ví dụ: hr_employee"/>
+                            <field name="solution_id"/>
+                            <field name="configuration_id"/>
+                        </group>
+                        <group>
+                            <field name="version"/>
+                            <field name="total_planned_hours" widget="float_time" readonly="1"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Tab 0: Mô tả tổng quan -->
+                        <page string="Mô tả &amp; Phạm vi">
+                            <field name="description" placeholder="Mô tả tổng quan về phạm vi nghiệp vụ module giải pháp..."/>
+                        </page>
+
+                        <!-- Tab 1: Chức năng -->
+                        <page string="Chức năng (Features)">
+                            <field name="feature_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="note"/>
+                                    <field name="image" widget="image" options="{'size': [40, 40]}"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 2: Tài liệu -->
+                        <page string="Tài liệu (Documents)">
+                            <field name="document_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="document_type"/>
+                                    <field name="version"/>
+                                    <field name="file" filename="file_name"/>
+                                    <field name="file_name" column_invisible="1"/>
+                                    <field name="url" widget="url"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 3: Mẫu công việc (Task Templates) -->
+                        <page string="Mẫu công việc (Task Templates)">
+                            <field name="task_template_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="planned_hours" widget="float_time"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 4: Checklist khảo sát -->
+                        <page string="Checklist khảo sát">
+                            <field name="survey_checklist_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="required"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 5: Checklist triển khai -->
+                        <page string="Checklist triển khai">
+                            <field name="implementation_checklist_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="required"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 6: Checklist bàn giao -->
+                        <page string="Checklist bàn giao">
+                            <field name="handover_checklist_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="required"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Tab 7: Lỗi thường gặp & Giải pháp -->
+                        <page string="Lỗi thường gặp &amp; Giải pháp">
+                            <field name="common_issue_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="severity" widget="badge" decoration-warning="severity == 'high'" decoration-danger="severity == 'critical'"/>
+                                    <field name="version"/>
+                                    <field name="cause"/>
+                                    <field name="solution"/>
+                                    <field name="image" widget="image" options="{'size': [40, 40]}"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="solution_module_view_search" model="ir.ui.view">
+        <field name="name">solution.module.search</field>
+        <field name="model">solution.module</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Module Giải Pháp">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="solution_id"/>
+                <field name="configuration_id"/>
+                <field name="version"/>
+                <filter string="Sẵn sàng triển khai" name="filter_ready" domain="[('state', '=', 'ready')]"/>
+                <filter string="Bản thảo" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <group>
+                    <filter string="Giải pháp" name="group_by_solution" context="{'group_by': 'solution_id'}"/>
+                    <filter string="Cấu hình phân hệ" name="group_by_config" context="{'group_by': 'configuration_id'}"/>
+                    <filter string="Phiên bản Odoo" name="group_by_version" context="{'group_by': 'version'}"/>
+                    <filter string="Trạng thái" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="solution_module_action" model="ir.actions.act_window">
+        <field name="name">Module Giải Pháp Odoo</field>
+        <field name="res_model">solution.module</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="solution_module_view_search"/>
+    </record>
+</odoo>

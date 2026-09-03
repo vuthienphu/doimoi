@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="dcg_helpdesk_project.CustomerRequestDashboardTemplate">
+        <div class="o_customer_request_dashboard">
+            <!-- Header -->
+            <div class="o_dashboard_header d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="o_dashboard_title">DASHBOARD YÊU CẦU KHÁCH HÀNG</h1>
+                    <div class="o_dashboard_subtitle">Thống kê yêu cầu khách hàng &amp; Tiến độ xử lý Task</div>
+                </div>
+            </div>
+
+            <!-- Date Filters Toolbar -->
+            <div class="o_dashboard_filters">
+                <form t-on-submit="onFilterSubmit" class="d-flex align-items-center gap-3 flex-wrap m-0">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="fw-semibold text-doimoi-navy mb-0">Từ ngày:</label>
+                        <input type="date" class="form-control form-control-sm rounded-2" t-model="state.dateFrom"/>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="fw-semibold text-doimoi-navy mb-0">Đến ngày:</label>
+                        <input type="date" class="form-control form-control-sm rounded-2" t-model="state.dateTo"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm px-3 rounded-2 font-sora fw-semibold">
+                        <i class="fa fa-filter me-1"></i> Lọc dữ liệu
+                    </button>
+                </form>
+            </div>
+
+            <!-- KPI Cards Grid (4 KPI chính) -->
+            <div class="row g-4 mb-4">
+                <!-- KPI 1: Tổng yêu cầu -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="o_kpi_card kpi_total" t-on-click="() => this.openTicketList([], 'Tổng yêu cầu')">
+                        <div class="o_kpi_title"><i class="fa fa-inbox me-2 text-primary"></i>TỔNG YÊU CẦU</div>
+                        <div class="o_kpi_value"><t t-esc="state.data.total"/></div>
+                    </div>
+                </div>
+                <!-- KPI 2: Đã tạo Task -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="o_kpi_card kpi_task" t-on-click="() => this.openTicketList([['task_count', '>', 0]], 'Ticket đã tạo Task')">
+                        <div class="o_kpi_title"><i class="fa fa-tasks me-2 text-success"></i>ĐÃ TẠO TASK</div>
+                        <div class="o_kpi_value"><t t-esc="state.data.with_task"/></div>
+                    </div>
+                </div>
+                <!-- KPI 3: Đang xử lý -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="o_kpi_card kpi_in_progress" t-on-click="() => this.openTicketList([['stage_id.fold', '=', false]], 'Ticket đang xử lý')">
+                        <div class="o_kpi_title"><i class="fa fa-spinner me-2 text-info"></i>ĐANG XỬ LÝ</div>
+                        <div class="o_kpi_value"><t t-esc="state.data.in_progress"/></div>
+                    </div>
+                </div>
+                <!-- KPI 4: Đã hoàn thành -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="o_kpi_card kpi_done" t-on-click="() => this.openTicketList([['stage_id.fold', '=', true]], 'Ticket đã hoàn thành')">
+                        <div class="o_kpi_title"><i class="fa fa-check-circle me-2 text-success"></i>ĐÃ HOÀN THÀNH</div>
+                        <div class="o_kpi_value"><t t-esc="state.data.done"/></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breakdown Section: Theo nguồn & Trạng thái -->
+            <div class="row g-4 mb-4">
+                <!-- Breakdown Nguồn -->
+                <div class="col-md-6">
+                    <div class="o_dashboard_section h-100 mb-0">
+                        <div class="o_dashboard_section_title">
+                            <span><i class="fa fa-pie-chart me-2 text-primary"></i>Phân loại theo nguồn</span>
+                        </div>
+                        <div class="list-group list-group-flush border-0">
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'web']], 'Yêu cầu từ Website')">
+                                <span class="fw-semibold"><span class="badge badge-source-web me-2">Website</span> Tự gửi qua Form</span>
+                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.web"/></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'zalo']], 'Yêu cầu từ Zalo')">
+                                <span class="fw-semibold"><span class="badge badge-source-zalo me-2">Zalo</span> Nhóm Chat Zalo</span>
+                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.zalo"/></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'internal']], 'Yêu cầu Nội bộ')">
+                                <span class="fw-semibold"><span class="badge badge-source-internal me-2">Nội bộ</span> Tạo trực tiếp Backend</span>
+                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.internal"/></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown Trạng thái -->
+                <div class="col-md-6">
+                    <div class="o_dashboard_section h-100 mb-0">
+                        <div class="o_dashboard_section_title">
+                            <span><i class="fa fa-list-ul me-2 text-info"></i>Phân loại theo Trạng thái</span>
+                        </div>
+                        <div class="list-group list-group-flush border-0">
+                            <t t-foreach="Object.entries(state.data.by_stage)" t-as="stage" t-key="stage[0]">
+                                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
+                                    <span class="fw-semibold"><t t-esc="stage[0]"/></span>
+                                    <span class="badge bg-secondary rounded-pill fs-6"><t t-esc="stage[1]"/></span>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Tickets Table -->
+            <div class="o_dashboard_section mb-0">
+                <div class="o_dashboard_section_title">
+                    <span><i class="fa fa-clock-o me-2 text-warning"></i>Yêu cầu gần đây</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Mã yêu cầu</th>
+                                <th>Tiêu đề</th>
+                                <th>Công ty</th>
+                                <th>Nguồn</th>
+                                <th>Trạng thái</th>
+                                <th class="text-center">Số Task</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="state.data.recent_tickets" t-as="ticket" t-key="ticket.id">
+                                <tr style="cursor: pointer;" t-on-click="() => this.openTicketForm(ticket.id)">
+                                    <td class="fw-bold text-primary"><t t-esc="ticket.code"/></td>
+                                    <td class="fw-semibold"><t t-esc="ticket.name"/></td>
+                                    <td><t t-esc="ticket.company"/></td>
+                                    <td>
+                                        <span t-attf-class="badge badge-source-#{ticket.source == 'web' ? 'web' : (ticket.source == 'zalo' ? 'zalo' : 'internal')}">
+                                            <t t-esc="ticket.source"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span t-attf-class="badge #{ticket.stage_fold ? 'bg-success' : 'bg-info'}">
+                                            <t t-esc="ticket.stage"/>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-dark border">
+                                            <t t-esc="ticket.task_count"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="!state.data.recent_tickets.length">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Chưa có yêu cầu nào trong khoảng thời gian này.</td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

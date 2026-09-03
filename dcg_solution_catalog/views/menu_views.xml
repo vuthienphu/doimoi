@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level Parent Menu with static description icon.png -->
+    <menuitem id="menu_solution_catalog_root"
+        name="Giải Pháp Catalog"
+        web_icon="dcg_solution_catalog,static/description/icon.png"
+        sequence="25"/>
+
+    <!-- Sub-menus -->
+    <menuitem id="menu_solution_module"
+        name="Module Giải Pháp"
+        parent="menu_solution_catalog_root"
+        action="solution_module_action"
+        sequence="10"/>
+
+    <menuitem id="menu_solution_configuration_menu"
+        name="Cấu hình &amp; Master Data"
+        parent="menu_solution_catalog_root"
+        sequence="90"/>
+
+    <menuitem id="menu_solution_solution"
+        name="Danh mục Giải pháp"
+        parent="menu_solution_configuration_menu"
+        action="solution_solution_action"
+        sequence="10"/>
+
+    <menuitem id="menu_solution_configuration"
+        name="Cấu hình Phân hệ"
+        parent="menu_solution_configuration_menu"
+        action="solution_configuration_action"
+        sequence="20"/>
+</odoo>
