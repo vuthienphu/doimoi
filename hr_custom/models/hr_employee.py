@@ -91,12 +91,11 @@ class HrEmployee(models.Model):
 
     # 3.3 Page Hợp đồng
     legal_entity_id = fields.Many2one('hr.contract.legal.entity',
-                                       string='Pháp nhân ký hợp đồng',
-                                       required=True)
+                                       string='Pháp nhân ký hợp đồng')
     contract_status = fields.Selection([
         ('active', 'Hiệu lực'),
         ('expired', 'Hết hiệu lực'),
-    ], string='Trạng thái hợp đồng', required=True)
+    ], string='Trạng thái hợp đồng', default='active')
 
     # 3.4 Quá trình công tác
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id',

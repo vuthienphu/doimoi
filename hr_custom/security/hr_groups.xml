@@ -38,7 +38,7 @@
         <field name="group_ids" eval="[(4, ref('hr.group_hr_user')), (4, ref('hr_custom.group_hr_ceo'))]"/>
     </record>
 
-    <data context="{'lang': 'vi_VN'}">
+    <data>
         <function model="res.groups" name="write">
             <value eval="[ref('hr.group_hr_user')]"/>
             <value eval="{'name': 'HRM'}"/>

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Bravestars HR Custom',
+    'name': 'HR Custom',
     'version': '19.0.1.0.0',
-    'category': 'Bravestars',
+    'category': 'Dcg',
     'summary': 'Tùy chỉnh HR',
-    'depends': ['hr', 'hr_level', 'hr_homeworking', 'om_hr_payroll', 'hr_org_chart'],
+    'depends': ['hr', 'hr_attendance', 'hr_level', 'hr_homeworking', 'om_hr_payroll', 'hr_org_chart'],
     'data': [
         'security/hr_groups.xml',
         'security/ir.model.access.csv',
