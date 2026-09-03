@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Thêm field Số ngày báo trước tối thiểu vào list -->
+    <record id="hr_contract_type_view_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.type.list.inherit.hr_to_offboarding</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr.hr_contract_type_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="min_notice_days"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Thêm field vào form -->
+    <record id="hr_contract_type_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.type.form.inherit.hr_to_offboarding</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr.hr_contract_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="min_notice_days"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tên action/menu 'Employment Types' được dịch sang 'Loại hợp đồng' qua i18n/vi.po -->
+
+</odoo>

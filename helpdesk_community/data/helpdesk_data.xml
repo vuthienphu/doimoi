@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_stage_new" model="helpdesk.stage">
+        <field name="name">New</field>
+        <field name="sequence">10</field>
+        <field name="is_start" eval="True"/>
+    </record>
+
+    <record id="helpdesk_stage_in_progress" model="helpdesk.stage">
+        <field name="name">In Progress</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="helpdesk_stage_resolved" model="helpdesk.stage">
+        <field name="name">Resolved</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="helpdesk_stage_closed" model="helpdesk.stage">
+        <field name="name">Closed</field>
+        <field name="sequence">40</field>
+        <field name="fold" eval="True"/>
+        <field name="is_done" eval="True"/>
+    </record>
+</odoo>

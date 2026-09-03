@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_helpdesk_team_support" model="helpdesk.team">
+        <field name="name">Customer Support</field>
+        <field name="assignment_policy">manual</field>
+        <field name="member_ids" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="demo_helpdesk_category_bug" model="helpdesk.category">
+        <field name="name">Bug Report</field>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="demo_helpdesk_category_feature" model="helpdesk.category">
+        <field name="name">Feature Request</field>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="demo_helpdesk_category_general" model="helpdesk.category">
+        <field name="name">General Inquiry</field>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="demo_helpdesk_ticket_1" model="helpdesk.ticket">
+        <field name="name">Cannot login to the portal</field>
+        <field name="description">User reports being unable to login after password reset.</field>
+        <field name="priority">high</field>
+        <field name="stage_id" ref="helpdesk_stage_in_progress"/>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="category_id" ref="demo_helpdesk_category_bug"/>
+    </record>
+
+    <record id="demo_helpdesk_ticket_2" model="helpdesk.ticket">
+        <field name="name">Add dark mode option</field>
+        <field name="description">It would be great to have a dark mode toggle in user preferences.</field>
+        <field name="priority">low</field>
+        <field name="stage_id" ref="helpdesk_stage_new"/>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="category_id" ref="demo_helpdesk_category_feature"/>
+    </record>
+
+    <record id="demo_helpdesk_ticket_3" model="helpdesk.ticket">
+        <field name="name">Invoice #INV2024001 not showing</field>
+        <field name="description">Customer cannot find invoice in their portal account.</field>
+        <field name="priority">urgent</field>
+        <field name="stage_id" ref="helpdesk_stage_resolved"/>
+        <field name="team_id" ref="demo_helpdesk_team_support"/>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="category_id" ref="demo_helpdesk_category_general"/>
+    </record>
+</odoo>

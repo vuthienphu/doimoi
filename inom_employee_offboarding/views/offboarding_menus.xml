@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_offboarding_root"
+              name="Nghỉ việc"
+              sequence="90"
+              web_icon="inom_employee_offboarding,static/description/icon.svg"/>
+
+    <menuitem id="menu_offboarding_request"
+              name="Đơn xin nghỉ việc"
+              parent="menu_offboarding_root"
+              action="action_offboarding_request"
+              sequence="10"/>
+
+    <menuitem id="menu_offboarding_configuration"
+              name="Cấu hình"
+              parent="menu_offboarding_root"
+              groups="inom_group_offboarding_officer,inom_group_offboarding_hr,inom_group_offboarding_ceo,inom_group_offboarding_admin,inom_group_offboarding_helpdesk"
+              sequence="90"/>
+
+    <menuitem id="menu_offboarding_reasons"
+              name="Lý do nghỉ việc"
+              parent="menu_offboarding_configuration"
+              action="action_offboarding_reason"
+              sequence="10"/>
+
+    <menuitem id="menu_offboarding_checklist_templates"
+              name="Checklist"
+              parent="menu_offboarding_configuration"
+              action="action_offboarding_checklist_template"
+              groups="inom_group_offboarding_officer,inom_group_offboarding_hr,inom_group_offboarding_admin,inom_group_offboarding_helpdesk"
+              sequence="20"/>
+
+    <menuitem id="menu_offboarding_payment_templates"
+              name="Khoản thanh toán"
+              parent="menu_offboarding_configuration"
+              action="action_offboarding_payment_template"
+              sequence="25"/>
+
+    <menuitem id="menu_offboarding_exit_interview_surveys"
+              name="Form Exit Interview"
+              parent="menu_offboarding_configuration"
+              action="action_offboarding_exit_interview_survey"
+              groups="inom_group_offboarding_officer,inom_group_offboarding_hr"
+              sequence="30"/>
+
+    <!-- Menu email -->
+    <menuitem
+        id="menu_offboarding_mail_templates"
+        name="Mẫu email"
+        parent="menu_offboarding_configuration"
+        action="action_offboarding_mail_template"
+        groups="inom_group_offboarding_officer,inom_group_offboarding_hr"
+        sequence="35"/>
+    
+    <menuitem id="menu_offboarding_dashboards"
+              name="Báo cáo"
+              parent="menu_offboarding_root"
+              action="action_offboarding_dashboard"
+              groups="inom_group_offboarding_ceo,inom_group_offboarding_officer,inom_group_offboarding_hr"
+              sequence="100"/>
+</odoo>

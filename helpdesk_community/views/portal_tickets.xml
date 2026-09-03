@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_tickets" name="My Tickets" customize_show="True">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/my">My Account</a></li>
+                    <li class="active">Support Tickets</li>
+                </ol>
+            </t>
+            <div class="o_portal_my_details">
+                <h2 class="mb-3">Support Tickets</h2>
+                <a href="/my/ticket/create" class="btn btn-primary mb-3">
+                    <i class="fa fa-plus"/> New Ticket
+                </a>
+                <table class="table table-striped" t-if="tickets">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="tickets" t-as="ticket">
+                            <td>
+                                <a t-attf-href="/my/ticket/{{ ticket.id }}">
+                                    <t t-esc="ticket.ticket_number or 'N/A'"/>
+                                </a>
+                            </td>
+                            <td><t t-esc="ticket.name"/></td>
+                            <td><span class="badge rounded-pill text-bg-info"><t t-esc="ticket.stage_id.name"/></span></td>
+                            <td><span t-field="ticket.create_date" t-options='{"widget": "date"}'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p t-if="not tickets" class="text-muted">
+                    No support tickets yet.
+                    <a href="/my/ticket/create">Create one</a>.
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_create_ticket" name="Create Ticket">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/my">My Account</a></li>
+                    <li><a href="/my/tickets">Tickets</a></li>
+                    <li class="active">New Ticket</li>
+                </ol>
+            </t>
+            <div class="o_portal_my_details">
+                <h2 class="mb-3">New Support Ticket</h2>
+                <form action="/my/ticket/create/submit" method="POST" class="mt-3">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label for="name">Subject</label>
+                        <input type="text" name="name" class="form-control"
+                               placeholder="Brief summary of your issue" required="True"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" class="form-control">
+                            <option value="">Select category...</option>
+                            <option t-foreach="categories" t-as="cat"
+                                    t-att-value="cat.id">
+                                <t t-esc="cat.name"/>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" class="form-control" rows="6"
+                                  placeholder="Describe your issue in detail..."/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-send"/> Submit
+                    </button>
+                    <a href="/my/tickets" class="btn btn-default">Cancel</a>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_ticket_detail" name="Ticket Detail">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/my">My Account</a></li>
+                    <li><a href="/my/tickets">Tickets</a></li>
+                    <li class="active">
+                        <t t-esc="ticket.ticket_number or 'Ticket'"/>
+                    </li>
+                </ol>
+            </t>
+            <div class="o_portal_my_details">
+                <h2 class="mb-3">
+                    <t t-esc="ticket.ticket_number or 'N/A'"/>
+                    <small class="text-muted"><t t-esc="ticket.name"/></small>
+                </h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div t-if="ticket.description" t-out="ticket.description"/>
+                                <p t-else="" class="text-muted">No description provided.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <dl>
+                                    <dt>Status</dt>
+                                    <dd><span class="badge rounded-pill text-bg-info"><t t-esc="ticket.stage_id.name"/></span></dd>
+                                    <dt>Priority</dt>
+                                    <dd class="text-capitalize"><t t-esc="ticket.priority"/></dd>
+                                    <dt>Created</dt>
+                                    <dd><span t-field="ticket.create_date" t-options='{"widget": "date"}'/></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Nạp can_open_form vào list/kanban để JS chặn mở form khi không được phép -->
+    <record id="hr_employee_public_view_tree_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.employee.public.list.inherit.custom</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="can_open_form" column_invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_public_view_kanban_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.employee.public.kanban.inherit.custom</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_hr_icon_display']" position="after">
+                <field name="can_open_form"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Nạp can_open_form vào org chart (hierarchy view) để JS chặn mở form. -->
+    <record id="hr_employee_public_view_hierarchy_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.employee.public.hierarchy.inherit.custom</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr_org_chart.hr_employee_public_hierarchy_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//hierarchy" position="inside">
+                <field name="can_open_form"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_public_view_form_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.employee.public.form.inherit.custom</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_form"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <field name="can_open_form" invisible="1"/>
+            </xpath>
+            <!-- Ẩn cả cục chứa SĐT công việc ở header -->
+            <xpath expr="//field[@name='work_phone'][@widget='phone']/.." position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- Tags nằm ngay dưới số điện thoại ở header -->
+            <xpath expr="//field[@name='mobile_phone'][@widget='phone']/.." position="after">
+                <p class="d-flex align-items-baseline mb-0">
+                    <i class="fa fa-tags fa-fw me-1 text-primary" title="Tags"/>
+                    <field name="category_ids" widget="many2many_tags"
+                           options="{'color_field': 'color', 'no_create_edit': True}"
+                           placeholder="Tags"/>
+                </p>
+            </xpath>
+            <!-- Ẩn page Certifications (hr_skills) nếu có -->
+            <xpath expr="//page[@name='certification']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- ── Page Công việc: thêm field cho khớp employee form ── -->
+            <xpath expr="//page[@name='work_information']//field[@name='job_id']" position="attributes">
+                <attribute name="string">Vị trí công việc</attribute>
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//page[@name='work_information']//field[@name='job_id']" position="after">
+                <field name="level_id" string="Level"/>
+            </xpath>
+            <xpath expr="//page[@name='work_information']//field[@name='job_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="before">
+                <field name="work_type" string="Hình thức làm việc"/>
+            </xpath>
+            <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="attributes">
+                <attribute name="string">Quản lý trực tiếp</attribute>
+            </xpath>
+            <xpath expr="//page[@name='work_information']//field[@name='parent_id']" position="after">
+                <label for="seniority" string="Thâm niên"/>
+                <div class="o_row">
+                    <field name="seniority" digits="[10,2]" nolabel="1" class="o_hr_narrow_field"/>
+                    <span>năm</span>
+                </div>
+            </xpath>
+            <!-- Ẩn group Vị trí ở page Công việc -->
+            <xpath expr="//group[@name='location']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- ── Thêm các page sau CV (resume) để CV nằm ngay sau Công việc ── -->
+            <xpath expr="//page[@name='resume']" position="after">
+                <page name="personal_information" string="Cá nhân">
+                    <group>
+                        <group string="Thông tin cá nhân">
+                            <field name="private_email" string="Email cá nhân"/>
+                            <field name="birthday" string="Ngày sinh"/>
+                            <field name="sex" string="Giới tính"/>
+                            <field name="vehicle_type" string="Loại phương tiện"/>
+                            <field name="private_car_plate" string="Biển số xe"/>
+                        </group>
+                        <group string="Công dân">
+                            <field name="country_id" string="Quốc tịch"/>
+                            <field name="identification_id" string="Số định danh cá nhân"/>
+                            <field name="id_issue_place" string="Nơi cấp"/>
+                            <label for="private_street" string="Địa chỉ thường trú"/>
+                            <div class="o_address_format">
+                                <field name="private_street" placeholder="Đường..." class="o_address_street"/>
+                                <field name="private_street2" placeholder="Đường 2..." class="o_address_street"/>
+                                <field name="private_city" placeholder="Thành phố" class="o_address_city"/>
+                                <field name="private_state_id" class="o_address_state" placeholder="Tỉnh/Thành phố"/>
+                                <field name="private_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="private_country_id" placeholder="Quốc gia" class="o_address_country"/>
+                            </div>
+                            <label for="current_street" string="Địa chỉ hiện tại"/>
+                            <div class="o_address_format">
+                                <field name="current_street" placeholder="Đường..." class="o_address_street"/>
+                                <field name="current_street2" placeholder="Đường 2..." class="o_address_street"/>
+                                <field name="current_city" placeholder="Thành phố" class="o_address_city"/>
+                                <field name="current_state_id" class="o_address_state" placeholder="Tỉnh/Thành phố"/>
+                                <field name="current_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="current_country_id" placeholder="Quốc gia" class="o_address_country"/>
+                            </div>
+                        </group>
+                        <group string="Thông tin gia đình &amp; liên hệ khẩn cấp" col="3">
+                            <group colspan="3">
+                                <field name="marital" string="Tình trạng hôn nhân"
+                                       selection="[('single','Độc thân'),('married','Kết hôn')]"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="emergency_contact" string="Người liên hệ khẩn cấp"/>
+                            </group>
+                            <group>
+                                <field name="emergency_relation" string="Mối quan hệ"/>
+                            </group>
+                            <group colspan="3">
+                                <field name="emergency_phone" string="SĐT liên hệ khẩn cấp" class="o_force_ltr"/>
+                            </group>
+                        </group>
+                        <group string="Học vấn">
+                            <field name="certificate" string="Trình độ học vấn"/>
+                            <field name="study_field" string="Chuyên ngành"/>
+                            <field name="study_school" string="Trường"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Thông tin gia đình">
+                            <field name="family_member_ids" nolabel="1" colspan="2">
+                                <list>
+                                    <field name="type" column_invisible="1"/>
+                                    <field name="relation" string="Quan hệ"/>
+                                    <field name="name" string="Họ tên"/>
+                                </list>
+                            </field>
+                        </group>
+                        <group string="Thông tin Thuế &amp; BHXH">
+                            <field name="bank_id" string="Ngân hàng"/>
+                            <field name="bank_account_number" string="Tài khoản ngân hàng"/>
+                            <field name="ssnid" string="Mã số BHXH"/>
+                            <field name="initial_hospital_id" string="Nơi đăng ký bệnh viện ban đầu"/>
+                            <field name="tax_code" string="Mã số thuế"/>
+                        </group>
+                    </group>
+                    <group string="Người phụ thuộc">
+                        <field name="dependent_ids" nolabel="1" colspan="2">
+                            <list>
+                                <field name="type" column_invisible="1"/>
+                                <field name="relation" string="Quan hệ"/>
+                                <field name="name" string="Họ và tên người phụ thuộc"/>
+                                <field name="birthday" string="Ngày sinh"/>
+                                <field name="identification_id" string="Số CCCD"/>
+                                <field name="tax_code" string="Mã số thuế"/>
+                                <field name="deduction_start" string="Ngày bắt đầu tính giảm trừ"/>
+                                <field name="deduction_end" string="Ngày kết thúc tính giảm trừ"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- ── Thêm page Hợp đồng ── -->
+                <page name="contract_information" string="Hợp đồng">
+                    <group string="Thông tin hợp đồng">
+                        <field name="contract_date_start" string="Ngày hiệu lực"/>
+                        <field name="contract_date_end" string="Ngày hết hạn"/>
+                        <field name="contract_type_id" string="Loại hợp đồng"/>
+                        <field name="legal_entity_id" string="Pháp nhân ký hợp đồng"/>
+                        <field name="contract_status" string="Trạng thái hợp đồng"/>
+                    </group>
+                </page>
+
+                <!-- ── Thêm page Quá trình công tác ── -->
+                <page name="work_history" string="Quá trình công tác">
+                    <field name="work_history_ids" nolabel="1">
+                        <list>
+                            <field name="date_from" string="Từ ngày"/>
+                            <field name="date_to" string="Đến ngày"/>
+                            <field name="job_id" string="Chức danh"/>
+                            <field name="department_id" string="Phòng ban"/>
+                            <field name="level_id" string="Level"/>
+                            <field name="note" string="Ghi chú"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

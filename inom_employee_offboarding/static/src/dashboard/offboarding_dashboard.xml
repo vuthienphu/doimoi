@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="inom_employee_offboarding.OffboardingDashboard">
+        <div class="o_offboarding_dashboard p-3">
+            <h2 class="o_ofb_title mb-3">Báo cáo xu hướng nghỉ việc</h2>
+
+            <!-- Bộ lọc -->
+            <div class="o_ofb_filters d-flex flex-wrap align-items-end gap-4 mb-3">
+                <!-- 1. Phòng ban -->
+                <div class="o_ofb_filter_group o_ofb_dept_filter">
+                    <label class="o_ofb_filter_title">1. Phòng ban</label>
+                    <button type="button"
+                            class="o_input form-select form-select-sm text-start o_ofb_dept_toggle"
+                            t-on-click.stop="toggleDeptDropdown">
+                        <i class="fa fa-sitemap text-muted o_ofb_dept_icon"/>
+                        <t t-if="!selectedDeptNames().length">
+                            <span class="o_ofb_dept_placeholder">Tất cả phòng ban</span>
+                        </t>
+                        <t t-else="">
+                            <span t-foreach="selectedDeptNames()" t-as="dname" t-key="dname_index"
+                                  class="o_ofb_dept_tag"><t t-esc="dname"/></span>
+                        </t>
+                    </button>
+                    <div t-if="state.deptOpen" class="o_ofb_dept_menu" t-on-click.stop="() => {}">
+                        <label class="o_ofb_dept_opt">
+                            <input type="checkbox"
+                                   t-att-checked="!state.filters.department_ids.length"
+                                   t-on-change="() => this.onDeptAll()"/>
+                            <span>Tất cả phòng ban</span>
+                        </label>
+                        <t t-foreach="state.departments" t-as="dep" t-key="dep.id">
+                            <label class="o_ofb_dept_opt">
+                                <input type="checkbox"
+                                       t-att-checked="state.filters.department_ids.includes(dep.id)"
+                                       t-on-change="() => this.onDeptToggle(dep.id)"/>
+                                <span t-esc="dep.name"/>
+                            </label>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- 2. Thời gian: chọn chế độ Năm / Quý / Tháng -->
+                <div class="o_ofb_filter_group">
+                    <label class="o_ofb_filter_title">2. Thời gian</label>
+                    <div class="o_ofb_segment">
+                        <button type="button"
+                                t-att-class="{ 'o_active': state.filters.mode === 'year' }"
+                                t-on-click="() => this.onModeChange('year')">Năm</button>
+                        <button type="button"
+                                t-att-class="{ 'o_active': state.filters.mode === 'quarter' }"
+                                t-on-click="() => this.onModeChange('quarter')">Quý</button>
+                        <button type="button"
+                                t-att-class="{ 'o_active': state.filters.mode === 'month' }"
+                                t-on-click="() => this.onModeChange('month')">Tháng</button>
+                    </div>
+                </div>
+
+                <!-- Năm: luôn hiển thị -->
+                <div class="o_ofb_filter_group">
+                    <label class="o_ofb_filter_title">Năm</label>
+                    <select class="o_input form-select form-select-sm"
+                            t-on-change="(ev) => this.onFilterChange('year', ev)">
+                        <t t-foreach="state.years" t-as="y" t-key="y">
+                            <option t-att-value="y" t-att-selected="state.filters.year === y">
+                                <t t-esc="y"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <!-- Quý: chỉ khi chế độ = Quý -->
+                <div t-if="state.filters.mode === 'quarter'" class="o_ofb_filter_group">
+                    <label class="o_ofb_filter_title">Quý</label>
+                    <select class="o_input form-select form-select-sm"
+                            t-on-change="(ev) => this.onFilterChange('quarter', ev)">
+                        <option value="" t-att-selected="!state.filters.quarter">Tất cả</option>
+                        <t t-foreach="state.quarters" t-as="q" t-key="q">
+                            <option t-att-value="q" t-att-selected="state.filters.quarter === q">
+                                Quý <t t-esc="q"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <!-- Tháng: chỉ khi chế độ = Tháng -->
+                <div t-if="state.filters.mode === 'month'" class="o_ofb_filter_group">
+                    <label class="o_ofb_filter_title">Tháng</label>
+                    <select class="o_input form-select form-select-sm"
+                            t-on-change="(ev) => this.onFilterChange('month', ev)">
+                        <option value="" t-att-selected="!state.filters.month">Tất cả</option>
+                        <t t-foreach="state.months" t-as="m" t-key="m">
+                            <option t-att-value="m" t-att-selected="state.filters.month === m">
+                                Tháng <t t-esc="m"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                <!-- Nút xuất Excel -->
+                <div class="ms-auto align-self-end">
+                    <button type="button"
+                            class="btn"
+                            style="background-color: #efe6ee; color: #4a2f42; border: 1px solid #d5c3d2; padding: 8px 20px; font-size: 14px; font-weight: 600;"
+                            t-on-click="exportExcel">
+                        <i class="fa fa-download me-2"/>Xuất Excel
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hàng KPI + chart xu hướng (drill-down theo filter) -->
+            <div class="row g-3">
+                <div class="col-lg-8">
+                    <div class="o_ofb_card h-100">
+                        <div class="o_ofb_card_title"><t t-esc="state.trendTitle"/></div>
+                        <div class="o_ofb_chart">
+                            <div t-if="state.trendEmpty" class="o_ofb_empty d-flex align-items-center justify-content-center h-100">Chưa có dữ liệu</div>
+                            <canvas t-else="" t-ref="trendCanvas"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex flex-column gap-3">
+                    <div class="o_ofb_kpi">
+                        <div class="o_ofb_kpi_icon o_ofb_kpi_icon_total"><i class="fa fa-user-times"/></div>
+                        <div class="o_ofb_kpi_body">
+                            <div class="o_ofb_kpi_label">Tổng nhân viên nghỉ việc</div>
+                            <div class="o_ofb_kpi_value"><t t-esc="state.kpi.total"/></div>
+                        </div>
+                    </div>
+                    <div class="o_ofb_kpi">
+                        <div class="o_ofb_kpi_icon o_ofb_kpi_icon_turnover">
+                            <img src="/inom_employee_offboarding/static/src/img/turnover_rate.png" alt="Turnover"/>
+                        </div>
+                        <div class="o_ofb_kpi_body">
+                            <div class="o_ofb_kpi_label">Tỷ lệ turnover trung bình</div>
+                            <div t-if="typeof state.kpi.turnover === 'number'" class="o_ofb_kpi_value"><t t-esc="fmtYears(state.kpi.turnover)"/>%</div>
+                            <div t-else="" class="o_ofb_empty">Chưa có dữ liệu</div>
+                        </div>
+                    </div>
+                    <div class="o_ofb_kpi">
+                        <div class="o_ofb_kpi_icon o_ofb_kpi_icon_tenure"><i class="fa fa-hourglass-half"/></div>
+                        <div class="o_ofb_kpi_body">
+                            <div class="o_ofb_kpi_label">Thâm niên TB khi nghỉ</div>
+                            <div t-if="typeof state.kpi.tenure === 'number'" class="o_ofb_kpi_value"><t t-esc="fmtYears(state.kpi.tenure)"/> năm</div>
+                            <div t-else="" class="o_ofb_empty">Chưa có dữ liệu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lý do + Level -->
+            <div class="row g-3 mt-1">
+                <div class="col-lg-6">
+                    <div class="o_ofb_card h-100">
+                        <div class="o_ofb_card_title">Số nghỉ việc theo Lý do</div>
+                        <t t-if="!state.reasonData.length">
+                            <div class="o_ofb_empty">Chưa có dữ liệu</div>
+                        </t>
+                        <t t-foreach="state.reasonData" t-as="r" t-key="r_index">
+                            <div class="o_ofb_bar_row">
+                                <div class="o_ofb_bar_label" t-att-title="r.name"><t t-esc="r.name"/></div>
+                                <div class="o_ofb_bar_track">
+                                    <div class="o_ofb_bar_fill" t-attf-style="width: {{ r.pct }}%;">
+                                        <span t-if="r.pct >= 12" class="o_ofb_bar_num"><t t-esc="r.count"/></span>
+                                    </div>
+                                    <span t-if="r.pct &lt; 12" class="o_ofb_bar_num_out"><t t-esc="r.count"/></span>
+                                </div>
+                                <div class="o_ofb_bar_value"><t t-esc="r.pct"/>%</div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="o_ofb_card h-100">
+                        <div class="o_ofb_card_title">Số nghỉ việc theo Level</div>
+                        <t t-if="!state.levelData.length">
+                            <div class="o_ofb_empty">Chưa có dữ liệu</div>
+                        </t>
+                        <t t-foreach="state.levelData" t-as="l" t-key="l_index">
+                            <div class="o_ofb_bar_row">
+                                <div class="o_ofb_bar_label" t-att-title="l.label"><t t-esc="l.label"/></div>
+                                <div class="o_ofb_bar_track">
+                                    <div class="o_ofb_bar_fill" t-attf-style="width: {{ l.pct }}%;">
+                                        <span t-if="l.pct >= 12" class="o_ofb_bar_num"><t t-esc="l.count"/></span>
+                                    </div>
+                                    <span t-if="l.pct &lt; 12" class="o_ofb_bar_num_out"><t t-esc="l.count"/></span>
+                                </div>
+                                <div class="o_ofb_bar_value"><t t-esc="l.pct"/>%</div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng phòng ban -->
+            <div class="o_ofb_card mt-3">
+                <div class="o_ofb_card_title">Số nghỉ việc theo Phòng ban</div>
+                <table class="table table-sm o_ofb_table">
+                    <thead>
+                        <tr>
+                            <th style="width: 24%;">Phòng ban</th>
+                            <th class="text-end">Số lượng nhân sự TB</th>
+                            <th class="text-end">Số nghỉ</th>
+                            <th class="text-end">Tỷ lệ Turnover</th>
+                            <th class="text-end">Thâm niên TB khi nghỉ</th>
+                            <th class="ps-5">Lý do nổi bật</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="!state.deptRows.length">
+                            <tr><td colspan="6" class="o_ofb_empty">Chưa có dữ liệu</td></tr>
+                        </t>
+                        <t t-foreach="state.deptRows" t-as="row" t-key="row_index">
+                            <tr>
+                                <td><t t-esc="row.name"/></td>
+                                <td class="text-end"><t t-esc="fmtHeadcount(row.headcount)"/></td>
+                                <td class="text-end fw-bold"><t t-esc="row.leavers"/></td>
+                                <td class="text-end">
+                                    <t t-if="typeof row.turnover === 'number'"><t t-esc="fmtYears(row.turnover)"/>%</t>
+                                    <t t-else="">—</t>
+                                </td>
+                                <td class="text-end">
+                                    <t t-if="typeof row.tenure === 'number'"><t t-esc="fmtYears(row.tenure)"/> năm</t>
+                                    <t t-else="">—</t>
+                                </td>
+                                <td class="ps-5">
+                                    <t t-if="row.topReasons.length">
+                                        <div t-foreach="row.topReasons" t-as="reason" t-key="reason_index">• <t t-esc="reason"/></div>
+                                    </t>
+                                    <t t-else="">—</t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+
+</templates>

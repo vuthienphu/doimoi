@@ -17,53 +17,53 @@
                     <field name="struct_id" readonly="0" class="oe_inline" nolabel="1"/>
                 </div>
             </xpath>
-            <xpath expr="//field[@name='identification_id']" position="attributes">
-                <attribute name="string">Số Căn Cước</attribute>
-            </xpath>
-            <xpath expr="//field[@name='identification_id']" position="after">
-                <field name="identification_issue_date"/>
-                <field name="identification_issue_place"/>
-                <field name="identification_expiry_date"/>
-            </xpath>
-            <xpath expr="//field[@name='ssnid']" position="attributes">
-                <attribute name="string">Số Bảo Hiểm Xã Hội</attribute>
-            </xpath>
-            <xpath expr="//field[@name='passport_id']" position="attributes">
-                <attribute name="string">Số Hộ Chiếu</attribute>
-            </xpath>
-            <xpath expr="//field[@name='passport_expiration_date']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//label[@for='passport_expiration_date']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//div[hasclass('o_wrap_label') and field[@name='passport_id']]" position="after">
-                <field name="passport_issue_date" string="Ngày Cấp"/>
-                <field name="passport_expiry_date" string="Ngày Hết Hạn"/>
-            </xpath>
-            <xpath expr="//group[@name='hr_document_group']" position="attributes">
-                <attribute name="string">Tài Liệu</attribute>
-            </xpath>
-            <xpath expr="//field[@name='driving_license']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//group[@name='hr_document_group']" position="inside">
-                <field name="labor_contract_ids" widget="many2many_binary"/>
-            </xpath>
-            <xpath expr="//group[div/field[@name='visa_no']]" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//label[@for='distance_home_work']" position="replace"/>
-            <xpath expr="//div[field[@name='distance_home_work']]" position="replace"/>
-            <xpath expr="//field[@name='certificate']" position="attributes">
-                <attribute name="string">Loại Bằng Cấp</attribute>
-            </xpath>
-            <xpath expr="//field[@name='study_field']" position="attributes">
-                <attribute name="string">Chuyên Ngành</attribute>
-            </xpath>
-            <xpath expr="//page[@name='hr_settings']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+<!--            <xpath expr="//field[@name='identification_id']" position="attributes">-->
+<!--                <attribute name="string">Số Căn Cước</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='identification_id']" position="after">-->
+<!--                <field name="identification_issue_date"/>-->
+<!--                <field name="identification_issue_place"/>-->
+<!--                <field name="identification_expiry_date"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='ssnid']" position="attributes">-->
+<!--                <attribute name="string">Số Bảo Hiểm Xã Hội</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='passport_id']" position="attributes">-->
+<!--                <attribute name="string">Số Hộ Chiếu</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='passport_expiration_date']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//label[@for='passport_expiration_date']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//div[hasclass('o_wrap_label') and field[@name='passport_id']]" position="after">-->
+<!--                <field name="passport_issue_date" string="Ngày Cấp"/>-->
+<!--                <field name="passport_expiry_date" string="Ngày Hết Hạn"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//group[@name='hr_document_group']" position="attributes">-->
+<!--                <attribute name="string">Tài Liệu</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='driving_license']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//group[@name='hr_document_group']" position="inside">-->
+<!--                <field name="labor_contract_ids" widget="many2many_binary"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//group[div/field[@name='visa_no']]" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//label[@for='distance_home_work']" position="replace"/>-->
+<!--            <xpath expr="//div[field[@name='distance_home_work']]" position="replace"/>-->
+<!--            <xpath expr="//field[@name='certificate']" position="attributes">-->
+<!--                <attribute name="string">Loại Bằng Cấp</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='study_field']" position="attributes">-->
+<!--                <attribute name="string">Chuyên Ngành</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//page[@name='hr_settings']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
         </field>
     </record>
     <record id="payroll_hr_homeworking_view_form" model="ir.ui.view">

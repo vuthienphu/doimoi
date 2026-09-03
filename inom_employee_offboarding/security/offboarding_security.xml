@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Group privilege (Odoo 19 structure: res.groups -> privilege_id) -->
+        <record id="offboarding_privilege" model="res.groups.privilege">
+            <field name="name">Employee Offboarding</field>
+            <field name="sequence">90</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+        <record id="inom_group_offboarding_ceo" model="res.groups">
+            <field name="name">CEO</field>
+            <field name="privilege_id" ref="offboarding_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="inom_group_offboarding_officer" model="res.groups">
+            <field name="name">C&amp;B</field>
+            <field name="privilege_id" ref="offboarding_privilege"/>
+            <field name="implied_ids" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('mail.group_mail_template_editor'))
+            ]"/>
+        </record>
+
+        <record id="inom_group_offboarding_hr" model="res.groups">
+            <field name="name">HRM</field>
+            <field name="privilege_id" ref="offboarding_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="inom_group_offboarding_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="privilege_id" ref="offboarding_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="inom_group_offboarding_helpdesk" model="res.groups">
+            <field name="name">Helpdesk</field>
+            <field name="privilege_id" ref="offboarding_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Nhân viên và quản lý chỉ thấy checklist line responsible = employee -->
+        <record id="rule_checklist_line_employee_manager" model="ir.rule">
+            <field name="name">Checklist: nhân viên và quản lý chỉ xem dòng responsible=employee</field>
+            <field name="model_id" ref="model_inom_offboarding_checklist_line"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[
+                '&amp;',
+                ('responsible', '=', 'employee'),
+                '|',
+                ('request_id.employee_id.user_id', '=', user.id),
+                ('request_id.manager_id.user_id', '=', user.id)
+            ]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- C&B, CEO xem được tất cả checklist line -->
+        <record id="rule_checklist_line_staff_all" model="ir.rule">
+            <field name="name">Checklist: HR/CEO xem toàn bộ</field>
+            <field name="model_id" ref="model_inom_offboarding_checklist_line"/>
+            <field name="groups" eval="[
+                (4, ref('inom_group_offboarding_hr')),
+                (4, ref('inom_group_offboarding_ceo')),
+            ]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_checklist_line_officer_all" model="ir.rule">
+            <field name="name">Checklist: C&amp;B xem, ghi toàn bộ</field>
+            <field name="model_id" ref="model_inom_offboarding_checklist_line"/>
+            <field name="groups" eval="[
+                (4, ref('inom_group_offboarding_officer')),
+            ]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Admin: xem toàn bộ checklist line, sửa được dòng responsible=admin -->
+        <record id="rule_checklist_line_admin_read" model="ir.rule">
+            <field name="name">Checklist: Admin xem toàn bộ</field>
+            <field name="model_id" ref="model_inom_offboarding_checklist_line"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Helpdesk: xem toàn bộ checklist line, sửa được dòng responsible=helpdesk -->
+        <record id="rule_checklist_line_helpdesk_read" model="ir.rule">
+            <field name="name">Checklist: Helpdesk xem toàn bộ</field>
+            <field name="model_id" ref="model_inom_offboarding_checklist_line"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_helpdesk'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <!-- Record Rules                                                 -->
+        <!-- Nhân viên thường: xem/tạo/sửa đơn của chính mình và của cấp dưới-->
+        <record id="offboarding_request_rule_employee_rwc" model="ir.rule">
+            <field name="name">Offboarding: nhân viên xem/sửa/tạo đơn của mình và cấp dưới</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">
+                ['|', ('employee_id.user_id', '=', user.id),
+                      ('manager_id.user_id', '=', user.id)]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Nhân viên thường: chỉ được xóa đơn của mình/cấp dưới khi ở nháp. -->
+        <record id="offboarding_request_rule_employee_unlink" model="ir.rule">
+            <field name="name">Offboarding: nhân viên xóa đơn nháp của mình và cấp dưới</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">
+                ['&amp;', ('state', '=', 'draft'),
+                 '|', ('employee_id.user_id', '=', user.id),
+                      ('manager_id.user_id', '=', user.id)]
+            </field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="offboarding_request_rule_cb_all" model="ir.rule">
+            <field name="name">Offboarding: C&amp;B toàn quyền</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_officer'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="offboarding_request_rule_hr_read_write" model="ir.rule">
+            <field name="name">Offboarding: HRM xem sửa</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_hr'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Admin: chỉ xem đơn approved/relieved -->
+        <record id="offboarding_request_rule_admin_read" model="ir.rule">
+            <field name="name">Offboarding: Admin chỉ xem đơn approved/relieved</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_admin'))]"/>
+            <field name="domain_force">[('state', 'in', ['approved', 'relieved'])]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Helpdesk: chỉ xem đơn approved/relieved -->
+        <record id="offboarding_request_rule_helpdesk_read" model="ir.rule">
+            <field name="name">Offboarding: Helpdesk chỉ xem đơn approved/relieved</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_helpdesk'))]"/>
+            <field name="domain_force">[('state', 'in', ['approved', 'relieved'])]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="offboarding_request_rule_ceo_read_write" model="ir.rule">
+            <field name="name">Offboarding: CEO xem sửa</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_ceo'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Đơn ở trạng thái Nháp chỉ người tạo (create_uid) mới xem được.
+             Rule GLOBAL (không gán group) -> AND với mọi rule đọc khác, nên áp
+             cho tất cả (nhân viên, C&amp;B, HRM, CEO). Chỉ giới hạn thao tác đọc. -->
+        <record id="offboarding_request_rule_draft_creator_only" model="ir.rule">
+            <field name="name">Offboarding: đơn nháp chỉ người tạo được xem</field>
+            <field name="model_id" ref="model_inom_offboarding_request"/>
+            <field name="domain_force">
+                ['|', ('state', '!=', 'draft'), ('create_uid', '=', user.id)]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Payment line: CB và HRM toàn quyền, CEO chỉ xem -->
+        <record id="rule_payment_line_cb_all" model="ir.rule">
+            <field name="name">Payment: C&amp;B toàn quyền</field>
+            <field name="model_id" ref="model_inom_offboarding_payment_line"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_officer'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="rule_payment_line_hr_all" model="ir.rule">
+            <field name="name">Payment: HRM toàn quyền</field>
+            <field name="model_id" ref="model_inom_offboarding_payment_line"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_hr'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="rule_payment_line_ceo_read" model="ir.rule">
+            <field name="name">Payment: CEO chỉ xem</field>
+            <field name="model_id" ref="model_inom_offboarding_payment_line"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_ceo'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Payment template: CB và HRM cấu hình -->
+        <record id="rule_payment_template_cb_all" model="ir.rule">
+            <field name="name">Payment template: C&amp;B toàn quyền</field>
+            <field name="model_id" ref="model_inom_offboarding_payment_template"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_officer'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="rule_payment_template_hr_all" model="ir.rule">
+            <field name="name">Payment template: HRM toàn quyền</field>
+            <field name="model_id" ref="model_inom_offboarding_payment_template"/>
+            <field name="groups" eval="[(4, ref('inom_group_offboarding_hr'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Survey access: employee đọc answer của mình hoặc của cấp dưới -->
+        <record id="offboarding_survey_input_employee_read" model="ir.rule">
+            <field name="name">Offboarding survey: nhân viên đọc answer của mình và cấp dưới</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="domain_force">['|', '|',
+                ('partner_id', '=', user.partner_id.id),
+                ('partner_id', 'in', user.employee_ids.mapped('child_ids.user_id.partner_id').ids),
+                ('manager_offboard_id.user_id', '=', user.id)
+            ]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="offboarding_survey_input_line_employee_read" model="ir.rule">
+            <field name="name">Offboarding survey: nhân viên đọc input line của mình và cấp dưới</field>
+            <field name="model_id" ref="survey.model_survey_user_input_line"/>
+            <field name="domain_force">['|', '|',
+                ('user_input_id.partner_id', '=', user.partner_id.id),
+                ('user_input_id.partner_id', 'in', user.employee_ids.mapped('child_ids.user_id.partner_id').ids),
+                ('user_input_id.manager_offboard_id.user_id', '=', user.id)
+            ]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Survey access: C&B, HR, CEO đọc toàn bộ exit survey offboard -->
+        <record id="offboarding_survey_input_staff_read" model="ir.rule">
+            <field name="name">Offboarding survey: C&amp;B/HR/CEO xem toàn bộ</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[
+                (4, ref('inom_group_offboarding_officer')),
+                (4, ref('inom_group_offboarding_hr')),
+                (4, ref('inom_group_offboarding_ceo')),
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="offboarding_survey_input_line_staff_read" model="ir.rule">
+            <field name="name">Offboarding survey: Admin/Helpdesk/C&amp;B/HR/CEO xem input line toàn bộ</field>
+            <field name="model_id" ref="survey.model_survey_user_input_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[
+                (4, ref('inom_group_offboarding_officer')),
+                (4, ref('inom_group_offboarding_hr')),
+                (4, ref('inom_group_offboarding_ceo')),
+                (4, ref('inom_group_offboarding_admin')),
+                (4, ref('inom_group_offboarding_helpdesk')),
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Survey question answer: C&B/HR/CEO xem toàn bộ, bypass restrict_user_ids -->
+        <record id="offboarding_survey_question_answer_staff_read" model="ir.rule">
+            <field name="name">Offboarding survey question answer: C&amp;B/HR/CEO xem toàn bộ</field>
+            <field name="model_id" ref="survey.model_survey_question_answer"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[
+                (4, ref('inom_group_offboarding_officer')),
+                (4, ref('inom_group_offboarding_hr')),
+                (4, ref('inom_group_offboarding_ceo')),
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Survey question answer: nhân viên xem answer thuộc survey không restrict hoặc có mình trong đó -->
+        <record id="offboarding_survey_question_answer_user_read" model="ir.rule">
+            <field name="name">Offboarding survey question answer: nhân viên xem</field>
+            <field name="model_id" ref="survey.model_survey_question_answer"/>
+            <field name="domain_force">['|',
+                '|', ('question_id.survey_id.restrict_user_ids', 'in', user.id),
+                     ('matrix_question_id.survey_id.restrict_user_ids', 'in', user.id),
+                '|', ('question_id.survey_id.restrict_user_ids', '=', False),
+                     ('matrix_question_id.survey_id.restrict_user_ids', '=', False)
+            ]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

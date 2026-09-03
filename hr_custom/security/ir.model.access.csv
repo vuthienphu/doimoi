@@ -1,0 +1,32 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_ceo,hr.employee.ceo.readonly,hr.model_hr_employee,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_department_ceo,hr.department.ceo.readonly,hr.model_hr_department,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_job_ceo,hr.job.ceo.readonly,hr.model_hr_job,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_employee_category_ceo,hr.employee.category.ceo.readonly,hr.model_hr_employee_category,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_contract_type_ceo,hr.contract.type.ceo.readonly,hr.model_hr_contract_type,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_version_ceo,hr.version.ceo.readonly,hr.model_hr_version,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_departure_reason_ceo,hr.departure.reason.ceo.readonly,hr.model_hr_departure_reason,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_work_location_ceo,hr.work.location.ceo.readonly,hr.model_hr_work_location,hr_custom.group_hr_ceo,1,0,0,0
+access_resource_resource_ceo,resource.resource.ceo.readonly,resource.model_resource_resource,hr_custom.group_hr_ceo,1,0,0,0
+access_resource_calendar_ceo,resource.calendar.ceo.readonly,resource.model_resource_calendar,hr_custom.group_hr_ceo,1,0,0,0
+access_resource_calendar_attendance_ceo,resource.calendar.attendance.ceo.readonly,resource.model_resource_calendar_attendance,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_hospital_cb,hr.hospital cb,model_hr_hospital,hr.group_hr_manager,1,1,1,1
+access_hr_hospital_hrm,hr.hospital hrm,model_hr_hospital,hr.group_hr_user,1,0,0,0
+access_hr_hospital_ceo,hr.hospital ceo,model_hr_hospital,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_contract_legal_entity_cb,hr.contract.legal.entity cb,model_hr_contract_legal_entity,hr.group_hr_manager,1,1,1,1
+access_hr_contract_legal_entity_hrm,hr.contract.legal.entity hrm,model_hr_contract_legal_entity,hr.group_hr_user,1,0,0,0
+access_hr_contract_legal_entity_ceo,hr.contract.legal.entity ceo,model_hr_contract_legal_entity,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_employee_relative_cb,hr.employee.relative cb,model_hr_employee_relative,hr.group_hr_manager,1,1,1,1
+access_hr_employee_relative_hrm,hr.employee.relative hrm,model_hr_employee_relative,hr.group_hr_user,1,1,1,1
+access_hr_employee_relative_ceo,hr.employee.relative ceo,model_hr_employee_relative,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_employee_relative_public,hr.employee.relative public,model_hr_employee_relative,base.group_user,1,0,0,0
+access_hr_employee_work_history_cb,hr.employee.work.history cb,model_hr_employee_work_history,hr.group_hr_manager,1,1,1,1
+access_hr_employee_work_history_hrm,hr.employee.work.history hrm,model_hr_employee_work_history,hr.group_hr_user,1,1,1,1
+access_hr_employee_work_history_ceo,hr.employee.work.history ceo,model_hr_employee_work_history,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_employee_work_history_public,hr.employee.work.history public,model_hr_employee_work_history,base.group_user,1,0,0,0
+access_hr_overtime_ruleset_ceo,hr.attendance.overtime.ruleset ceo,hr_attendance.model_hr_attendance_overtime_ruleset,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_payroll_structure_type_ceo,hr.payroll.structure.type ceo,hr.model_hr_payroll_structure_type,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_attendance_ceo,hr.attendance ceo,hr_attendance.model_hr_attendance,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_attendance_overtime_line_ceo,hr.attendance.overtime.line ceo,hr_attendance.model_hr_attendance_overtime_line,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_payroll_structure_ceo,hr.payroll.structure ceo,om_hr_payroll.model_hr_payroll_structure,hr_custom.group_hr_ceo,1,0,0,0
+access_hr_payslip_ceo,hr.payslip ceo,om_hr_payroll.model_hr_payslip,hr_custom.group_hr_ceo,1,0,0,0

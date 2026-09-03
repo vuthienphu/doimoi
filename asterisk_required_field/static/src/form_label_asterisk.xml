@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Append "*" to the label of a required field (form views only). -->
+    <t t-inherit="web.FormLabel" t-inherit-mode="extension">
+        <xpath expr="//t[@t-esc='props.string']" position="after">
+            <span t-if="isRequiredField" class="o_asterisk_required text-danger" aria-hidden="true"> *</span>
+        </xpath>
+    </t>
+
+</templates>

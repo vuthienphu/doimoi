@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_res_bank_hr" model="ir.actions.act_window">
+        <field name="name">Ngân hàng</field>
+        <field name="res_model">res.bank</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_res_bank_hr"
+              name="Ngân hàng"
+              parent="hr.menu_config_recruitment"
+              action="action_res_bank_hr"
+              groups="hr.group_hr_user,hr_custom.group_hr_ceo"
+              sequence="12"/>
+
+</odoo>
