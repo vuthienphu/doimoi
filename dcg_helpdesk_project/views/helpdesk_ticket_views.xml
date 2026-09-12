@@ -8,6 +8,7 @@
             <list string="Yêu cầu Khách hàng">
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="zalo_channel_id"/>
                 <field name="project_id"/>
                 <field name="request_source"/>
                 <field name="user_id"/>
@@ -18,7 +19,7 @@
         </field>
     </record>
 
-    <!-- Kanban View -->
+    <!-- Kanban View grouped by Stage -->
     <record id="helpdesk_ticket_view_kanban" model="ir.ui.view">
         <field name="name">helpdesk.ticket.kanban</field>
         <field name="model">helpdesk.ticket</field>
@@ -37,6 +38,36 @@
                         </div>
                         <div class="text-muted small">
                             <field name="partner_id"/>
+                        </div>
+                        <footer class="pt-1 d-flex justify-content-between align-items-center">
+                            <span class="badge text-bg-info"><field name="request_source"/></span>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Kanban View grouped by Partner (Khách hàng) -->
+    <record id="helpdesk_ticket_view_kanban_partner" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.partner</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="partner_id" class="o_kanban_small_column">
+                <field name="partner_id"/>
+                <field name="name"/>
+                <field name="stage_id"/>
+                <field name="user_id"/>
+                <field name="priority"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold fs-5"/>
+                            <field name="priority" widget="priority"/>
+                        </div>
+                        <div class="text-muted small">
+                            <span class="badge text-bg-secondary"><field name="stage_id"/></span>
                         </div>
                         <footer class="pt-1 d-flex justify-content-between align-items-center">
                             <span class="badge text-bg-info"><field name="request_source"/></span>
@@ -94,13 +125,31 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Chi tiết Yêu cầu Khách hàng">
+                        <page string="Nội dung Yêu cầu &amp; Phân tích AI" name="description_analysis_page">
+                            <div class="row pt-2 pb-2">
+                                <div class="col-md-6 pe-md-3 border-end">
+                                    <div class="d-flex align-items-center mb-2 pb-1 border-bottom">
+                                        <i class="fa fa-comments text-primary fs-4 me-2" title="Yêu cầu gốc (Zalo / Khách hàng)" aria-label="Yêu cầu gốc (Zalo / Khách hàng)"/>
+                                        <h5 class="fw-bold mb-0 text-primary">Yêu cầu gốc (Zalo / Khách hàng)</h5>
+                                    </div>
+                                    <field name="original_request_content" placeholder="Chi tiết nội dung trao đổi / chat Zalo gốc của khách hàng..."/>
+                                </div>
+                                <div class="col-md-6 ps-md-3">
+                                    <div class="d-flex align-items-center mb-2 pb-1 border-bottom">
+                                        <i class="fa fa-robot text-info fs-4 me-2" title="AI Phân tích &amp; Đánh giá" aria-label="AI Phân tích &amp; Đánh giá"/>
+                                        <h5 class="fw-bold mb-0 text-info">AI Phân tích &amp; Đánh giá</h5>
+                                    </div>
+                                    <field name="description" placeholder="Báo cáo phân tích sự cố và đánh giá tự động từ AI Support..."/>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Thông tin Người liên hệ" name="contact_info_page">
                             <group>
                                 <group string="Nguồn &amp; Công ty">
                                     <field name="request_source"/>
                                     <field name="company_name"/>
                                 </group>
-                                <group string="Thông tin người liên hệ">
+                                <group string="Chi tiết Liên hệ">
                                     <field name="contact_name"/>
                                     <field name="contact_phone"/>
                                     <field name="contact_email"/>
@@ -108,8 +157,16 @@
                                     <field name="contact_position"/>
                                 </group>
                             </group>
-                            <separator string="Nội dung mô tả"/>
-                            <field name="description" placeholder="Nội dung chi tiết của yêu cầu..."/>
+                        </page>
+                        <page string="Đồng bộ Hệ thống phụ" name="external_sync_page" invisible="not external_ticket_id and not external_partner_id">
+                            <group>
+                                <group string="Thông tin ticket phụ">
+                                    <field name="external_ticket_id" readonly="1"/>
+                                    <field name="external_ticket_ref" readonly="1"/>
+                                    <field name="external_partner_id" readonly="1"/>
+                                    <field name="zalo_channel_id" readonly="1"/>
+                                </group>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
@@ -128,6 +185,8 @@
                 <field name="partner_id"/>
                 <field name="project_id"/>
                 <field name="user_id"/>
+                <field name="external_ticket_ref"/>
+                <field name="external_partner_id"/>
                 <filter string="Của tôi" name="my_ticket" domain="[('user_id', '=', uid)]"/>
                 <separator/>
                 <filter string="Từ Website" name="source_web" domain="[('request_source', '=', 'web')]"/>
@@ -135,6 +194,7 @@
                 <filter string="Nội bộ" name="source_internal" domain="[('request_source', '=', 'internal')]"/>
                 <group>
                     <filter string="Khách hàng" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Kênh Zalo" name="group_by_zalo_channel" context="{'group_by': 'zalo_channel_id'}"/>
                     <filter string="Dự án" name="group_by_project" context="{'group_by': 'project_id'}"/>
                     <filter string="Trạng thái" name="group_by_stage" context="{'group_by': 'stage_id'}"/>
                     <filter string="Người phụ trách" name="group_by_user" context="{'group_by': 'user_id'}"/>

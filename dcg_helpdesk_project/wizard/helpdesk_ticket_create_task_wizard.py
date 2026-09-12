@@ -51,7 +51,12 @@ class HelpdeskTicketCreateTaskWizard(models.TransientModel):
                 if 'task_name' in fields_list:
                     res['task_name'] = ticket.name
                 if 'description' in fields_list:
-                    res['description'] = ticket.description
+                    desc_parts = []
+                    if ticket.original_request_content:
+                        desc_parts.append(ticket.original_request_content)
+                    if ticket.description:
+                        desc_parts.append(ticket.description)
+                    res['description'] = "<hr/>".join(desc_parts) if desc_parts else False
         return res
 
     def action_create_task(self):

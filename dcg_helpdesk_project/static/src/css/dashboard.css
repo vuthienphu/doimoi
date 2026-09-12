@@ -1,94 +1,189 @@
+:root {
+    --doimoi-primary: #F0631A;
+    --doimoi-primary-hover: #C94E10;
+    --doimoi-navy: #132A3E;
+    --doimoi-light-bg: #F8F9FB;
+    --doimoi-orange-light: #FFF1E6;
+    --doimoi-muted: #5B6472;
+    --font-sora: 'Sora', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+}
+
+/* Fix scrolling in Odoo Client Action container */
 .o_customer_request_dashboard {
-    padding: 20px;
-    background-color: #F8F9FB;
-    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    padding: 24px;
+    background-color: var(--doimoi-light-bg);
+    box-sizing: border-box;
+    font-family: var(--font-inter);
 }
 
 .o_dashboard_header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .o_dashboard_title {
-    font-family: 'Sora', sans-serif;
-    color: #132A3E;
+    font-family: var(--font-sora);
+    color: var(--doimoi-navy);
     font-weight: 700;
     font-size: 1.5rem;
     margin-bottom: 4px;
 }
 
 .o_dashboard_subtitle {
-    color: #5B6472;
+    color: var(--doimoi-muted);
     font-size: 0.875rem;
 }
 
 .o_dashboard_filters {
     background: #ffffff;
-    padding: 16px 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(19, 42, 62, 0.05);
-    margin-bottom: 24px;
-
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+    border: 1px solid #E7E9ED;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(19, 42, 62, 0.04);
 }
 
+.o_dashboard_filters label {
+    font-family: var(--font-sora);
+    color: var(--doimoi-navy);
+}
+
+/* KPI Cards with DoiMoi design palette */
 .o_kpi_card {
     background: #ffffff;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 2px 12px rgba(19, 42, 62, 0.06);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(19, 42, 62, 0.05);
+    border: 1px solid #E7E9ED;
+    border-top: 4px solid var(--doimoi-primary);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
-    border-left: 4px solid transparent;
 }
 
 .o_kpi_card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(19, 42, 62, 0.1);
+    box-shadow: 0 8px 20px rgba(19, 42, 62, 0.1);
 }
 
-.o_kpi_card.kpi_total { border-left-color: #F0631A; }
-.o_kpi_card.kpi_task { border-left-color: #0E7C66; }
-.o_kpi_card.kpi_in_progress { border-left-color: #3B82F6; }
-.o_kpi_card.kpi_done { border-left-color: #10B981; }
+.o_kpi_card.kpi_total { border-top-color: #F0631A; }
+.o_kpi_card.kpi_new { border-top-color: #132A3E; }
+.o_kpi_card.kpi_in_progress { border-top-color: #0E7C66; }
+.o_kpi_card.kpi_waiting { border-top-color: #3B82F6; }
+.o_kpi_card.kpi_urgent { border-top-color: #DC2626; }
+.o_kpi_card.kpi_without_task { border-top-color: #8B5CF6; }
 
 .o_kpi_title {
-    font-size: 0.875rem;
-    color: #5B6472;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-family: var(--font-sora);
+    font-size: 0.75rem;
+    color: var(--doimoi-muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .o_kpi_value {
-    font-family: 'Sora', sans-serif;
+    font-family: var(--font-sora);
     font-size: 2rem;
     font-weight: 700;
-    color: #132A3E;
+    color: var(--doimoi-navy);
+    line-height: 1.2;
+}
+
+.text-doimoi-orange { color: #F0631A !important; }
+.text-doimoi-navy { color: #132A3E !important; }
+.bg-doimoi-primary { background-color: #F0631A !important; }
+.bg-doimoi-navy { background-color: #132A3E !important; }
+.bg-doimoi-light { background-color: #FFF1E6 !important; }
+
+.btn-doimoi-primary {
+    background-color: var(--doimoi-primary) !important;
+    border-color: var(--doimoi-primary) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    font-family: var(--font-sora);
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-doimoi-primary:hover {
+    background-color: var(--doimoi-primary-hover) !important;
+    border-color: var(--doimoi-primary-hover) !important;
 }
 
 .o_dashboard_section {
     background: #ffffff;
     border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 2px 12px rgba(19, 42, 62, 0.06);
-    margin-bottom: 24px;
+    padding: 22px 24px;
+    border: 1px solid #E7E9ED;
+    box-shadow: 0 2px 10px rgba(19, 42, 62, 0.04);
 }
 
 .o_dashboard_section_title {
-    font-family: 'Sora', sans-serif;
-    color: #132A3E;
+    font-family: var(--font-sora);
+    color: var(--doimoi-navy);
     font-weight: 700;
     font-size: 1.1rem;
-    margin-bottom: 16px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+.table-doimoi {
+    border-color: #E7E9ED;
+}
+
+.table-doimoi thead {
+    background-color: #132A3E;
+    color: #ffffff;
+}
+
+.table-doimoi thead th {
+    font-family: var(--font-sora);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 12px 16px;
+    border: none;
+    color: #ffffff;
+}
+
+.table-doimoi tbody td {
+    padding: 12px 16px;
+    border-color: #E7E9ED;
+}
+
 .badge-source-web { background-color: #FFF1E6; color: #F0631A; border: 1px solid #F0631A; }
 .badge-source-zalo { background-color: #E6F6F1; color: #0E7C66; border: 1px solid #0E7C66; }
-.badge-source-internal { background-color: #EBF5FF; color: #3B82F6; border: 1px solid #3B82F6; }
-.badge-source-other { background-color: #F3F4F6; color: #6B7280; border: 1px solid #9CA3AF; }
+.badge-source-internal { background-color: #EBF5FF; color: #132A3E; border: 1px solid #132A3E; }
+.badge-source-other { background-color: #F3F4F6; color: #5B6472; border: 1px solid #9CA3AF; }
+
+.cursor-pointer { cursor: pointer; }
+
+/* Skeleton Loading Animation */
+.skeleton-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid #E7E9ED;
+}
+
+.skeleton-line {
+    height: 14px;
+    background: linear-gradient(90deg, #F8F9FB 25%, #E7E9ED 50%, #F8F9FB 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.donut-chart {
+    transform: rotate(-90deg);
+    border-radius: 50%;
+}
+
+

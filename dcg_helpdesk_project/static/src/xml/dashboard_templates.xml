@@ -1,156 +1,414 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates xml:space="preserve">
     <t t-name="dcg_helpdesk_project.CustomerRequestDashboardTemplate">
-        <div class="o_customer_request_dashboard">
-            <!-- Header -->
-            <div class="o_dashboard_header d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="o_dashboard_title">DASHBOARD YÊU CẦU KHÁCH HÀNG</h1>
-                    <div class="o_dashboard_subtitle">Thống kê yêu cầu khách hàng &amp; Tiến độ xử lý Task</div>
-                </div>
-            </div>
-
-            <!-- Date Filters Toolbar -->
-            <div class="o_dashboard_filters">
-                <form t-on-submit="onFilterSubmit" class="d-flex align-items-center gap-3 flex-wrap m-0">
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="fw-semibold text-doimoi-navy mb-0">Từ ngày:</label>
-                        <input type="date" class="form-control form-control-sm rounded-2" t-model="state.dateFrom"/>
+        <div class="o_customer_request_dashboard p-3 p-lg-4">
+            <!-- 1. Header & Filter Bar -->
+            <div class="o_dashboard_header mb-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                    <div>
+                        <h1 class="o_dashboard_title m-0">DASHBOARD YÊU CẦU HELPDESK TICKET</h1>
+                        <div class="o_dashboard_subtitle">Theo dõi tiến độ xử lý Ticket, phân bổ nhân sự và hiệu suất Task dự án</div>
                     </div>
                     <div class="d-flex align-items-center gap-2">
-                        <label class="fw-semibold text-doimoi-navy mb-0">Đến ngày:</label>
-                        <input type="date" class="form-control form-control-sm rounded-2" t-model="state.dateTo"/>
+                        <button class="btn btn-doimoi-primary btn-sm px-3 shadow-sm" t-on-click="onFilterReset" title="Đặt lại bộ lọc">
+                            <i class="fa fa-refresh me-1"></i> Làm mới
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm px-3 rounded-2 font-sora fw-semibold">
-                        <i class="fa fa-filter me-1"></i> Lọc dữ liệu
-                    </button>
-                </form>
+                </div>
+
+                <!-- Filters Toolbar -->
+                <div class="o_dashboard_filters p-3 bg-white rounded-3 shadow-sm">
+                    <div class="row g-2 align-items-end">
+                        <!-- Filter: Khoảng thời gian preset -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Khoảng thời gian:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.datePreset" t-on-change="onPresetChange">
+                                <option value="today">Hôm nay</option>
+                                <option value="7days">7 ngày qua</option>
+                                <option value="30days">30 ngày qua</option>
+                                <option value="this_month">Tháng này</option>
+                                <option value="last_month">Tháng trước</option>
+                                <option value="this_quarter">Quý này</option>
+                                <option value="this_year">Năm nay</option>
+                                <option value="custom">Tùy chọn</option>
+                            </select>
+                        </div>
+                        <!-- Filter: Từ ngày -->
+                        <div class="col-xl-2 col-md-3 col-6" t-if="state.filters.datePreset === 'custom' || true">
+                            <label class="form-label text-muted small fw-bold mb-1">Từ ngày:</label>
+                            <input type="date" class="form-control form-control-sm" t-model="state.filters.dateFrom" t-on-change="onFilterChange"/>
+                        </div>
+                        <!-- Filter: Đến ngày -->
+                        <div class="col-xl-2 col-md-3 col-6" t-if="state.filters.datePreset === 'custom' || true">
+                            <label class="form-label text-muted small fw-bold mb-1">Đến ngày:</label>
+                            <input type="date" class="form-control form-control-sm" t-model="state.filters.dateTo" t-on-change="onFilterChange"/>
+                        </div>
+                        <!-- Filter: Công ty -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Công ty:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.partnerId" t-on-change="onFilterChange">
+                                <option value="">Tất cả Công ty</option>
+                                <t t-foreach="state.filterOptions.partners" t-as="p" t-key="p.id">
+                                    <option t-att-value="p.id"><t t-esc="p.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Filter: Dự án -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Dự án:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.projectId" t-on-change="onFilterChange">
+                                <option value="">Tất cả Dự án</option>
+                                <t t-foreach="state.filterOptions.projects" t-as="proj" t-key="proj.id">
+                                    <option t-att-value="proj.id"><t t-esc="proj.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Filter: Đội ngũ -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Đội ngũ hỗ trợ:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.teamId" t-on-change="onFilterChange">
+                                <option value="">Tất cả Đội ngũ</option>
+                                <t t-foreach="state.filterOptions.teams" t-as="team" t-key="team.id">
+                                    <option t-att-value="team.id"><t t-esc="team.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Filter: Người phụ trách -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Người phụ trách:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.userId" t-on-change="onFilterChange">
+                                <option value="">Tất cả Nhân viên</option>
+                                <option value="unassigned">Chưa giao</option>
+                                <t t-foreach="state.filterOptions.users" t-as="u" t-key="u.id">
+                                    <option t-att-value="u.id"><t t-esc="u.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Filter: Nguồn yêu cầu -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Nguồn yêu cầu:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.requestSource" t-on-change="onFilterChange">
+                                <option value="">Tất cả Nguồn</option>
+                                <t t-foreach="state.filterOptions.request_sources" t-as="src" t-key="src.code">
+                                    <option t-att-value="src.code"><t t-esc="src.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <!-- Filter: Trạng thái -->
+                        <div class="col-xl-2 col-md-3 col-6">
+                            <label class="form-label text-muted small fw-bold mb-1">Trạng thái:</label>
+                            <select class="form-select form-select-sm" t-model="state.filters.stageId" t-on-change="onFilterChange">
+                                <option value="">Tất cả Trạng thái</option>
+                                <t t-foreach="state.filterOptions.stages" t-as="stg" t-key="stg.id">
+                                    <option t-att-value="stg.id"><t t-esc="stg.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- KPI Cards Grid (4 KPI chính) -->
-            <div class="row g-4 mb-4">
-                <!-- KPI 1: Tổng yêu cầu -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="o_kpi_card kpi_total" t-on-click="() => this.openTicketList([], 'Tổng yêu cầu')">
-                        <div class="o_kpi_title"><i class="fa fa-inbox me-2 text-primary"></i>TỔNG YÊU CẦU</div>
-                        <div class="o_kpi_value"><t t-esc="state.data.total"/></div>
+            <!-- Loading Skeleton State -->
+            <t t-if="state.loading">
+                <div class="row g-3 mb-4">
+                    <t t-foreach="[1,2,3,4,5,6]" t-as="i" t-key="i">
+                        <div class="col-xl-2 col-md-4 col-6">
+                            <div class="o_kpi_card skeleton-card">
+                                <div class="skeleton-line w-50 mb-2"></div>
+                                <div class="skeleton-line w-75"></div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="o_dashboard_section p-4 skeleton-card" style="height: 250px;"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="o_dashboard_section p-4 skeleton-card" style="height: 250px;"></div>
                     </div>
                 </div>
-                <!-- KPI 2: Đã tạo Task -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="o_kpi_card kpi_task" t-on-click="() => this.openTicketList([['task_count', '>', 0]], 'Ticket đã tạo Task')">
-                        <div class="o_kpi_title"><i class="fa fa-tasks me-2 text-success"></i>ĐÃ TẠO TASK</div>
-                        <div class="o_kpi_value"><t t-esc="state.data.with_task"/></div>
-                    </div>
-                </div>
-                <!-- KPI 3: Đang xử lý -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="o_kpi_card kpi_in_progress" t-on-click="() => this.openTicketList([['stage_id.fold', '=', false]], 'Ticket đang xử lý')">
-                        <div class="o_kpi_title"><i class="fa fa-spinner me-2 text-info"></i>ĐANG XỬ LÝ</div>
-                        <div class="o_kpi_value"><t t-esc="state.data.in_progress"/></div>
-                    </div>
-                </div>
-                <!-- KPI 4: Đã hoàn thành -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="o_kpi_card kpi_done" t-on-click="() => this.openTicketList([['stage_id.fold', '=', true]], 'Ticket đã hoàn thành')">
-                        <div class="o_kpi_title"><i class="fa fa-check-circle me-2 text-success"></i>ĐÃ HOÀN THÀNH</div>
-                        <div class="o_kpi_value"><t t-esc="state.data.done"/></div>
-                    </div>
-                </div>
-            </div>
+            </t>
 
-            <!-- Breakdown Section: Theo nguồn & Trạng thái -->
-            <div class="row g-4 mb-4">
-                <!-- Breakdown Nguồn -->
-                <div class="col-md-6">
-                    <div class="o_dashboard_section h-100 mb-0">
-                        <div class="o_dashboard_section_title">
-                            <span><i class="fa fa-pie-chart me-2 text-primary"></i>Phân loại theo nguồn</span>
+            <t t-else="">
+                <!-- 2. KPI Cards Grid (6 Thẻ KPI) -->
+                <div class="row g-3 mb-4">
+                    <!-- KPI 1: Tổng Ticket -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_total" t-on-click="() => this.openTicketList([], 'Tất cả Ticket')">
+                            <div class="o_kpi_title"><i class="fa fa-inbox me-2 text-primary"></i>TỔNG TICKET</div>
+                            <div class="o_kpi_value"><t t-esc="state.data.kpi.total"/></div>
+                            <div class="o_kpi_sub text-muted small">Tổng số vé tiếp nhận</div>
                         </div>
-                        <div class="list-group list-group-flush border-0">
-                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'web']], 'Yêu cầu từ Website')">
-                                <span class="fw-semibold"><span class="badge badge-source-web me-2">Website</span> Tự gửi qua Form</span>
-                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.web"/></span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'zalo']], 'Yêu cầu từ Zalo')">
-                                <span class="fw-semibold"><span class="badge badge-source-zalo me-2">Zalo</span> Nhóm Chat Zalo</span>
-                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.zalo"/></span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" t-on-click="() => this.openTicketList([['request_source', '=', 'internal']], 'Yêu cầu Nội bộ')">
-                                <span class="fw-semibold"><span class="badge badge-source-internal me-2">Nội bộ</span> Tạo trực tiếp Backend</span>
-                                <span class="badge bg-light text-dark rounded-pill fs-6"><t t-esc="state.data.by_source.internal"/></span>
-                            </div>
+                    </div>
+
+                    <!-- KPI 2: Ticket mới -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_new" t-on-click="() => this.openTicketList([['stage_id.sequence', '=', 1]], 'Ticket mới')">
+                            <div class="o_kpi_title"><i class="fa fa-plus-circle me-2 text-info"></i>TICKET MỚI</div>
+                            <div class="o_kpi_value text-info"><t t-esc="state.data.kpi.new"/></div>
+                            <div class="o_kpi_sub text-muted small">Vừa tạo / Chờ xử lý ban đầu</div>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: Đang xử lý -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_in_progress" t-on-click="() => this.openTicketList([['stage_id.fold', '=', false]], 'Ticket đang xử lý')">
+                            <div class="o_kpi_title"><i class="fa fa-spinner me-2 text-warning"></i>ĐANG XỬ LÝ</div>
+                            <div class="o_kpi_value text-warning"><t t-esc="state.data.kpi.processing"/></div>
+                            <div class="o_kpi_sub text-muted small">Trong tiến độ hỗ trợ</div>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4: Chờ xử lý / phân công -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_waiting" t-on-click="() => this.openTicketList([['user_id', '=', false]], 'Ticket chờ phân công')">
+                            <div class="o_kpi_title"><i class="fa fa-clock-o me-2 text-secondary"></i>CHỜ XỬ LÝ</div>
+                            <div class="o_kpi_value text-secondary"><t t-esc="state.data.kpi.waiting"/></div>
+                            <div class="o_kpi_sub text-muted small">Chưa có người phụ trách</div>
+                        </div>
+                    </div>
+
+                    <!-- KPI 5: Ticket Khẩn cấp -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_urgent" t-on-click="() => this.openTicketList([['priority', '=', '3']], 'Ticket khẩn cấp')">
+                            <div class="o_kpi_title"><i class="fa fa-exclamation-triangle me-2 text-danger"></i>KHẨN CẤP</div>
+                            <div class="o_kpi_value text-danger"><t t-esc="state.data.kpi.urgent"/></div>
+                            <div class="o_kpi_sub text-muted small">Ưu tiên mức độ cao nhất</div>
+                        </div>
+                    </div>
+
+                    <!-- KPI 6: Chưa có Task -->
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="o_kpi_card kpi_without_task" t-on-click="() => this.openTicketList([['task_count', '=', 0]], 'Ticket chưa có Task')">
+                            <div class="o_kpi_title"><i class="fa fa-tasks me-2 text-purple"></i>CHƯA CÓ TASK</div>
+                            <div class="o_kpi_value text-purple"><t t-esc="state.data.kpi.without_task"/></div>
+                            <div class="o_kpi_sub text-muted small">Cần chuyển giao cho dự án</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Breakdown Trạng thái -->
-                <div class="col-md-6">
-                    <div class="o_dashboard_section h-100 mb-0">
-                        <div class="o_dashboard_section_title">
-                            <span><i class="fa fa-list-ul me-2 text-info"></i>Phân loại theo Trạng thái</span>
+                <!-- 3. Charts & Analytics Section -->
+                <div class="row g-4 mb-4">
+                    <!-- Chart 1: Phân bổ Ticket theo Trạng thái -->
+                    <div class="col-lg-6">
+                        <div class="o_dashboard_section h-100 mb-0">
+                            <div class="o_dashboard_section_title">
+                                <span><i class="fa fa-list-ul me-2 text-primary"></i>Phân bổ Ticket theo Trạng thái</span>
+                            </div>
+                            <div class="o_stage_bar_list mt-3">
+                                <t t-foreach="state.data.by_stage" t-as="stage" t-key="stage.id">
+                                    <div class="o_bar_item mb-3 cursor-pointer" t-on-click="() => this.openTicketList([['stage_id', '=', stage.id]], 'Ticket - ' + stage.name)">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="fw-semibold text-dark"><t t-esc="stage.name"/></span>
+                                            <span class="badge bg-light text-dark border"><t t-esc="stage.count"/> vé (<t t-esc="stage.percentage"/>%)</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px; border-radius: 6px;">
+                                            <div class="progress-bar bg-primary" role="progressbar" t-attf-style="width: #{stage.percentage}%;"></div>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-if="!state.data.by_stage.length">
+                                    <div class="text-muted text-center py-4">Chưa có dữ liệu trạng thái.</div>
+                                </t>
+                            </div>
                         </div>
-                        <div class="list-group list-group-flush border-0">
-                            <t t-foreach="Object.entries(state.data.by_stage)" t-as="stage" t-key="stage[0]">
-                                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2">
-                                    <span class="fw-semibold"><t t-esc="stage[0]"/></span>
-                                    <span class="badge bg-secondary rounded-pill fs-6"><t t-esc="stage[1]"/></span>
+                    </div>
+
+                    <!-- Chart 2: Donut Chart - Nguồn Yêu cầu -->
+                    <div class="col-lg-6">
+                        <div class="o_dashboard_section h-100 mb-0">
+                            <div class="o_dashboard_section_title">
+                                <span><i class="fa fa-pie-chart me-2 text-success"></i>Phân bổ Ticket theo Nguồn</span>
+                            </div>
+                            <div class="row align-items-center mt-3">
+                                <!-- Donut SVG Graphic -->
+                                <div class="col-sm-6 text-center position-relative mb-3 mb-sm-0">
+                                    <svg viewBox="0 0 36 36" class="donut-chart" style="max-width: 170px; height: auto;">
+                                        <circle cx="18" cy="18" r="15.91549430918954" fill="transparent" stroke="#f3f4f6" stroke-width="3.5"></circle>
+                                        <!-- Web arc -->
+                                        <circle cx="18" cy="18" r="15.91549430918954" fill="transparent" stroke="#F0631A" stroke-width="3.8"
+                                                t-attf-stroke-dasharray="#{state.data.by_source[0] ? state.data.by_source[0].percentage : 0} #{100 - (state.data.by_source[0] ? state.data.by_source[0].percentage : 0)}" stroke-dashoffset="25"></circle>
+                                        <!-- Zalo arc -->
+                                        <circle cx="18" cy="18" r="15.91549430918954" fill="transparent" stroke="#0E7C66" stroke-width="3.8"
+                                                t-attf-stroke-dasharray="#{state.data.by_source[1] ? state.data.by_source[1].percentage : 0} #{100 - (state.data.by_source[1] ? state.data.by_source[1].percentage : 0)}"
+                                                t-attf-stroke-dashoffset="#{25 - (state.data.by_source[0] ? state.data.by_source[0].percentage : 0)}"></circle>
+                                        <!-- Internal arc -->
+                                        <circle cx="18" cy="18" r="15.91549430918954" fill="transparent" stroke="#3B82F6" stroke-width="3.8"
+                                                t-attf-stroke-dasharray="#{state.data.by_source[2] ? state.data.by_source[2].percentage : 0} #{100 - (state.data.by_source[2] ? state.data.by_source[2].percentage : 0)}"
+                                                t-attf-stroke-dashoffset="#{25 - ((state.data.by_source[0] ? state.data.by_source[0].percentage : 0) + (state.data.by_source[1] ? state.data.by_source[1].percentage : 0))}"></circle>
+                                    </svg>
+                                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                        <div class="fs-4 fw-bold text-dark"><t t-esc="state.data.kpi.total"/></div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Tổng Ticket</div>
+                                    </div>
                                 </div>
-                            </t>
+                                <!-- Legend -->
+                                <div class="col-sm-6">
+                                    <div class="list-group list-group-flush">
+                                        <t t-foreach="state.data.by_source" t-as="src" t-key="src.code">
+                                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2 cursor-pointer"
+                                                 t-on-click="() => this.openTicketList([['request_source', '=', src.code]], 'Nguồn - ' + src.name)">
+                                                <span class="fw-semibold">
+                                                    <span class="d-inline-block rounded-circle me-2" t-attf-style="width: 10px; height: 10px; background-color: #{src.color};"></span>
+                                                    <t t-esc="src.name"/>
+                                                </span>
+                                                <span class="badge bg-light text-dark fw-bold border"><t t-esc="src.percentage"/>% (<t t-esc="src.count"/>)</span>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Recent Tickets Table -->
-            <div class="o_dashboard_section mb-0">
-                <div class="o_dashboard_section_title">
-                    <span><i class="fa fa-clock-o me-2 text-warning"></i>Yêu cầu gần đây</span>
+                <!-- Row 4: Priority + Task Stats + Assignee Distribution -->
+                <div class="row g-4 mb-4">
+                    <!-- Chart 3: Ticket theo Độ ưu tiên -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="o_dashboard_section h-100 mb-0">
+                            <div class="o_dashboard_section_title">
+                                <span><i class="fa fa-signal me-2 text-danger"></i>Theo Độ ưu tiên</span>
+                            </div>
+                            <div class="list-group list-group-flush mt-2">
+                                <t t-foreach="state.data.by_priority" t-as="prio" t-key="prio.code">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2 cursor-pointer"
+                                         t-on-click="() => this.openTicketList([['priority', '=', prio.code]], 'Độ ưu tiên - ' + prio.name)">
+                                        <span class="fw-semibold">
+                                            <span class="badge me-2" t-attf-style="background-color: #{prio.color};"><t t-esc="prio.name"/></span>
+                                        </span>
+                                        <span class="fw-bold fs-6"><t t-esc="prio.count"/> vé</span>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hiệu suất xử lý Task -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="o_dashboard_section h-100 mb-0">
+                            <div class="o_dashboard_section_title">
+                                <span><i class="fa fa-check-square-o me-2 text-primary"></i>Hiệu suất xử lý Task</span>
+                            </div>
+                            <div class="row g-2 mt-2">
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded-3 text-center border">
+                                        <div class="text-muted small fw-semibold">Tổng Task</div>
+                                        <div class="fs-4 fw-bold text-dark"><t t-esc="state.data.task_stats.total_tasks"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded-3 text-center border">
+                                        <div class="text-muted small fw-semibold">Ticket có Task</div>
+                                        <div class="fs-4 fw-bold text-success"><t t-esc="state.data.task_stats.tickets_with_task"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded-3 text-center border">
+                                        <div class="text-muted small fw-semibold">Chưa có Task</div>
+                                        <div class="fs-4 fw-bold text-warning"><t t-esc="state.data.task_stats.tickets_without_task"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-3 bg-light rounded-3 text-center border">
+                                        <div class="text-muted small fw-semibold">Task hoàn thành</div>
+                                        <div class="fs-4 fw-bold text-info"><t t-esc="state.data.task_stats.completed_tasks"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phân bổ theo Người phụ trách -->
+                    <div class="col-xl-4 col-md-12">
+                        <div class="o_dashboard_section h-100 mb-0">
+                            <div class="o_dashboard_section_title">
+                                <span><i class="fa fa-users me-2 text-info"></i>Phân bổ theo Người phụ trách</span>
+                            </div>
+                            <div class="list-group list-group-flush mt-2">
+                                <t t-foreach="state.data.by_user" t-as="usr" t-key="usr.id">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2 cursor-pointer"
+                                         t-on-click="() => this.openTicketList(usr.id ? [['user_id', '=', usr.id]] : [['user_id', '=', false]], 'Phụ trách - ' + usr.name)">
+                                        <span class="fw-semibold text-truncate" style="max-width: 180px;">
+                                            <i class="fa fa-user-circle me-2 text-secondary"></i>
+                                            <t t-esc="usr.name"/>
+                                        </span>
+                                        <span class="badge bg-secondary rounded-pill fs-6"><t t-esc="usr.count"/> vé</span>
+                                    </div>
+                                </t>
+                                <t t-if="!state.data.by_user.length">
+                                    <div class="text-muted text-center py-3">Chưa có dữ liệu người phụ trách.</div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Mã yêu cầu</th>
-                                <th>Tiêu đề</th>
-                                <th>Công ty</th>
-                                <th>Nguồn</th>
-                                <th>Trạng thái</th>
-                                <th class="text-center">Số Task</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="state.data.recent_tickets" t-as="ticket" t-key="ticket.id">
-                                <tr style="cursor: pointer;" t-on-click="() => this.openTicketForm(ticket.id)">
-                                    <td class="fw-bold text-primary"><t t-esc="ticket.code"/></td>
-                                    <td class="fw-semibold"><t t-esc="ticket.name"/></td>
-                                    <td><t t-esc="ticket.company"/></td>
-                                    <td>
-                                        <span t-attf-class="badge badge-source-#{ticket.source == 'web' ? 'web' : (ticket.source == 'zalo' ? 'zalo' : 'internal')}">
-                                            <t t-esc="ticket.source"/>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span t-attf-class="badge #{ticket.stage_fold ? 'bg-success' : 'bg-info'}">
-                                            <t t-esc="ticket.stage"/>
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge bg-light text-dark border">
-                                            <t t-esc="ticket.task_count"/>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="!state.data.recent_tickets.length">
+
+                <!-- 4. Ticket Cần Chú Ý Table -->
+                <div class="o_dashboard_section mb-0">
+                    <div class="o_dashboard_section_title">
+                        <span>
+                            <i class="fa fa-exclamation-circle me-2 text-danger"></i>Ticket cần chú ý
+                            <span class="badge bg-danger ms-2 rounded-pill"><t t-esc="state.data.attention_tickets.length"/></span>
+                        </span>
+                        <button class="btn btn-link btn-sm text-decoration-none text-doimoi-orange fw-bold p-0" t-on-click="() => this.openTicketList([], 'Tất cả Ticket cần chú ý')">
+                            Xem tất cả <i class="fa fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+
+                    <div class="table-responsive mt-3">
+                        <table class="table table-doimoi table-hover align-middle mb-0 border">
+                            <thead>
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted py-4">Chưa có yêu cầu nào trong khoảng thời gian này.</td>
+                                    <th style="width: 100px;">Mã Ticket</th>
+                                    <th>Tiêu đề yêu cầu</th>
+                                    <th>Công ty</th>
+                                    <th>Dự án</th>
+                                    <th style="width: 110px;">Ưu tiên</th>
+                                    <th>Người phụ trách</th>
+                                    <th>Trạng thái</th>
+                                    <th style="width: 140px;">Ngày tạo</th>
                                 </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.data.attention_tickets" t-as="ticket" t-key="ticket.id">
+                                    <tr class="cursor-pointer" t-on-click="() => this.openTicketForm(ticket.id)">
+                                        <td class="fw-bold text-doimoi-orange"><t t-esc="ticket.code"/></td>
+                                        <td class="fw-semibold text-dark"><t t-esc="ticket.name"/></td>
+                                        <td><t t-esc="ticket.company"/></td>
+                                        <td><t t-esc="ticket.project"/></td>
+                                        <td>
+                                            <span t-attf-class="badge #{ticket.priority == '3' ? 'bg-danger' : (ticket.priority == '2' ? 'bg-warning text-dark' : (ticket.priority == '1' ? 'bg-info' : 'bg-secondary'))}">
+                                                <t t-esc="ticket.priority_name"/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-attf-class="badge #{ticket.user_id ? 'bg-light text-dark border' : 'bg-warning text-dark'}">
+                                                <t t-esc="ticket.user"/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-attf-class="badge #{ticket.stage_fold ? 'bg-success' : 'bg-primary'}">
+                                                <t t-esc="ticket.stage"/>
+                                            </span>
+                                        </td>
+                                        <td class="text-muted small"><t t-esc="ticket.create_date"/></td>
+                                    </tr>
+                                </t>
+                                <t t-if="!state.data.attention_tickets.length">
+                                    <tr>
+                                        <td colspan="8" class="text-center text-muted py-5">
+                                            <i class="fa fa-check-circle fs-1 text-success d-block mb-2"></i>
+                                            Không có Ticket nào cần chú ý hoặc không tìm thấy dữ liệu phù hợp với bộ lọc hiện tại.
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </t>
         </div>
     </t>
 </templates>

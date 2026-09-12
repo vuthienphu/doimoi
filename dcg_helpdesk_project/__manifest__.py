@@ -15,6 +15,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/helpdesk_data.xml',
+        'data/cron_data.xml',
         'views/helpdesk_ticket_views.xml',
         'views/project_task_views.xml',
         'views/res_partner_views.xml',

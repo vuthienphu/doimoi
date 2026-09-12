@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "65c5c4fd-5788-4015-9af7-3967a9d43700",
+    "name": "Helpdesk Ticket — Simple",
+    "description": "Bộ tối giản cho gerp.helpdesk.ticket qua JSON-RPC.\n\n1. Login → lấy {{uid}}\n2. Search ticket (kèm tracking log)\n3. Search stage_ids\n4. Update stage_id của ticket\n\n### Biến\n- base_url  vd http://localhost:8069\n- db        vd gerp-eoffice-v17\n- login / password\n- uid       tự set sau bước Login\n- ticket_id / stage_id\n\nNếu POST /jsonrpc trả 404 (bị proxy chặn), đổi endpoint sang session:\nPOST {{base_url}}/web/session/authenticate rồi POST {{base_url}}/web/dataset/call_kw\n{ model, method, args, kwargs } (bỏ db/uid/password trong args).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "7007103",
+    "_collection_link": "https://go.postman.co/collection/7007103-65c5c4fd-5788-4015-9af7-3967a9d43700?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Login → set {{uid}}",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const j = pm.response.json();",
+              "if (j.result) { pm.collectionVariables.set('uid', j.result); pm.test('uid = ' + j.result, () => pm.expect(j.result).to.be.a('number')); }",
+              "else { pm.test('login failed', () => pm.expect.fail(JSON.stringify(j.error))); }"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"common\",\n    \"method\": \"login\",\n    \"args\": [\"{{db}}\", \"{{login}}\", \"{{password}}\"]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/jsonrpc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "jsonrpc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Search ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"{{db}}\", {{uid}}, \"{{password}}\",\n      \"gerp.helpdesk.ticket\", \"search_read\",\n      [ [] ],\n      {\n        \"fields\": [\"id\", \"ticket_ref\", \"name\", \"team_id\", \"stage_id\", \"partner_id\", \"user_id\", \"priority\", \"create_date\", \"close_date\", \"message_ids\"],\n        \"order\": \"create_date desc\",\n        \"limit\": 20\n      }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/jsonrpc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "jsonrpc"
+          ]
+        },
+        "description": "Đổi domain trong `[ [] ]` để lọc, vd `[[\"stage_id.is_closed\",\"=\",false]]`, `[[\"team_id\",\"=\",1]]`. `message_ids` = id các dòng chatter/log của từng ticket (chi tiết ở request 2b)."
+      },
+      "response": []
+    },
+    {
+      "name": "2b. Tracking log của 1 ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"{{db}}\", {{uid}}, \"{{password}}\",\n      \"mail.tracking.value\", \"search_read\",\n      [ [ [\"mail_message_id.model\", \"=\", \"gerp.helpdesk.ticket\"], [\"mail_message_id.res_id\", \"=\", {{ticket_id}}] ] ],\n      {\n        \"fields\": [\"id\", \"mail_message_id\", \"field_id\", \"field_info\", \"old_value_char\", \"new_value_char\", \"old_value_integer\", \"new_value_integer\", \"old_value_datetime\", \"new_value_datetime\", \"old_value_text\", \"new_value_text\"],\n        \"order\": \"id asc\"\n      }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/jsonrpc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "jsonrpc"
+          ]
+        },
+        "description": "Log thay đổi field (cũ → mới) của ticket {{ticket_id}}: name, team_id, partner_id, user_id, stage_id, priority, ticket_type_id. Muốn xem cả tin nhắn/ghi chú: đổi model thành `mail.message`, domain `[[\"model\",\"=\",\"gerp.helpdesk.ticket\"],[\"res_id\",\"=\",{{ticket_id}}]]`, fields `[\"date\",\"author_id\",\"message_type\",\"body\",\"tracking_value_ids\"]`."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Search stage_ids",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"{{db}}\", {{uid}}, \"{{password}}\",\n      \"gerp.helpdesk.stage\", \"search_read\",\n      [ [] ],\n      { \"fields\": [\"id\", \"name\", \"sequence\", \"is_closed\", \"team_ids\"], \"order\": \"sequence\" }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/jsonrpc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "jsonrpc"
+          ]
+        },
+        "description": "Lọc theo team: domain `[[\"team_ids\",\"in\",[1]]]`."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update ticket → stage_id",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"call\",\n  \"params\": {\n    \"service\": \"object\",\n    \"method\": \"execute_kw\",\n    \"args\": [\n      \"{{db}}\", {{uid}}, \"{{password}}\",\n      \"gerp.helpdesk.ticket\", \"write\",\n      [ [ {{ticket_id}} ], { \"stage_id\": {{stage_id}} } ]\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/jsonrpc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "jsonrpc"
+          ]
+        },
+        "description": "Trả `true` nếu OK. Đổi stage kéo theo: set/clear close_date, gửi stage.mail_template_id, cập nhật SLA. User Portal cần cờ \"Dùng API Helpdesk\" + là follower ticket / thành viên (portal) của team."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8069"
+    },
+    {
+      "key": "db",
+      "value": "gerp-eoffice-v17"
+    },
+    {
+      "key": "login",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "value": "admin"
+    },
+    {
+      "key": "uid",
+      "value": ""
+    },
+    {
+      "key": "ticket_id",
+      "value": "1"
+    },
+    {
+      "key": "stage_id",
+      "value": "1"
+    }
+  ]
+}

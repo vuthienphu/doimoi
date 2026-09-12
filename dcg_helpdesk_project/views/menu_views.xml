@@ -17,7 +17,8 @@
     <record id="action_helpdesk_ticket_customer_request" model="ir.actions.act_window">
         <field name="name">Yêu cầu Khách hàng</field>
         <field name="res_model">helpdesk.ticket</field>
-        <field name="view_mode">list,kanban,form</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'search_default_group_by_partner': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Chưa có yêu cầu nào từ khách hàng!
@@ -29,7 +30,7 @@
     <record id="action_res_partner_zalo_channel" model="ir.actions.act_window">
         <field name="name">Kênh Zalo Khách hàng</field>
         <field name="res_model">res.partner.zalo.channel</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 
     <!-- 3. Submenus under menu_dcg_helpdesk_root -->
