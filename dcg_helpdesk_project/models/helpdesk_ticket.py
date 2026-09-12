@@ -143,6 +143,8 @@ class HelpdeskTicket(models.Model):
             cutoff_str = fields.Datetime.to_string(cutoff_dt)
             sync_domain = ['|', ('create_date', '>=', cutoff_str), ('write_date', '>=', cutoff_str)]
 
+            _logger.info("=== [SYNC START] Fetching external tickets (Last 2 days cutoff: %s) ===", cutoff_str)
+
             fields_to_read = [
                 "id", "ticket_ref", "name", "description", "team_id", "stage_id",
                 "partner_id", "user_id", "priority", "create_date", "write_date", "close_date"
@@ -156,8 +158,10 @@ class HelpdeskTicket(models.Model):
             )
 
             if not tickets_data:
-                _logger.info("No external tickets created or updated in the last 2 days.")
+                _logger.info("[SYNC] No external tickets created or updated in the last 2 days (Cutoff: %s).", cutoff_str)
                 return True
+
+            _logger.info("[SYNC] Search read returned %d external tickets modified in last 2 days.", len(tickets_data))
 
             # Lấy danh sách messages/notes qua custom API method gerp_get_messages (Request 2c)
             ext_ticket_ids = [t['id'] for t in tickets_data if t.get('id')]
@@ -175,18 +179,32 @@ class HelpdeskTicket(models.Model):
                             tid = msg.get('ticket_id')
                             if tid:
                                 messages_by_ext_id.setdefault(tid, []).append(msg)
+                        _logger.info("[SYNC] Fetched %d message/chat entries for %d external tickets via gerp_get_messages.", len(msgs_raw), len(ext_ticket_ids))
                 except Exception as msg_err:
-                    _logger.warning("Could not fetch gerp_get_messages during sync: %s", str(msg_err))
+                    _logger.warning("[SYNC WARNING] Could not fetch gerp_get_messages during sync: %s", str(msg_err))
 
             updated_count = 0
+            up_to_date_count = 0
+            skipped_count = 0
+
             for t_data in tickets_data:
                 ext_id = t_data.get('id')
                 if not ext_id:
                     continue
 
-                # KO tạo ticket mới! Chỉ tìm kiếm bản ghi ticket đã tồn tại nội bộ
+                ext_name = t_data.get('name') or f"Ticket {ext_id}"
+                ext_ref = t_data.get('ticket_ref') or ''
+
+                # Tìm kiếm ticket nội bộ theo: external_ticket_id -> external_ticket_ref -> name
                 ticket = self.search([('external_ticket_id', '=', ext_id)], limit=1)
+                if not ticket and ext_ref:
+                    ticket = self.search([('external_ticket_ref', '=', ext_ref)], limit=1)
+                if not ticket and ext_name:
+                    ticket = self.search([('name', '=', ext_name)], limit=1)
+
                 if not ticket:
+                    _logger.info("[SYNC SKIP] External Ticket ID %s (Ref: '%s', Name: '%s') not found in local DB. Skipping (creation disabled).", ext_id, ext_ref, ext_name)
+                    skipped_count += 1
                     continue
 
                 ext_partner = t_data.get('partner_id')
@@ -223,8 +241,6 @@ class HelpdeskTicket(models.Model):
 
                 raw_chat_html = "".join(chat_bodies) if chat_bodies else False
                 ai_analysis_html = ext_desc.strip() if ext_desc and isinstance(ext_desc, str) and ext_desc.strip() else False
-                ext_name = t_data.get('name') or f"Ticket {ext_id}"
-                ext_ref = t_data.get('ticket_ref') or ''
 
                 # Kiểm tra khác biệt để cập nhật và ghi log (KO đổi stage / trạng thái)
                 update_vals = {}
@@ -259,14 +275,27 @@ class HelpdeskTicket(models.Model):
                     changed_fields.append('Kênh Zalo')
 
                 if update_vals:
+                    if not ticket.external_ticket_id:
+                        update_vals['external_ticket_id'] = ext_id
                     ticket.write(update_vals)
                     updated_count += 1
                     _logger.info(
-                        "Ticket Sync Update [ID: %d | Ext ID: %s | Ref: %s]: Cập nhật nội dung các trường [%s]",
+                        "[SYNC UPDATE] Local Ticket ID %d (Ext ID: %s | Ref: '%s'): Updated fields [%s]",
                         ticket.id, ext_id, ext_ref, ", ".join(changed_fields)
                     )
+                else:
+                    if not ticket.external_ticket_id:
+                        ticket.write({'external_ticket_id': ext_id})
+                    up_to_date_count += 1
+                    _logger.info(
+                        "[SYNC OK] Local Ticket ID %d (Ext ID: %s | Ref: '%s'): Content is up to date.",
+                        ticket.id, ext_id, ext_ref
+                    )
 
-            _logger.info("Successfully checked %d external tickets (last 2 days). Updated content for %d existing tickets.", len(tickets_data), updated_count)
+            _logger.info(
+                "=== [SYNC SUMMARY] Processed %d external tickets: Updated=%d | Up-to-date=%d | Skipped (Not found locally)=%d ===",
+                len(tickets_data), updated_count, up_to_date_count, skipped_count
+            )
             return True
 
             _logger.info("Successfully synced %d tickets from external system", len(tickets_data))
