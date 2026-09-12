@@ -141,7 +141,7 @@ class HelpdeskTicket(models.Model):
             # Lọc các Ticket được tạo hoặc cập nhật trong vòng 2 ngày gần nhất (2-day cutoff)
             cutoff_dt = fields.Datetime.now() - timedelta(days=2)
             cutoff_str = fields.Datetime.to_string(cutoff_dt)
-            sync_domain = [('|', ('create_date', '>=', cutoff_str), ('write_date', '>=', cutoff_str))]
+            sync_domain = ['|', ('create_date', '>=', cutoff_str), ('write_date', '>=', cutoff_str)]
 
             fields_to_read = [
                 "id", "ticket_ref", "name", "description", "team_id", "stage_id",
