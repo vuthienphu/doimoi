@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mobile_device_token_user,mobile.device.token.user,model_mobile_device_token,base.group_user,1,1,1,0
+access_mobile_device_token_admin,mobile.device.token.admin,model_mobile_device_token,base.group_system,1,1,1,1
+access_mobile_login_history_user,mobile.login.history.user,model_mobile_login_history,base.group_user,1,0,0,0
+access_mobile_login_history_admin,mobile.login.history.admin,model_mobile_login_history,base.group_system,1,1,1,1

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu Mobile App (Chỉ Quản trị viên hệ thống mới thấy) -->
+    <menuitem id="menu_mobile_app_root"
+              name="Mobile App"
+              sequence="85"
+              groups="base.group_system"
+              web_icon="dcg_mobile_app,static/description/icon.png"/>
+
+    <!-- Menu con Quản lý Thiết bị -->
+    <menuitem id="menu_mobile_device_token"
+              name="Thiết bị Đăng nhập"
+              parent="menu_mobile_app_root"
+              action="action_mobile_device_token"
+              sequence="10"/>
+
+    <!-- Menu con Lịch sử Đăng nhập -->
+    <menuitem id="menu_mobile_login_history"
+              name="Lịch sử Đăng nhập"
+              parent="menu_mobile_app_root"
+              action="action_mobile_login_history"
+              sequence="20"/>
+</odoo>

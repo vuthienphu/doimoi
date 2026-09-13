@@ -345,3 +345,35 @@ class HelpdeskTicket(models.Model):
             },
         }
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        tickets = super().create(vals_list)
+        for ticket in tickets:
+            try:
+                ticket._send_mobile_push_notification()
+            except Exception as e:
+                _logger.warning("Failed to send mobile push notification for ticket %s: %s", ticket.id, e)
+        return tickets
+
+    def _send_mobile_push_notification(self):
+        self.ensure_one()
+        recipients = self.env['res.users']
+        if self.user_id:
+            recipients |= self.user_id
+        if self.team_id and self.team_id.member_ids:
+            recipients |= self.team_id.member_ids
+
+        if not recipients:
+            return
+
+        if 'mobile.notification.service' in self.env:
+            title = f"Có Ticket mới: #{str(self.id).zfill(5)}"
+            body = self.name or "Bạn có yêu cầu hỗ trợ mới cần xử lý."
+            self.env['mobile.notification.service'].sudo().send_notification_to_users(
+                user_ids=recipients.ids,
+                title=title,
+                body=body,
+                model='helpdesk.ticket',
+                res_id=self.id,
+            )
+
