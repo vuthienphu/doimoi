@@ -154,23 +154,24 @@ class DoimoiWebsite(Website):
         if not name or not company_name or not phone:
             return request.redirect('/contactus?error=required#contact-form')
 
-        sales_team = request.env['crm.team'].sudo().search([
-            ('active', '=', True),
-            ('company_id', 'in', [False, request.website.company_id.id]),
-        ], order='sequence, id', limit=1)
-        request.env['crm.lead'].sudo().create({
-            'name': 'Yêu cầu tư vấn - %s - %s' % (company_name, name),
-            'contact_name': name,
-            'partner_name': company_name,
-            'phone': phone,
-            'email_from': email,
-            'description': 'Loại yêu cầu: %s\n\n%s' % (request_type, description),
-            # Đưa yêu cầu website thẳng vào Pipeline và giao cho trưởng nhóm Sales,
-            # tránh bị bộ lọc "My Pipeline" ẩn khỏi màn hình của quản trị viên.
-            'type': 'opportunity',
-            'team_id': sales_team.id or False,
-            'user_id': sales_team.user_id.id or False,
-            'company_id': request.website.company_id.id,
-        })
+        # TẠM THỜI: Không ghi nhận dữ liệu vào DB theo yêu cầu, cho user điền xong return luôn
+        # sales_team = request.env['crm.team'].sudo().search([
+        #     ('active', '=', True),
+        #     ('company_id', 'in', [False, request.website.company_id.id]),
+        # ], order='sequence, id', limit=1)
+        # request.env['crm.lead'].sudo().create({
+        #     'name': 'Yêu cầu tư vấn - %s - %s' % (company_name, name),
+        #     'contact_name': name,
+        #     'partner_name': company_name,
+        #     'phone': phone,
+        #     'email_from': email,
+        #     'description': 'Loại yêu cầu: %s\n\n%s' % (request_type, description),
+        #     # Đưa yêu cầu website thẳng vào Pipeline và giao cho trưởng nhóm Sales,
+        #     # tránh bị bộ lọc "My Pipeline" ẩn khỏi màn hình của quản trị viên.
+        #     'type': 'opportunity',
+        #     'team_id': sales_team.id or False,
+        #     'user_id': sales_team.user_id.id or False,
+        #     'company_id': request.website.company_id.id,
+        # })
         request.session['doimoi_last_submit_at'] = now
         return request.redirect('/contactus?submitted=1#contact-form')
