@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from email.utils import formataddr
+from markupsafe import Markup
 
 import odoo
 from odoo import api, fields, models, _
@@ -274,12 +275,50 @@ class ProjectTask(models.Model):
                 task.message_subscribe(partner_ids=partner_ids)
                 
                 if new_partners:
-                    task.message_post(
-                        body="Bạn vừa được thêm vào theo dõi công việc này (vai trò Người kiểm tra / Quản lý).",
-                        partner_ids=new_partners,
-                        subtype_xmlid='mail.mt_comment',
-                        message_type='comment'
-                    )
+                    # Lọc bỏ địa chỉ trùng với alias của CRM để không bắn mail vào hòm thư CRM
+                    crm_aliases = set(self.env['mail.alias'].sudo().search([
+                        ('alias_model_id.model', '=', 'crm.lead'),
+                        ('alias_name', '!=', False),
+                    ]).mapped('alias_name'))
+
+                    valid_partners = []
+                    for partner in self.env['res.partner'].browse(new_partners):
+                        if partner.email:
+                            local_part = partner.email.split('@')[0].strip().lower()
+                            if local_part in crm_aliases:
+                                continue
+                        valid_partners.append(partner.id)
+
+                    if valid_partners:
+                        deadline_str = task.date_deadline.strftime('%d/%m/%Y') if task.date_deadline else 'Chưa đặt'
+                        task_url = task._get_task_url()
+                        body_html = Markup(
+                            '<p>Xin chào,</p>'
+                            '<p>Bạn vừa được thêm vào theo dõi công việc <b>%s</b> (vai trò Người kiểm tra / Quản lý).</p>'
+                            '<ul>'
+                            '<li><b>Dự án:</b> %s</li>'
+                            '<li><b>Khách hàng:</b> %s</li>'
+                            '<li><b>Hạn chót:</b> %s</li>'
+                            '</ul>'
+                            '<p style="margin-top: 15px;">'
+                            '<a href="%s" style="padding: 10px 20px; background-color: #875A7B; color: #ffffff; text-decoration: none; border-radius: 4px; display: inline-block;">'
+                            'Mở công việc'
+                            '</a>'
+                            '</p>'
+                        ) % (
+                            task.name,
+                            task.project_id.name or '',
+                            task.partner_id.name or '',
+                            deadline_str,
+                            task_url,
+                        )
+                        task.message_post(
+                            body=body_html,
+                            partner_ids=valid_partners,
+                            subject="[Task] %s - Thông báo người theo dõi" % task.name,
+                            subtype_xmlid='mail.mt_comment',
+                            message_type='comment',
+                        )
 
     def _send_stage_notification(self):
         self.ensure_one()

@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-
+import logging
 from markupsafe import Markup
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class CrmLead(models.Model):
@@ -14,6 +15,33 @@ class CrmLead(models.Model):
         copy=False,
         ondelete='set null',
     )
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        """
+        Chặn tạo CRM Lead từ các email thông báo nội bộ của Project Task.
+        Nếu mail thông báo task gửi ra ngoài mà bị hòm thư CRM/Incoming Mail quét lại,
+        hệ thống sẽ bỏ qua để không tự động sinh Lead rác trùng tên Task.
+        """
+        subject = msg_dict.get('subject') or ''
+        body = msg_dict.get('body') or ''
+        headers = msg_dict.get('headers') or {}
+        headers_str = str(headers)
+
+        if (
+            'project.task' in headers_str
+            or 'X-Odoo-Task' in headers_str
+            or msg_dict.get('model') == 'project.task'
+            or '[Task]' in subject
+            or '[Nhắc việc]' in subject
+            or 'Bạn vừa được thêm vào theo dõi công việc' in body
+            or 'Đã thêm người theo dõi công việc' in body
+            or 'Mở công việc' in body
+        ):
+            _logger.info("Bỏ qua tạo crm.lead từ email thông báo của Project Task: %s", subject)
+            return self.browse()
+
+        return super().message_new(msg_dict, custom_values=custom_values)
 
     def write(self, vals):
         result = super().write(vals)
