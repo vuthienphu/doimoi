@@ -183,9 +183,9 @@ class HelpdeskTicket(models.Model):
                 except Exception as msg_err:
                     _logger.warning("[SYNC WARNING] Could not fetch gerp_get_messages during sync: %s", str(msg_err))
 
+            created_count = 0
             updated_count = 0
             up_to_date_count = 0
-            skipped_count = 0
 
             for t_data in tickets_data:
                 ext_id = t_data.get('id')
@@ -195,18 +195,7 @@ class HelpdeskTicket(models.Model):
                 ext_name = t_data.get('name') or f"Ticket {ext_id}"
                 ext_ref = t_data.get('ticket_ref') or ''
 
-                # Tìm kiếm ticket nội bộ theo: external_ticket_id -> external_ticket_ref -> name
-                ticket = self.search([('external_ticket_id', '=', ext_id)], limit=1)
-                if not ticket and ext_ref:
-                    ticket = self.search([('external_ticket_ref', '=', ext_ref)], limit=1)
-                if not ticket and ext_name:
-                    ticket = self.search([('name', '=', ext_name)], limit=1)
-
-                if not ticket:
-                    _logger.info("[SYNC SKIP] External Ticket ID %s (Ref: '%s', Name: '%s') not found in local DB. Skipping (creation disabled).", ext_id, ext_ref, ext_name)
-                    skipped_count += 1
-                    continue
-
+                # 1. Xử lý Kênh Zalo (res.partner.zalo.channel)
                 ext_partner = t_data.get('partner_id')
                 ext_partner_id = str(ext_partner[0]) if ext_partner and isinstance(ext_partner, (list, tuple)) else (str(ext_partner) if ext_partner else False)
                 ext_partner_name = ext_partner[1] if ext_partner and isinstance(ext_partner, (list, tuple)) and len(ext_partner) > 1 else False
@@ -221,13 +210,15 @@ class HelpdeskTicket(models.Model):
                     ], limit=1)
                     if not zalo_channel:
                         zalo_channel = self.env['res.partner.zalo.channel'].create({
-                            'name': ext_partner_name or f"Zalo Channel {ext_partner_id}",
+                            'name': ext_partner_name or f"Kênh Zalo {ext_partner_id}",
                             'channel_id': ext_partner_id,
                             'partner_id': False,
                         })
+                        _logger.info("[SYNC] Created new Zalo channel: ID %s, Name '%s' (unmapped partner)", ext_partner_id, zalo_channel.name)
                     mapped_partner_id = zalo_channel.partner_id.id if zalo_channel.partner_id else False
                     mapped_project_id = zalo_channel.project_id.id if zalo_channel.project_id else False
 
+                # 2. Xử lý nội dung chat, AI phân tích và độ ưu tiên
                 ext_desc = t_data.get('description') or ''
                 msgs = messages_by_ext_id.get(ext_id, [])
 
@@ -242,7 +233,46 @@ class HelpdeskTicket(models.Model):
                 raw_chat_html = "".join(chat_bodies) if chat_bodies else False
                 ai_analysis_html = ext_desc.strip() if ext_desc and isinstance(ext_desc, str) and ext_desc.strip() else False
 
-                # Kiểm tra khác biệt để cập nhật và ghi log (KO đổi stage / trạng thái)
+                # Map priority từ hệ thống ngoài ('low', 'normal', 'medium', 'high', 'urgent', '0', '1', '2', '3')
+                raw_priority = str(t_data.get('priority') or '0').strip().lower()
+                priority_map = {
+                    '0': '0', '1': '1', '2': '2', '3': '3',
+                    'low': '0', 'normal': '0', 'medium': '1', 'high': '2', 'urgent': '3'
+                }
+                mapped_priority = priority_map.get(raw_priority, '0')
+
+                # 3. Tìm kiếm ticket nội bộ theo: external_ticket_id -> external_ticket_ref
+                # (KHÔNG tìm kiếm theo name vì nhiều ticket có cùng tiêu đề mẫu)
+                ticket = self.search([('external_ticket_id', '=', ext_id)], limit=1)
+                if not ticket and ext_ref:
+                    ticket = self.search([('external_ticket_ref', '=', ext_ref)], limit=1)
+
+                # 4. Nếu chưa có ticket thì tạo mới (để rỗng partner/project nếu kênh chưa map)
+                if not ticket:
+                    default_stage = self.env['helpdesk.stage'].search([], order='sequence asc, id asc', limit=1)
+                    create_vals = {
+                        'name': ext_name,
+                        'external_ticket_id': ext_id,
+                        'external_ticket_ref': ext_ref,
+                        'external_partner_id': ext_partner_id or False,
+                        'request_source': 'zalo',
+                        'original_request_content': raw_chat_html,
+                        'description': ai_analysis_html,
+                        'zalo_channel_id': zalo_channel.id if zalo_channel else False,
+                        'partner_id': mapped_partner_id or False,
+                        'project_id': mapped_project_id or False,
+                        'stage_id': default_stage.id if default_stage else False,
+                        'priority': mapped_priority,
+                    }
+                    ticket = self.create(create_vals)
+                    created_count += 1
+                    _logger.info(
+                        "[SYNC CREATE] Created local Ticket ID %d (Ext ID: %s | Ref: '%s' | Name: '%s')",
+                        ticket.id, ext_id, ext_ref, ext_name
+                    )
+                    continue
+
+                # 5. Nếu ticket đã tồn tại thì kiểm tra khác biệt để cập nhật
                 update_vals = {}
                 changed_fields = []
 
@@ -258,9 +288,13 @@ class HelpdeskTicket(models.Model):
                     update_vals['name'] = ext_name
                     changed_fields.append('Tiêu đề Yêu cầu')
 
-                if (ticket.external_ticket_ref or '') != ext_ref:
+                if ext_ref and (ticket.external_ticket_ref or '') != ext_ref:
                     update_vals['external_ticket_ref'] = ext_ref
                     changed_fields.append('Mã Ticket phụ')
+
+                if ext_partner_id and (ticket.external_partner_id or '') != ext_partner_id:
+                    update_vals['external_partner_id'] = ext_partner_id
+                    changed_fields.append('ID Partner phụ')
 
                 if mapped_partner_id and not ticket.partner_id:
                     update_vals['partner_id'] = mapped_partner_id
@@ -274,9 +308,11 @@ class HelpdeskTicket(models.Model):
                     update_vals['zalo_channel_id'] = zalo_channel.id
                     changed_fields.append('Kênh Zalo')
 
+                if not ticket.external_ticket_id:
+                    update_vals['external_ticket_id'] = ext_id
+                    changed_fields.append('ID Ticket phụ')
+
                 if update_vals:
-                    if not ticket.external_ticket_id:
-                        update_vals['external_ticket_id'] = ext_id
                     ticket.write(update_vals)
                     updated_count += 1
                     _logger.info(
@@ -284,8 +320,6 @@ class HelpdeskTicket(models.Model):
                         ticket.id, ext_id, ext_ref, ", ".join(changed_fields)
                     )
                 else:
-                    if not ticket.external_ticket_id:
-                        ticket.write({'external_ticket_id': ext_id})
                     up_to_date_count += 1
                     _logger.info(
                         "[SYNC OK] Local Ticket ID %d (Ext ID: %s | Ref: '%s'): Content is up to date.",
@@ -293,12 +327,9 @@ class HelpdeskTicket(models.Model):
                     )
 
             _logger.info(
-                "=== [SYNC SUMMARY] Processed %d external tickets: Updated=%d | Up-to-date=%d | Skipped (Not found locally)=%d ===",
-                len(tickets_data), updated_count, up_to_date_count, skipped_count
+                "=== [SYNC SUMMARY] Processed %d external tickets: Created=%d | Updated=%d | Up-to-date=%d ===",
+                len(tickets_data), created_count, updated_count, up_to_date_count
             )
-            return True
-
-            _logger.info("Successfully synced %d tickets from external system", len(tickets_data))
             return True
 
         except Exception as e:
