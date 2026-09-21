@@ -30,6 +30,7 @@ class SolutionModule(models.Model):
 
     feature_ids = fields.One2many('solution.module.feature', 'module_id', string='Chức năng')
     document_ids = fields.One2many('solution.module.document', 'module_id', string='Tài liệu')
+    skill_requirement_ids = fields.One2many('solution.module.skill.requirement', 'module_id', string='Yêu cầu kỹ năng')
     survey_checklist_ids = fields.One2many('solution.module.survey.checklist', 'module_id', string='Checklist khảo sát')
     implementation_checklist_ids = fields.One2many('solution.module.implementation.checklist', 'module_id', string='Checklist triển khai')
     handover_checklist_ids = fields.One2many('solution.module.handover.checklist', 'module_id', string='Checklist bàn giao')

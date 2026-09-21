@@ -2,6 +2,7 @@ from . import solution_solution
 from . import solution_configuration
 from . import solution_module_feature
 from . import solution_module_document
+from . import solution_module_skill_requirement
 from . import solution_module_survey_checklist
 from . import solution_module_implementation_checklist
 from . import solution_module_handover_checklist

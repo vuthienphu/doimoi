@@ -9,6 +9,7 @@
     'depends': [
         'project',
         'crm',
+        'hr_skills',
         'dcg_project_customize',
         'dcg_custom_crm',
     ],
