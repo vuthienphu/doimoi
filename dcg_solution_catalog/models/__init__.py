@@ -8,6 +8,7 @@ from . import solution_module_implementation_checklist
 from . import solution_module_handover_checklist
 from . import solution_module_common_issue
 from . import solution_module_task_template
+from . import solution_module_task_template_skill_requirement
 from . import solution_module
 from . import project_project
 from . import project_task
