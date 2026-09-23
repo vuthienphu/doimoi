@@ -8,6 +8,14 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="solution_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Chọn giải pháp liên quan..."/>
             </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Nguồn gốc tự động sinh" invisible="not is_auto_generated" name="dcg_solution_source">
+                    <field name="is_auto_generated" invisible="1"/>
+                    <field name="source_module_id" readonly="1"/>
+                    <field name="source_task_template_id" readonly="1"/>
+                    <field name="source_lead_id" readonly="1"/>
+                </group>
+            </xpath>
         </field>
     </record>
 

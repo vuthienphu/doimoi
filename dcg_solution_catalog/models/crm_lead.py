@@ -32,23 +32,13 @@ class CrmLead(models.Model):
             project = lead.project_id
             if project and lead.solution_ids:
                 if not project.solution_ids:
-                    project.write({'solution_ids': [(6, 0, lead.solution_ids.ids)]})
+                    # skip_solution_check: đây là lần gắn giải pháp đầu tiên khi Project
+                    # vừa được tạo từ CRM, không cần cảnh báo loại bỏ giải pháp.
+                    project.with_context(skip_solution_check=True).write({
+                        'solution_ids': [(6, 0, lead.solution_ids.ids)],
+                    })
 
-                existing_task_names = set(project.task_ids.mapped('name'))
-                tasks_to_create = []
-
-                for solution in lead.solution_ids:
-                    for tmpl in solution.task_template_ids:
-                        if tmpl.name not in existing_task_names:
-                            tasks_to_create.append({
-                                'name': tmpl.name,
-                                'description': tmpl.description,
-                                'allocated_hours': tmpl.planned_hours,
-                                'project_id': project.id,
-                                'partner_id': lead.partner_id.id if lead.partner_id else False,
-                                'solution_ids': [(6, 0, [solution.id])],
-                            })
-                            existing_task_names.add(tmpl.name)
-
-                if tasks_to_create:
-                    self.env['project.task'].create(tasks_to_create)
+                # Sinh Task từ toàn bộ Mẫu công việc của các Module đã gắn.
+                # Method dùng chung này tự chống trùng theo Mẫu công việc (source_task_template_id)
+                # và gán liên kết Module/Mẫu công việc/Cơ hội nguồn lên từng Task được tạo.
+                project._dcg_generate_tasks_from_solutions(lead.solution_ids)
