@@ -79,6 +79,33 @@ class ProjectProject(models.Model):
                     result_set.clear()
         return list(result_set)
 
+    def _dcg_get_combined_skill_requirements(self, solution, task_template):
+        """Gộp Yêu cầu kỹ năng của Module và của Mẫu công việc thành 1 danh sách duy nhất,
+        theo từng kỹ năng (skill_id): nếu cùng 1 kỹ năng được khai báo ở cả 2 cấp, giá trị
+        khai báo ở Mẫu công việc (cụ thể hơn) sẽ được ưu tiên/ghi đè giá trị ở Module (chung).
+
+        :return: list[dict] các vals sẵn sàng để tạo ``project.task.skill.requirement``
+            (chưa có ``task_id``, ``sequence`` giữ theo thứ tự Module trước, Mẫu công việc sau).
+        """
+        combined = {}
+        for req in solution.skill_requirement_ids:
+            combined[req.skill_id.id] = {
+                'sequence': req.sequence,
+                'skill_type_id': req.skill_type_id.id,
+                'skill_id': req.skill_id.id,
+                'skill_level_id': req.skill_level_id.id,
+                'source_requirement_ref': 'solution.module.skill.requirement,%s' % req.id,
+            }
+        for req in task_template.skill_requirement_ids:
+            combined[req.skill_id.id] = {
+                'sequence': req.sequence,
+                'skill_type_id': req.skill_type_id.id,
+                'skill_id': req.skill_id.id,
+                'skill_level_id': req.skill_level_id.id,
+                'source_requirement_ref': 'solution.module.task.template.skill.requirement,%s' % req.id,
+            }
+        return list(combined.values())
+
     def _dcg_generate_tasks_from_solutions(self, solutions=None):
         """Tự sinh Task cho các Mẫu công việc (task template) của các Giải pháp/Module
         đã gắn vào Dự án, nếu Task tương ứng chưa tồn tại.
@@ -86,11 +113,15 @@ class ProjectProject(models.Model):
         - Dùng ``source_task_template_id`` để chống sinh trùng (thay vì so tên Task).
         - Task được tạo giữ liên kết với Module nguồn, Mẫu công việc nguồn và
           Cơ hội CRM nguồn (nếu Dự án được tạo từ CRM qua ``lead_id``).
+        - Mỗi Task tự nhận luôn danh sách Yêu cầu kỹ năng (Kỹ năng + Mức tối thiểu) gộp từ
+          Module và Mẫu công việc nguồn, để PM có sẵn thông tin phục vụ phân công nhân sự.
 
         :param solutions: tập ``solution.module`` cần xét; mặc định là toàn bộ
             ``solution_ids`` hiện có trên Dự án (dùng khi mới tạo Project từ CRM).
         """
         Task = self.env['project.task']
+        TaskSkillRequirement = self.env['project.task.skill.requirement']
+
         for project in self:
             target_solutions = solutions if solutions is not None else project.solution_ids
             if not target_solutions:
@@ -104,6 +135,7 @@ class ProjectProject(models.Model):
             )
 
             tasks_to_create = []
+            skill_requirements_per_task = []
             for solution in target_solutions:
                 for tmpl in solution.task_template_ids:
                     if tmpl.id in existing_template_ids:
@@ -119,7 +151,16 @@ class ProjectProject(models.Model):
                         'source_task_template_id': tmpl.id,
                         'source_lead_id': project.lead_id.id if project.lead_id else False,
                     })
+                    skill_requirements_per_task.append(
+                        self._dcg_get_combined_skill_requirements(solution, tmpl)
+                    )
                     existing_template_ids.add(tmpl.id)
 
             if tasks_to_create:
-                Task.create(tasks_to_create)
+                created_tasks = Task.create(tasks_to_create)
+                skill_requirement_vals = []
+                for task, skill_reqs in zip(created_tasks, skill_requirements_per_task):
+                    for skill_req in skill_reqs:
+                        skill_requirement_vals.append(dict(skill_req, task_id=task.id))
+                if skill_requirement_vals:
+                    TaskSkillRequirement.create(skill_requirement_vals)

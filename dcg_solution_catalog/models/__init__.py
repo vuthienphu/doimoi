@@ -12,4 +12,5 @@ from . import solution_module_task_template_skill_requirement
 from . import solution_module
 from . import project_project
 from . import project_task
+from . import project_task_skill_requirement
 from . import crm_lead

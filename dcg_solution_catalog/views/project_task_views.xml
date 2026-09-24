@@ -1,45 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_task_form2_inherit_solution" model="ir.ui.view">
         <field name="name">project.task.form.inherit.solution</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="inherit_id" ref="project.view_task_form2" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="solution_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Chọn giải pháp liên quan..."/>
+                <field name="solution_ids" widget="many2many_tags" options="{'no_create': True}"
+                    placeholder="Chọn giải pháp liên quan..." />
             </xpath>
             <xpath expr="//sheet" position="inside">
-                <group string="Nguồn gốc tự động sinh" invisible="not is_auto_generated" name="dcg_solution_source">
-                    <field name="is_auto_generated" invisible="1"/>
-                    <field name="source_module_id" readonly="1"/>
-                    <field name="source_task_template_id" readonly="1"/>
-                    <field name="source_lead_id" readonly="1"/>
+                <group string="Nguồn gốc tự động sinh" invisible="not is_auto_generated"
+                    name="dcg_solution_source">
+                    <field name="is_auto_generated" invisible="1" />
+                    <field name="source_module_id" readonly="1" />
+                    <field name="source_task_template_id" readonly="1" />
+                    <field name="source_lead_id" readonly="1" />
                 </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Yêu cầu kỹ năng" name="dcg_task_skill_requirements">
+                    <field name="skill_requirement_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle" />
+                            <field name="skill_type_id"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="skill_id" domain="[('skill_type_id', '=', skill_type_id)]"
+                                context="{'from_skill_dropdown': True, 'default_skill_type_id': skill_type_id}"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="skill_level_id"
+                                domain="[('skill_type_id', '=', skill_type_id)]"
+                                context="{'default_skill_type_id': skill_type_id}"
+                                options="{'no_create': True, 'no_create_edit': True}" />
+                            <field name="source_requirement_ref" column_invisible="1" />
+                        </list>
+                    </field>
+                    <p class="text-muted"> Với Task tự sinh, danh sách này được tự động điền từ Mẫu
+                        công việc/Module nguồn. Bạn có thể thêm, sửa hoặc xóa riêng cho Task này mà
+                        không ảnh hưởng tới Mẫu công việc dùng chung. </p>
+                </page>
             </xpath>
         </field>
     </record>
-
     <record id="view_task_tree2_inherit_solution" model="ir.ui.view">
         <field name="name">project.task.tree.inherit.solution</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.project_task_view_tree_base"/>
+        <field name="inherit_id" ref="project.project_task_view_tree_base" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='project_id']" position="after">
-                <field name="solution_ids" widget="many2many_tags" optional="show"/>
+                <field name="solution_ids" widget="many2many_tags" optional="show" />
             </xpath>
         </field>
     </record>
-
     <record id="view_task_search_inherit_solution" model="ir.ui.view">
         <field name="name">project.task.search.inherit.solution</field>
         <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="inherit_id" ref="project.view_task_search_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='project_id']" position="after">
-                <field name="solution_ids"/>
+                <field name="solution_ids" />
             </xpath>
             <xpath expr="//group" position="inside">
-                <filter string="Giải pháp" name="group_by_solution" context="{'group_by': 'solution_ids'}"/>
+                <filter string="Giải pháp" name="group_by_solution"
+                    context="{'group_by': 'solution_ids'}" />
             </xpath>
         </field>
     </record>
